@@ -1,0 +1,15 @@
+BEGIN
+    // Nhập điểm từ người dùng
+    INPUT Math
+    INPUT Physics
+    INPUT Chemistry
+
+    // Tính điểm tổng
+    Sum = Math + Physics + Chemistry
+
+    // Tính điểm trung bình
+    Average = Sum / 3
+
+    // Hiển thị kết quả
+    OUTPUT "Điểm trung bình: ", Average
+END

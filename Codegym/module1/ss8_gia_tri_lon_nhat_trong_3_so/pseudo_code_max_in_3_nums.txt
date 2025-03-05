@@ -1,0 +1,21 @@
+BEGIN
+    // Nhập ba số a, b, c
+    INPUT a, b, c
+
+    // Giả sử a là giá trị lớn nhất ban đầu
+    Max = a
+
+    // So sánh a với b và c
+    IF (a > b) AND (a > c) THEN
+        Max = a
+    ELSE 
+        IF (b > c) THEN
+            Max = b
+        ELSE
+            Max = c
+        END IF
+    END IF
+
+    // Hiển thị giá trị lớn nhất
+    OUTPUT "Giá trị lớn nhất là: ", Max
+END

@@ -1,0 +1,34 @@
+BEGIN  
+    // Nhập điểm số sinh viên  
+    INPUT N  
+
+    // Kiểm tra nếu điểm nhỏ hơn 0  
+    IF N < 0 THEN  
+        OUTPUT "Điểm vô lý, không xét"  
+
+    // Kiểm tra nếu điểm từ 75 trở lên  
+    ELSE IF N >= 75 THEN  
+        OUTPUT "Xếp loại A"  
+
+    // Kiểm tra nếu điểm từ 60 đến dưới 75  
+    ELSE IF N >= 60 AND N < 75 THEN  
+        OUTPUT "Xếp loại B"  
+
+    // Kiểm tra nếu điểm từ 45 đến dưới 60  
+    ELSE IF N >= 45 AND N < 60 THEN  
+        OUTPUT "Xếp loại C"  
+
+    // Kiểm tra nếu điểm từ 35 đến dưới 45  
+    ELSE IF N >= 35 AND N < 45 THEN  
+        OUTPUT "Xếp loại D"  
+
+    // Kiểm tra nếu điểm dưới 35  
+    ELSE IF N < 35 THEN  
+        OUTPUT "Xếp loại E"  
+
+    // Trường hợp khác (phòng trường hợp nhập sai)  
+    ELSE  
+        OUTPUT "Điểm vô lý, không xét"  
+    END IF  
+
+END  

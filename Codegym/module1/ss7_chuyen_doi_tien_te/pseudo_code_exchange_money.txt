@@ -1,0 +1,13 @@
+BEGIN
+    // Nhập số tiền USD từ người dùng
+    INPUT USD
+
+    // Tỉ giá hối đoái
+    exchangeRate = 23000
+
+    // Chuyển đổi sang VNĐ
+    VND = USD * exchangeRate
+
+    // Hiển thị kết quả
+    OUTPUT "Số tiền VNĐ: ", VND
+END
