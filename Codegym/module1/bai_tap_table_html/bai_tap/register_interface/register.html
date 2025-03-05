@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>[Practice] - Create the register interface for user</h1>
+    <div class="container">
+      <form
+        action="http://demo.codegym.vn/6/registration_form/register.php"
+        method="post"
+      >
+        <label for="name">User Name</label> <br />
+        <input type="text" name="name" id="name" /><br />
+        <label for="email">Email</label> <br />
+        <input type="email" name="email" id="email" /> <br />
+        <label for="phone">Phone Number</label> <br />
+        <input type="number" name="phone" id="phone" /><br />
+        <label>Gender</label> <br />
+        <input type="radio" id="male" name="gender" value="Nam" />
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="Nữ" />
+        <label for="female">Female</label><br /><br />
+        <input type="button" value="Submit" />
+      </form>
+    </div>
+  </body>
+</html>
