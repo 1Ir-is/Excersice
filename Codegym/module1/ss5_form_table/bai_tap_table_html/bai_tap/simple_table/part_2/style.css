@@ -1,0 +1,62 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f8f8f8;
+}
+
+.container {
+  width: 80%;
+  background-color: #f9f1f1;
+  box-shadow: 2px 2px 10px gray;
+  padding: 20px;
+  border-radius: 15px;
+  margin: 20px auto;
+}
+
+h1 {
+  color: blue;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.info-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.left-info,
+.right-info {
+  width: 45%;
+}
+
+.left-info,
+.right-info {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.blue-text {
+  color: blue;
+}
+
+table {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+}
+
+th.yellow-bg {
+  background-color: yellow;
+  font-weight: bold;
+}
+
+th.orange-bg {
+  background-color: orange;
+}
