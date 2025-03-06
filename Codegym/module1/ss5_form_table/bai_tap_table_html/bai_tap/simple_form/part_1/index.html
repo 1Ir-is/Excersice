@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Hobby Form</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">SỞ THÍCH CỦA BẠN</div>
+      <form>
+        <div class="info">
+          <label for="username">Họ và tên</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Nhập họ và tên"
+          />
+
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Nhập email"
+          />
+        </div>
+
+        <label>Sở thích</label>
+        <div class="hobby-group">
+          <input type="checkbox" id="sport" name="hobby" value="sport" />
+          <label for="sport">Thể thao</label>
+
+          <input type="checkbox" id="web" name="hobby" value="web" />
+          <label for="web">Lướt web</label>
+
+          <input type="checkbox" id="travel" name="hobby" value="travel" />
+          <label for="travel">Du lịch</label>
+
+          <input type="checkbox" id="music" name="hobby" value="music" />
+          <label for="music">Âm nhạc</label>
+
+          <input type="checkbox" id="game" name="hobby" value="game" />
+          <label for="game">Chơi game</label>
+
+          <input type="checkbox" id="reading" name="hobby" value="reading" />
+          <label for="reading">Đọc sách</label>
+
+          <input type="checkbox" id="cinema" name="hobby" value="cinema" />
+          <label for="cinema">Điện ảnh</label>
+        </div>
+
+        <div class="buttons">
+          <button type="submit" class="submit-btn">Gửi thông tin</button>
+          <button type="reset" class="reset-btn">Nhập lại</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

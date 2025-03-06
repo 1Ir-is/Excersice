@@ -1,0 +1,78 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+.title {
+  text-align: center;
+  background: #ff6600;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 5px 5px 0 0;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.info label {
+  margin-left: 65px;
+}
+
+.info input {
+  align-self: center;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+}
+input[type="text"],
+input[type="email"] {
+  width: 80%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.hobby-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.hobby-group label {
+  font-weight: normal;
+  color: #ff6600;
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+button {
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 48%;
+}
+.submit-btn {
+  background: #4caf50;
+  color: white;
+}
+.reset-btn {
+  background: #f44336;
+  color: white;
+}
