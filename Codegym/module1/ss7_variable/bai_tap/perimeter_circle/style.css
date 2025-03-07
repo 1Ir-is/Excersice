@@ -1,0 +1,79 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #43c6ac; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #f8ffae,
+    #43c6ac
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #f8ffae,
+    #43c6ac
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container {
+  background-color: #ffffff;
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 35px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+label {
+  font-size: 30px;
+}
+
+button {
+  width: 50%;
+  padding: 20px 40px;
+  border: none;
+  font-size: 25px;
+  text-transform: uppercase;
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  background-color: #43c6ac;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.1s ease-out;
+}
+
+button:hover {
+  background-color: #f8ffae;
+  color: black;
+}
+
+#result {
+  font-size: 30px;
+  text-align: center;
+  margin-top: 20px;
+}
