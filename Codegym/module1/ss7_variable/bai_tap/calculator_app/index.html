@@ -4,57 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculator App</title>
-    <style>
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #f0f0f0;
-        font-family: Arial, sans-serif;
-      }
-      .calculator {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-      .display {
-        width: 92%;
-        height: 50px;
-        background-color: #222;
-        color: #fff;
-        text-align: right;
-        padding: 10px;
-        font-size: 24px;
-        border-radius: 5px;
-        margin-bottom: 10px;
-      }
-      .buttons {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-      }
-      .button {
-        padding: 20px;
-        background-color: #f9f9f9;
-        border: none;
-        border-radius: 5px;
-        font-size: 18px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-      .button:hover {
-        background-color: #ddd;
-      }
-      .button.operator {
-        background-color: #ff9500;
-        color: #fff;
-      }
-      .button.operator:hover {
-        background-color: #e08900;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="calculator">
@@ -87,72 +37,6 @@
         </button>
       </div>
     </div>
-
-    <script>
-      function clearDisplay() {
-        document.getElementById("display").innerText = "0";
-      }
-
-      function appendToDisplay(value) {
-        const display = document.getElementById("display");
-        if (display.innerText === "0") {
-          display.innerText = value;
-        } else {
-          display.innerText += value;
-        }
-      }
-
-      function add(a, b) {
-        return a + b;
-      }
-
-      function subtract(a, b) {
-        return a - b;
-      }
-
-      function multiply(a, b) {
-        return a * b;
-      }
-
-      function divide(a, b) {
-        if (b === 0) {
-          throw new Error("Cannot divide by zero");
-        }
-        return a / b;
-      }
-
-      function calculateResult() {
-        const display = document.getElementById("display");
-        try {
-          const expression = display.innerText;
-          const operator = expression.match(/[+\-*/]/)[0];
-          const [operand1, operand2] = expression.split(operator);
-          const a = parseFloat(operand1);
-          const b = parseFloat(operand2);
-
-          let result;
-          switch (operator) {
-            case "+":
-              result = add(a, b);
-              break;
-            case "-":
-              result = subtract(a, b);
-              break;
-            case "*":
-              result = multiply(a, b);
-              break;
-            case "/":
-              result = divide(a, b);
-              break;
-            default:
-              throw new Error("Invalid operator");
-          }
-
-          display.innerText = result;
-        } catch {
-          display.innerText = "Error";
-        }
-      }
-    </script>
+    <script src="app.js"></script>
   </body>
 </html>
