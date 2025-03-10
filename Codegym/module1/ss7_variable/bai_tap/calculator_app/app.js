@@ -54,8 +54,8 @@ function calculateResult() {
     const a = parseFloat(operand1);
     const b = parseFloat(operand2);
 
-    if (isNaN(a) || isNaN(b)) {
-      throw new Error("Invalid expression");
+    if (["+", "-", "*", "/"].includes(expression.slice(-1))) {
+      alert("Invalid expression");
     }
 
     let result;
@@ -73,7 +73,7 @@ function calculateResult() {
         result = divide(a, b);
         break;
       default:
-        throw new Error("Invalid operator");
+        alert("Invalid operator");
     }
 
     display.innerText = parseFloat(result.toFixed(2));
