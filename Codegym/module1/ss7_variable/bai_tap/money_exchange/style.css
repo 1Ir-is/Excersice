@@ -8,29 +8,38 @@ body {
 }
 .container {
   background-color: #fff;
+  width: 50%;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .container h1 {
   margin-bottom: 20px;
+  text-align: center;
+  text-transform: uppercase;
 }
+
+label {
+  font-size: 28px;
+  font-weight: bold;
+}
+
 .container select,
 .container button {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #ccc;
-  font-size: 20px;
+  font-size: 28px;
   border-radius: 4px;
 }
 
 .container input {
-  width: 96%;
+  width: 98%;
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #ccc;
-  font-size: 20px;
+  font-size: 28px;
   border-radius: 4px;
 }
 .container button {
@@ -42,6 +51,7 @@ body {
   background-color: #0056b3;
 }
 #result {
-  font-size: 20px;
+  font-size: 25px;
   margin-top: 20px;
+  font-weight: bold;
 }

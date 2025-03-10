@@ -10,10 +10,38 @@
     <div class="container">
       <h1>Money Exchange</h1>
       <input type="number" id="amount" placeholder="Enter amount" />
-      <select id="currency">
-        <option value="vnd_to_usd">VND to USD</option>
-        <option value="usd_to_vnd">USD to VND</option>
-      </select>
+      <div>
+        <label for="fromCurrency">From:</label>
+        <select id="fromCurrency">
+          <option value="VND">VND</option>
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="GBP">GBP</option>
+          <option value="JPY">JPY</option>
+          <option value="AUD">AUD</option>
+          <option value="CAD">CAD</option>
+          <option value="CHF">CHF</option>
+          <option value="CNY">CNY</option>
+          <option value="KRW">KRW</option>
+          <option value="SGD">SGD</option>
+        </select>
+      </div>
+      <div>
+        <label for="toCurrency">To:</label>
+        <select id="toCurrency">
+          <option value="VND">VND</option>
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="GBP">GBP</option>
+          <option value="JPY">JPY</option>
+          <option value="AUD">AUD</option>
+          <option value="CAD">CAD</option>
+          <option value="CHF">CHF</option>
+          <option value="CNY">CNY</option>
+          <option value="KRW">KRW</option>
+          <option value="SGD">SGD</option>
+        </select>
+      </div>
       <button onclick="exchangeMoney()">Exchange</button>
       <p id="result"></p>
     </div>
