@@ -2,6 +2,14 @@ function clearDisplay() {
   document.getElementById("display").innerText = "0";
 }
 
+function deleteLastChar() {
+  const display = document.getElementById("display");
+  display.innerText = display.innerText.slice(0, -1);
+  if (display.innerText === "") {
+    display.innerText = "0";
+  }
+}
+
 function appendToDisplay(value) {
   const display = document.getElementById("display");
   const lastChar = display.innerText.slice(-1);
@@ -45,6 +53,10 @@ function calculateResult() {
     const [operand1, operand2] = expression.split(operator);
     const a = parseFloat(operand1);
     const b = parseFloat(operand2);
+
+    if (isNaN(a) || isNaN(b)) {
+      throw new Error("Invalid expression");
+    }
 
     let result;
     switch (operator) {
