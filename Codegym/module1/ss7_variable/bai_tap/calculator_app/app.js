@@ -4,7 +4,7 @@ function clearDisplay() {
 
 function appendToDisplay(value) {
   const display = document.getElementById("display");
-  if (display.innerText === "0") {
+  if (display.innerText === "0" && !["+", "-", "*", "/"].includes(value)) {
     display.innerText = value;
   } else {
     display.innerText += value;
@@ -25,7 +25,7 @@ function multiply(a, b) {
 
 function divide(a, b) {
   if (b === 0) {
-    throw new Error("Cannot divide by zero");
+    return a > 0 ? "Infinity" : "-Infinity"; // Allow division by zero
   }
   return a / b;
 }
