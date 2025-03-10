@@ -4,8 +4,15 @@ function clearDisplay() {
 
 function appendToDisplay(value) {
   const display = document.getElementById("display");
+  const lastChar = display.innerText.slice(-1);
+
   if (display.innerText === "0" && !["+", "-", "*", "/"].includes(value)) {
     display.innerText = value;
+  } else if (
+    ["+", "-", "*", "/"].includes(lastChar) &&
+    ["+", "-", "*", "/"].includes(value)
+  ) {
+    display.innerText = display.innerText.slice(0, -1) + value;
   } else {
     display.innerText += value;
   }
