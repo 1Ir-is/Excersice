@@ -57,7 +57,7 @@ function calculateResult() {
         throw new Error("Invalid operator");
     }
 
-    display.innerText = result;
+    display.innerText = parseFloat(result.toFixed(2));
   } catch {
     display.innerText = "Error";
   }
