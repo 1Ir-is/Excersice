@@ -1,0 +1,27 @@
+body {
+  font-size: 30px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 40%;
+  border: 10px solid black;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+.orange {
+  background-color: #ffcc33;
+}
+
+.green {
+  background-color: #adff2f;
+}
+
+.blue {
+  background-color: #00ffff;
+}
