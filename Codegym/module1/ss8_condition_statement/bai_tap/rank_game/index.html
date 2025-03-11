@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Ranking</title>
+  </head>
+  <body>
+    <div>
+      <h3>Game Ranking System</h3>
+      <form>
+        <label for="mainScore">Main Score</label>
+        <input type="number" name="mainScore" id="mainScore" /> <br />
+        <label for="matchesPlayed">Matches Played</label>
+        <input type="number" name="matchesPlayed" id="matchesPlayed" /> <br />
+        <label for="matchesWon">Matches Won</label>
+        <input type="number" name="matchesWon" id="matchesWon" /> <br />
+        <button type="button" onclick="calculateRank()">Calculate</button>
+      </form>
+      <p id="result"></p>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
