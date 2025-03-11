@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solve Linear Equation</title>
+  </head>
+  <body>
+    <div class="container">
+      <h3>Solve Linear Equation (ax + b = 0)</h3>
+      <form>
+        <label for="coefficientA">Coefficient a: </label>
+        <input
+          type="number"
+          id="coefficientA"
+          name="coefficientA"
+          required
+        /><br />
+        <label for="coefficientB">Coefficient b: </label>
+        <input
+          type="number"
+          id="coefficientB"
+          name="coefficientB"
+          required
+        /><br />
+        <button type="button" onclick="solveEquation()">Solve</button>
+      </form>
+      <p id="result"></p>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
