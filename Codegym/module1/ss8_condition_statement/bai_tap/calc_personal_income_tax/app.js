@@ -3,7 +3,7 @@ function calculateTax() {
   let result;
   let tax = 0;
 
-  /* Tham khảo ở https://viblo.asia/p/tu-tao-cong-cu-tinh-thue-thu-nhap-ca-nhan-2020-Qbq5Q0EmlD8
+  /* Đã tham khảo ở https://viblo.asia/p/tu-tao-cong-cu-tinh-thue-thu-nhap-ca-nhan-2020-Qbq5Q0EmlD8
         Bậc	    Thu nhập tính thuế/tháng	Thuế suất	Tính số thuế phải nộp
         1	    Đến 5 triệu đồng (trđ)	    5%	        5% x TNTT
         2	    Trên 5 trđ đến 10 trđ	    10%	        10% TNTT - 0,25 trđ

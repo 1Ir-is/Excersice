@@ -3,7 +3,7 @@ function calculateBill() {
   let result;
   let bill = 0;
 
-  /*  Tham khảo công thức tính ở https://zalopay.vn/cach-tinh-tien-dien-2655
+  /*  Đã tham khảo công thức tính ở https://zalopay.vn/cach-tinh-tien-dien-2655
     TT     Số kWh sử dụng          Giá bán điện (đồng/kWh)
     Bậc 1  Cho kWh từ 0 - 50       1.806
     Bậc 2  Cho kWh từ 51 - 100     1.866
