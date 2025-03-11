@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Count day in month</title>
+  </head>
+  <body>
+    <div class="container">
+      <h3>Count day in month</h3>
+      <form>
+        <label for="month">Month: </label>
+        <input
+          type="number"
+          name="month"
+          id="month"
+          min="1"
+          max="12"
+          required
+        /><br />
+        <button type="button" onclick="countDayInMonth()">Count</button>
+        <p id="result"></p>
+      </form>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
