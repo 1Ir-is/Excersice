@@ -24,3 +24,4 @@ function calculateRank() {
     "result"
   ).innerText = `Hạng của người chơi là: ${rank}`;
 }
+
