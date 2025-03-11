@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Check Triangle Sides</title>
+  </head>
+  <body>
+    <div class="container">
+      <h3>Check if Three Numbers are Sides of a Triangle</h3>
+      <form>
+        <label for="sideA">Side a: </label>
+        <input type="number" id="sideA" name="sideA" required /><br />
+        <label for="sideB">Side b: </label>
+        <input type="number" id="sideB" name="sideB" required /><br />
+        <label for="sideC">Side c: </label>
+        <input type="number" id="sideC" name="sideC" required /><br />
+        <button type="button" onclick="checkTriangle()">Check</button>
+      </form>
+      <p id="result"></p>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
