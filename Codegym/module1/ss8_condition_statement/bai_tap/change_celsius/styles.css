@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #c9ffbf; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #ffafbd,
+    #c9ffbf
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #ffafbd,
+    #c9ffbf
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-family: "Arial", sans-serif;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+label {
+  font-family: "Arial", sans-serif;
+  font-size: 1rem;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #ffafbd;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-family: "Arial", sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#result {
+  margin-top: 20px;
+  font-family: "Arial", sans-serif;
+  font-size: 1rem;
+  color: #333;
+  text-align: center;
+}
