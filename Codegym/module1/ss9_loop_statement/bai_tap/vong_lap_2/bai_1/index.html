@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 1</title>
+  </head>
+  <body>
+    <h3>Hien thi day so Fibonacci</h3>
+    <p id="fibonacci"></p>
+    <script>
+      let fib1 = 0,
+        fib2 = 1;
+      let result = fib1 + " " + fib2;
+      for (let i = 2; i < 20; i++) {
+        let nextFib = fib1 + fib2;
+        result += " " + nextFib;
+        fib1 = fib2;
+        fib2 = nextFib;
+      }
+      document.getElementById(
+        "fibonacci"
+      ).innerText = `20 so fibonacci dau tien la: ${result}`;
+    </script>
+  </body>
+</html>
