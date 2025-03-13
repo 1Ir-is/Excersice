@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bang cuu chuong</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+
+      th,
+      td {
+        padding: 8px;
+        text-align: center;
+      }
+
+      h3 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h3>Bang Cuu chuong</h3>
+      <table id="multiplicationTable"></table>
+    </div>
+    <script>
+      function generateMultiplicationTable() {
+        const table = document.getElementById("multiplicationTable");
+        let tableContent = "<tr>";
+
+        for (let i = 2; i <= 9; i++) {
+          tableContent += `<th> Bang ${i} </th>`;
+        }
+        tableContent += "</tr>";
+        for (let j = 1; j <= 9; j++) {
+          tableContent += "<tr>";
+          for (let i = 2; i <= 9; i++) {
+            tableContent += `<td>${i} x ${j} = ${i * j}</td>`;
+          }
+          tableContent += "</tr>";
+        }
+
+        table.innerHTML = tableContent;
+      }
+      window.onload = generateMultiplicationTable();
+    </script>
+  </body>
+</html>
