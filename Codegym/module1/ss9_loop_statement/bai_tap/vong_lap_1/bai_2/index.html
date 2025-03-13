@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 2</title>
+  </head>
+  <body>
+    <script>
+      let nhietDo;
+      while (true) {
+        nhietDo = parseFloat(prompt("Nhap nhiet do:"));
+        if (nhietDo > 100) {
+          alert("Nhiet do qua cao, yeu cau giam nhiet do!");
+        } else if (nhietDo < 20) {
+          alert("Nhiet do qua thap, yeu cau tang nhiet do!");
+        } else {
+          alert("Nhiet do binh thuong!");
+        }
+      }
+    </script>
+  </body>
+</html>
