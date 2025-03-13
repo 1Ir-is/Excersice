@@ -6,6 +6,72 @@
     <title>Bai 6</title>
   </head>
   <body>
-    
+    <h3>Tong 30 so dau tien chia het cho 7</h3>
+    <br />
+    <!-- Cach 1 -->
+    <section>
+      <p><strong>Cach 1</strong></p>
+      <p id="result_method1"></p>
+    </section>
+    <br />
+    <section>
+      <p><strong>Cach 2</strong></p>
+      <p id="result_method2"></p>
+    </section>
+
+    <br />
+    <section>
+      <p><strong>Cach 3</strong></p>
+      <p id="result_method3"></p>
+    </section>
+
+    <script>
+      // Cach 1 => Dung phep chia
+      function method1() {
+        let sum = 0,
+          count = 0,
+          number = 1;
+        while (count < 30) {
+          if (number % 7 === 0) {
+            sum += number;
+            count++;
+          }
+          number++;
+        }
+        document.getElementById(
+          "result_method1"
+        ).innerHTML = `Tong 30 so dau tien chia het cho 7 trong cach 1 la: <strong>${sum}</strong>`;
+      }
+
+      // Cach 2 => Bang cuu chuong 7
+      function method2() {
+        let sum = 0;
+        for (let i = 1; i <= 30; i++) {
+          sum += i * 7;
+        }
+        document.getElementById(
+          "result_method2"
+        ).innerHTML = `Tong 30 so dau tien chia het cho 7 trong cach 2 la: <strong>${sum}</strong>`;
+      }
+
+      // Cach 3 => Bat dau tu so 7 moi lan cong them 7
+      function method3() {
+        let sum = 0,
+          count = 0,
+          number = 7;
+        while (count < 30) {
+          sum += number;
+          number += 7;
+          count++;
+        }
+        document.getElementById(
+          "result_method3"
+        ).innerHTML = `Tong 30 so dau tien chia het cho 7 trong cach 3 la: <strong>${sum}</strong>`;
+      }
+
+      method1();
+      method2();
+      method3();
+    </script>
   </body>
 </html>
