@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 4</title>
+  </head>
+  <body>
+    <h3>Hien thi so Fibonacci dau tien chia het cho 5</h3>
+    <p id="fibonacci"></p>
+    <script>
+      let fib1 = 0,
+        fib2 = 1;
+      let nextFib = fib1 + fib2;
+
+      // day fibo ban dau -> [0, 1]
+      while (nextFib % 5 !== 0) {
+        fib1 = fib2;
+        fib2 = nextFib;
+        nextFib = fib1 + fib2;
+      }
+
+      document.getElementById(
+        "fibonacci"
+      ).innerHTML = `So Fibonacci dau tien chia het cho 5 la: ${nextFib}`;
+    </script>
+  </body>
+</html>
