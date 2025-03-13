@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 3</title>
+  </head>
+  <body>
+    <h3>Hien thi 20 so Fibonacci dau tien</h3>
+    <p id="fibonacci"></p>
+
+    <script>
+      let fib1 = 0,
+        fib2 = 1;
+      let result = fib1 + " " + fib2;
+
+      // day fibo ban dau -> [0, 1]
+      for (let i = 2; i < 20; i++) {
+        let nextFib = fib1 + fib2;
+        result += " " + nextFib;
+        // day fibo moi -> [0, 1, nextFib]
+        fib1 = fib2;
+        fib2 = nextFib;
+      }
+
+      document.getElementById("fibonacci").innerHTML = result;
+    </script>
+  </body>
+</html>
