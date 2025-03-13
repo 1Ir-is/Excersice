@@ -21,9 +21,48 @@
 
         // Góc vuông ở dưới bên trái
         for (let i = 1; i <= n; i++) {
-          result += "*".repeat(i) + "\n";
+          let line = "";
+          for (let j = 1; j <= i; j++) {
+            line += "*";
+          }
+          result += line + "\n";
         }
         result += "\n";
+
+        // Góc vuông ở trên bên trái
+        for (let i = n; i >= 1; i--) {
+          let line = "";
+          for (let j = 1; j <= i; j++) {
+            line += "*";
+          }
+          result += line + "\n";
+        }
+        result += "\n";
+
+        // Góc vuông ở dưới bên phải
+        for (let i = 1; i <= n; i++) {
+          let line = "";
+          for (let j = 1; j <= n - i; j++) {
+            line += " "; // Thêm khoảng trắng
+          }
+          for (let j = 1; j <= i; j++) {
+            line += "*";
+          }
+          result += line + "\n";
+        }
+        result += "\n";
+
+        // Góc vuông ở trên bên phải
+        for (let i = n; i >= 1; i--) {
+          let line = "";
+          for (let j = 1; j <= n - i; j++) {
+            line += " "; // Thêm khoảng trắng
+          }
+          for (let j = 1; j <= i; j++) {
+            line += "*";
+          }
+          result += line + "\n";
+        }
 
         document.getElementById("output").innerText = result;
       }
