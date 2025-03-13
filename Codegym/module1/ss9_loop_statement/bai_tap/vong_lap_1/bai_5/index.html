@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 5</title>
+  </head>
+  <body>
+    <p id="fibonacci"></p>
+    <p id="sum"></p>
+    <script>
+      let fib1 = 0,
+        fib2 = 1;
+      // Tinh tong khoi dau cua day fibonacci (0 + 1 = 1)
+      let sum = fib1 + fib2;
+
+      let result = fib1 + " " + fib2;
+      for (let i = 2; i < 20; i++) {
+        let nextFib = fib1 + fib2; // Tinh so fibo
+        sum += nextFib; // Sau khi tinh xong so Fibo tiep theo thi cong luon vao sum
+        result += " " + nextFib; // Noi vao chuoi ket qua
+
+        // Cap nhap lai gia tri cho vong lap tiep theo
+        fib1 = fib2;
+        fib2 = nextFib;
+      }
+
+      document.getElementById("fibonacci").innerHTML = result;
+      document.getElementById("sum").innerHTML =
+        "Tong 20 so dau tien cua day fibonacci la: " + sum;
+    </script>
+  </body>
+</html>
