@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đếm từ 1 đến 100</title>
+    <style>
+      #counter {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 50px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px; /* Thêm khoảng cách giữa các số */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="counter"></div>
+    <script>
+      // Cach 1:  don gian
+      //   for (let i = 1; i <= 100; i++) {
+      //     console.log(i);
+      //     if (i === 99) {
+      //       alert("Da dem xong!");
+      //     }
+      //   }
+
+      // Cach 2:
+      const counterDiv = document.getElementById("counter");
+
+      for (let i = 1; i <= 100; i++) {
+        setTimeout(() => {
+          const span = document.createElement("span");
+          span.textContent = i;
+          counterDiv.appendChild(span);
+
+          if (i === 99) {
+            alert("Đã hoàn thành đếm đến 99!");
+          }
+        }, i * 100); // Hiển thị số tiếp theo sau mỗi 100ms
+      }
+    </script>
+  </body>
+</html>
