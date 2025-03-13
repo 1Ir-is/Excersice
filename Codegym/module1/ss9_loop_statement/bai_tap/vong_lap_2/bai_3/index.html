@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>In Tam Giác Vuông</title>
+    <style>
+      pre {
+        font-family: monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>In Tam Giác Vuông</h3>
+    <pre id="output"></pre>
+
+    <script>
+      function printTriangle() {
+        let n = 5; // Số dòng của tam giác
+        let result = "";
+
+        // Góc vuông ở dưới bên trái
+        for (let i = 1; i <= n; i++) {
+          result += "*".repeat(i) + "\n";
+        }
+        result += "\n";
+
+        document.getElementById("output").innerText = result;
+      }
+
+      printTriangle();
+    </script>
+  </body>
+</html>
