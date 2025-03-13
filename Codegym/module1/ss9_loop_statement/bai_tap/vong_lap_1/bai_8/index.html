@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game doan so</title>
+  </head>
+  <body>
+    <button onclick="playGame()">Bat dau</button>
+
+    <script>
+      function playGame() {
+        let min = parseInt(prompt("Nhap so nho nhat trong khoang du doan: "));
+        let max = parseInt(prompt("Nhap so lon nhat trong khoang du doan: "));
+
+        if (isNaN(min) || isNaN(max) || min >= max) {
+          alert("Khoang khong hop le vui long nhap lai!");
+          return;
+        }
+
+        let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+        let guess = null;
+        // So lan doan la 3
+        let attempt = 3;
+
+        while (attempt > 0) {
+          guess = parseInt(
+            prompt(
+              `Ban co tong cong la ${attempt} lan du doan tu ${min} den ${max}`
+            )
+          );
+
+          if (isNaN(guess)) {
+            alert("Vui long nhap so hop le!");
+          } else if (guess < randomNumber) {
+            alert("So ban doan nho hon, vui long nhap lai!");
+          } else if (guess > randomNumber) {
+            alert("So ban doan lon hon, vui long nhap lai!");
+          } else {
+            alert("Chuc mung ban!");
+            return;
+          }
+
+          attempt--;
+
+          if (attempt === 0) {
+            alert("Ban da het luot!");
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
