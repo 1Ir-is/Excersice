@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tính Tổng S</title>
+  </head>
+  <body>
+    <h3>Tính tổng S = 1 + 1/2 + 1/3 + ... + 1/n</h3>
+    <label for="n">Nhập giá trị n:</label>
+    <input type="number" id="n" min="1" />
+    <button onclick="tinhTong()">Tính</button>
+    <p id="ketQua"></p>
+
+    <script>
+      function tinhTong() {
+        let n = parseInt(document.getElementById("n").value);
+        if (isNaN(n) || n < 1) {
+          alert("Vui lòng nhập số nguyên dương!");
+          return;
+        }
+
+        let S = 0; // Khởi tạo tổng S = 0
+        for (let i = 1; i <= n; i++) {
+          S += 1 / i; // Cộng từng số hạng vào tổng
+        }
+
+        document.getElementById("ketQua").innerText = `Tổng S = ${S.toFixed(
+          6
+        )}`;
+      }
+    </script>
+  </body>
+</html>
