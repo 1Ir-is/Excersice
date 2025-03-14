@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 1</title>
+  </head>
+  <body>
+    <script>
+      let exit = false;
+
+      while (!exit) {
+        let menu = prompt(
+          "------ Quan ly sinh vien ------ \n" +
+            "Hay nhap so de chon \n" +
+            "1. Hien thi danh sach sinh vien \n" +
+            "2. Them moi sinh vien \n" +
+            "3. Xoa sinh vien \n" +
+            "4. Ket thuc chuong trinh \n"
+        );
+
+        switch (menu) {
+          case "1":
+            alert("Hien thi danh sach sinh vien");
+            break;
+          case "2":
+            alert("Them moi sinh vien");
+            break;
+          case "3":
+            alert("Xoa sinh vien");
+            break;
+          case "4":
+            let confirmExit = confirm(
+              "Ban co chac chan muon ket thuc chuong trinh?"
+            );
+            
+            if (confirmExit) {
+              alert("Ket thuc chuong trinh");
+              exit = true;
+            }
+            break;
+          default:
+            alert("Lua chon khong hop le");
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chọn đồ uống</title>
+  </head>
+  <body>
+    <script>
+      let totalMoney = 0;
+      let orderList = "";
+      let exit = false;
+
+      while (!exit) {
+        let menu = prompt(
+          "------------- Menu ------------- \n" +
+            "1. Cafe      10K\n" +
+            "2. Ca cao    15K\n" +
+            "3. Nuoc cam  20K\n" +
+            "4. Ket thuc\n" +
+            "-----------------------------\n" +
+            "Danh sách đã chọn: " +
+            (orderList !== "" ? orderList : "Chưa chọn món nào ") +
+            "Tổng tiền: " +
+            totalMoney +
+            "K\n" +
+            "-----------------------------\n" +
+            "Nhập số để chọn đồ uống:"
+        );
+
+        switch (menu) {
+          case "1":
+            orderList += "Cafe - 10K\n";
+            totalMoney += 10;
+            break;
+          case "2":
+            orderList += "Ca cao - 15K\n";
+            totalMoney += 15;
+            break;
+          case "3":
+            orderList += "Nuoc cam - 20K\n";
+            totalMoney += 20;
+            break;
+          case "4":
+            let confirmExit = confirm("Bạn có chắc chắn muốn kết thúc không?");
+            if (confirmExit) {
+              alert(
+                "Cảm ơn bạn đã mua hàng!\n" +
+                  "-----------------------------\n" +
+                  "Danh sách đã chọn:\n" +
+                  orderList +
+                  "Tổng tiền: " +
+                  totalMoney +
+                  "K"
+              );
+              exit = true;
+            }
+            break;
+          default:
+            alert("Lựa chọn không hợp lệ, vui lòng nhập lại!");
+        }
+      }
+    </script>
+  </body>
+</html>
