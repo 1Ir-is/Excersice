@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 4</title>
+  </head>
+  <body>
+    <h2>Hinh Chu Nhat</h2>
+    <pre id="rectangle"></pre>
+    <script>
+      function printRectangle(chieuDai, chieuCao) {
+        let result = "";
+
+        for (let i = 0; i < chieuCao; i++) {
+          let line = "";
+
+          for (let j = 0; j < chieuDai; j++) {
+            if (
+              i === 0 ||
+              i === chieuCao - 1 ||
+              j === 0 ||
+              j === chieuDai - 1
+            ) {
+              line += "* "; // In viền ngoài
+            } else {
+              line += "  "; // In khoảng trống bên trong
+            }
+          }
+
+          result += line + "\n"; // Xuống dòng
+        }
+
+        document.getElementById("rectangle").innerText = result;
+      }
+
+      printRectangle(10, 5);
+    </script>
+  </body>
+</html>
