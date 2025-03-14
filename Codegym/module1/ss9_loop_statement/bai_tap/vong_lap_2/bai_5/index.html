@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 5</title>
+  </head>
+  <body>
+    <div>
+      <label for="soTienGoc">So Tien Goc: </label>
+      <input type="number" id="soTienGoc" name="soTienGoc" /><br />
+      <label for="soThang">So Thang Gui: </label>
+      <input type="number" name="soThang" id="soThang" /> <br />
+      <label for="laiSuat">Lai Suat</label>
+      <input type="number" name="laiSuat" id="laiSuat" /> <br />
+      <button type="button" onclick="tinhToan()">Tinh Toan</button>
+      <p id="ketQua"></p>
+    </div>
+
+    <script>
+      function tinhToan() {
+        let soTienGoc = parseFloat(document.getElementById("soTienGoc").value);
+        let soThang = parseFloat(document.getElementById("soThang").value);
+        let laiSuat = parseFloat(document.getElementById("laiSuat").value) / 100;
+
+        let tongTien = soTienGoc;
+
+        for (let thang = 1; thang <= soThang; thang++) {
+          tongTien += tongTien * laiSuat;
+        }
+
+        document.getElementById(
+          "ketQua"
+        ).innerText = `Sau ${soThang} thi tong tien ban nhan duoc la ${tongTien
+          .toFixed(0)
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+      }
+    </script>
+  </body>
+</html>
