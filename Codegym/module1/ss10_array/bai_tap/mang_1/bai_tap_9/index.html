@@ -10,15 +10,19 @@
       let a = [5, 12, 8, 20, 15, 3, 10, 7, 25, 18];
       let b = [5, -12, 8, -20, 15, 3, -10, 7, -25, 18];
 
-      let c = [];
+      //Cach 1
+      //   let c = [];
 
-      for (const element of a) {
-        c.push(element);
-      }
+      //   for (const element of a) {
+      //     c.push(element);
+      //   }
 
-      for (const element of b) {
-        c.push(element);
-      }
+      //   for (const element of b) {
+      //     c.push(element);
+      //   }
+
+      // Cach 2
+      let c = a.concat(b);
 
       alert("Mang c gom cac phan tu: " + c.join(", "));
     </script>
