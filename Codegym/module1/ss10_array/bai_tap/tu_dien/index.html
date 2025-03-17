@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 style="text-transform: uppercase">Dich tu tieng anh sang tieng viet</h1>
+    <label for="wordInput">Nhap tu: </label>
+    <input type="text" id="wordInput" />
+    <button onclick="translateWord()">Dich</button>
+    <p id="result"></p>
+    <script>
+      function translateWord() {
+        let englishWord = ["hello", "world", "apple", "banana"];
+        let vietnameseWords = ["xin chao", "the gioi", "tao", "chuoi"];
+
+        let wordInput = document
+          .getElementById("wordInput")
+          .value.toLowerCase();
+        let index = englishWord.indexOf(wordInput);
+
+        document.getElementById("result").innerText =
+          index !== -1
+            ? "Tu duoc dich ra Tieng Viet la: " + vietnameseWords[index]
+            : "Khong tim thay";
+      }
+    </script>
+  </body>
+</html>
