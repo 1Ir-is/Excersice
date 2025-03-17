@@ -12,52 +12,106 @@
     <p id="result"></p>
 
     <script>
+      // Cach 1
+      //   function demNguyenAmPhuAm() {
+      //     let str = document.getElementById("inputString").value;
+      //     let nguyenAm = 0;
+      //     let phuAm = 0;
+      //     str = str.toLowerCase();
+
+      //     for (const element of str) {
+      //       let c = element;
+
+      //       // Kiểm tra nếu là nguyên âm
+      //       if (
+      //         c == "a" ||
+      //         c == "ă" ||
+      //         c == "â" ||
+      //         c == "e" ||
+      //         c == "ê" ||
+      //         c == "i" ||
+      //         c == "o" ||
+      //         c == "ô" ||
+      //         c == "ơ" ||
+      //         c == "u" ||
+      //         c == "ư" ||
+      //         c == "y"
+      //       ) {
+      //         nguyenAm++;
+      //       }
+      //       // Kiểm tra nếu là phụ âm
+      //       else if (
+      //         c == "b" ||
+      //         c == "c" ||
+      //         c == "d" ||
+      //         c == "đ" ||
+      //         c == "g" ||
+      //         c == "h" ||
+      //         c == "k" ||
+      //         c == "l" ||
+      //         c == "m" ||
+      //         c == "n" ||
+      //         c == "p" ||
+      //         c == "q" ||
+      //         c == "r" ||
+      //         c == "s" ||
+      //         c == "t" ||
+      //         c == "v" ||
+      //         c == "x"
+      //       ) {
+      //         phuAm++;
+      //       }
+      //     }
+
+      //     document.getElementById(
+      //       "result"
+      //     ).innerText = `Nguyên âm: ${nguyenAm}, Phụ âm: ${phuAm}`;
+      //   }
+
+      // Cach 2
       function demNguyenAmPhuAm() {
-        let str = document.getElementById("inputString").value;
+        let str = document.getElementById("inputString").value.toLowerCase();
+        let nguyenAmArr = [
+          "a",
+          "ă",
+          "â",
+          "e",
+          "ê",
+          "i",
+          "o",
+          "ô",
+          "ơ",
+          "u",
+          "ư",
+          "y",
+        ];
+        let phuAmArr = [
+          "b",
+          "c",
+          "d",
+          "đ",
+          "g",
+          "h",
+          "k",
+          "l",
+          "m",
+          "n",
+          "p",
+          "q",
+          "r",
+          "s",
+          "t",
+          "v",
+          "x",
+        ];
         let nguyenAm = 0;
         let phuAm = 0;
-        str = str.toLowerCase();
 
         for (const element of str) {
           let c = element;
-
-          // Kiểm tra nếu là nguyên âm
-          if (
-            c == "a" ||
-            c == "ă" ||
-            c == "â" ||
-            c == "e" ||
-            c == "ê" ||
-            c == "i" ||
-            c == "o" ||
-            c == "ô" ||
-            c == "ơ" ||
-            c == "u" ||
-            c == "ư" ||
-            c == "y"
-          ) {
+          if (nguyenAmArr.includes(c)) {
             nguyenAm++;
-          }
-          // Kiểm tra nếu là phụ âm
-          else if (
-            c == "b" ||
-            c == "c" ||
-            c == "d" ||
-            c == "đ" ||
-            c == "g" ||
-            c == "h" ||
-            c == "k" ||
-            c == "l" ||
-            c == "m" ||
-            c == "n" ||
-            c == "p" ||
-            c == "q" ||
-            c == "r" ||
-            c == "s" ||
-            c == "t" ||
-            c == "v" ||
-            c == "x"
-          ) {
+          } else if (phuAmArr.includes(c)) {
             phuAm++;
           }
         }
