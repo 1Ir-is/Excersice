@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Nhap n la do dai mang (n > 0 va n < 20 neu ko thoa man thi se nhap lai)
+      // Nhap vao cac gia tri phan tu trong mang
+      // Hien thi gia tri trong mang.
+      let n;
+      do {
+        n = parseInt(prompt("Nhap n: "));
+        if (n <= 0 || n >= 20) {
+          alert("Vui long nhap n > 0 va n < 20");
+        }
+      } while (isNaN(n) || n <= 0 || n >= 20);
+
+      let arr = [];
+      for (let i = 0; i < n; i++) {
+        let value;
+        do {
+          value = parseInt(prompt("Nhap phan tu thu " + (i + 1) + ":"));
+          if (value < 0) {
+            alert("Vui long nhap gia tri lon hon 0");
+          }
+        } while (isNaN(value) || value < 0);
+        arr.push(value);
+      }
+      alert("Mang da nhap la: " + arr.toString(", "));
+
+      // Dao nguoc mang
+      for (let i = 0; i < arr.length / 2; i++) {
+        let temp = arr[i];
+        arr[i] = arr[arr.length - 1 - i];
+        arr[arr.length - 1 - i] = temp;
+      }
+      alert("Mang sau khi dao nguoc: " + arr.toString(", "));
+    </script>
+  </body>
+</html>
