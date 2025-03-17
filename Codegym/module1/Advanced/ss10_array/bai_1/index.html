@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Bài tập 1:												
+    Nhập 1 mảng từ bàn phím với độ dài n												
+    Hiện thị mảng sau khi thêm mới các phần tử												
+    Kiểm tra mảng vừa nhập. Nếu số phần tử chẵn bằng số phần 
+    tử lẻ thì hiện thị thông báo "OK", nếu không thoả mãn thì hiện thị "NO"												 -->
+
+    <h1>Bài tập 1</h1>
+    <button onclick="processArray()">Nhập mảng và kiểm tra</button>
+
+    <p id="result"></p>
+
+    <script>
+      function processArray() {
+        const length = parseInt(prompt("Nhập độ dài của mảng:"));
+        const array = [];
+
+        for (let i = 0; i < length; i++) {
+          const element = parseInt(prompt(`Nhập phần tử thứ ${i + 1}:`));
+          array.push(element);
+        }
+
+        let evenCount = 0;
+        let oddCount = 0;
+
+        for (let i = 0; i < length; i++) {
+          if (array[i] % 2 === 0) {
+            evenCount++;
+          } else {
+            oddCount++;
+          }
+        }
+
+        const result = document.getElementById("result");
+        if (evenCount === oddCount) {
+          result.textContent = "OK";
+        } else {
+          result.textContent = "NO";
+        }
+      }
+    </script>
+  </body>
+</html>
