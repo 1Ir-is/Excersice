@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let input = prompt("Nhap chuoi: ");
+      let result = "";
+
+      // for-off
+      for (const element of input) {
+        let char = element;
+        if (char === element.toLowerCase()) {
+          result += element.toUpperCase();
+        } else {
+          result += element.toLocaleLowerCase();
+        }
+      }
+
+      // for thuong
+      //   for (let i = 0; i < input.length; i++) {
+      //     let char = input[i];
+      //     if (char === input[i].toLowerCase()) {
+      //       result += input[i].toUpperCase();
+      //     } else {
+      //       result += input[i].toLocaleLowerCase();
+      //     }
+      //   }
+
+      alert("Ket qua: " + result);
+    </script>
+  </body>
+</html>
