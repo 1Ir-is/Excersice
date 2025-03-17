@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Bài tập 2:												
+    Nhập 1 mảng từ bàn phím với độ dài n												
+    Hiện thị mảng sau khi thêm mới các phần tử												
+    Hiện thị các số chính phương có trong mảng ( Số chính phương là các số ví dụ 1,4,9,16,25,36,49……)												 -->
+
+    <h1>Bài tập 2</h1>
+    <button onclick="processArray()">Nhập mảng và kiểm tra</button>
+
+    <p id="result"></p>
+
+    <script>
+      function processArray() {
+        const length = parseInt(prompt("Nhập độ dài của mảng:"));
+        const array = [];
+
+        for (let i = 0; i < length; i++) {
+          const element = parseInt(prompt(`Nhập phần tử thứ ${i + 1}:`));
+          array.push(element);
+        }
+
+        const perfectSquares = [];
+        for (const element of array) {
+          let isPerfectSquare = false;
+          for (let j = 1; j * j <= element; j++) {
+            if (j * j === element) {
+              isPerfectSquare = true;
+              break;
+            }
+          }
+          if (isPerfectSquare) {
+            perfectSquares.push(element);
+          }
+        }
+
+        const result = document.getElementById("result");
+        result.textContent = `Các số chính phương trong mảng: ${perfectSquares.join(
+          ", "
+        )}`;
+      }
+    </script>
+  </body>
+</html>
