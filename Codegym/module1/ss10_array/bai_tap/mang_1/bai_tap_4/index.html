@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Khởi tạo mảng số nguyên
+      let arr = [5, 12, 8, 20, 15, 3, 10, 7, 25, 18];
+
+      // Hiển thị mảng ban đầu
+      alert("Mảng ban đầu: " + arr.join(", "));
+
+      // Đảo ngược các phần tử trong mảng
+      for (let i = 0; i < arr.length / 2; i++) {
+        let temp = arr[i];
+        arr[i] = arr[arr.length - 1 - i];
+        arr[arr.length - 1 - i] = temp;
+      }
+
+      // Hiển thị mảng sau khi đảo ngược
+      alert("Mảng sau khi đảo ngược: " + arr.join(", "));
+    </script>
+  </body>
+</html>

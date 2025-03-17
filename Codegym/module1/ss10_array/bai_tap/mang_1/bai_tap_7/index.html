@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [5, -12, 8, -20, 15, 3, -10, 7, -25, 18];
+      let V = parseInt(prompt("Nhap so nguyen V: "));
+      let found = false;
+
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === V) {
+          found = true;
+          // Dich cac phan tu ben phai sang trai
+          for (let j = i; j < arr.length - 1; j++) {
+            arr[j] = arr[j + 1]; // Gan phan tu ben phai vao vi tri hien tai
+          }
+          // Xoa phan tu cuoi cung vi da bi trung
+          arr.pop();
+          break;
+        }
+      }
+
+      if (found) {
+        alert(
+          V +
+            " is in the array and has been removed" +
+            "\n" +
+            " Current array is: " +
+            arr
+        );
+      } else {
+        alert(V + " is not in the array");
+      }
+    </script>
+  </body>
+</html>
