@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 6</title>
+  </head>
+  <body>
+    <script>
+      // Nhập mảng ký tự từ người dùng
+      let input = prompt(
+        "Nhập mảng ký tự (các ký tự cách nhau bằng dấu phẩy):"
+      );
+      let arr = input.split(",");
+
+      // Thay thế tất cả ký tự '-' bằng '_'
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === "-") {
+          arr[i] = "_";
+        }
+      }
+
+      // Hiển thị mảng sau khi thay thế
+      alert("Mảng sau khi thay thế: " + arr.join(", "));
+    </script>
+  </body>
+</html>
