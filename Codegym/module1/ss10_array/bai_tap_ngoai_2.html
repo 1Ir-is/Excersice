@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 2</title>
+  </head>
+  <body>
+    <script>
+      // Nhap mang so tu ban phim voi do dai n (n <= 20)
+      // Hien thi mang sau khi them moi cac phan tu
+      // Kiem tra mang vua nhap.
+      // Neu mang tang dan deu thi hien ok, khong phai thi no
+      // vd:  0,2,4,6,8 -> True
+      //      5,10,15,20,25 -> True
+      //      2,4,,7,9 -> False
+      let n;
+      do {
+        n = parseFloat(prompt("Nhập n (1-19): "));
+        if (isNaN(n) || n <= 0 || n >= 20 || n % 1 !== 0) {
+          alert("Không hợp lệ, vui lòng nhập lại!");
+        }
+      } while (isNaN(n) || n <= 0 || n >= 20 || n % 1 !== 0);
+
+      let arr = [];
+      for (let i = 0; i < n; i++) {
+        let value;
+        do {
+          value = parseFloat(prompt(`Nhập phần tử thứ ${i + 1}: `));
+          if (isNaN(value) || value < 0 || value % 1 !== 0) {
+            alert("Không hợp lệ, vui lòng nhập lại!");
+          }
+        } while (isNaN(value) || value < 0 || value % 1 !== 0);
+        arr.push(value);
+      }
+
+      alert("Mảng vừa nhập vào là: " + arr.join(", "));
+
+      let isTangDanDeu = true;
+      let khoangCach = arr[1] - arr[0];
+      for (let i = 1; i < arr.length; i++) {
+        if (arr[i] - arr[i - 1] !== khoangCach) {
+          isTangDanDeu = false;
+          break;
+        }
+      }
+
+      if (isTangDanDeu) {
+        alert("TRUE");
+      } else {
+        alert("FALSE");
+      }
+    </script>
+  </body>
+</html>

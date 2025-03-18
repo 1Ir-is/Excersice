@@ -1,44 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Game Tài Xỉu Đơn Giản</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+      .dice {
+        font-size: 50px;
+        margin: 10px;
+      }
+      .result {
+        font-size: 24px;
+        margin-top: 20px;
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body>
+    <h1>Chào mừng đến với game Tài Xỉu</h1>
+    <p>Chọn cửa cược:</p>
+    <button onclick="playGame('tai')">Tài (11-18)</button>
+    <button onclick="playGame('xiu')">Xỉu (3-10)</button>
+
+    <div id="dice" class="dice">🎲🎲🎲</div>
+    <div id="total"></div>
+    <div id="result" class="result"></div>
+
     <script>
-      // Nhap n la do dai mang (n > 0 va n < 20 neu ko thoa man thi se nhap lai)
-      // Nhap vao cac gia tri phan tu trong mang
-      // Hien thi gia tri trong mang.
+      function rollDice() {
+        return Math.floor(Math.random() * 6 + 1);
+      }
 
-      let n;
-      do {
-        n = parseInt(prompt("Nhap n: "));
-        if (n <= 0 || n >= 20) {
-          alert("Vui long nhap n > 0 va n < 20");
+      function playGame(choice) {
+        let dice1 = rollDice();
+        let dice2 = rollDice();
+        let dice3 = rollDice();
+        let totalDice = dice1 + dice2 + dice3;
+
+        document.getElementById(
+          "dice"
+        ).innerHTML = `🎲${dice1} 🎲${dice2} 🎲${dice3}`;
+        document.getElementById("total").innerText = `Tổng: ${totalDice}`;
+
+        let result;
+        if (totalDice >= 11) {
+          result = "tai";
+        } else {
+          result = "xiu";
         }
-      } while (isNaN(n) || n <= 0 || n >= 20);
 
-      let arr = [];
-      for (let i = 0; i < n; i++) {
-        let value;
-        do {
-          value = parseInt(prompt("Nhap phan tu thu " + (i + 1) + ":"));
-          if (value < 0) {
-            alert("Vui long nhap gia tri lon hon 0");
-          }
-        } while (isNaN(value) || value < 0);
-        arr.push(value);
-      }
-      alert("Mang da nhap la: " + arr.toString(", "));
+        let message;
+        if (result === choice) {
+          message = "Bạn thắng!";
+        } else {
+          message = "Bạn thua!";
+        }
 
-      // Dao nguoc mang
-      for (let i = 0; i < arr.length / 2; i++) {
-        let temp = arr[i];
-        arr[i] = arr[arr.length - 1 - i];
-        arr[arr.length - 1 - i] = temp;
+        document.getElementById("result").innerText = message;
       }
-      alert("Mang sau khi dao nguoc: " + arr.toString(", "));
     </script>
   </body>
 </html>
+
+<!-- <!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Tài Xỉu Đơn Giản</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+      .dice-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin: 20px;
+      }
+      .dice {
+        font-size: 50px;
+        display: inline-block;
+        transition: transform 0.3s ease-in-out;
+      }
+      .rolling {
+        animation: shake 0.5s infinite;
+      }
+      @keyframes shake {
+        0% {
+          transform: rotate(0deg);
+        }
+        25% {
+          transform: rotate(10deg);
+        }
+        50% {
+          transform: rotate(0deg);
+        }
+        75% {
+          transform: rotate(-10deg);
+        }
+        100% {
+          transform: rotate(0deg);
+        }
+      }
+      .result {
+        font-size: 24px;
+        margin-top: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Chào mừng đến với game Tài Xỉu</h1>
+    <p>Chọn cửa cược:</p>
+    <button onclick="playGame('tai')">Tài (11-18)</button>
+    <button onclick="playGame('xiu')">Xỉu (3-10)</button>
+
+    <div class="dice-container">
+      <div id="dice1" class="dice">🎲</div>
+      <div id="dice2" class="dice">🎲</div>
+      <div id="dice3" class="dice">🎲</div>
+    </div>
+    <div id="total"></div>
+    <div id="result" class="result"></div>
+
+    <script>
+      function rollDice() {
+        return Math.floor(Math.random() * 6 + 1);
+      }
+
+      function playGame(choice) {
+        let dice1Elem = document.getElementById("dice1");
+        let dice2Elem = document.getElementById("dice2");
+        let dice3Elem = document.getElementById("dice3");
+
+        // Thêm hiệu ứng rung lắc
+        dice1Elem.classList.add("rolling");
+        dice2Elem.classList.add("rolling");
+        dice3Elem.classList.add("rolling");
+
+        setTimeout(() => {
+          let dice1 = rollDice();
+          let dice2 = rollDice();
+          let dice3 = rollDice();
+          let totalDice = dice1 + dice2 + dice3;
+
+          // Hiển thị kết quả xúc xắc
+          dice1Elem.innerText = getDiceFace(dice1);
+          dice2Elem.innerText = getDiceFace(dice2);
+          dice3Elem.innerText = getDiceFace(dice3);
+
+          document.getElementById("total").innerText = `Tổng: ${totalDice}`;
+
+          let result = totalDice >= 11 ? "tai" : "xiu";
+          let message = result === choice ? "Bạn thắng!" : "Bạn thua!";
+          document.getElementById("result").innerText = message;
+
+          // Xóa hiệu ứng rung lắc
+          dice1Elem.classList.remove("rolling");
+          dice2Elem.classList.remove("rolling");
+          dice3Elem.classList.remove("rolling");
+        }, 1000); // Delay 1 giây để mô phỏng xúc xắc quay
+      }
+
+      function getDiceFace(num) {
+        let diceFaces = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+        return diceFaces[num - 1];
+      }
+    </script>
+  </body>
+</html> -->

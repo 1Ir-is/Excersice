@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rút gọn phân số</title>
+  </head>
+  <body>
+    <script>
+      let input, parts;
+      do {
+        input = prompt("Nhập phân số dạng xx/yy:");
+        parts = input.split("/"); // Tách chuỗi thành mảng [tử số, mẫu số]
+
+        if (parts.length !== 2) {
+          alert("Không là phân số");
+        } else {
+          let tu = parseInt(parts[0]);
+          let mau = parseInt(parts[1]);
+
+          if (isNaN(tu) || isNaN(mau) || mau === 0) {
+            alert("Không là phân số");
+          } else {
+            let a = tu;
+            let b = mau;
+            while (b !== 0) {
+              let temp = b;
+              b = a % b;
+              a = temp;
+            }
+            let tuRutGon = tu / a;
+            let mauRutGon = mau / a;
+
+            alert("Phan so la: " + tuRutGon + "/" + mauRutGon);
+          }
+        }
+      } while (true);
+    </script>
+  </body>
+</html>

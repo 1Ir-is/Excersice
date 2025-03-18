@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Nhap vao mot chuoi dang so
+      // Kiem tra n phai la 1 so co 4 chu so
+      // + Neu khong thoa man la 4 chu so thi thong bao can nhap
+      //    so co 4 chu so.
+      // + Neu thoa man la 4 chu so tiep tuc thuc hien cong viec:
+      //  Tim ra so co 3 chu so tu n (bang cach xoa di mot chu so
+      //  bat ky cua n) de co duoc 1 so lon nhat.
+      // vd:  923 -> -1
+      //      1923 -> 923
+      //      9371 -> 971.
+
+      let input;
+      do {
+        input = prompt("Nhập số có 4 chữ số:");
+        if (input.length !== 4 || isNaN(input)) {
+          alert("Cần nhập số có 4 chữ số");
+        }
+      } while (input.length !== 4 || isNaN(input));
+
+      let maxNumber = -1;
+      for (let i = 0; i < input.length; i++) {
+        let newNumber = "";
+        for (let j = 0; j < input.length; j++) {
+          if (j !== i) {
+            newNumber += input[j];
+          }
+        }
+        newNumber = parseInt(newNumber);
+
+        if (newNumber > maxNumber) {
+          maxNumber = newNumber;
+        }
+      }
+
+      alert("So co 3 chu so tu n lon nhat la: " + maxNumber);
+    </script>
+  </body>
+</html>

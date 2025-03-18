@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <p id="display"></p>
+    <script>
+      let row = 10;
+      let col = 10;
+      let isPlayer1 = true;
+      let array = new Array(row);
+      for (let i = 0; i < array.length; i++) {
+        array[i] = new Array(col);
+        for (let j = 0; j < array[i].length; j++) {
+          array[i][j] = "";
+        }
+      }
+      display();
+      function display() {
+        let tableString = `<table border="1">`;
+        for (let i = 0; i < array.length; i++) {
+          tableString += `  <tr>`;
+          for (let j = 0; j < array[i].length; j++) {
+            tableString += ` <td  onclick="play(${i},${j})" style="width: 40px; height: 40px;text-align: center">${array[i][j]}</td>`;
+          }
+          tableString += `  </tr>`;
+        }
+        tableString += `</table>`;
+        document.getElementById("display").innerHTML = tableString;
+      }
+      function play(i, j) {
+        // kiểm trả đã có dữ liệu chưu
+        if (array[i][j] == "") {
+          if (isPlayer1) {
+            array[i][j] = "X";
+            isPlayer1 = false;
+            if (checkIsWin()) {
+              alert("X chiến thắng");
+            }
+          } else if (!isPlayer1) {
+            array[i][j] = "O";
+            isPlayer1 = true;
+            if (checkIsWin()) {
+              alert("O chiến thắng");
+            }
+          }
+        } else {
+          alert("ô này đã chơi bạn ơi!");
+        }
+        display();
+      }
+      function checkIsWin() {
+        for (let i = 0; i < array.length; i++) {
+          for (let j = 0; j < array[i].length; j++) {
+            // Check horizontal win
+            if (
+              j + 2 < array[i].length &&
+              array[i][j] !== "" &&
+              array[i][j] === array[i][j + 1] &&
+              array[i][j] === array[i][j + 2]
+            ) {
+              return true;
+            }
+
+            // Check vertical win
+            if (
+              i + 2 < array.length &&
+              array[i][j] !== "" &&
+              array[i][j] === array[i + 1][j] &&
+              array[i][j] === array[i + 2][j]
+            ) {
+              return true;
+            }
+
+            // Check diagonal (top-left to bottom-right) win
+            if (
+              i + 2 < array.length &&
+              j + 2 < array[i].length &&
+              array[i][j] !== "" &&
+              array[i][j] === array[i + 1][j + 1] &&
+              array[i][j] === array[i + 2][j + 2]
+            ) {
+              return true;
+            }
+
+            // Check diagonal (bottom-left to top-right) win
+            if (
+              i - 2 >= 0 &&
+              j + 2 < array[i].length &&
+              array[i][j] !== "" &&
+              array[i][j] === array[i - 1][j + 1] &&
+              array[i][j] === array[i - 2][j + 2]
+            ) {
+              return true;
+            }
+          }
+        }
+        return false; // No win condition met
+      }
+    </script>
+  </body>
+</html>

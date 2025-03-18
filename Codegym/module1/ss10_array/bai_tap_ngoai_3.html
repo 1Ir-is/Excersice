@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 3</title>
+  </head>
+  <body>
+    <script>
+      // Nhap mang so tu ban phim voi do dai n
+      // Hien thi mang sau khi them moi cac phan tu
+      // Kiem tra mang vua nhap
+      // Neu mang doi xung thi hien 0K khong phai thi tra ve NO
+      // VD:  1,2,3,4,3,2,1 -> OK
+      //      0,1,2,1,1,0 -> NO
+      let n;
+      do {
+        n = parseFloat(prompt("Nhập n (1-19): "));
+        if (isNaN(n) || n <= 0 || n >= 20 || n % 1 !== 0) {
+          alert("Không hợp lệ, vui lòng nhập lại!");
+        }
+      } while (isNaN(n) || n <= 0 || n >= 20 || n % 1 !== 0);
+
+      let arr = [];
+      for (let i = 0; i < n; i++) {
+        let value;
+        do {
+          value = parseFloat(prompt(`Nhập phần tử thứ ${i + 1}: `));
+          if (isNaN(value) || value < 0 || value % 1 !== 0) {
+            alert("Không hợp lệ, vui lòng nhập lại!");
+          }
+        } while (isNaN(value) || value < 0 || value % 1 !== 0);
+        arr.push(value);
+      }
+
+      alert("Mảng vừa nhập vào là: " + arr.join(", "));
+
+      let isDoiXung = true;
+      for (let i = 0; i < arr.length / 2; i++) {
+        if (arr[i] !== arr[arr.length - 1 - i]) {
+          isDoiXung = false;
+          break;
+        }
+      }
+
+      if (isDoiXung) {
+        alert("OK");
+      } else {
+        alert("NO");
+      }
+    </script>
+  </body>
+</html>
