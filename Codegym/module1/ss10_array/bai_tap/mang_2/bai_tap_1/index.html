@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 1</title>
+  </head>
+  <body>
+    <!--Khoi tao  mang
+    let a = [
+    [1, 2, 1, 24],
+    [8, 11, 9, 4],
+    [7, 0, 7, 27],
+    [7, 4, 28, 14],
+    [3, 10, 26, 7]
+];
+    -->
+
+    <script>
+      let a = [
+        [1, 2, 1, 24],
+        [8, 11, 9, 4],
+        [7, 0, 7, 27],
+        [7, 4, 28, 14],
+        [3, 10, 26, 7],
+      ];
+
+      // In ra cac phan tu trong mang
+      for (let i = 0; i < a.length; i++) {
+        document.write("row " + i);
+
+        for (let j = 0; j < a[i].length; j++) {
+          document.write("<br>");
+          document.write(" " + a[i][j]);
+        }
+        document.write("<br>");
+      }
+    </script>
+  </body>
+</html>
