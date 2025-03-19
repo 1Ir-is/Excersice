@@ -135,14 +135,13 @@
       function addProduct() {
         const productInput = document.getElementById("productInput").value;
         if (productInput) {
-            products.push(productInput);
-            document.getElementById("productInput").innerText = ""
+          products.push(productInput);
+          document.getElementById("productInput").value = "";
+          displayProducts();
         } else {
-            
+          alert("Please enter a product name");
         }
       }
-
-      displayProducts();
     </script>
   </body>
 </html>
