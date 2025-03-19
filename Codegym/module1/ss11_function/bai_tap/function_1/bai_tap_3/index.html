@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 3</title>
+  </head>
+  <body>
+    <button onclick="displayResult()">Click here</button>
+    <p id="result"></p>
+    <script>
+      function compareAndSum(a, b) {
+        if (a < b) {
+          alert("Tham so thu nhat lon hon tham so thu hai!");
+        } else {
+          return a + b;
+        }
+      }
+
+      function displayResult() {
+        const soThuNhat = parseInt(prompt("Nhap so thu nhat: "));
+        const soThuHai = parseInt(prompt("Nhap so thu hai: "));
+        const result = compareAndSum(soThuNhat, soThuHai);
+
+        if (result !== undefined) {
+          document.getElementById(
+            "result"
+          ).innerText = `Tong cua 2 so ${soThuNhat} va ${soThuHai} la: ${result} `;
+        }
+      }
+    </script>
+  </body>
+</html>
