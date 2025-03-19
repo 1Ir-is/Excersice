@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 2</title>
+  </head>
+  <body>
+    <button onclick="displayResult()">Click me!</button>
+    <script>
+      function calcCircleArea(radius) {
+        return Math.PI * radius * radius;
+      }
+
+      function calcCirclePerimeter(radius) {
+        return 2 * Math.PI * radius;
+      }
+
+      function displayResult() {
+        const inputRadius = parseFloat(prompt("Nhap ban kinh: "));
+        const circleAreaResult = calcCircleArea(inputRadius);
+        const circlePerimeterResult = calcCirclePerimeter(inputRadius);
+        alert(
+          `Voi ban kinh la ${inputRadius} thi Chu Vi la ${circlePerimeterResult.toFixed(
+            3
+          )} va Dien Tich la ${circleAreaResult.toFixed(3)}`
+        );
+      }
+    </script>
+  </body>
+</html>
