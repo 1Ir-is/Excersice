@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 4</title>
+  </head>
+  <body>
+    <button onclick="displayResult()">Click me</button>
+    <script>
+      function isDigit(char) {
+        return !isNaN(char) && char.trim() !== "";
+      }
+
+      function displayResult() {
+        const inputChar = prompt("Nhap: ");
+        const result = isDigit(inputChar);
+        alert(result);
+      }
+    </script>
+  </body>
+</html>
