@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 8</title>
+  </head>
+  <body>
+    <button onclick="displayResult()">Click me</button>
+    <script>
+      function reversedArray(arr) {
+        // Cach 1
+        // return arr.reverse();
+
+        // Cach 2
+        let left = 0;
+        let right = arr.length - 1;
+        while (left < right) {
+          let temp = arr[left];
+          arr[left] = arr[right];
+          arr[right] = temp;
+          left++;
+          right--;
+        }
+        return arr;
+      }
+
+      function displayResult() {
+        let n;
+        do {
+          n = parseInt(prompt("Nhap so luong phan tu cho mang: "));
+        } while (isNaN(n) || n <= 0);
+
+        let arr = [];
+        for (let i = 0; i < n; i++) {
+          let value = prompt(`Nhap phan tu thu ${i + 1}:`);
+          arr.push(value);
+        }
+
+        alert("Mang da nhap la:" + arr);
+        const result = reversedArray(arr);
+        alert("Mang sau khi dao nguoc la: " + result);
+      }
+    </script>
+  </body>
+</html>
