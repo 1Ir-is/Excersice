@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quan Ly San Pham</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .container {
+        width: 50%;
+        margin: auto;
+      }
+      h2 {
+        margin-bottom: 10px;
+      }
+      input {
+        width: 70%;
+        padding: 8px;
+        margin-right: 10px;
+      }
+      button {
+        padding: 8px 15px;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .add-btn {
+        background-color: #50af50;
+        color: white;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 7px;
+      }
+
+      input[type="text"] {
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .add-product {
+        background-color: #f2f2f2;
+        padding: 30px;
+        text-align: center;
+      }
+      .edit-btn,
+      .delete-btn {
+        background-color: #50af50;
+        color: white;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 7px;
+        margin: 3px;
+      }
+      .delete-btn {
+        background-color: red;
+      }
+      .table-container {
+        margin-top: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+      .product-count {
+        color: red;
+        font-weight: bold;
+      }
+
+      .product-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Add New Product</h2>
+      <section class="add-product">
+        <input type="text" id="productInput" placeholder="New Product" />
+        <button class="add-btn" onclick="addProduct()">Add</button>
+      </section>
+
+      <div class="table-container">
+        <div class="product-header">
+          <h2>Display All Product</h2>
+          <p><span class="product-count" id="productCount">0</span> products</p>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="productTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      let products = ["Sony Xperia"];
+
+      function displayProducts() {
+        const productTable = document.getElementById("productTable");
+        productTable.innerHTML = "";
+        for (let i = 0; i < products.length; i++) {
+          productTable.innerHTML += `
+                    <tr>
+                        <td>${products[i]}</td>
+                        <td>
+                            <button class="edit-btn" onclick="editProduct(${i})">Edit</button>
+                            <button class="delete-btn" onclick="deleteProduct(${i})">Delete</button>
+                        </td>
+                    </tr>
+                `;
+        }
+        document.getElementById("productCount").innerText = products.length;
+      }
+
+      function addProduct() {
+        const productInput = document.getElementById("productInput").value;
+        if (productInput) {
+            products.push(productInput);
+            document.getElementById("productInput").innerText = ""
+        } else {
+            
+        }
+      }
+
+      displayProducts();
+    </script>
+  </body>
+</html>
