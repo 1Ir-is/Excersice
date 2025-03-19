@@ -7,9 +7,16 @@
   </head>
   <body>
     <script>
-      let n = +prompt(
-        "Nhap mot so de kiem tra xem co phai so nguyen to hay khong:"
-      );
+      let n;
+
+      do {
+        n = +prompt(
+          "Nhap mot so de kiem tra xem co phai so nguyen to hay khong (nho hon hoac bang 10000):"
+        );
+        if (n > 10000) {
+          alert("So ban nhap lon hon 10000. Vui long nhap lai.");
+        }
+      } while (n > 10000);
 
       if (isPrime(n)) {
         alert(n + " la so nguyen to.");
