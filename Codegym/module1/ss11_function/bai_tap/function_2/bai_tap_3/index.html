@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 3</title>
+  </head>
+  <body>
+    <button onclick="displayResult()">Click me</button>
+
+    <script>
+      function giaiThua(n) {
+        if (n < 0) {
+          return -1;
+        }
+
+        if (n === 0 || n === 1) {
+          return 1;
+        } else {
+          return n * giaiThua(n - 1);
+        }
+      }
+
+      function displayResult() {
+        const inputNumber = parseInt(prompt("Nhap so: "));
+        const result = giaiThua(inputNumber);
+        alert(`Giai thua cua ${inputNumber} la ${result}`);
+      }
+    </script>
+  </body>
+</html>
