@@ -7,36 +7,23 @@
   </head>
   <body>
     <script>
-      let n;
-      do {
-        n = +prompt("Nhap so luong so nguyen to can in ra (toi da 10000): ");
-        if (n > 10000) {
-          alert(
-            "Gia tri nhap vao khong hop le! Vui long nhap so nho hon hoac bang 10000."
-          );
-        }
-      } while (n > 10000);
+      let n = +prompt(
+        "Nhap mot so de kiem tra xem co phai so nguyen to hay khong:"
+      );
 
-      let number = 2;
-      let countSNT = 0;
-
-      document.writeln("Cac so nguyen to la: ");
-      while (countSNT < n) {
-        if (isPrime(number)) {
-          countSNT++;
-          document.writeln(number);
-        }
-        number++;
+      if (isPrime(n)) {
+        alert(n + " la so nguyen to.");
+      } else {
+        alert(n + " khong phai la so nguyen to.");
       }
 
       function isPrime(n) {
         if (n < 2) {
           return false;
-        } else {
-          for (let i = 2; i <= Math.sqrt(n); i++) {
-            if (n % i === 0) {
-              return false;
-            }
+        }
+        for (let i = 2; i <= Math.sqrt(n); i++) {
+          if (n % i === 0) {
+            return false;
           }
         }
         return true;
