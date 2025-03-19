@@ -150,20 +150,37 @@
       }
 
       function deleteProduct(index) {
-        products.splice(index, 1);
-        displayProducts();
+        const confirmDelete = confirm(
+          "Are you sure you want to delete this product?"
+        );
+        if (confirmDelete) {
+          products.splice(index, 1);
+          alert("Product deleted successfully!");
+          displayProducts();
+        }
       }
 
       function editProduct(index) {
-        const newName = prompt(
-          "Enter new name for the product:",
-          products[index]
-        );
-        if (newName) {
-          products[index] = newName;
-          alert("Edit Success!");
-          displayProducts();
+        const oldName = products[index];
+        let newName = prompt("Enter new name for the product:", oldName);
+
+        // Kiểm tra nếu người dùng nhấn Cancel hoặc nhập rỗng
+        if (newName === null) return; // Nhấn hủy thì không làm gì cả
+        newName = newName.trim(); // Xóa khoảng trắng hai đầu
+
+        if (newName === "") {
+          alert("Product name cannot be empty!");
+          return;
         }
+
+        if (newName === oldName) {
+          alert("New name cannot be the same as the old name!");
+          return;
+        }
+
+        products[index] = newName;
+        alert("Edit Success!");
+        displayProducts();
       }
 
       displayProducts();
