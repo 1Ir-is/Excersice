@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 7</title>
+  </head>
+  <body>
+    <button onclick="displayResult()">Click me</button>
+    <script>
+      function swapNumber(a, b) {
+        // Cach 1 -> Doi cho truc tiep
+        // return [b, a];
+
+        // Cach 2 -> Dung bien tam
+        // let temp = a;
+        // a = b;
+        // b = temp;
+        // return [a, b];
+
+        // Cach 3 -> Dung phep cong - tru
+        // a = a + b;
+        // b = a - b;
+        // a = a - b;
+        // return [a, b];
+
+        // Cach 4 -> Dùng phép toán XOR (^) => Chi dung voi so int
+        a = a ^ b;
+        b = a ^ b;
+        a = a ^ b;
+        return [a, b];
+      }
+
+      function displayResult() {
+        const number_1 = parseInt(prompt("Nhap so thu 1: "));
+        const number_2 = parseInt(prompt("Nhap so thu 2: "));
+        const result = swapNumber(number_1, number_2);
+        alert(
+          `Sau khi doi cho cua 2 so ${number_1} va ${number_2} la: ${result}`
+        );
+      }
+    </script>
+  </body>
+</html>
