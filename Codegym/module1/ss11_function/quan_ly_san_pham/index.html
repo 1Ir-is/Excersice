@@ -113,7 +113,13 @@
     </div>
 
     <script>
-      let products = ["Sony Xperia"];
+      let products = [
+        "Sony Xperia",
+        "Samsung Galaxy",
+        "Nokia 6",
+        "Xiaomi Redmi Note 4",
+        "Apple IPhone 6S",
+      ];
 
       function displayProducts() {
         const productTable = document.getElementById("productTable");
@@ -142,6 +148,12 @@
           alert("Please enter a product name");
         }
       }
+
+      function deleteProduct(index) {
+        products.splice(index, 1);
+        displayProducts();
+      }
+      displayProducts();
     </script>
   </body>
 </html>
