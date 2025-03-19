@@ -153,6 +153,19 @@
         products.splice(index, 1);
         displayProducts();
       }
+
+      function editProduct(index) {
+        const newName = prompt(
+          "Enter new name for the product:",
+          products[index]
+        );
+        if (newName) {
+          products[index] = newName;
+          alert("Edit Success!");
+          displayProducts();
+        }
+      }
+
       displayProducts();
     </script>
   </body>
