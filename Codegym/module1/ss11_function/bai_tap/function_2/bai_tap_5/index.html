@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 5</title>
+  </head>
+  <body>
+    <button onclick="displayResult()">Click me</button>
+    <script>
+      function findMinNumber(a, b, c) {
+        // Cach 1
+        // return Math.min(a, b, c);
+
+        // Cach 2
+        let min = a;
+        if (b < min) {
+          min = b;
+        }
+        if (c < min) {
+          min = c;
+        }
+        return min;
+      }
+
+      function displayResult() {
+        const number_1 = parseInt(prompt("Nhap so thu 1: "));
+        const number_2 = parseInt(prompt("Nhap so thu 2: "));
+        const number_3 = parseInt(prompt("Nhap so thu 3: "));
+
+        const result = findMinNumber(number_1, number_2, number_3);
+        alert(
+          `Trong 3 so ${number_1}, ${number_2}, ${number_3} thi so ${result} la so nguyen co gia tri nho nhat`
+        );
+      }
+    </script>
+  </body>
+</html>
