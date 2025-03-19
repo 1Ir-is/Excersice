@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 2</title>
+  </head>
+  <body>
+    <button onclick="displayResult()">Click de tang 1 so</button>
+    <p id="result"></p>
+
+    <script>
+      function tangMotSo(number) {
+        return number + 1;
+      }
+
+      function displayResult() {
+        const inputNumber = parseInt(prompt("Nhap mot so: "));
+        const result = tangMotSo(inputNumber);
+        document.getElementById(
+          "result"
+        ).innerText = `Gia tri sau khi tang len 1 la: ${result}`;
+      }
+    </script>
+  </body>
+</html>
