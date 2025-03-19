@@ -13,10 +13,10 @@
         // return [b, a];
 
         // Cach 2 -> Dung bien tam
-        // let temp = a;
-        // a = b;
-        // b = temp;
-        // return [a, b];
+        let temp = a;
+        a = b;
+        b = temp;
+        return [a, b];
 
         // Cach 3 -> Dung phep cong - tru
         // a = a + b;
@@ -25,10 +25,10 @@
         // return [a, b];
 
         // Cach 4 -> Dùng phép toán XOR (^) => Chi dung voi so int
-        a = a ^ b;
-        b = a ^ b;
-        a = a ^ b;
-        return [a, b];
+        // a = a ^ b;
+        // b = a ^ b;
+        // a = a ^ b;
+        // return [a, b];
       }
 
       function displayResult() {

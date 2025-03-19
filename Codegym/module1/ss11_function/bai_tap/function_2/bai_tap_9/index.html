@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 9</title>
+  </head>
+  <body>
+    <button onclick="displayResult()">Click me</button>
+    <script>
+      function checkCharacterInArray(array, char) {
+        let count = 0;
+        for (let i = 0; i < array.length; i++) {
+          if (array[i] === char) {
+            count++;
+          }
+        }
+        return count > 0 ? count : -1;
+      }
+
+      function displayResult() {
+        let n;
+        do {
+          n = parseInt(prompt("Nhập số lượng phần tử trong mảng:"));
+          if (isNaN(n) || n <= 0) {
+            alert("Vui lòng nhập số nguyên dương!");
+          }
+        } while (isNaN(n) || n <= 0); 
+
+        // Khởi tạo mảng
+        let arr = [];
+        for (let i = 0; i < n; i++) {
+          let value = prompt(`Nhập phần tử thứ ${i + 1}:`);
+          arr.push(value.trim()); // Loại bỏ khoảng trắng dư thừa
+        }
+
+        // Hiển thị kết quả
+        alert("Mảng đã nhập: " + arr.join(", "));
+
+        let charToFind = prompt("Nhập ký tự cần tìm:").trim();
+
+        let result = checkCharacterInArray(arr, charToFind);
+
+        alert(`Kết quả: ${result}`);
+      }
+    </script>
+  </body>
+</html>
