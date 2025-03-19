@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chuyen doi giua feet va meters</title>
+  </head>
+  <body>
+    <script>
+      function feetToMeter(feet) {
+        return 0.305 * feet;
+      }
+
+      function meterToFeet(meter) {
+        return 3.279 * meter;
+      }
+
+      let choice;
+      let exit = false;
+      do {
+        choice = prompt(
+          "Chon loai chuyen doi: \n1. Feet sang Meters\n2. Meters sang Feet\n3. Thoat"
+        );
+
+        switch (choice) {
+          case "1":
+            let feet = +prompt("Nhap gia tri feet: ");
+            let meters = feetToMeter(feet);
+            alert(feet + " feet = " + meters.toFixed(3) + " meters");
+            break;
+          case "2":
+            let metersValue = +prompt("Nhap gia tri meter: ");
+            let feetValue = meterToFeet(metersValue);
+            alert(metersValue + " meters = " + feetValue.toFixed(3) + " feet");
+            break;
+          case "3":
+            let confirmExit = confirm(
+              "Ban co chac chan muon ket thuc chuong trinh?"
+            );
+
+            if (confirmExit) {
+              alert("Ket thuc chuong trinh");
+              exit = true;
+            }
+            break;
+
+          default:
+            alert("Lua chon khong hop le!");
+        }
+      } while (!exit);
+    </script>
+  </body>
+</html>
