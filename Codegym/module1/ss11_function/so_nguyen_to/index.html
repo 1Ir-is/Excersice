@@ -7,7 +7,16 @@
   </head>
   <body>
     <script>
-      let n = +prompt("Nhap so luong nguyen tu can in ra: ");
+      let n;
+      do {
+        n = +prompt("Nhap so luong so nguyen to can in ra (toi da 10000): ");
+        if (n > 10000) {
+          alert(
+            "Gia tri nhap vao khong hop le! Vui long nhap so nho hon hoac bang 10000."
+          );
+        }
+      } while (n > 10000);
+
       let number = 2;
       let countSNT = 0;
 
