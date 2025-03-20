@@ -139,6 +139,10 @@
         let start = (currentPage - 1) * itemsPerPage;
         let end = start + itemsPerPage;
 
+        if (end > products.length) {
+          end = products.length;
+        }
+
         for (let i = start; i < end; i++) {
           productTable.innerHTML += `
                     <tr>
