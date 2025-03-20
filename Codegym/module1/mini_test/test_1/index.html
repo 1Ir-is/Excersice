@@ -8,6 +8,7 @@
   <body>
     <script>
       let exit = false;
+      let sinhVien = ["Huynh Minh Huy", "Tran Chung Chien"];
 
       while (!exit) {
         let menu = prompt(
@@ -21,19 +22,19 @@
 
         switch (menu) {
           case "1":
-            alert("Hien thi danh sach sinh vien");
+            displaySinhVien();
             break;
           case "2":
-            alert("Them moi sinh vien");
+            addSinhVien();
             break;
           case "3":
-            alert("Xoa sinh vien");
+            deleteStudent();
             break;
           case "4":
             let confirmExit = confirm(
               "Ban co chac chan muon ket thuc chuong trinh?"
             );
-            
+
             if (confirmExit) {
               alert("Ket thuc chuong trinh");
               exit = true;
@@ -41,6 +42,53 @@
             break;
           default:
             alert("Lua chon khong hop le");
+        }
+      }
+
+      function displaySinhVien() {
+        if (sinhVien.length === 0) {
+          alert("Danh sach sinh vien dang trong!");
+        } else {
+          alert("Danh sach sinh vien la: \n" + sinhVien.join("\n"));
+        }
+      }
+
+      function addSinhVien() {
+        let newSinhVien = prompt("Nhap ten hoc sinh moi: ").trim();
+
+        if (newSinhVien === "") {
+          alert("Ten sinh vien khong duoc de trong!");
+        }
+
+        sinhVien.push(newSinhVien);
+        alert("Them sinh vien thanh cong");
+      }
+
+      function deleteStudent() {
+        if (sinhVien.length === 0) {
+          alert("Không có sinh viên nào để xóa.");
+          return;
+        }
+
+        let studentName = prompt("Nhập tên sinh viên cần xóa:").trim();
+        if (studentName === "") {
+          alert("Tên sinh viên không được để trống!");
+          return;
+        }
+
+        let index = sinhVien.indexOf(studentName);
+
+        if (index === -1) {
+          alert("Không tìm thấy sinh viên này!");
+          return;
+        }
+
+        let confirmDelete = confirm(
+          `Bạn có chắc muốn xóa sinh viên "${studentName}" không?`
+        );
+        if (confirmDelete) {
+          sinhVien.splice(index, 1);
+          alert(`Xóa sinh viên "${studentName}" thành công!`);
         }
       }
     </script>

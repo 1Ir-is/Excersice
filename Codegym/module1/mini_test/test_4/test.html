@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Tài Xỉu Đơn Giản</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+      .dice {
+        font-size: 50px;
+        margin: 10px;
+      }
+      .result {
+        font-size: 24px;
+        margin-top: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Chào mừng đến với game Tài Xỉu</h1>
+    <p>Chọn cửa cược:</p>
+    <button onclick="playGame('tai')">Tài (11-18)</button>
+    <button onclick="playGame('xiu')">Xỉu (3-10)</button>
+
+    <div id="dice" class="dice">🎲🎲🎲</div>
+    <div id="total"></div>
+    <div id="result" class="result"></div>
+
+    <script>
+      function rollDice() {
+        return Math.floor(Math.random() * 6) + 1;
+      }
+
+      function playGame(choice) {
+        let dice1 = rollDice();
+        let dice2 = rollDice();
+        let dice3 = rollDice();
+        let total = dice1 + dice2 + dice3;
+
+        document.getElementById(
+          "dice"
+        ).innerHTML = `🎲${dice1} 🎲${dice2} 🎲${dice3}`;
+        document.getElementById("total").innerText = `Tổng: ${total}`;
+
+        let result = total >= 11 ? "tai" : "xiu";
+        let message = result === choice ? "Bạn thắng! 🎉" : "Bạn thua! 😢";
+        document.getElementById("result").innerText = message;
+      }
+    </script>
+  </body>
+</html>

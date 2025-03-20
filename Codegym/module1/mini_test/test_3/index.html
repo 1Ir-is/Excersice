@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Nhap n -> ok thi nhap tiep 
+        nhap gia tri cho mang
+        hien thi mang
+        tinh tong cac phan tu o vi tri chan chia het cho 3 
+        let array = [4, 6, 9, 12, 16, 36] 
+        dem so phan tu la so chinh phuong
+        - So vi tri chan chia het cho 3: 9 -> 9 + 0 = 9
+        - So chinh phuong la: 4, 9, 16, 36
+        -->
+
+    <script>
+      let n;
+      do {
+        n = parseFloat(prompt("Nhập n (1-19): "));
+        if (isNaN(n) || n <= 0 || n >= 20 || n % 1 !== 0) {
+          alert("Không hợp lệ, vui lòng nhập lại!");
+        }
+      } while (isNaN(n) || n <= 0 || n >= 20 || n % 1 !== 0);
+
+      let arr = [];
+      for (let i = 0; i < n; i++) {
+        let value;
+        do {
+          value = parseFloat(prompt(`Nhập phần tử thứ ${i + 1}: `));
+          if (isNaN(value) || value <= 0 || value % 1 !== 0) {
+            alert("Không hợp lệ, vui lòng nhập lại!");
+          }
+        } while (isNaN(value) || value <= 0 || value % 1 !== 0);
+        arr.push(value);
+      }
+
+      alert("Mảng vừa nhập vào là: " + arr.join(", "));
+
+      let sum = 0;
+      for (let i = 0; i < arr.length; i += 2) {
+        if (arr[i] % 3 === 0) {
+          sum += arr[i];
+        }
+      }
+
+      alert("Tổng các phần tử ở vị trí chẵn chia hết cho 3 là: " + sum);
+
+      let soChinhPhuong = 0;
+
+      for (let i = 0; i < arr.length; i++) {
+        let sqrt = Math.sqrt(arr[i]);
+        if (sqrt % 1 === 0) {
+          soChinhPhuong++;
+        }
+      }
+
+      alert("So phan tu la chinh phuong la: " + soChinhPhuong);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đếm số lần xuất hiện của từ</title>
+  </head>
+  <body>
+    <script>
+      function demSoLanXuatHien() {
+        let str = prompt("Nhập một chuỗi:").toLowerCase(); // Nhập chuỗi và chuyển thành chữ thường
+        let words = str.split(" "); // Tách chuỗi thành mảng từ
+        let wordCount = []; // Mảng 2 chiều lưu từ và số lần xuất hiện
+
+        // Duyệt từng từ trong mảng
+        for (let i = 0; i < words.length; i++) {
+          let word = words[i];
+          let found = false;
+
+          // Kiểm tra xem từ đã có trong wordCount chưa
+          for (let j = 0; j < wordCount.length; j++) {
+            if (wordCount[j][0] === word) {
+              wordCount[j][1]++; // Nếu có rồi, tăng số lần xuất hiện
+              found = true;
+              break;
+            }
+          }
+
+          // Nếu chưa có trong wordCount, thêm mới
+          if (!found) {
+            wordCount.push([word, 1]);
+          }
+        }
+
+        // Hiển thị kết quả
+        let resultText = "Số lần xuất hiện của từng từ:\n";
+        for (let i = 0; i < wordCount.length; i++) {
+          resultText += `${wordCount[i][0]}: ${wordCount[i][1]} lần\n`;
+        }
+
+        alert(resultText);
+      }
+
+      demSoLanXuatHien();
+    </script>
+  </body>
+</html>
