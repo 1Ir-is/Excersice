@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 1</title>
+  </head>
+  <body>
+    <script>
+      function checkArray(arr) {
+        let even = true;
+        let odd = true;
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] % 2 === 0) {
+            odd = false;
+          } else {
+            even = false;
+          }
+        }
+        if (even) return 1;
+        if (odd) return 0;
+        return -1;
+      }
+
+      let n;
+      do {
+        n = parseInt(prompt("Nhap n: "));
+        if (isNaN(n) || n <= 0 || n >= 6 || n % 1 !== 0) {
+          alert("Khong hop le");
+        }
+      } while (isNaN(n) || n <= 0 || n >= 6 || n % 1 !== 0);
+
+      let arr = [];
+      for (let i = 0; i < n; i++) {
+        let value;
+        do {
+          value = parseFloat(prompt(`Nhap phan tu thu ${i + 1}: `));
+          if (isNaN(value) || value < 0 || value % 1 !== 0) {
+            alert("Khong hop le!");
+          }
+        } while (isNaN(value) || value < 0 || value % 1 !== 0);
+        arr.push(value);
+      }
+      alert(checkArray(arr));
+    </script>
+  </body>
+</html>
