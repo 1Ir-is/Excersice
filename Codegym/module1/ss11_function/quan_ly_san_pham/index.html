@@ -27,6 +27,13 @@
         cursor: pointer;
         font-size: 14px;
       }
+
+      #searchInput {
+        display: block;
+        margin: 0 auto 10px auto;
+        width: 350px;
+      }
+
       .add-btn {
         background-color: #50af50;
         color: white;
@@ -134,6 +141,13 @@
           <p><span class="product-count" id="productCount">0</span> products</p>
         </div>
 
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search....."
+          oninput="searchProduct()"
+        />
+
         <table>
           <thead>
             <tr>
@@ -144,7 +158,6 @@
           <tbody id="productTable"></tbody>
         </table>
 
-        <!-- Pagination -->
         <div class="pagination" id="pagination"></div>
       </div>
     </div>
@@ -261,7 +274,15 @@
 
       function goToPage(page) {
         currentPage = page;
-        displayProducts();
+        let keyword = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+
+        if (keyword === "") {
+          displayProducts();
+        } else {
+          searchProduct();
+        }
       }
 
       function prevPage() {
@@ -282,6 +303,52 @@
           currentPage++;
           displayProducts();
         }
+      }
+
+      function searchProduct() {
+        let keyword = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+
+        if (keyword === "") {
+          currentPage = 1;
+          displayProducts();
+          return;
+        }
+
+        let filterProducts = [];
+        for (let i = 0; i < products.length; i++) {
+          if (products[i].toLowerCase().includes(keyword)) {
+            filterProducts.push({ name: products[i], index: i });
+          }
+        }
+        displayFilteredProducts(filterProducts);
+      }
+
+      function displayFilteredProducts(filteredProducts) {
+        const productTable = document.getElementById("productTable");
+        productTable.innerHTML = "";
+
+        let start = (currentPage - 1) * itemsPerPage;
+        let end = start + itemsPerPage;
+
+        let paginatedProducts = filteredProducts.slice(start, end);
+
+        for (const element of paginatedProducts) {
+          productTable.innerHTML += `
+            <tr>
+                <td>${element.name}</td>
+                <td>
+                    <button class="edit-btn" onclick="editProduct(${element.index})">Edit</button>
+                    <button class="delete-btn" onclick="deleteProduct(${element.index})">Delete</button>
+                </td>
+            </tr>
+        `;
+        }
+
+        document.getElementById("productCount").innerText =
+          filteredProducts.length;
+        updatePagination(filteredProducts.length);
       }
 
       displayProducts();
