@@ -204,11 +204,16 @@
       }
 
       function addProduct() {
-        const productInput = document.getElementById("productInput").value;
+        const productInput = document
+          .getElementById("productInput")
+          .value.trim();
+
         if (productInput) {
           products.push(productInput);
           document.getElementById("productInput").value = "";
           displayProducts();
+        } else if (productInput === "") {
+          alert("Invalid input");
         } else {
           alert("Please enter a product name");
         }
