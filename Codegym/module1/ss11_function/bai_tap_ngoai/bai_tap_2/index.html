@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài 2</title>
+  </head>
+  <body>
+    <script>
+      function checkCharArray(arr) {
+        let hasNumber = false;
+        let hasLetter = false;
+
+        for (let i = 0; i < arr.length; i++) {
+          let char = arr[i];
+
+          if (char >= "0" && char <= "9") {
+            hasNumber = true;
+          } else if (
+            (char >= "a" && char <= "z") ||
+            (char >= "A" && char <= "Z")
+          ) {
+            hasLetter = true;
+          } else {
+            return -1;
+          }
+        }
+
+        if (hasNumber && !hasLetter) return 1;
+        if (!hasNumber && hasLetter) return 0;
+        return -1;
+      }
+
+      let arr1 = ["5", "2", "8", "1", "4"];
+      let arr2 = ["a", "b", "r", "e"];
+      let arr3 = ["1", "a", "b", "4"];
+
+      document.write(
+        `Mảng: ${arr1.join(", ")} có kết quả là: ` +
+          checkCharArray(arr1) +
+          "<br>"
+      );
+      document.write(
+        `Mảng: ${arr2.join(", ")} có kết quả là: ` +
+          checkCharArray(arr2) +
+          "<br>"
+      );
+      document.write(
+        `Mảng: ${arr3.join(", ")} có kết quả là: ` +
+          checkCharArray(arr3) +
+          "<br>"
+      );
+    </script>
+  </body>
+</html>
