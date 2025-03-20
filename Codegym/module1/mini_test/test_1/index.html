@@ -49,7 +49,11 @@
         if (sinhVien.length === 0) {
           alert("Danh sach sinh vien dang trong!");
         } else {
-          alert("Danh sach sinh vien la: \n" + sinhVien.join("\n"));
+          let studentList = "Danh sách sinh viên:\n";
+          for (let i = 0; i < sinhVien.length; i++) {
+            studentList += `${i + 1}. ${sinhVien[i]}\n`;
+          }
+          alert(studentList);
         }
       }
 
@@ -70,25 +74,36 @@
           return;
         }
 
-        let studentName = prompt("Nhập tên sinh viên cần xóa:").trim();
-        if (studentName === "") {
-          alert("Tên sinh viên không được để trống!");
+        let studentList = "Danh sách sinh viên:\n";
+        for (let i = 0; i < sinhVien.length; i++) {
+          studentList += `${i + 1}. ${sinhVien[i]}\n`;
+        }
+
+        let studentIndex = prompt(
+          `${studentList}\nNhập số thứ tự của sinh viên cần xóa:`
+        );
+
+        if (studentIndex === null) return;
+
+        studentIndex = studentIndex.trim();
+        if (
+          studentIndex === "" ||
+          isNaN(studentIndex) ||
+          studentIndex < 1 ||
+          studentIndex > sinhVien.length
+        ) {
+          alert("Số thứ tự không hợp lệ!");
           return;
         }
 
-        let index = sinhVien.indexOf(studentName);
-
-        if (index === -1) {
-          alert("Không tìm thấy sinh viên này!");
-          return;
-        }
+        studentIndex = parseInt(studentIndex) - 1;
 
         let confirmDelete = confirm(
-          `Bạn có chắc muốn xóa sinh viên "${studentName}" không?`
+          `Bạn có chắc muốn xóa sinh viên "${sinhVien[studentIndex]}" không?`
         );
         if (confirmDelete) {
-          sinhVien.splice(index, 1);
-          alert(`Xóa sinh viên "${studentName}" thành công!`);
+          alert(`Xóa sinh viên "${sinhVien[studentIndex]}" thành công!`);
+          sinhVien.splice(studentIndex, 1);
         }
       }
     </script>
