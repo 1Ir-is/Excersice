@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quan Ly San Pham</title>
+    <title>Product Management</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -34,13 +34,11 @@
         border: none;
         border-radius: 7px;
       }
-
       input[type="text"] {
         border: 1px solid #ccc;
         padding: 10px;
         border-radius: 5px;
       }
-
       .add-product {
         background-color: #f2f2f2;
         padding: 30px;
@@ -78,11 +76,47 @@
         color: red;
         font-weight: bold;
       }
-
       .product-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin-top: 20px;
+      }
+
+      .pagination button {
+        background-color: white;
+        border: 1px solid #ddd;
+        color: #007bff;
+        padding: 8px 15px;
+        margin: 2px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        border-radius: 5px;
+      }
+
+      .pagination button:hover {
+        background-color: #007bff;
+        color: white;
+      }
+
+      .pagination .active {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+      }
+
+      .pagination .disabled {
+        pointer-events: none;
+        background-color: #e9ecef;
+        color: #6c757d;
+        border-color: #ddd;
       }
     </style>
   </head>
@@ -96,7 +130,7 @@
 
       <div class="table-container">
         <div class="product-header">
-          <h2>Display All Product</h2>
+          <h2>Display All Products</h2>
           <p><span class="product-count" id="productCount">0</span> products</p>
         </div>
 
@@ -109,11 +143,9 @@
           </thead>
           <tbody id="productTable"></tbody>
         </table>
-        <div class="pagination">
-          <button id="previousButton" onclick="prevBtn()">Previous</button>
-          <span id="pageInfo"></span>
-          <button id="nextButton" onclick="nextBtn()">Next</button>
-        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination"></div>
       </div>
     </div>
 
@@ -184,9 +216,8 @@
         const oldName = products[index];
         let newName = prompt("Enter new name for the product:", oldName);
 
-        // Kiểm tra nếu người dùng nhấn Cancel hoặc nhập rỗng
-        if (newName === null) return; // Nhấn hủy thì không làm gì cả
-        newName = newName.trim(); // Xóa khoảng trắng hai đầu
+        if (newName === null) return; // Cancel button pressed
+        newName = newName.trim(); // Remove leading/trailing spaces
 
         if (newName === "") {
           alert("Product name cannot be empty!");
@@ -204,37 +235,51 @@
       }
 
       function updatePagination() {
+        const pagination = document.getElementById("pagination");
+        pagination.innerHTML = "";
         let totalPages = products.length / itemsPerPage;
         if (products.length % itemsPerPage !== 0) {
           totalPages++;
         }
 
         totalPages = parseInt(totalPages);
-        document.getElementById("previousButton").disabled = currentPage === 1;
-        document.getElementById("nextButton").disabled =
-          currentPage === totalPages;
-        document.getElementById(
-          "pageInfo"
-        ).innerText = `Page ${currentPage} of ${totalPages}`;
+
+        pagination.innerHTML += `<button onclick="prevPage()" class="${
+          currentPage === 1 ? "disabled" : ""
+        }">Previous</button>`;
+
+        for (let i = 1; i <= totalPages; i++) {
+          pagination.innerHTML += `<button onclick="goToPage(${i})" class="${
+            currentPage === i ? "active" : ""
+          }">${i}</button>`;
+        }
+
+        pagination.innerHTML += `<button onclick="nextPage()" class="${
+          currentPage === totalPages ? "disabled" : ""
+        }">Next</button>`;
       }
 
-      function nextBtn() {
-        let totalPages = products.length / itemsPerPage;
-        if (products.length % itemsPerPage !== 0) {
-          totalPages++;
-        }
+      function goToPage(page) {
+        currentPage = page;
+        displayProducts();
+      }
 
-        totalPages = parseInt(totalPages);
-
-        if (currentPage < totalPages) {
-          currentPage++;
+      function prevPage() {
+        if (currentPage > 1) {
+          currentPage--;
           displayProducts();
         }
       }
 
-      function prevBtn() {
-        if (currentPage > 1) {
-          currentPage--;
+      function nextPage() {
+        let totalPages = products.length / itemsPerPage;
+        if (products.length % itemsPerPage !== 0) {
+          totalPages++;
+        }
+
+        totalPages = parseInt(totalPages);
+        if (currentPage < totalPages) {
+          currentPage++;
           displayProducts();
         }
       }
