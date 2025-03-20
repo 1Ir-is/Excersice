@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tu doi xung</title>
+  </head>
+  <body>
+    <script>
+      function isPalindrome(s) {
+        // Loại bỏ khoảng trắng và chuyển tất cả về chữ thường để so sánh chính xác
+        s = s.replace(" ", "").toLowerCase();
+
+        // Điều kiện dừng: Nếu chuỗi rỗng hoặc chỉ có một ký tự, chắc chắn là doi xung
+        if (s.length <= 1) {
+          return true;
+        }
+
+        // So sánh ký tự đầu và ký tự cuối
+        if (s[0] !== s[s.length - 1]) {
+          return false;
+        }
+
+        // Gọi đệ quy với chuỗi con bỏ ký tự đầu và ký tự cuối
+        return isPalindrome(s.slice(1, -1));
+      }
+
+      let input = prompt("Nhập một chuỗi để kiểm tra:");
+      if (input !== null) {
+        let result = isPalindrome(input)
+          ? "là chuỗi đối xứng"
+          : "không phải chuỗi đối xứng";
+        alert(`Chuỗi "${input}" ${result}.`);
+      } else {
+        alert("Bạn chưa nhập chuỗi.");
+      }
+    </script>
+  </body>
+</html>
