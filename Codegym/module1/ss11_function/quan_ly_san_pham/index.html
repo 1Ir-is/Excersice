@@ -109,6 +109,11 @@
           </thead>
           <tbody id="productTable"></tbody>
         </table>
+        <div class="pagination">
+          <button id="previousButton" onclick="prevBtn()">Previous</button>
+          <span id="pageInfo"></span>
+          <button id="nextButton" onclick="nextBtn()">Next</button>
+        </div>
       </div>
     </div>
 
@@ -124,10 +129,17 @@
         "Fujitsu F-04E",
       ];
 
+      let currentPage = 1;
+      const itemsPerPage = 5;
+
       function displayProducts() {
         const productTable = document.getElementById("productTable");
         productTable.innerHTML = "";
-        for (let i = 0; i < products.length; i++) {
+
+        let start = (currentPage - 1) * itemsPerPage;
+        let end = start + itemsPerPage;
+
+        for (let i = start; i < end; i++) {
           productTable.innerHTML += `
                     <tr>
                         <td>${products[i]}</td>
@@ -139,6 +151,7 @@
                 `;
         }
         document.getElementById("productCount").innerText = products.length;
+        updatePagination();
       }
 
       function addProduct() {
@@ -184,6 +197,42 @@
         products[index] = newName;
         alert("Edit Success!");
         displayProducts();
+      }
+
+      function updatePagination() {
+        let totalPages = products.length / itemsPerPage;
+        if (products.length % itemsPerPage !== 0) {
+          totalPages++;
+        }
+
+        totalPages = parseInt(totalPages);
+        document.getElementById("previousButton").disabled = currentPage === 1;
+        document.getElementById("nextButton").disabled =
+          currentPage === totalPages;
+        document.getElementById(
+          "pageInfo"
+        ).innerText = `Page ${currentPage} of ${totalPages}`;
+      }
+
+      function nextBtn() {
+        let totalPages = products.length / itemsPerPage;
+        if (products.length % itemsPerPage !== 0) {
+          totalPages++;
+        }
+
+        totalPages = parseInt(totalPages);
+
+        if (currentPage < totalPages) {
+          currentPage++;
+          displayProducts();
+        }
+      }
+
+      function prevBtn() {
+        if (currentPage > 1) {
+          currentPage--;
+          displayProducts();
+        }
       }
 
       displayProducts();
