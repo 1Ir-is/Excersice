@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bài 1</title>
+  </head>
+  <body>
+    <script>
+      function findSecondLargest(arr) {
+        // Sắp xếp mảng theo thứ tự giảm dần
+        for (let i = 0; i < arr.length - 1; i++) {
+          for (let j = i + 1; j < arr.length; j++) {
+            if (arr[i] < arr[j]) {
+              let temp = arr[i];
+              arr[i] = arr[j];
+              arr[j] = temp;
+            }
+          }
+        }
+
+        let max = arr[0]; // Số lớn nhất
+        let secondMax = -1; // Giả định không có số lớn thứ 2
+        let count = 0;
+
+        // Tìm số lớn thứ 2
+        for (let i = 1; i < arr.length; i++) {
+          if (arr[i] < max) {
+            secondMax = arr[i];
+            break;
+          }
+        }
+
+        // Đếm số lần xuất hiện của số lớn thứ 2
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] === secondMax) {
+            count++;
+          }
+        }
+
+        return { secondMax, count };
+      }
+
+      let n = parseInt(prompt("Nhập số lượng phần tử của mảng:"));
+      let arr = [];
+
+      for (let i = 0; i < n; i++) {
+        arr.push(parseInt(prompt(`Nhập phần tử thứ ${i + 1}:`)));
+      }
+
+      let result = findSecondLargest(arr);
+      alert(
+        "Số lớn thứ 2: " +
+          result.secondMax +
+          "\nSố luong phan tu cua so lon thu 2: " +
+          result.count
+      );
+    </script>
+  </body>
+</html>

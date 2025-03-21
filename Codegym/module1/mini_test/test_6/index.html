@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hình kim cương rỗng</title>
+  </head>
+  <body>
+    <script>
+      function drawHollowDiamond(n) {
+        let output = "";
+
+        // Vẽ nửa trên
+        for (let i = 1; i <= n; i++) {
+          let line = "";
+
+          // In khoảng trắng trước số
+          for (let j = 1; j <= n - i; j++) {
+            line += "&nbsp;&nbsp;";
+          }
+
+          // In số đầu tiên
+          line += i;
+
+          // In khoảng trắng giữa (trừ dòng đầu)
+          if (i >= 1) {
+            for (let j = 0; j <= (i - 1) * 4; j++) {
+              // Tăng khoảng trắng giữa các số
+              line += "&nbsp;";
+            }
+            line += i; // In số cuối
+          }
+
+          output += line + "<br>";
+        }
+
+        // Vẽ nửa dưới
+        for (let i = n - 1; i >= 1; i--) {
+          let line = "";
+
+          // In khoảng trắng trước số
+          for (let j = 1; j <= n - i; j++) {
+            line += "&nbsp;&nbsp;";
+          }
+
+          // In số đầu tiên
+          line += i;
+
+          // In khoảng trắng giữa (trừ dòng đầu)
+          if (i >= 1) {
+            for (let j = 0; j <= (i - 1) * 4; j++) {
+              line += "&nbsp;";
+            }
+            line += i; // In số cuối
+          }
+
+          output += line + "<br>";
+        }
+
+        return output;
+      }
+
+      let n = 5;
+      document.write(drawHollowDiamond(n));
+    </script>
+  </body>
+</html>
