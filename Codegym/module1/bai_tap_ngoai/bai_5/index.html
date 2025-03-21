@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài 5</title>
+  </head>
+  <body>
+    <script>
+      let n;
+      do {
+        n = parseInt(prompt("Nhập số phần tử của mảng (n, số chẵn):"));
+        if (isNaN(n) || n <= 0 || n % 2 !== 0) {
+          alert("Không hợp lệ! Vui lòng nhập số chẵn dương.");
+        }
+      } while (isNaN(n) || n <= 0 || n % 2 !== 0);
+
+      let array = [];
+      for (let i = 0; i < n; i++) {
+        let value;
+        do {
+          value = parseInt(prompt(`Nhập phần tử thứ ${i + 1}:`));
+          if (isNaN(value)) {
+            alert("Không hợp lệ! Vui lòng nhập số nguyên.");
+          }
+        } while (isNaN(value));
+        array.push(value);
+      }
+
+      function checkPairs(arr) {
+        for (let i = 0; i < arr.length; i += 2) {
+          if (arr[i] >= arr[i + 1]) {
+            return "NO";
+          }
+        }
+        return "OK";
+      }
+
+      alert("Mảng nhập vào: " + array.join(", "));
+      alert("Kết quả kiểm tra: " + checkPairs(array));
+    </script>
+  </body>
+</html>
