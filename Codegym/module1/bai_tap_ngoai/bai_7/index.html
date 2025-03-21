@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 7</title>
+  </head>
+  <body>
+    <script>
+      // -3 , 5 , 7 -> Khong phai la canh cua 1 tam giac;
+      // 1 , 2 , 3 -> Khong phai la canh cua 1 tam giac;
+      // 3 , 4 , 5 -> La 3 canh cua 1 tam giac vuong;
+      // 4, 12, 10 -> Chi la 3 canh cua mot tam giac;
+      function checkTriangle(x, y, z) {
+        if (
+          x <= 0 ||
+          y <= 0 ||
+          z <= 0 ||
+          x + y <= z ||
+          x + z <= y ||
+          y + z <= x
+        ) {
+          return "không phải là cạnh của 1 tam giác";
+        }
+        let a = x;
+        let b = y;
+        let c = z;
+
+        // Đảm bảo c là cạnh lớn nhất
+        if (a > c) [a, c] = [c, a];
+        if (b > c) [b, c] = [c, b];
+
+        if (a * a + b * b === c * c) {
+          return "là 3 cạnh của 1 tam giác vuông";
+        }
+
+        return "chỉ là 3 cạnh của một tam giác";
+      }
+
+      let x = parseInt(prompt("Nhap x: "));
+      let y = parseInt(prompt("Nhap y: "));
+      let z = parseInt(prompt("Nhap z: "));
+
+      let ketQua = checkTriangle(x, y, z);
+      alert(`Với 3 cạnh ${x} , ${y} , ${z} thì nó ${ketQua}`);
+    </script>
+  </body>
+</html>
