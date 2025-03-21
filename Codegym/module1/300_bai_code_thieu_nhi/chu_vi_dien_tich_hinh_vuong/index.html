@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 0001</title>
+  </head>
+  <body>
+    <script>
+      // Tinh chu vi va dien tich hinh vuong.
+      // Chu vi hinh vuong la: canh * 4.
+      // Dien tich hinh vuong la: canh * canh.
+
+      let n = parseFloat(prompt("Nhap n: "));
+      let chuVi;
+      let dienTich;
+      if (isNaN(n) || n <= 0) {
+        alert("Khong hop le!");
+      } else {
+        chuVi = n * 4;
+        dienTich = n * n;
+      }
+
+      alert(
+        `Chu vi cua hinh vuong la "${chuVi}" , dien tich cua hinh vuong la "${dienTich}"`
+      );
+    </script>
+  </body>
+</html>
