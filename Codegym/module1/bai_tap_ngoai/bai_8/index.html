@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài 8</title>
+  </head>
+  <body>
+    <script>
+      function normalizeString(str) {
+        str = str.trim().toLowerCase();
+        let words = str.split(/\s+/);
+        for (let i = 0; i < words.length; i++) {
+          words[i] = words[i][0].toUpperCase() + words[i].slice(1);
+        }
+        return words.join(" ");
+      }
+
+      let inputString = prompt("Nhập xâu ký tự:");
+      alert("Chuỗi sau khi chuẩn hóa: " + normalizeString(inputString));
+    </script>
+  </body>
+</html>

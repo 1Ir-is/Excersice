@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 9</title>
+  </head>
+  <body>
+    <script>
+      function differentSymbolsNaive(s) {
+        let array = [];
+        let count = 0;
+
+        for (let i = 0; i < s.length; i++) {
+          let char = s[i];
+
+          // Chỉ kiểm tra nếu char là chữ cái (a-z, A-Z)
+          if ((char >= "a" && char <= "z") || (char >= "A" && char <= "Z")) {
+            let exists = false;
+
+            // Kiểm tra xem ký tự đã có trong mảng chưa
+            for (let j = 0; j < array.length; j++) {
+              if (array[j] === char) {
+                exists = true;
+                break;
+              }
+            }
+
+            // Nếu chưa tồn tại, thêm vào mảng và tăng biến đếm
+            if (!exists) {
+              array.push(char);
+              count++;
+            }
+          }
+        }
+
+        return count;
+      }
+
+      let input = prompt("Nhập chuỗi:");
+      alert("Số ký tự chữ khác nhau: " + differentSymbolsNaive(input));
+    </script>
+  </body>
+</html>
