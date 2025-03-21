@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 4</title>
+  </head>
+  <body>
+    <script>
+      function checkPoints(xArr, yArr) {
+        if (xArr.length !== yArr.length) {
+          return false;
+        }
+
+        for (let i = 0; i < xArr.length; i++) {
+          if (yArr[i] !== 2 * xArr[i] + 1) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      // Test với các bộ giá trị đã cho
+      document.write(checkPoints([3, 4], [7, 9]) + "<br>"); // TRUE
+      document.write(checkPoints([3, 4], [7, 9, 10]) + "<br>"); // FALSE
+      document.write(checkPoints([1, 2, 3, 4], [7, 9]) + "<br>"); // FALSE
+      document.write(checkPoints([1, 2, 3, 4], [3, 5, 9, 7]) + "<br>"); // FALSE
+      document.write(checkPoints([1, 2, 3, 4], [3, 5, 7, 9])); // TRUE
+    </script>
+  </body>
+</html>
