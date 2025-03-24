@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài 5</title>
+  </head>
+  <body>
+    <!--
+    	Nhập 1 mảng từ bàn phím với độ dài n (với n là số chẵn)														
+        Hiện thị mảng sau khi thêm mới các phần tử														
+        "Kiểm tra mảng vừa nhập. Nếu các cặp phần ở liền kề nhau (phần tử thứ nhất <phần tử thứ 2) 
+         hiện thị thông báo ""OK"",
+     nếu không thoả mãn thì hiện thị "NO"													
+        Ví dụ: [1,2,6,7,5,8] => OK ( vì cặp (1,2), (6,7),(5,8) thoả mãn vì  phần tử thứ nhất 
+        nhỏ hơn phần tử thứ 2														
+            [1,2,6,7,8,4]=> NO vì cặp (8,4) không thoả mãn)		
+    -->
+    <h1>Bai 5</h1>
+    <button onclick="nhapVaKiemTraLienKe()">Bat Dau</button>
+    <script>
+      function kiemTraLienKe(array) {
+        for (let i = 0; i < array.length; i += 2) {
+          if (array[i] >= array[i + 1]) {
+            return "NO";
+          }
+        }
+        return "OK";
+      }
+
+      function nhapVaKiemTraLienKe() {
+        let n;
+        do {
+          n = parseInt(prompt("Nhập số phần tử của mảng (n, số chẵn):"));
+          if (isNaN(n) || n <= 0 || n % 2 !== 0) {
+            alert("Không hợp lệ! Vui lòng nhập số chẵn dương.");
+          }
+        } while (isNaN(n) || n <= 0 || n % 2 !== 0);
+
+        let array = [];
+        for (let i = 0; i < n; i++) {
+          let value;
+          do {
+            value = parseInt(prompt(`Nhập phần tử thứ ${i + 1}:`));
+            if (isNaN(value)) {
+              alert("Không hợp lệ! Vui lòng nhập số nguyên.");
+            }
+          } while (isNaN(value));
+          array.push(value);
+        }
+        alert("Mảng nhập vào: " + array.join(", "));
+        alert("Kết quả kiểm tra: " + kiemTraLienKe(array));
+      }
+    </script>
+  </body>
+</html>
