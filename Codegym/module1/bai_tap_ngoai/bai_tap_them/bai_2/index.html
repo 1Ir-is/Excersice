@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 2</title>
+  </head>
+  <body>
+    <!--
+    Bài 2										
+	Viết 1 hàm truyền vào 1 tham số (với tham số là một mảng 1 chiều), (checkArrray(arr))									
+	Thực hiện kiểm tra.								
+	+ Nếu từng phần tử ở vị trí 1/2 mảng sau có giá trị bằng bình phương từng phần tử đầu thì trả về "true",									
+    + Nếu bất kỳ vị trí nào không đúng điều kiện thì trả về "false"								
+	+ Nếu mảng có số phần tử lẻ => false									
+	+ Ví dụ: checkArray(1,2,3,1,4,9]) => true = (vì 1*1=1 và 2*2=4 và 3*3=9)									
+		     checkArray([2,1,3,1,1,9]) => false = (vì 2*2=4  khác 1 => sai)
+    -->
+    <h1>Bai 2</h1>
+    <pre>
+        Bài 2										
+        Viết 1 hàm truyền vào 1 tham số (với tham số là một mảng 1 chiều), (checkArrray(arr))									
+        Thực hiện kiểm tra.								
+        + Nếu từng phần tử ở vị trí 1/2 mảng sau có giá trị bằng bình phương từng phần tử đầu thì trả về "true",									
+        + Nếu bất kỳ vị trí nào không đúng điều kiện thì trả về "false"								
+        + Nếu mảng có số phần tử lẻ => false									
+        + Ví dụ: checkArray(1,2,3,1,4,9]) => true = (vì 1*1=1 và 2*2=4 và 3*3=9)									
+                checkArray([2,1,3,1,1,9]) => false = (vì 2*2=4  khác 1 => sai)
+    </pre>
+    <button onclick="nhapVaKiemTraMang()">Bat Dau</button>
+    <script>
+      function kiemTraMang(array) {
+        for (let i = 0; i < array.length / 2; i++) {
+          if (array[i] * array[i] !== array[array.length / 2 + i]) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      function nhapVaKiemTraMang() {
+        let n;
+        do {
+          n = parseInt(prompt("Nhap do dai mang: "));
+          if (isNaN(n) || n <= 0 || n % 1 !== 0) {
+            alert("Khong hop le!");
+          }
+          if (n % 2 !== 0) {
+            alert("Mang phai co so phan tu chan!");
+          }
+        } while (isNaN(n) || n <= 0 || n % 1 !== 0 || n % 2 !== 0);
+
+        let array = [];
+        for (let i = 0; i < n; i++) {
+          let value;
+          do {
+            value = parseInt(prompt(`Nhap phan tu thu ${i}: `));
+            if (isNaN(value) || value % 1 !== 0) {
+              alert("Khong hop le!");
+            }
+          } while (isNaN(value) || value % 1 !== 0);
+          array.push(value);
+        }
+        alert("Mảng nhập vào: " + array.join(", "));
+
+        let result = kiemTraMang(array);
+        alert(result ? "true" : "false");
+      }
+    </script>
+  </body>
+</html>
