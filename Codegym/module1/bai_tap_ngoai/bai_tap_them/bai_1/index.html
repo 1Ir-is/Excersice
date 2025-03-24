@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 1</title>
+  </head>
+  <body>
+    <!--
+    Bài 1: 	
+    Nhập 1 mảng từ bàn phím với độ dài n												
+	Hiện thị mảng sau khi thêm mới các phần tử												
+	Kiểm tra mảng vừa nhập. Nếu số phần tử chẵn bằng số phần tử lẻ thì 
+    hiện thị thông báo "OK", nếu không thoả mãn thì hiện thị "NO"
+    -->
+    <h1>Bai 1</h1>
+    <p>
+      Bài 1: Nhập 1 mảng từ bàn phím với độ dài n. Hiện thị mảng sau khi thêm
+      mới các phần tử. Kiểm tra mảng vừa nhập. Nếu số phần tử chẵn bằng số phần
+      tử lẻ thì hiện thị thông báo "OK", nếu không thoả mãn thì hiện thị "NO"
+    </p>
+    <button onclick="kiemTraMang()">Bat Dau</button>
+    <script>
+      function kiemTraMang() {
+        let n;
+        do {
+          n = parseInt(prompt("Nhap do dai mang: "));
+          if (isNaN(n) || n <= 0 || n % 1 !== 0) {
+            alert("Khong hop le!");
+          }
+        } while (isNaN(n) || n <= 0 || n % 1 !== 0);
+
+        let array = [];
+        for (let i = 0; i <= n; i++) {
+          let value;
+          do {
+            value = parseInt(prompt(`Nhap phan tu thu ${i}: `));
+            if (isNaN(value) || value % 1 !== 0 || value <= 0) {
+              alert("Khong hop le!");
+            }
+          } while (isNaN(value) || value % 1 !== 0 || value <= 0);
+          array.push(value);
+        }
+        alert("Mảng nhập vào: " + array.join(", "));
+
+        let soChan = 0;
+        let soLe = 0;
+        for (let i = 0; i < array.length; i++) {
+          if (array[i] % 2 === 0) {
+            soChan++;
+          } else {
+            soLe++;
+          }
+        }
+
+        if (soChan === soLe) {
+          alert("OK");
+        } else {
+          alert("NO");
+        }
+      }
+    </script>
+  </body>
+</html>
