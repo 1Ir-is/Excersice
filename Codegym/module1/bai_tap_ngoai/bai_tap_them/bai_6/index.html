@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 6</title>
+  </head>
+  <body>
+    <!--
+    Viết 1 hàm truyền vào 1 tham số (với tham số là một chuỗi), (checkString(str))								
+	Hàm trả về mảng các ký tự là nguyên âm có trong mảng
+    -->
+    <h1>Bai 6</h1>
+    <pre>
+        Viết 1 hàm truyền vào 1 tham số (với tham số là một chuỗi), (checkString(str))								
+        Hàm trả về mảng các ký tự là nguyên âm có trong mảng
+    </pre>
+    <button onclick="nhapVaKiemTraMang()">Bat Dau</button>
+    <script>
+      function kiemTraChuoi(str) {
+        let nguyenAm = [];
+        for (let i = 0; i < str.length; i++) {
+          const char = str[i].toLowerCase();
+          if (
+            char === "a" ||
+            char === "e" ||
+            char === "i" ||
+            char === "o" ||
+            char === "u"
+          ) {
+            nguyenAm.push(str[i]);
+          }
+        }
+        return nguyenAm;
+      }
+
+      function nhapVaKiemTraMang() {
+        let inputStr;
+        do {
+          inputStr = prompt("Nhap chuoi: ");
+          if (inputStr === null || inputStr === "") {
+            alert("Khong hop le");
+            return;
+          }
+        } while (inputStr === null || inputStr === "");
+        let ketQua = kiemTraChuoi(inputStr);
+        if (ketQua.length > 0) {
+          alert("Mang cac ky tu nguyen am: " + ketQua.join(", "));
+        } else {
+          alert("Khong co ky tu nguyen am nao trong chuoi");
+        }
+      }
+    </script>
+  </body>
+</html>
