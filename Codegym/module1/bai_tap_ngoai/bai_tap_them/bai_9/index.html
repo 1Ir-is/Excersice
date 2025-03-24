@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 9</title>
+  </head>
+  <body>
+    <!--
+    Bài 9	Nhập 1 mảng từ bàn phím với độ dài n														
+	Hiện thị mảng sau khi thêm mới các phần tử														
+	Đếm số lượng số có giá trị bằng giá trinh trung bình của mảng.
+Ví dụ [1,2,2,3,3,5,4,4] => số lượng số bằng với giá trị trung bình của các phần 
+tử trong mảng  là 2 ( vì giá trị trung bình các phần tử trong mảng là 3=> số 3 xuất hiện 2 lần)
+    -->
+    <h1>Bai 9</h1>
+    <pre>
+Nhập 1 mảng từ bàn phím với độ dài n														
+        Hiện thị mảng sau khi thêm mới các phần tử														
+        Đếm số lượng số có giá trị bằng giá trinh trung bình của mảng.
+    Ví dụ [1,2,2,3,3,5,4,4] => số lượng số bằng với giá trị trung bình của các phần 
+    tử trong mảng  là 2 ( vì giá trị trung bình các phần tử trong mảng là 3=> số 3 xuất hiện 2 lần)</pre
+    >
+    <button onclick="nhapVaKiemTra()">Bat Dau</button>
+    <script>
+      function nhapVaKiemTra() {
+        let n;
+        do {
+          n = parseInt(prompt("Nhập số phần tử của mảng (n):"));
+          if (isNaN(n) || n <= 0 || n % 1 !== 0) {
+            alert("Không hợp lệ! Vui lòng nhập số dương.");
+          }
+        } while (isNaN(n) || n <= 0 || n % 1 !== 0);
+
+        let array = [];
+        for (let i = 0; i < n; i++) {
+          let value;
+          do {
+            value = parseInt(prompt(`Nhập phần tử thứ ${i + 1}:`));
+            if (isNaN(value)) {
+              alert("Không hợp lệ! Vui lòng nhập số nguyên.");
+            }
+          } while (isNaN(value));
+          array.push(value);
+        }
+        alert("Mảng nhập vào: " + array.join(", "));
+
+        let sum = 0;
+        for (let i = 0; i < array.length; i++) {
+          sum += array[i];
+        }
+
+        let average = sum / array.length;
+
+        let count = 0;
+        for (let i = 0; i < array.length; i++) {
+          if (array[i] === average) {
+            count++;
+          }
+        }
+
+        alert(
+          `Số lượng số bằng với giá trị trung bình của các phần tử trong mảng là ${count} (vì giá trị trung bình các phần tử trong mảng là ${average} => số ${average} xuất hiện ${count} lần)`
+        );
+      }
+    </script>
+  </body>
+</html>
