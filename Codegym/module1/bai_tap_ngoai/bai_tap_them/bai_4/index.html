@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 4</title>
+  </head>
+  <body>
+    <!--
+    Bài 4	Viết 1 hàm truyền vào 1 tham số (với tham số là một chuỗi), (checkString(str))									
+	Thực hiện kiểm tra. Nếu số ký tự in Hoa bằng ký tự in thường  
+    thì trả về true. Ngược lại trả về false
+    -->
+    <h1>Bai 4</h1>
+    <pre>
+        Bài 4: Viết 1 hàm truyền vào 1 tham số (với tham số là một chuỗi), (checkString(str))									
+	Thực hiện kiểm tra. Nếu số ký tự in Hoa bằng ký tự in thường  thì trả về true. Ngược lại trả về false
+    </pre>
+    <button onclick="nhapVaKiemTraChuoi()">Bat Dau</button>
+    <script>
+      function kiemTraChuoi(str) {
+        let inHoa = 0;
+        let inThuong = 0;
+
+        for (let i = 0; i < str.length; i++) {
+          if (str[i] >= "A" && str[i] <= "Z") {
+            inHoa++;
+          }
+          if (str[i] >= "a" && str[i] <= "z") {
+            inThuong++;
+          }
+        }
+        return inHoa === inThuong;
+      }
+
+      function nhapVaKiemTraChuoi() {
+        let inputStr;
+        do {
+          inputStr = prompt("Nhap chuoi: ");
+          if (inputStr === null || inputStr === "") {
+            alert("Khong hop le");
+            return;
+          }
+        } while (inputStr === null || inputStr === "");
+        let ketQua = kiemTraChuoi(inputStr);
+        if (ketQua) {
+          alert("True - So ky tu in hoa bang so ky tu in thuong");
+        } else {
+          alert("False - So ky tu in hoa khong bang so ky tu in thuong");
+        }
+      }
+    </script>
+  </body>
+</html>
