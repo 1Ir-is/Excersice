@@ -25,7 +25,8 @@
           return this.celsius + 273;
         }
       }
-      const temp = new Temperature(25);
+      const tempInput = prompt("Nhập nhiệt độ cần chuyển đổi (°C):");
+      const temp = new Temperature(tempInput);
 
       const outputDiv = document.getElementById("output");
       outputDiv.innerHTML = `
