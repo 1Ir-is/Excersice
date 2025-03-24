@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 7</title>
+  </head>
+  <body>
+    <!--
+    Bài 7	Khai báo  1 mảng số nguyên từ bàn phím với độ dài n. 													
+	Nhập các phần tử cho  mảng với  một số nguyên lớn hơn 10 và nhỏ hơn 100.													
+	Hiện thị mảng sau khi thêm mới các phần tử													
+	Viết chương trình hiện thị các phần tử của mảng có hàng đơn 
+    vị lớp hơn hàng chục ví dụ: [11, 12, 21 , 56, 19] => kết quả hiện thị ra 12,56,19													
+    -->
+    <h1>Bai 7</h1>
+    <pre>
+        Khai báo  1 mảng số nguyên từ bàn phím với độ dài n. 													
+	Nhập các phần tử cho  mảng với  một số nguyên lớn hơn 10 và nhỏ hơn 100.													
+	Hiện thị mảng sau khi thêm mới các phần tử													
+	Viết chương trình hiện thị các phần tử của mảng có hàng đơn vị lớp hơn hàng 
+        chục ví dụ: [11, 12, 21 , 56, 19] => kết quả hiện thị ra 12,56,19													
+
+    </pre>
+    <button onclick="nhapVaHienThi()">Bat Dau</button>
+    <script>
+      function nhapVaHienThi() {
+        let n;
+        do {
+          n = parseInt(prompt("Nhập số phần tử của mảng (n):"));
+          if (isNaN(n) || n <= 0 || n % 1 !== 0) {
+            alert("Không hợp lệ! Vui lòng nhập số dương.");
+          }
+        } while (isNaN(n) || n <= 0 || n % 1 !== 0);
+
+        let array = [];
+        for (let i = 0; i < n; i++) {
+          let value;
+          do {
+            value = parseInt(prompt(`Nhập phần tử thứ ${i + 1}:`));
+            if (value <= 10 || value >= 100 || isNaN(value)) {
+              alert(
+                "Không hợp lệ! Vui lòng nhập số nguyên lớn hơn 10 và nhỏ hơn 100."
+              );
+            }
+          } while (value <= 10 || value >= 100 || isNaN(value));
+          array.push(value);
+        }
+        alert("Mảng nhập vào: " + array.join(", "));
+
+        let ketQua = [];
+        for (let i = 0; i < array.length; i++) {
+          const number = array[i];
+          const hangDonVi = number % 10;
+          const hangChuc = parseInt(number / 10);
+
+          if (hangDonVi > hangChuc) {
+            ketQua.push(number);
+          }
+        }
+        if (ketQua.length > 0) {
+          alert(
+            "Các phần tử có hàng đơn vị lớn hơn hàng chục: " + ketQua.join(", ")
+          );
+        } else {
+          alert("Không có phần tử nào co hang don vi lon hon hang chuc");
+        }
+      }
+    </script>
+  </body>
+</html>
