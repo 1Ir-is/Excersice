@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 19</title>
+  </head>
+  <body>
+    <!--
+        Bài 19	Viết 1 hàm truyền vào 1 tham số (với tham số là một chuỗi), (checkString(str))								
+        Hàm trả về  một chuỗi là tất cả các ký tự in Hoa có trong chuỗi								
+        Ví dụ: Hello CoDeGym => HCDG								
+    -->
+    <h1>Trích xuất các ký tự in hoa từ chuỗi</h1>
+    <button onclick="runCheck()">Nhập chuỗi và kiểm tra</button>
+    <div id="result"></div>
+
+    <script>
+      function checkString(str) {
+        let result = "";
+        for (let i = 0; i < str.length; i++) {
+          if (str[i] >= "A" && str[i] <= "Z") {
+            result += str[i];
+          }
+        }
+        return result;
+      }
+
+      function runCheck() {
+        const input = prompt("Nhập một chuỗi:");
+        if (!input) {
+          alert("Vui lòng nhập một chuỗi hợp lệ!");
+          return;
+        }
+
+        const result = checkString(input);
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = `<p>Kết quả: ${result}</p>`;
+      }
+    </script>
+  </body>
+</html>
