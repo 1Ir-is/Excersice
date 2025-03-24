@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 12</title>
+  </head>
+  <body>
+    <h1>Bài 12</h1>
+    <p>Viết hàm truyền vào tham số là một chuỗi - checkDate(dateString)</p>
+    <p>
+      Kiểm tra xem chuỗi nhập vào dateString có phải là định dạng của ngày tháng
+      năm hay không (dd/mm/yyyy).
+    </p>
+    <p>Nếu đúng return true, sai return false</p>
+    <button onclick="nhapVaKiemTra()">Bắt đầu</button>
+    <script>
+      function checkDate(dateString) {
+
+        if (dateString.length !== 10) {
+          return false;
+        }
+
+        if (dateString[2] !== "/" || dateString[5] !== "/") {
+          return false;
+        }
+
+        const dayStr = dateString[0] + dateString[1];
+        const monthStr = dateString[3] + dateString[4];
+        const yearStr =
+          dateString[6] + dateString[7] + dateString[8] + dateString[9];
+
+        const day = parseInt(dayStr, 10);
+        const month = parseInt(monthStr, 10);
+        const year = parseInt(yearStr, 10);
+
+        if (isNaN(day) || isNaN(month) || isNaN(year)) {
+          return false;
+        }
+
+        if (month < 1 || month > 12) {
+          return false;
+        }
+
+        if (year < 1900 || year > 2100) {
+          return false;
+        }
+
+        const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+        if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
+          daysInMonth[1] = 29; // Tháng 2 có 29 ngày trong năm nhuận
+        }
+
+        if (day < 1 || day > daysInMonth[month - 1]) {
+          return false;
+        }
+        return true;
+      }
+
+      function nhapVaKiemTra() {
+        const input = prompt("Nhập chuỗi ngày tháng (định dạng dd/mm/yyyy):");
+
+        if (!input) {
+          alert("Vui lòng nhập một chuỗi hợp lệ!");
+          return;
+        }
+
+        const result = checkDate(input);
+
+        if (result) {
+          alert(
+            "true - Chuỗi nhập vào là định dạng ngày tháng hợp lệ (dd/mm/yyyy)."
+          );
+        } else {
+          alert(
+            "false - Chuỗi nhập vào không phải là định dạng ngày tháng hợp lệ."
+          );
+        }
+      }
+    </script>
+  </body>
+</html>
