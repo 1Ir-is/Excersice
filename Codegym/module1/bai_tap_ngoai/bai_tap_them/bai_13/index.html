@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 13</title>
+  </head>
+  <body>
+    <h1>Kiểm tra mảng số nguyên tố</h1>
+    <button onclick="processArray()">Nhập và kiểm tra mảng</button>
+    <div id="result"></div>
+
+    <script>
+      function isPrime(n) {
+        if (n < 2) return false;
+        for (let i = 2; i <= Math.sqrt(n); i++) {
+          if (n % i === 0) return false;
+        }
+        return true;
+      }
+
+      function processArray() {
+        const n = parseInt(prompt("Nhập độ dài của mảng (n):"));
+        if (isNaN(n) || n <= 0) {
+          alert("Vui lòng nhập một số nguyên dương hợp lệ!");
+          return;
+        }
+
+        const array = [];
+        for (let i = 0; i < n; i++) {
+          const value = parseInt(prompt(`Nhập phần tử thứ ${i + 1}:`));
+          if (isNaN(value)) {
+            alert("Vui lòng nhập một số hợp lệ!");
+            return;
+          }
+          array.push(value);
+        }
+
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = `<p>Mảng vừa nhập: [${array.join(", ")}]</p>`;
+
+        let allPrime = true;
+        for (let i = 0; i < array.length; i++) {
+          if (!isPrime(array[i])) {
+            allPrime = false;
+            break;
+          }
+        }
+
+        if (allPrime) {
+          resultDiv.innerHTML +=
+            "<p><strong>OK</strong> - Tất cả các phần tử đều là số nguyên tố</p>";
+        } else {
+          resultDiv.innerHTML +=
+            "<p><strong>NO</strong> - Không phải tất cả các phần tử đều là số nguyên tố</p>";
+        }
+      }
+    </script>
+  </body>
+</html>
