@@ -3,26 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bai 13</title>
+    <title>Bai 15</title>
   </head>
   <body>
     <!--
-    Bài 13	Nhập 1 mảng từ bàn phím với độ dài n														
+    Bài 15: Nhập 1 mảng số từ bàn phím với độ dài n														
 	Hiện thị mảng sau khi thêm mới các phần tử														
-	Kiểm tra mảng vừa nhập. Nếu tất cả các phần tử trong mảng là số nguyên tố  
+	Kiểm tra mảng vừa nhập. Nếu tất cả các phần tử trong mảng đều thuộc dãy số fibonacy  
     thì hiện thị thông báo "OK", nếu không thoả mãn thì hiện thị "NO"
     -->
-    <h1>Kiểm tra mảng số nguyên tố</h1>
+    <h1>Kiểm tra mảng thuộc dãy Fibonacci</h1>
     <button onclick="processArray()">Nhập và kiểm tra mảng</button>
     <div id="result"></div>
 
     <script>
-      function isPrime(n) {
-        if (n < 2) return false;
-        for (let i = 2; i <= Math.sqrt(n); i++) {
-          if (n % i === 0) return false;
+      // Hàm kiểm tra một số có thuộc dãy Fibonacci hay không
+      function isFibonacci(num) {
+        if (num < 0) return false;
+
+        let fib1 = 0;
+        let fib2 = 1;
+
+        // Kiểm tra từng số trong dãy Fibonacci
+        while (fib1 <= num) {
+          if (fib1 === num) return true;
+          let nextFib = fib1 + fib2;
+          fib1 = fib2;
+          fib2 = nextFib;
         }
-        return true;
+
+        return false;
       }
 
       function processArray() {
@@ -45,20 +55,20 @@
         const resultDiv = document.getElementById("result");
         resultDiv.innerHTML = `<p>Mảng vừa nhập: [${array.join(", ")}]</p>`;
 
-        let allPrime = true;
+        let allFibonacci = true;
         for (let i = 0; i < array.length; i++) {
-          if (!isPrime(array[i])) {
-            allPrime = false;
+          if (!isFibonacci(array[i])) {
+            allFibonacci = false;
             break;
           }
         }
 
-        if (allPrime) {
+        if (allFibonacci) {
           resultDiv.innerHTML +=
-            "<p><strong>OK</strong> - Tất cả các phần tử đều là số nguyên tố</p>";
+            "<p><strong>OK</strong> - Tất cả các phần tử đều thuộc dãy Fibonacci</p>";
         } else {
           resultDiv.innerHTML +=
-            "<p><strong>NO</strong> - Không phải tất cả các phần tử đều là số nguyên tố</p>";
+            "<p><strong>NO</strong> - Không phải tất cả các phần tử đều thuộc dãy Fibonacci</p>";
         }
       }
     </script>
