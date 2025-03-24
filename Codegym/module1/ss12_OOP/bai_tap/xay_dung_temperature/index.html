@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Temperature Conversion</title>
+  </head>
+  <body>
+    <h1>Temperature Conversion</h1>
+    <div id="output"></div>
+    <script>
+      class Temperature {
+        constructor(celsius) {
+          if (celsius < -273) {
+            alert("Nhiệt độ không thể thấp hơn -273°C");
+            return;
+          }
+          this.celsius = celsius;
+        }
+        toFahrenheit() {
+          return (this.celsius * 9) / 5 + 32;
+        }
+
+        toKelvin() {
+          return this.celsius + 273;
+        }
+      }
+      const temp = new Temperature(25);
+
+      const outputDiv = document.getElementById("output");
+      outputDiv.innerHTML = `
+            <p>Nhiệt độ: ${temp.celsius}°C</p>
+            <p>Chuyển đổi sang Fahrenheit: ${temp.toFahrenheit()}°F</p>
+            <p>Chuyển đổi sang Kelvin: ${temp.toKelvin()}K</p>
+        `;
+    </script>
+  </body>
+</html>
