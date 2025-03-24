@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xay dung lop mo ta hinh chu nhat</title>
+  </head>
+  <body>
+    <h1>Hinh chu nhat</h1>
+    <canvas
+      id="rectangleCanvas"
+      width="500"
+      height="500"
+      style="border: 1px solid #ccc"
+    ></canvas>
+    <br />
+    <script>
+      class Rectangle {
+        constructor(chieuDai, chieuRong) {
+          this.chieuDai = chieuDai;
+          this.chieuRong = chieuRong;
+        }
+
+        tinhChuVi() {
+          return (this.chieuDai + this.chieuRong) * 2;
+        }
+
+        tinhDienTich() {
+          return this.chieuDai * this.chieuRong;
+        }
+
+        // Ve hinh chu nhat
+        drawRectangle() {
+          const canvas = document.getElementById("rectangleCanvas");
+          if (canvas.getContext) {
+            const ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.chieuDai, canvas.chieuRong);
+            ctx.fillStyle = "red ";
+            ctx.fillRect(0, 0, this.chieuDai, this.chieuRong);
+          } else {
+            console.log("Canvas is not supported in your browser");
+          }
+        }
+      }
+      const myRectangle = new Rectangle(200, 100);
+      document.write(
+        "Chu vi hinh chu nhat: " + myRectangle.tinhChuVi() + "<br>"
+      );
+      document.write(
+        "Dien tich hinh chu nhat: " + myRectangle.tinhDienTich() + "<br>"
+      );
+
+      myRectangle.drawRectangle();
+    </script>
+  </body>
+</html>
