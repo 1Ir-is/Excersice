@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 10</title>
+  </head>
+  <body>
+    <!--
+    Bài 10	Nhập 1 mảng từ bàn phím với độ dài n										
+	Hiện thị mảng sau khi thêm mới các phần tử										
+	Hiện thị các số chính phương có trong mảng 
+    ( Số chính phương là các số ví dụ 1,4,9,16,25,36,49……)										
+    -->
+    <h1>Bai 10</h1>
+    <pre>
+        Nhập 1 mảng từ bàn phím với độ dài n										
+	Hiện thị mảng sau khi thêm mới các phần tử										
+	Hiện thị các số chính phương có trong mảng ( Số chính phương là các số ví dụ 1,4,9,16,25,36,49……)										
+    </pre>
+    <button onclick="nhapVaKiemTra()">Bat Dau</button>
+    <script>
+      function nhapVaKiemTra() {
+        let n;
+        do {
+          n = parseInt(prompt("Nhập số phần tử của mảng (n):"));
+          if (isNaN(n) || n <= 0 || n % 1 !== 0) {
+            alert("Không hợp lệ! Vui lòng nhập số dương.");
+          }
+        } while (isNaN(n) || n <= 0 || n % 1 !== 0);
+
+        let array = [];
+        for (let i = 0; i < n; i++) {
+          let value;
+          do {
+            value = parseInt(prompt(`Nhập phần tử thứ ${i + 1}:`));
+            if (isNaN(value)) {
+              alert("Không hợp lệ! Vui lòng nhập số nguyên.");
+            }
+          } while (isNaN(value));
+          array.push(value);
+        }
+        alert("Mảng nhập vào: " + array.join(", "));
+
+        let soChinhPhuong = [];
+        for (let i = 0; i < array.length; i++) {
+          if (array[i] >= 0) {
+            let sqrt = parseInt(Math.sqrt(array[i]));
+            if (sqrt * sqrt === array[i]) {
+              soChinhPhuong.push(array[i]);
+            }
+          }
+        }
+
+        if (soChinhPhuong.length > 0) {
+          alert("Các số chính phương trong mảng: " + soChinhPhuong.join(", "));
+        } else {
+          alert("Không có số chính phương trong mảng.");
+        }
+
+        alert("Các số chính phương trong mảng: " + soChinhPhuong.join(", "));
+      }
+    </script>
+  </body>
+</html>
