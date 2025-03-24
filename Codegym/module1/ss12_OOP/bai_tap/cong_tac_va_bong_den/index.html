@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gia lap cong tac va bong den</title>
+  </head>
+  <body>
+    <h1>Gia lap cong tac va bong den</h1>
+    <div>
+      <button id="switchButton" onclick="toggleSwitch()">Turn On</button>
+      <p id="lampStatus">Lamp is OFF</p>
+    </div>
+
+    <script>
+      // Lop ElectricLamp
+      class ElectricLamp {
+        constructor() {
+          this.status = false;
+        }
+
+        turnOn() {
+          this.status = true;
+        }
+
+        turnOff() {
+          this.status = false;
+        }
+
+        getStatus() {
+          return this.status ? "On" : "Off";
+        }
+      }
+
+      // Lop SwitchButton
+      class SwitchButton {
+        constructor() {
+          this.status = false;
+          this.lamp = null;
+        }
+
+        connectToLamp(lamp) {
+          this.lamp = lamp;
+        }
+
+        switchOn() {
+          if (this.lamp) {
+            this.status = true;
+            this.lamp.turnOn();
+          }
+        }
+
+        switchOff() {
+          if (this.lamp) {
+            this.status = false;
+            this.lamp.turnOff();
+          }
+        }
+      }
+
+      const lamp = new ElectricLamp();
+      const switchButton = new SwitchButton();
+
+      // Ket noi cong tac voi bong den
+      switchButton.connectToLamp(lamp);
+
+      // Ham xu ly bat/tat cong tac
+      function toggleSwitch() {
+        const button = document.getElementById("switchButton");
+        const lampStatus = document.getElementById("lampStatus");
+
+        if (switchButton.status) {
+          switchButton.switchOff();
+          button.innerText = "Turn On";
+        } else {
+          switchButton.switchOn();
+          button.innerText = "Turn Off";
+        }
+        lampStatus.innerText = `Lamp is ${lamp.getStatus()}`;
+      }
+    </script>
+  </body>
+</html>
