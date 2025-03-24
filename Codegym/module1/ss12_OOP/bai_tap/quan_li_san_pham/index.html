@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Management</title>
+    <style>
+      /* CSS styles remain unchanged */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .container {
+        width: 50%;
+        margin: auto;
+      }
+      h2 {
+        margin-bottom: 10px;
+      }
+      input {
+        width: 70%;
+        padding: 8px;
+        margin-right: 10px;
+      }
+      button {
+        padding: 8px 15px;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      #searchInput {
+        display: block;
+        margin: 0 auto 10px auto;
+        width: 350px;
+      }
+      .add-btn {
+        background-color: #50af50;
+        color: white;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 7px;
+      }
+      input[type="text"] {
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      .add-product {
+        background-color: #f2f2f2;
+        padding: 30px;
+        text-align: center;
+      }
+      .edit-btn,
+      .delete-btn {
+        background-color: #50af50;
+        color: white;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 7px;
+        margin: 3px;
+      }
+      .delete-btn {
+        background-color: red;
+      }
+      .table-container {
+        margin-top: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+      .product-count {
+        color: red;
+        font-weight: bold;
+      }
+      .product-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .pagination {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin-top: 20px;
+      }
+      .pagination button {
+        background-color: white;
+        border: 1px solid #ddd;
+        color: #007bff;
+        padding: 8px 15px;
+        margin: 2px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        border-radius: 5px;
+      }
+      .pagination button:hover {
+        background-color: #007bff;
+        color: white;
+      }
+      .pagination .active {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+      }
+      .pagination .disabled {
+        pointer-events: none;
+        background-color: #e9ecef;
+        color: #6c757d;
+        border-color: #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Add New Product</h2>
+      <section class="add-product">
+        <input type="text" id="productInput" placeholder="New Product" />
+        <button class="add-btn" onclick="addProduct()">Add</button>
+      </section>
+
+      <div class="table-container">
+        <div class="product-header">
+          <h2>Display All Products</h2>
+          <p><span class="product-count" id="productCount">0</span> products</p>
+        </div>
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search....."
+          oninput="searchProduct()"
+        />
+
+        <table>
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="productTable"></tbody>
+        </table>
+
+        <div class="pagination" id="pagination"></div>
+      </div>
+    </div>
+
+    <script>
+      class Product {
+        constructor(name) {
+          this.name = name;
+        }
+      }
+
+      let products = [
+        new Product("Sony Xperia"),
+        new Product("Samsung Galaxy"),
+        new Product("Nokia 6"),
+        new Product("iPhone 6S"),
+        new Product("Xiaomi Redmi Note 4"),
+        new Product("OnePlus 7T"),
+        new Product("Oppo A71"),
+        new Product("Fujitsu F-04E"),
+      ];
+
+      let currentPage = 1;
+      const itemsPerPage = 5;
+
+      function displayProducts() {
+        const productTable = document.getElementById("productTable");
+        productTable.innerHTML = "";
+
+        let start = (currentPage - 1) * itemsPerPage;
+        let end = start + itemsPerPage;
+
+        if (end > products.length) {
+          end = products.length;
+        }
+
+        for (let i = start; i < end; i++) {
+          productTable.innerHTML += `
+            <tr>
+              <td>${products[i].name}</td>
+              <td>
+                <button class="edit-btn" onclick="editProduct(${i})">Edit</button>
+                <button class="delete-btn" onclick="deleteProduct(${i})">Delete</button>
+              </td>
+            </tr>
+          `;
+        }
+        document.getElementById("productCount").innerText = products.length;
+        updatePagination();
+      }
+
+      function addProduct() {
+        const productInput = document
+          .getElementById("productInput")
+          .value.trim();
+
+        if (productInput) {
+          products.push(new Product(productInput));
+          document.getElementById("productInput").value = "";
+          displayProducts();
+        } else {
+          alert("Please enter a valid product name.");
+        }
+      }
+
+      function deleteProduct(index) {
+        const confirmDelete = confirm(
+          "Are you sure you want to delete this product?"
+        );
+        if (confirmDelete) {
+          products.splice(index, 1);
+          alert("Product deleted successfully!");
+          displayProducts();
+        }
+      }
+
+      function editProduct(index) {
+        const oldName = products[index].name;
+        let newName = prompt("Enter new name for the product:", oldName);
+
+        if (newName === null) return; // Cancel button pressed
+        newName = newName.trim(); // Remove leading/trailing spaces
+
+        if (newName === "") {
+          alert("Product name cannot be empty!");
+          return;
+        }
+
+        if (newName === oldName) {
+          alert("New name cannot be the same as the old name!");
+          return;
+        }
+
+        products[index].name = newName;
+        alert("Edit Success!");
+        displayProducts();
+      }
+
+      function updatePagination() {
+        const pagination = document.getElementById("pagination");
+        pagination.innerHTML = "";
+        let totalPages = products.length / itemsPerPage;
+        if (products.length % itemsPerPage !== 0) {
+          totalPages++;
+        }
+
+        totalPages = parseInt(totalPages);
+
+        pagination.innerHTML += `<button onclick="prevPage()" class="${
+          currentPage === 1 ? "disabled" : ""
+        }">Previous</button>`;
+
+        for (let i = 1; i <= totalPages; i++) {
+          pagination.innerHTML += `<button onclick="goToPage(${i})" class="${
+            currentPage === i ? "active" : ""
+          }">${i}</button>`;
+        }
+
+        pagination.innerHTML += `<button onclick="nextPage()" class="${
+          currentPage === totalPages ? "disabled" : ""
+        }">Next</button>`;
+      }
+
+      function goToPage(page) {
+        currentPage = page;
+        displayProducts();
+      }
+
+      function prevPage() {
+        if (currentPage > 1) {
+          currentPage--;
+          displayProducts();
+        }
+      }
+
+      function nextPage() {
+        let totalPages = products.length / itemsPerPage;
+        if (products.length % itemsPerPage !== 0) {
+          totalPages++;
+        }
+        if (currentPage < totalPages) {
+          currentPage++;
+          displayProducts();
+        }
+      }
+
+      function searchProduct() {
+        let keyword = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+
+        if (keyword === "") {
+          currentPage = 1;
+          displayProducts();
+          return;
+        }
+
+        let filteredProducts = products.filter((product) =>
+          product.name.toLowerCase().includes(keyword)
+        );
+
+        displayFilteredProducts(filteredProducts);
+      }
+
+      function displayFilteredProducts(filteredProducts) {
+        const productTable = document.getElementById("productTable");
+        productTable.innerHTML = "";
+
+        let start = (currentPage - 1) * itemsPerPage;
+        let end = start + itemsPerPage;
+
+        let paginatedProducts = filteredProducts.slice(start, end);
+
+        for (const product of paginatedProducts) {
+          productTable.innerHTML += `
+            <tr>
+              <td>${product.name}</td>
+              <td>
+                <button class="edit-btn" onclick="editProduct(${products.indexOf(
+                  product
+                )})">Edit</button>
+                <button class="delete-btn" onclick="deleteProduct(${products.indexOf(
+                  product
+                )})">Delete</button>
+              </td>
+            </tr>
+          `;
+        }
+
+        document.getElementById("productCount").innerText =
+          filteredProducts.length;
+        updatePagination(filteredProducts.length);
+      }
+
+      displayProducts();
+    </script>
+  </body>
+</html>
