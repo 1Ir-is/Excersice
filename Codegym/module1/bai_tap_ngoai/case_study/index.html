@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Rank System</title>
+  </head>
+  <body>
+    <h1>Hệ thống đánh giá xếp hạng khách hàng</h1>
+    <button onclick="checkRank()">Bắt Đầu</button>
+    <div id="result"></div>
+
+    <script>
+      function getCustomerRank(spentAmount) {
+        if (spentAmount < 100) {
+          return {
+            rank: "Bronze",
+            discount: "0%",
+            freeShipping: false,
+            gift: false,
+          };
+        } else if (spentAmount >= 100 && spentAmount < 500) {
+          return {
+            rank: "Silver",
+            discount: "5%",
+            freeShipping: false,
+            gift: false,
+          };
+        } else if (spentAmount >= 500 && spentAmount < 1000) {
+          return {
+            rank: "Gold",
+            discount: "10%",
+            freeShipping: true,
+            gift: false,
+          };
+        } else {
+          return {
+            rank: "Platinum",
+            discount: "20%",
+            freeShipping: true,
+            gift: true,
+          };
+        }
+      }
+
+      function checkRank() {
+        const spentAmount = parseFloat(
+          prompt("Nhập tổng số tiền đã chi tiêu:")
+        );
+        if (!isNaN(spentAmount)) {
+          const customerRank = getCustomerRank(spentAmount);
+          document.getElementById("result").innerHTML = `
+            <p>Hạng khách hàng: <strong>${customerRank.rank}</strong></p>
+            <p>Giảm giá: <strong>${customerRank.discount}</strong></p>
+            <p>Miễn phí giao hàng: <strong>${
+              customerRank.freeShipping ? "Có" : "Không"
+            }</strong></p>
+            <p>Quà tặng: <strong>${
+              customerRank.gift ? "Có" : "Không"
+            }</strong></p>
+          `;
+        } else {
+          document.getElementById(
+            "result"
+          ).innerHTML = `<p>Vui lòng nhập một số hợp lệ.</p>`;
+        }
+      }
+    </script>
+  </body>
+</html>
