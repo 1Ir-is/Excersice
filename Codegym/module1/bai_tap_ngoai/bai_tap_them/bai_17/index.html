@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 17</title>
+  </head>
+  <body>
+    <!--
+    Bài 17	Viết 1 hàm truyền vào 1 tham số (với tham số là một chuỗi), (checkString(str))												
+	Hàm trả về Từ viết tắt của chuỗi										
+	Nếu chuỗi chỉ có 1 từ thì trả về từ đó . Ví dụ   : "Hello" => "Hello"										
+	Nếu chuỗi từ 2 từ trở lên thì trả về chuỗi 
+    gồm các ký tự đầu tiên của một từ. Ví dụ:" Object Oriented Programming" => OOP
+    -->
+    <h1>Trích xuất từ viết tắt của chuỗi</h1>
+    <button onclick="runCheck()">Nhập chuỗi và kiểm tra</button>
+    <div id="result"></div>
+
+    <script>
+      function checkString(str) {
+        const words = str.trim().split(/\s+/);
+
+        if (words.length === 1) {
+          return words[0];
+        }
+        let tuVietTat = "";
+        for (let i = 0; i < words.length; i++) {
+          tuVietTat += words[i][0].toUpperCase();
+        }
+        return tuVietTat;
+      }
+
+      function runCheck() {
+        const input = prompt("Nhập một chuỗi:");
+        if (!input) {
+          alert("Vui lòng nhập một chuỗi hợp lệ!");
+          return;
+        }
+
+        const result = checkString(input);
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = `<p>Kết quả: ${result}</p>`;
+      }
+    </script>
+  </body>
+</html>

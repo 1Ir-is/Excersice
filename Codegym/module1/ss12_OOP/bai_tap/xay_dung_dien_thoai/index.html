@@ -3,12 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mobile Simulation</title>
+    <title>Gia Lap Dien Thoai</title>
   </head>
   <body>
-    <h1>Mobile Simulation</h1>
+    <h1>Gia Lap Dien Thoai</h1>
     <script>
       class Mobile {
+        /* 
+        - Thuộc tính:
+          + battery: số nguyên, mặc định là 100
+          + isOn: boolean, mặc định là false, thể hiện trạng thái bật/tắt của điện thoại.
+          + draftMessage: chuỗi, mặc định là "", thể hiện tin nhắn đang soạn.
+          + inbox: mảng chuỗi, mặc định là [], thể hiện hộp thư đến.
+          + sentMessages: mảng chuỗi, mặc định là [], thể hiện tin nhắn đã gửi.
+        */
         constructor() {
           this.battery = 100;
           this.isOn = false;
@@ -122,20 +130,30 @@
           });
         }
       }
+      /* 
+        - Tạo các đối tượng:
+          + Khởi tạo hai đối tượng: Nokia và iPhone.
+          + Nokia soạn tin nhắn và gửi cho iPhone.
+          + iPhone kiểm tra hộp thư đến và hiển thị tin nhắn.
+      */
+      const nokia = new Mobile();
+      const iphone = new Mobile();
 
-      // Tạo hai đối tượng Mobile
-      const phone1 = new Mobile();
-      const phone2 = new Mobile();
+      nokia.turnOn();
+      iphone.turnOn();
 
-      // Kịch bản sử dụng
-      phone1.turnOn();
-      phone1.composeMessage("Xin chào, bạn khỏe không?");
-      phone1.sendMessage(phone2);
+      nokia.composeMessage("Hello from Nokia!");
+      nokia.sendMessage(iphone);
 
-      phone2.turnOn();
-      phone2.viewInbox();
+      iphone.viewInbox();
 
-      phone1.viewSentMessages();
+      iphone.composeMessage("Hi Nokia, got your message!");
+      iphone.sendMessage(nokia);
+
+      nokia.viewInbox();
+
+      console.log("Nokia battery: " + nokia.battery + "%");
+      console.log("iPhone battery: " + iphone.battery + "%");
     </script>
   </body>
 </html>

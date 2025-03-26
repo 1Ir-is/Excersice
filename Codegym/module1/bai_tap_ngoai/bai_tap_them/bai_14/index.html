@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 15</title>
+  </head>
+  <body>
+    <!--
+    Bài 15: Nhập 1 mảng số từ bàn phím với độ dài n														
+	Hiện thị mảng sau khi thêm mới các phần tử														
+	Kiểm tra mảng vừa nhập. Nếu tất cả các phần tử trong mảng đều thuộc dãy số fibonacy  
+    thì hiện thị thông báo "OK", nếu không thoả mãn thì hiện thị "NO"
+    -->
+    <h1>Kiểm tra mảng thuộc dãy Fibonacci</h1>
+    <button onclick="processArray()">Nhập và kiểm tra mảng</button>
+    <div id="result"></div>
+
+    <script>
+      // Hàm kiểm tra một số có thuộc dãy Fibonacci hay không
+      function isFibonacci(num) {
+        if (num < 0) return false;
+
+        let fib1 = 0;
+        let fib2 = 1;
+
+        // Kiểm tra từng số trong dãy Fibonacci
+        while (fib1 <= num) {
+          if (fib1 === num) return true;
+          let nextFib = fib1 + fib2;
+          fib1 = fib2;
+          fib2 = nextFib;
+        }
+
+        return false;
+      }
+
+      function processArray() {
+        const n = parseInt(prompt("Nhập độ dài của mảng (n):"));
+        if (isNaN(n) || n <= 0) {
+          alert("Vui lòng nhập một số nguyên dương hợp lệ!");
+          return;
+        }
+
+        const array = [];
+        for (let i = 0; i < n; i++) {
+          const value = parseInt(prompt(`Nhập phần tử thứ ${i + 1}:`));
+          if (isNaN(value)) {
+            alert("Vui lòng nhập một số hợp lệ!");
+            return;
+          }
+          array.push(value);
+        }
+
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = `<p>Mảng vừa nhập: [${array.join(", ")}]</p>`;
+
+        let allFibonacci = true;
+        for (let i = 0; i < array.length; i++) {
+          if (!isFibonacci(array[i])) {
+            allFibonacci = false;
+            break;
+          }
+        }
+
+        if (allFibonacci) {
+          resultDiv.innerHTML +=
+            "<p><strong>OK</strong> - Tất cả các phần tử đều thuộc dãy Fibonacci</p>";
+        } else {
+          resultDiv.innerHTML +=
+            "<p><strong>NO</strong> - Không phải tất cả các phần tử đều thuộc dãy Fibonacci</p>";
+        }
+      }
+    </script>
+  </body>
+</html>

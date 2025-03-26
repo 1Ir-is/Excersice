@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 20</title>
+  </head>
+  <body>
+    <!--
+    Bài 20	Nhập 1 mảng số từ bàn phím với độ dài n					
+	Hiện thị mảng sau khi thêm mới các phần tử					
+	Tính tổng các phần tử tử chẵn và ở vị trí lẻ					
+    -->
+    <h1>Tính tổng các phần tử chẵn ở vị trí lẻ</h1>
+    <button onclick="processArray()">Nhập và xử lý mảng</button>
+    <div id="result"></div>
+
+    <script>
+      function processArray() {
+        const n = parseInt(prompt("Nhập độ dài của mảng (n):"));
+        if (isNaN(n) || n <= 0) {
+          alert("Vui lòng nhập một số nguyên dương hợp lệ!");
+          return;
+        }
+
+        const array = [];
+        for (let i = 0; i < n; i++) {
+          const value = parseInt(prompt(`Nhập phần tử thứ ${i + 1}:`));
+          if (isNaN(value)) {
+            alert("Vui lòng nhập một số hợp lệ!");
+            return;
+          }
+          array.push(value);
+        }
+
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = `<p>Mảng vừa nhập: [${array.join(", ")}]</p>`;
+
+        let sum = 0;
+        for (let i = 1; i < array.length; i += 2) {
+          // Vị trí lẻ (index 1, 3, 5,...)
+          if (array[i] % 2 === 0) {
+            // Phần tử chẵn
+            sum += array[i];
+          }
+        }
+
+        resultDiv.innerHTML += `<p>Tổng các phần tử chẵn ở vị trí lẻ: ${sum}</p>`;
+      }
+    </script>
+  </body>
+</html>
