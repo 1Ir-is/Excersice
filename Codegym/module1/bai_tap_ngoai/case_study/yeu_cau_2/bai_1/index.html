@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 1 - Yeu cau 2</title>
+  </head>
+  <body>
+    <!--
+    Bài 1: Cho mảng a chỉ chứa các số nguyên
+Xây dựng mảng b là prefix sums của mảng a cụ thể theo công thức:
+  b[0]   = a[0]
+  b[1]   = a[0] + a[1]
+  b[2]   = a[0] + a[1] + a[2]
+  ...
+  b[n - 1] = a[0] + a[1] + ... + a[n - 1]
+với n là độ dài của mảng a.
+Ví dụ: Cho a = [1, 2, 3], thì kết quả prefixSums(a) = [1, 3, 6].
+Mảng b được tạo ra: [1, 1 + 2, 1 + 2 + 3] = [1, 3, 6]
+
+    -->
+    <h1>Prefix Sums</h1>
+    <button onclick="calculatePrefixSums()">Kiem Tra</button>
+    <p id="result"></p>
+
+    <script>
+      function prefixSums(a) {
+        const b = [];
+        let sum = 0;
+        for (const element of a) {
+          sum += element;
+          b.push(sum);
+        }
+        return b;
+      }
+
+      function calculatePrefixSums() {
+        let n;
+        do {
+          n = parseInt(prompt("Nhập số phần tử của mảng a:"));
+        } while (isNaN(n) || n <= 0);
+        const a = [];
+        for (let i = 0; i < n; i++) {
+          let element;
+          do {
+            element = parseInt(prompt(`Nhập phần tử thứ ${i + 1}:`));
+          } while (isNaN(element));
+          a.push(element);
+        }
+        const b = prefixSums(a);
+        document.getElementById("result").innerHTML = `
+            Mảng a: [${a.join(", ")}]
+            <br />
+            Mảng b: [${b.join(", ")}]
+            `;
+      }
+    </script>
+  </body>
+</html>
