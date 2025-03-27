@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 5</title>
+  </head>
+  <body>
+    <!--
+    Bài 5: Giả sử menu của chúng ta có các loại thức uống như sau:
+Cafe
+Cam vắt
+Nước ép cà rốt
+Nước ép cà chua
+Nước lọc
+Nước dừa
+Viết một chương trình gọi thức uống đơn giản.
+Gợi ý: Trước tiên in ra màn hinh danh sách các loại thức uống cho người dùng chọn lựa
+Đánh dấu theo thứ tự 1 (cafe), 2 (cam vắt), 3(nước ép cà rốt), 4(nước ép cà chua), 
+5(nước lọc), 6(nước dừa), 7(thoát gọi món)
+Khi người dùng lựa chọn 1 trong số các thức uống, chương trình sẽ hiện đơn giá của thức 
+uống đó và cho phép người dùng nhập số lượng. Cuối cùng hiển thị tổng số tiền người dùng cần
+ phải trả.
+Sử dụng vòng lặp do while lặp lại cho người dùng đặt thức uống, kết thúc quá trình đặt thức 
+uống khi người nhấn số 7
+
+    -->
+    <h1>Chuong trinh goi thuc uong</h1>
+    <button onclick="startOrder()">Bat Dau</button>
+    <p id="result"></p>
+
+    <script>
+      function startOrder() {
+        const menu = [
+          "Cafe",
+          "Cam vắt",
+          "Nước ép cà rốt",
+          "Nước ép cà chua",
+          "Nước lọc",
+          "Nước dừa",
+        ];
+
+        const prices = [20000, 15000, 25000, 30000, 10000, 20000];
+        let total = 0;
+        let orderDetails = "";
+        let choice;
+        let hasOrdered = false;
+        do {
+          let menuDisplay = "Danh sach thuc uong:\n";
+          for (let i = 0; i < menu.length; i++) {
+            menuDisplay += `${i + 1}. ${menu[i]} - ${prices[i]} VND\n`;
+          }
+          menuDisplay += "7. Thoat goi mon";
+          choice = parseInt(prompt(menuDisplay + "\nChon thuc uong:"));
+
+          if (choice >= 1 && choice <= 6) {
+            const quantity = parseInt(prompt("Nhap so luong:"));
+            total += prices[choice - 1] * quantity;
+            orderDetails += `${menu[choice - 1]}: ${
+              prices[choice - 1]
+            } VND x ${quantity} ly<br>`;
+            hasOrdered = true;
+          } else if (choice != 7) {
+            alert("Lua chon khong hop le!");
+          }
+        } while (choice !== 7);
+
+        if (hasOrdered) {
+          document.getElementById("result").innerHTML = `
+            <h3>Chi tiet don hang</h3>
+            <p>${orderDetails}</p>
+            <h3>Tong so tien can thanh toan: ${total} VND</h3>
+        `;
+        } else {
+          document.getElementById("result").innerHTML = `
+            <h3>Khong co don hang nao duoc dat</h3>
+            <h3>Tong so tien can thanh toan: ${total} VND</h3>
+          `;
+        }
+      }
+    </script>
+  </body>
+</html>
