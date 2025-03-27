@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 2 - Yeu cau 1</title>
+  </head>
+  <body>
+    <h1>Đọc số thành chuỗi</h1>
+    <button onclick="readNumber()">Nhập số và đọc</button>
+    <p id="result"></p>
+
+    <script>
+      function readNumber() {
+        const number = prompt("Nhập một số nguyên dương nhỏ hơn 999:");
+
+        // Kiểm tra dữ liệu nhập vào
+        if (
+          !number ||
+          isNaN(number) ||
+          number < 0 ||
+          number >= 999 ||
+          !Number.isInteger(+number)
+        ) {
+          alert("Vui lòng nhập một số nguyên dương nhỏ hơn 999.");
+          return;
+        }
+
+        const units = [
+          "không",
+          "một",
+          "hai",
+          "ba",
+          "bốn",
+          "năm",
+          "sáu",
+          "bảy",
+          "tám",
+          "chín",
+        ];
+        let result = "";
+
+        // Chuyển số thành chuỗi và xử lý từng chữ số
+        const digits = number.split(""); // Tách từng chữ số thành mảng
+
+        if (digits.length === 1) {
+          // Số có 1 chữ số
+          result = units[+digits[0]];
+        } else if (digits.length === 2) {
+          // Số có 2 chữ số
+          const tens = +digits[0];
+          const ones = +digits[1];
+          result = units[tens] + " mươi";
+          if (ones > 0) {
+            result +=
+              " " + (ones === 1 ? "mốt" : ones === 5 ? "lăm" : units[ones]);
+          }
+        } else if (digits.length === 3) {
+          // Số có 3 chữ số
+          const hundreds = +digits[0];
+          const tens = +digits[1];
+          const ones = +digits[2];
+
+          result = units[hundreds] + " trăm";
+          if (tens === 0 && ones > 0) {
+            result += " lẻ " + units[ones];
+          } else if (tens > 0) {
+            result += " " + units[tens] + " mươi";
+            if (ones > 0) {
+              result +=
+                " " + (ones === 1 ? "mốt" : ones === 5 ? "lăm" : units[ones]);
+            }
+          }
+        }
+
+        // Hiển thị kết quả
+        document.getElementById("result").innerText = "Kết quả: " + result;
+      }
+    </script>
+  </body>
+</html>
