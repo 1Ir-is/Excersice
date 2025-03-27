@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 2</title>
+  </head>
+  <body>
+    <!--
+    Bài 2: Cho 2 mảng A và B chứa số nguyên. 
+    Tìm ra một mảng đã được sắp xếp chứa các phần tử xuất hiện trong 
+    mảng B nhưng lại không xuất hiện A
+Chú ý các phần tử giống nhau chỉ tính là 1 lần xuất hiện
+Ví dụ:  A=[7,2,5,3,5,3] và B=[7,2,5,4,6,3,5,3] thì kết quả missingValue(A, B) = [4, 6]
+
+    -->
+    <h1>Tìm phần tử xuất hiện trong B nhưng không có trong A</h1>
+    <button onclick="findMissingValues()">Nhập mảng và tính toán</button>
+    <p id="result"></p>
+
+    <script>
+      function missingValue(A, B) {
+        const result = [];
+        for (let i = 0; i < B.length; i++) {
+          let found = false;
+          for (let j = 0; j < A.length; j++) {
+            if (B[i] === A[j]) {
+              found = true;
+              break;
+            }
+          }
+          if (!found) {
+            // Kiểm tra trùng lặp trong kết quả
+            let isDuplicate = false;
+            for (let k = 0; k < result.length; k++) {
+              if (result[k] === B[i]) {
+                isDuplicate = true;
+                break;
+              }
+            }
+            if (!isDuplicate) {
+              result.push(B[i]);
+            }
+          }
+        }
+
+        return result;
+      }
+
+      function findMissingValues() {
+        // Tạo sẵn hai mảng A và B
+        const A = [7, 2, 5, 3, 5, 3];
+        const B = [7, 2, 5, 4, 6, 3, 5, 3];
+
+        const result = missingValue(A, B);
+
+        document.getElementById("result").innerHTML = `
+          Mảng A: [${A.join(", ")}] <br />
+          Mảng B: [${B.join(", ")}] <br />
+          Kết quả: [${result.join(", ")}]
+        `;
+      }
+    </script>
+  </body>
+</html>
