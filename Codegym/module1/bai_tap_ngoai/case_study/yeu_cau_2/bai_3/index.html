@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 3</title>
+  </head>
+  <body>
+    <!--
+    Bài 3: Cho một danh sách các phân số, hãy tìm chỉ số của phân số lớn nhất (đếm từ 0)
+Giả định rằng không có các phân số bằng nhau trong tập đầu vào
+Ví dụ: numerators = [5, 2, 5] và denominators = [6, 3, 4], thì kết quả 
+maxFraction(numerators, denominators) = 2. 
+⇨	5/4 là phân số lớn nhất, có chỉ số là 2.
+    -->
+    <h1>Tim chi so cua phan so lon nhat</h1>
+    <button onclick="findMaxFraction()">Bat Dau</button>
+    <p id="result"></p>
+
+    <script>
+      function maxFraction(numerators, denominators) {
+        let maxFractionIndex = 0;
+        let maxFractionValue = numerators[0] / denominators[0];
+        for (let i = 1; i < numerators.length; i++) {
+          const fractionValue = numerators[i] / denominators[i];
+          if (fractionValue > maxFractionValue) {
+            maxFractionValue = fractionValue;
+            maxFractionIndex = i;
+          }
+        }
+        return maxFractionIndex;
+      }
+
+      function findMaxFraction() {
+        const numerators = [5, 2, 5];
+        const denominators = [6, 3, 4];
+
+        const maxFractionIndex = maxFraction(numerators, denominators);
+
+        document.getElementById("result").innerHTML = `
+          Tu So: [${numerators.join(", ")}] <br />
+          Mau So: [${denominators.join(", ")}] <br />
+          Ket qua: ${maxFractionIndex}
+        `;
+      }
+    </script>
+  </body>
+</html>
