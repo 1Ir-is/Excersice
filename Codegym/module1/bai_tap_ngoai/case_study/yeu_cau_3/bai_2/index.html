@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 2</title>
+  </head>
+  <body>
+    <!--
+    Bài 2: Cho xâu kí tự. Hãy tìm ra chuỗi con liên tiếp tăng dần có độ dài lớn nhất
+Ví dụ: s = "abefaefghedcb", thì kết quả getMaxChildString (s)   “aefgh”
+⇨	aefgh : là chuỗi con liên tiếp trong chuỗi cha có độ dài lớp nhất.
+
+    -->
+    <h1>Tim chuoi con lien tiep tang dan</h1>
+    <button onclick="findMaxChildString()">Bat Dau</button>
+    <p id="result"></p>
+
+    <script>
+      function getMaxChildString(s) {
+        let maxChildString = "";
+        let currentChildString = s[0];
+        for (let i = 1; i < s.length; i++) {
+          if (s[i] > s[i - 1]) {
+            currentChildString += s[i];
+          } else {
+            if (currentChildString.length > maxChildString.length) {
+              maxChildString = currentChildString;
+            }
+            currentChildString = s[i];
+          }
+        }
+        if (currentChildString.length > maxChildString.length) {
+          maxChildString = currentChildString;
+        }
+        return maxChildString;
+      }
+
+      function findMaxChildString() {
+        const s = "abefaefghedcb";
+
+        const result = getMaxChildString(s);
+
+        document.getElementById("result").innerHTML = `
+            Chuoi: ${s} <br />
+            Ket qua: ${result}
+            `;
+      }
+    </script>
+  </body>
+</html>
