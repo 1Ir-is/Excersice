@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 4</title>
+  </head>
+  <body>
+    <!--
+    Bài 4: Viết một chương trình nhập một số từ bàn phím và in ra màn hình bằng chữ. 
+    Ví dụ 1234, kết quả in ra màn hình là một hai ba bốn.
+    -->
+    <h1>Chuyen so thanh chuoi</h1>
+    <button onclick="convertNumberToWords()">Bat Dau</button>
+    <p id="result"></p>
+
+    <script>
+      function convertNumberToWords() {
+        const number = prompt("Nhap mot so nguyen duong:");
+        const words = [
+          "khong",
+          "mot",
+          "hai",
+          "ba",
+          "bon",
+          "nam",
+          "sau",
+          "bay",
+          "tam",
+          "chin",
+        ];
+        let result = "";
+        for (let i = 0; i < number.length; i++) {
+          const digit = parseInt(number[i]);
+          result += words[digit] + " ";
+        }
+
+        document.getElementById("result").innerHTML = `Ket qua la: ${result}`;
+      }
+    </script>
+  </body>
+</html>
