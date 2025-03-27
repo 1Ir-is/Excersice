@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 1</title>
+  </head>
+  <body>
+    <!--
+    Bài 1: Viết 
+    hàm tính tổng các số chẵn trong ma trận có kích thước m*n. 
+    Với m, n là các số nhập từ bàn phím.
+    -->
+    <h1>Tính tổng các số chẵn trong ma trận</h1>
+    <button onclick="calculateSumOfEvenNumbers()">Tính tổng</button>
+    <p id="result"></p>
+
+    <script>
+      function calculateSumOfEvenNumbers() {
+        let m, n;
+        do {
+          m = parseInt(prompt("Nhập số hàng m:"));
+        } while (isNaN(m) || m <= 0);
+        do {
+          n = parseInt(prompt("Nhập số cột n:"));
+        } while (isNaN(n) || n <= 0);
+
+        // Nhập ma trận
+        const matrix = [];
+        for (let i = 0; i < m; i++) {
+          const row = [];
+          for (let j = 0; j < n; j++) {
+            let element;
+            do {
+              element = parseInt(prompt(`Nhập phần tử thứ [${i}][${j}]:`));
+            } while (isNaN(element));
+            row.push(element);
+          }
+          matrix.push(row);
+        }
+
+        // Hiển thị ma trận
+        let matrixDisplay = "<strong>Ma trận: </strong><br />";
+        let sumEven = sumEvenNumber(matrix, m, n);
+
+        for (let i = 0; i < m; i++) {
+          matrixDisplay += `[${matrix[i].join(", ")}]<br />`;
+        }
+
+        document.getElementById("result").innerHTML = `
+          ${matrixDisplay}
+          <br />
+          <strong>Tổng số chẵn trong Ma trận: </strong> ${sumEven}
+        `;
+      }
+
+      function sumEvenNumber(matrix, m, n) {
+        let sum = 0;
+        for (let i = 0; i < m; i++) {
+          for (let j = 0; j < n; j++) {
+            if (matrix[i][j] % 2 === 0) {
+              sum += matrix[i][j];
+            }
+          }
+        }
+        return sum;
+      }
+    </script>
+  </body>
+</html>
