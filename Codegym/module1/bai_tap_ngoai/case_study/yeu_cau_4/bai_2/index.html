@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 2</title>
+  </head>
+  <body>
+    <!--
+    Bài 2: Viết hàm liệt kê các số nguyên tố trong mảng 
+    2 chiều, đếm các số nguyên tố có trong mảng đó.
+    -->
+    <h1>Liet ke so nguyen to trong mang 2 chieu</h1>
+    <button onclick="countPrimeNum()">Bat Dau</button>
+    <p id="result"></p>
+
+    <script>
+      function isPrimeNumber(n) {
+        if (n < 2) return false;
+        for (let i = 2; i <= Math.sqrt(n); i++) {
+          if (n % i === 0) return false;
+        }
+        return true;
+      }
+
+      function countPrimeNum() {
+        let m;
+        let n;
+        do {
+          m = parseInt(prompt("Nhap so hang m: "));
+        } while (isNaN(m) || m <= 0);
+        do {
+          n = parseInt(prompt("Nhap so cot n: "));
+        } while (isNaN(n) || n <= 0);
+
+        // Nhap ma tran
+        const matrix = [];
+        for (let i = 0; i < m; i++) {
+          const row = [];
+          for (let j = 0; j < n; j++) {
+            let element;
+            do {
+              element = parseInt(prompt(`Nhap phan tu thu [${i}][${j}]: `));
+            } while (isNaN(element));
+            row.push(element);
+          }
+          matrix.push(row);
+        }
+
+        let primeNumbers = [];
+        let count = 0;
+        for (let i = 0; i < m; i++) {
+          for (let j = 0; j < n; j++) {
+            if (isPrimeNumber(matrix[i][j])) {
+              primeNumbers.push(matrix[i][j]);
+              count++;
+            }
+          }
+        }
+
+        // Hien thi ma tran
+        let matrixDisplay = "<strong>Ma tran: </strong><br />";
+
+        for (let i = 0; i < m; i++) {
+          matrixDisplay += `[${matrix[i].join(", ")}]<br />`;
+        }
+
+        document.getElementById("result").innerHTML = `
+          ${matrixDisplay}
+          <br />
+            <strong>Cac so nguyen to trong Ma tran: </strong> [${primeNumbers.join(
+              ", "
+            )}] <br />
+            <strong>So luong so nguyen to trong Ma tran: </strong> ${count}
+        `;
+      }
+    </script>
+  </body>
+</html>
