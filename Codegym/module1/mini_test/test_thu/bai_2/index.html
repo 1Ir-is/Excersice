@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 2 - Test thu</title>
+  </head>
+  <body>
+    <!--
+    Bài 2: Viết hàm có tham số truyền vào là một chuỗi các ký tự.Hàm thực hiện 
+    đếm số lượng ký tự in Hoa và số ký tự in thường
+    Ví dụ:   HellOCodeym => kết quả trả về : [3,8]=> 3: ký tự in hoa, 8 ký tự 
+    thường
+           Nếu là chuỗi rỗng “” => thì trả về một mảng [0,0]
+
+Lưu ý : không tính ký tự khoảng trắng;
+    -->
+    <h1>Dem so ky tu in hoa va in thuong trong 1 chuoi</h1>
+    <button onclick="displayUpperLower()">Bat Dau</button>
+    <p id="result"></p>
+
+    <script>
+      function countUpperLower(str) {
+        if (str === "") {
+          return [0, 0];
+        }
+        let upper = 0;
+        let lower = 0;
+
+        for (let char of str) {
+          if (char >= "A" && char <= "Z") {
+            upper++;
+          } else if (char >= "a" && char <= "z") {
+            lower++;
+          }
+          // Bỏ qua khoảng trắng và các ký tự đặc biệt
+        }
+
+        return [upper, lower];
+      }
+
+      function displayUpperLower() {
+        let inputStr = prompt("Nhap chuoi: ");
+        let result = countUpperLower(inputStr);
+        document.getElementById(
+          "result"
+        ).innerText = `Chuoi ban vua nhap la: ${inputStr} \n Ket qua [So ky tu in hoa, So ky tu in thuong] la: ${result}`;
+      }
+    </script>
+  </body>
+</html>

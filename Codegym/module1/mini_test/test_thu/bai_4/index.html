@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 4 - Test thu</title>
+  </head>
+  <body>
+    <!--
+    Tạo một lớp Máy tính  có:
+- Thuộc tính:
++ Mã máy (string)
++ Tên máy(string)
++ Tên Hãng sản xuất (string)
++ Giá bán (number).
+- Các phương thức getter và setter cho các thuộc tính
+- Phương thức  toString() : phương thức lấy các thông tin của đối tượng.
+-Yêu cầu: Viết chương trình quản lý  Máy tính    với các chức năng sau;
++ Thêm mới 1 máy tính
++ Hiển thị được danh sách máy tính
+-->
+    <h1>Quan ly may tinh</h1>
+    <button onclick="addComputer()">Them May Tinh</button>
+    <button onclick="displayComputers()">Hien Thi Danh Sach May Tinh</button>
+    <button onclick="displaySortAscPriceComputer()">
+      Hien Thi Danh Sach May Tinh Theo Gia Tang Dan
+    </button>
+    <p id="result"></p>
+
+    <script>
+      class Computer {
+        constructor(id, name, brand, price) {
+          this.id = id;
+          this.name = name;
+          this.brand = brand;
+          this.price = price;
+        }
+
+        /*
+              Getter, setter cho ma may
+          */
+        getId() {
+          return this.id;
+        }
+        setId(id) {
+          this.id = id;
+        }
+
+        /*
+              Getter, setter cho ten may
+          */
+        getName() {
+          return this.name;
+        }
+        setName(name) {
+          this.name = name;
+        }
+
+        /*
+              Getter, setter cho hang san xuat
+          */
+        getBrand() {
+          return this.brand;
+        }
+        setBrand(brand) {
+          this.brand = brand;
+        }
+        /*
+              Getter, setter cho gia ban
+          */
+        getPrice() {
+          return this.price;
+        }
+        setPrice(price) {
+          this.price = price;
+        }
+
+        /*
+             Phuong thuc toString
+          */
+        toString() {
+          return `
+                  Ma may: ${this.id},
+                  Ten may: ${this.name},
+                  Hang san xuat: ${this.brand},
+                  Gia: ${this.price},
+              `;
+        }
+      }
+
+      // Luu danh sach
+      const computers = [
+        new Computer("C001", "Dell XPS 13", "Dell", 25000),
+        new Computer("C002", "MacBook Pro", "Apple", 50000),
+        new Computer("C003", "HP Spectre x360", "HP", 30000),
+        new Computer("C004", "Lenovo ThinkPad X1", "Lenovo", 20000),
+      ];
+
+      // them may tinh
+      function addComputer() {
+        const id = prompt("Nhap ma may:");
+        const name = prompt("Nhap ten may:");
+        const brand = prompt("Nhap hang san xuat:");
+        const price = parseFloat(prompt("Nhap gia ban:"));
+
+        if (id && name && brand && !isNaN(price)) {
+          const computer = new Computer(id, name, brand, price);
+          computers.push(computer);
+          alert("Them may tinh thanh cong!");
+        } else {
+          alert("That bai vui long thu lai!");
+        }
+      }
+
+      // hien thi danh sach
+      function displayComputers() {
+        if (computers.length === 0) {
+          document.getElementById("result").innerText =
+            "Danh sach may tinh rong!";
+        }
+        let result = "Danh sach may tinh: \n";
+        for (let i = 0; i < computers.length; i++) {
+          result += `${i + 1}. ${computers[i].toString()}\n`;
+        }
+        document.getElementById("result").innerText = result;
+      }
+
+      // hien thi danh sach theo gia tang dan
+      function displaySortAscPriceComputer() {
+        if (computers.length === 0) {
+          document.getElementById("result").innerText =
+            "Danh sach may tinh rong";
+        }
+
+        // bubble sort cho gia tang dan
+        for (let i = 0; i < computers.length - 1; i++) {
+          for (let j = i + 1; j < computers.length; j++) {
+            if (computers[i].getPrice() > computers[j].getPrice()) {
+              let temp = computers[i];
+              computers[i] = computers[j];
+              computers[j] = temp;
+            }
+          }
+        }
+
+        let result = "Danh sach may tinh (sap xep theo gia tang dan): \n";
+        for (let i = 0; i < computers.length; i++) {
+          result += `${i + 1}. ${computers[i].toString()}\n`;
+        }
+        document.getElementById("result").innerText = result;
+      }
+    </script>
+  </body>
+</html>

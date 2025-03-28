@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài 1 - Test Thử</title>
+  </head>
+  <body>
+    <!--
+    Bài 1: Nhập từ bàn phím mảng số nguyên gồm n phần tử (n<=50). 
+    Hiển thị ra màn hình danh sách các phần tử của mảng, 
+Hiện thị giá trị = tổng các số ở vị trí chắn – tổng các số ở vị trí lẻ
+Ví dụ: [15,2,3,5,10,15,7]. Kết quả sau khi thực hiện là: (15+3+10+7)-(2+5+15) = ?
+    -->
+    <h1>
+      Hien thi danh sach cac phan tu cua mang (Hiện thị giá trị = tổng các số ở
+      vị trí chắn – tổng các số ở vị trí lẻ)
+    </h1>
+    <button onclick="displayValue()">Bat Dau</button>
+    <p id="result"></p>
+
+    <script>
+      function displayValue() {
+        let n;
+        do {
+          n = parseInt(prompt("Nhap do dai mang (n): "));
+          if (isNaN(n) || n <= 0 || n >= 50 || n % 1 !== 0) {
+            alert("Khong hop le vui long nhap lai!");
+          }
+        } while (isNaN(n) || n <= 0 || n >= 50 || n % 1 !== 0);
+
+        let array = [];
+        for (let i = 0; i < n; i++) {
+          let value;
+          do {
+            value = parseInt(prompt(`Nhap phan tu thu ${i + 1}: `));
+            if (isNaN(value) || value <= 0 || value % 1 !== 0) {
+              alert("Không hợp lệ, vui lòng nhập lại!");
+            }
+          } while (isNaN(value) || value <= 0 || value % 1 !== 0);
+          array.push(value);
+        }
+
+        let sumEven = 0;
+        let sumOdd = 0;
+
+        for (let i = 0; i < array.length; i++) {
+          if (i % 2 === 0) {
+            sumEven += array[i];
+          } else {
+            sumOdd += array[i];
+          }
+        }
+
+        let result = sumEven - sumOdd;
+        document.getElementById(
+          "result"
+        ).innerText = `Mang ban vua nhap la: ${array} \n Ket qua la: ${result}`;
+      }
+    </script>
+  </body>
+</html>
