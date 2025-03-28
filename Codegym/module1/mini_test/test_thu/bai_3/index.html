@@ -55,11 +55,11 @@ Số đầu vào	Kết quả
 
         // bubble sort
         for (let i = 0; i < fibNumbers.length - 1; i++) {
-          for (let j = i + 1; j < fibNumbers.length; j++) {
-            if (fibNumbers[i] > fibNumbers[j]) {
-              let temp = fibNumbers[i];
-              fibNumbers[i] = fibNumbers[j];
-              fibNumbers[j] = temp;
+          for (let j = 0; j < fibNumbers.length - 1 - i; j++) {
+            if (fibNumbers[j] > fibNumbers[j + 1]) {
+              let temp = fibNumbers[j];
+              fibNumbers[j] = fibNumbers[j + 1];
+              fibNumbers[j + 1] = temp;
             }
           }
         }

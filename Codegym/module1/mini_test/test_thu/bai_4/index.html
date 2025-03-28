@@ -134,11 +134,11 @@
 
         // bubble sort cho gia tang dan
         for (let i = 0; i < computers.length - 1; i++) {
-          for (let j = i + 1; j < computers.length; j++) {
-            if (computers[i].getPrice() > computers[j].getPrice()) {
-              let temp = computers[i];
-              computers[i] = computers[j];
-              computers[j] = temp;
+          for (let j = 0; j < computers.length - 1 - i; j++) {
+            if (computers[j].getPrice() > computers[j + 1].getPrice()) {
+              let temp = computers[j];
+              computers[j] = computers[j + 1];
+              computers[j + 1] = temp;
             }
           }
         }
