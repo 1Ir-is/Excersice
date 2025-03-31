@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài 1</title>
+  </head>
+  <body>
+    <!--
+    Input	 	Output
+[3,4,5,5,12,13]	2 nhóm tạo thành 3 cạnh tham giác vuông	OK
+[3,4,5,5,12,13,7,24,25]	3 nhóm tạo thành 3 cạnh tham giác vuông	OK
+[3,4,5,6,12,13,7,24,25]	Nhóm 2 không tạo thành một tham giác vuông	NO
+
+    -->
+    <script>
+      function getValidNumber(message) {
+        let num;
+        do {
+          num = prompt(message);
+          num = Number(num);
+          if (isNaN(num) || !Number.isInteger(num) || num <= 0) {
+            alert("Vui long nhap so nguyen duong hop le.");
+          }
+        } while (
+          isNaN(num) ||
+          !Number.isInteger(num) ||
+          num < 0 ||
+          num % 1 !== 0
+        );
+        return num;
+      }
+
+      function isValidTriangleGroups(arr) {
+        for (let i = 0; i < arr.length; i += 3) {
+          let a = arr[i];
+          let b = arr[i + 1];
+          let c = arr[i + 2];
+          if (
+            !(
+              a * a + b * b === c * c ||
+              a * a + c * c === b * b ||
+              b * b + c * c === a * a
+            )
+          ) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      let n;
+      do {
+        n = getValidNumber("Nhap so phan tu cua mang: ");
+        if (n % 3 !== 0 || n >= 15) {
+          alert(
+            "So phan tu phai la boi so cua 3 va n <= 15. Vui long nhap lai."
+          );
+        }
+      } while (n % 3 !== 0 || n >= 15);
+
+      let arr = [];
+      for (let i = 0; i < n; i++) {
+        let value = getValidNumber(`Nhap phan tu thu ${i + 1}:`);
+        arr.push(value);
+      }
+
+      alert("Mang vua nhap: " + arr.join(", "));
+
+      let isValid = isValidTriangleGroups(arr);
+      alert(isValid ? "OK" : "NO");
+    </script>
+  </body>
+</html>

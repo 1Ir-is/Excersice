@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 3</title>
+  </head>
+  <body>
+    <!--
+    Số đầu vào	                Kết quả
+[1,5,6,11,9,20,8,0,8,1]	        [1,5],[5,6],[11,19],[8,0]
+		                    [[1,5], [8,0], [5,6],[11,19]] => mảng 2 chiều đã sắp xếp
+-->
+    <script>
+      function getValidNumber(message) {
+        let num;
+        do {
+          num = prompt(message);
+          num = Number(num);
+          if (isNaN(num) || !Number.isInteger(num) || num < 0) {
+            alert("Vui long nhap so nguyen duong hop le.");
+          }
+        } while (
+          isNaN(num) ||
+          !Number.isInteger(num) ||
+          num < 0 ||
+          num % 1 !== 0
+        );
+        return num;
+      }
+
+      function findPairs(arr) {
+        let result = [];
+        for (let i = 0; i < arr.length - 2; i++) {
+          if (arr[i] + arr[i + 1] === arr[i + 2]) {
+            result.push([arr[i], arr[i + 1]]);
+          }
+        }
+
+        alert(
+          "Cac cap phan tu lien ke nhau co tong bang phan tu tiep theo: " +
+            result.join(", ")
+        );
+
+        result.sort((a, b) => a[0] + a[1] - (b[0] + b[1]));
+        alert("Danh sach mang 2 chieu sau khi sap xep: " + result.join(", "));
+        return result;
+      }
+
+      let n;
+      do {
+        n = getValidNumber("Nhap so phan tu mang: ");
+        if (n >= 50) {
+          alert("So phan tu cua mang phai nho hon 50. Vui long nhap lai.");
+        }
+      } while (n >= 50);
+      let array = [];
+      for (let i = 0; i < n; i++) {
+        let value = getValidNumber(`Nhap phan tu thu ${i + 1}:`);
+        array.push(value);
+      }
+
+      alert("Mang vua nhap la: " + array.join(", "));
+      let result = findPairs(array);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quan ly dien thoai</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Them moi so dien thoai</h2>
+      <section class="add-list">
+        <input
+          type="text"
+          id="telephoneInput"
+          placeholder="Nhap so dien thoai"
+        />
+        <input type="text" id="ownerInput" placeholder="Nhap chu danh ba" />
+        <input type="text" id="addressInput" placeholder="Nhap dia chi" />
+        <button class="add-btn" onclick="themDanhBa()">Them</button>
+      </section>
+
+      <div class="table-container">
+        <div class="phoneList-header">
+          <h2>Hien thi danh sach</h2>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>So Dien Thoai</th>
+              <th>Ten Chu Danh Ba</th>
+              <th>Dia Chi</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="phoneListTable"></tbody>
+        </table>
+      </div>
+    </div>
+    <script>
+      class DanhBa {
+        constructor(soDienThoai, tenChuDanhBa, diaChi) {
+          this.soDienThoai = soDienThoai;
+          this.tenChuDanhBa = tenChuDanhBa;
+          this.diaChi = diaChi;
+        }
+      }
+
+      let danhBa = [
+        new DanhBa("0192301923", "Tran Chung Chien", "Viet Nam"),
+        new DanhBa("0192323923", "Tran Duc Vinh", "Viet Nam"),
+      ];
+
+      function hienThiDanhBa() {
+        const phoneListTable = document.getElementById("phoneListTable");
+        phoneListTable.innerHTML = "";
+
+        for (let i = 0; i < danhBa.length; i++) {
+          phoneListTable.innerHTML += `
+              <tr>
+                <td>${danhBa[i].soDienThoai}</td>
+                <td>${danhBa[i].tenChuDanhBa}</td>
+                <td>${danhBa[i].diaChi}</td>
+                <td>
+                  <button class="delete-btn" onclick="xoaDanhBa(${i})">Xóa</button>
+                </td>
+              </tr>
+            `;
+        }
+      }
+
+      function themDanhBa() {
+        const soDienThoai = document
+          .getElementById("telephoneInput")
+          .value.trim();
+        const tenChuDanhBa = document.getElementById("ownerInput").value.trim();
+        const diaChi = document.getElementById("addressInput").value.trim();
+
+        if (isNaN(soDienThoai)) {
+          alert("Số điện thoại chỉ được chứa các ký tự số!");
+          return;
+        }
+
+        if (soDienThoai && tenChuDanhBa && diaChi) {
+          danhBa.push(new DanhBa(soDienThoai, tenChuDanhBa, diaChi));
+          hienThiDanhBa();
+          document.getElementById("telephoneInput").value = "";
+          document.getElementById("ownerInput").value = "";
+          document.getElementById("addressInput").value = "";
+        } else {
+          alert("Vui lòng nhập đầy đủ thông tin!");
+        }
+      }
+
+      function xoaDanhBa(index) {
+        const confirmDelete = confirm("Bạn có chắc chắn muốn xóa danh bạ này?");
+        if (confirmDelete) {
+          danhBa.splice(index, 1);
+          hienThiDanhBa();
+        }
+      }
+      hienThiDanhBa();
+    </script>
+  </body>
+</html>
