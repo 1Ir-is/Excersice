@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xổ số</title>
+    <style>
+      .container {
+        /* width: 100%; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #48d673;
+      }
+
+      .form {
+        /* display: block; */
+        width: 600px;
+        padding: 60px;
+        background: #ededed;
+        border-radius: 8px;
+      }
+
+      input[type="number"] {
+        width: 100%;
+        height: 50px;
+        font-size: 35px;
+        text-align: center;
+      }
+
+      button[type="button"] {
+        width: 130px;
+        height: 60px;
+        font-size: larger;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="form">
+        <table style="width: 100%">
+          <tr style="text-align: center">
+            <td colspan="6">
+              <h1>Xổ Số</h1>
+            </td>
+          </tr>
+
+          <tbody id="table"></tbody>
+          <tr>
+            <td colspan="6" style="text-align: center">
+              <button type="button" id="buy" onclick="buyTicket()">
+                Mua vé
+              </button>
+              <button type="button" id="show" onclick="showResult()">
+                Xem kết quả
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <th colspan="6" style="text-align: center">
+              <h1 id="result"></h1>
+            </th>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <script>
+      class Lottery {
+        constructor() {
+          this.number1 = 0;
+          this.number2 = 0;
+          this.number3 = 0;
+          this.number4 = 0;
+          this.number5 = 0;
+          this.number6 = 0;
+        }
+
+        getRandomNumber() {
+          return Math.floor(Math.random() * 100);
+        }
+
+        getRandomList() {
+          this.number1 = this.getRandomNumber();
+          this.number2 = this.getRandomNumber();
+          this.number3 = this.getRandomNumber();
+          this.number4 = this.getRandomNumber();
+          this.number5 = this.getRandomNumber();
+          this.number6 = this.getRandomNumber();
+        }
+      }
+
+      //Mảng chứ toàn bộ vé số được mua
+      let lotteryArr = [];
+
+      //Kết quả trúng thưởng
+      var showTicket = {};
+      let winTicket = new Lottery();
+      winTicket.getRandomList();
+      // winTicket = { number1: 1, number2: 2, number3: 3, number4: 4, number5: 5, number6: 6 }
+
+      //số lượng vé đã mua
+      let ticketQuantity = 0;
+
+      display();
+
+      function disableButton(idButton, boolean) {
+        document.getElementById(idButton).disabled = boolean;
+      }
+
+      //kiểm tra kết quả
+      function checkResult() {
+        let winArray = [];
+        let count = 0;
+        let resultStr = "";
+        for (let i = 0; i < lotteryArr.length; i++) {
+          for (let j = 1; j <= 6; j++) {
+            let str = "number";
+            if (lotteryArr[i][str + j] == winTicket[str + j]) {
+              count++;
+            }
+          }
+          if (count > 0) {
+            winArray.push(count);
+          }
+        }
+
+        for (let i = 0; i < winArray.length; i++) {
+          if (winArray[i] === 6) {
+            resultStr = "Bạn đã trúng giải nhất\n";
+          } else if (winArray[i] === 5) {
+            resultStr = "Bạn đã trúng giải nhì\n";
+          } else if (winArray[i] >= 3) {
+            resultStr = "Bạn đã trúng giải ba\n";
+          }
+        }
+
+        if (resultStr == "") {
+          resultStr += "Chúc bạn may nắm lần sau";
+        }
+        disableButton("buy", true);
+        disableButton("show", true);
+        document.getElementById("result").innerText = resultStr;
+      }
+
+      //mua vé với 2 lựa chọn
+      function buyTicket() {
+        if (ticketQuantity < 4) {
+          let choose;
+          do {
+            choose = +prompt(
+              "Bạn có 2 lựa chọn:\n1. Bạn tự chọn số.\n2. Hệ thống random số."
+            );
+          } while (choose != 1 && choose != 2);
+
+          let newTicket = new Lottery();
+          if (choose === 2) {
+            newTicket.getRandomList();
+          } else {
+            let n = 0;
+            for (let i = 1; i <= 6; i++) {
+              do {
+                n = prompt("Nhập số thứ " + i + " trong vé");
+                newTicket["number" + i] = n;
+              } while (n < 0 || n > 99);
+            }
+          }
+          lotteryArr.push(newTicket);
+          ticketQuantity++;
+          display();
+        } else {
+          alert("Bạn đã mua đủ giới hạn số lượng vé số");
+        }
+      }
+
+      //Hiển thị số trúng thưởng
+      function showResult() {
+        showTicket = winTicket;
+        display();
+        checkResult();
+      }
+
+      //hiển thị vé mua
+      function display() {
+        let winning = showTicket;
+        table = "";
+        table += `
+                <tr style="color: red">
+                    <td><input disabled style="color: red" type="number" name="" id="" value="${showTicket.number1}"></td>
+                    <td><input disabled style="color: red" type="number" name="" id="" value="${showTicket.number2}"></td>
+                    <td><input disabled style="color: red" type="number" name="" id="" value="${showTicket.number3}"></td>
+                    <td><input disabled style="color: red" type="number" name="" id="" value="${showTicket.number4}"></td>
+                    <td><input disabled style="color: red" type="number" name="" id="" value="${showTicket.number5}"></td>
+                    <td><input disabled style="color: red" type="number" name="" id="" value="${showTicket.number6}"></td>
+                </tr>`;
+        table += `
+                <tr>
+                    <td colspan="6">
+                        <hr>
+                    </td>
+                </tr>`;
+        for (let i = 0; i < lotteryArr.length; i++) {
+          table += `
+                <tr>
+                    <td><input disabled type="number" name="" id="" value="${lotteryArr[i].number1}"></td>
+                    <td><input disabled type="number" name="" id="" value="${lotteryArr[i].number2}"></td>
+                    <td><input disabled type="number" name="" id="" value="${lotteryArr[i].number3}"></td>
+                    <td><input disabled type="number" name="" id="" value="${lotteryArr[i].number4}"></td>
+                    <td><input disabled type="number" name="" id="" value="${lotteryArr[i].number5}"></td>
+                    <td><input disabled type="number" name="" id="" value="${lotteryArr[i].number6}"></td>
+                </tr>`;
+        }
+        document.getElementById("table").innerHTML = table;
+      }
+    </script>
+  </body>
+</html>
