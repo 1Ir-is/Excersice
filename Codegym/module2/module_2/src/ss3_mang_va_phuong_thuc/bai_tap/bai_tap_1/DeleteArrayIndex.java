@@ -28,23 +28,23 @@ public class DeleteArrayIndex {
         System.out.println();
 
         System.out.print("Nhap phan tu can xoa: ");
-        int deleteArray = scanner.nextInt();
+        int deleteValue = scanner.nextInt();
 
         // tim phan tu can xoa
         int index_del = -1;
         for (i = 0; i < array.length; i++) {
-            if (array[i] == deleteArray) {
+            if (array[i] == deleteValue) {
                 index_del = i;
                 break;
             }
         }
 
         while (index_del == -1) {
-            System.out.println("Phan tu " + deleteArray + " khong tim thay trong mang.");
+            System.out.println("Phan tu " + deleteValue + " khong tim thay trong mang.");
             System.out.print("Nhap lai phan tu can xoa: ");
-            deleteArray = scanner.nextInt();
+            deleteValue = scanner.nextInt();
             for (i = 0; i < array.length; i++) {
-                if (array[i] == deleteArray) {
+                if (array[i] == deleteValue) {
                     index_del = i;
                     break;
                 }
@@ -57,7 +57,7 @@ public class DeleteArrayIndex {
         }
 
         // in mang sau khi xoa
-        System.out.println("Mang sau khi xoa phan tu " + deleteArray + ": ");
+        System.out.println("Mang sau khi xoa phan tu " + deleteValue + ": ");
         for (i = 0; i < array.length - 1; i++) {
             System.out.print(array[i] + " ");
         }
