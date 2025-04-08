@@ -42,6 +42,6 @@ public class MaxElementMatrix {
             }
         }
 
-        System.out.println("Phan tu lon nhat la: " + max + " tai vi tri [" + maxRow + "][" + maxCol + "]");
+        System.out.println("Phan tu lon nhat: " + max + " tai vi tri [" + maxRow + "][" + maxCol + "]");
     }
 }
