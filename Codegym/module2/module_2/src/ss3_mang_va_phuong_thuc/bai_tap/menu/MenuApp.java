@@ -23,35 +23,31 @@ public class MenuApp {
             System.out.println("=============================================");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
+            scanner.nextLine();
             switch (choice) {
                 case 1:
                     display();
                     System.out.println("Press Enter to go back...");
-                    scanner.nextLine();
                     scanner.nextLine();
                     break;
                 case 2:
                     add();
                     System.out.println("Press Enter to go back...");
                     scanner.nextLine();
-                    scanner.nextLine();
                     break;
                 case 3:
                     update();
                     System.out.println("Press Enter to go back...");
-                    scanner.nextLine();
                     scanner.nextLine();
                     break;
                 case 4:
                     delete();
                     System.out.println("Press Enter to go back...");
                     scanner.nextLine();
-                    scanner.nextLine();
                     break;
                 case 5:
                     search();
                     System.out.println("Press Enter to go back...");
-                    scanner.nextLine();
                     scanner.nextLine();
                     break;
                 case 6:
