@@ -2,6 +2,7 @@ package ss5_access_modifier.bai_tap.product_management;
 
 import ss3_mang_va_phuong_thuc.bai_tap.menu.MenuPrinter;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuApp {
@@ -16,8 +17,7 @@ public class MenuApp {
         do {
             MenuPrinter.printMainMenu();
             System.out.print("Nhập lựa chọn: ");
-            choice = scanner.nextInt();
-            scanner.nextLine();
+            choice = validateMenuChoice(scanner);
 
             switch (choice) {
                 case 1:
@@ -48,15 +48,41 @@ public class MenuApp {
                     }
                     break;
                 default:
-                    System.out.println("Có lỗi, vui lòng thử lại!");
+                    System.out.println("Lựa chọn không hợp lệ, vui lòng thử lại!");
             }
         } while (choice != 6);
     }
 
+    private int validateMenuChoice(Scanner scanner) {
+        int choice = -1;
+        while (true) {
+            try {
+                choice = scanner.nextInt();
+                scanner.nextLine();
+                if (choice >= 1 && choice <= 6) {
+                    return choice;
+                } else {
+                    System.out.print("Lựa chọn phải từ 1 đến 6. Vui lòng nhập lại: ");
+                }
+            } catch (InputMismatchException e) {
+                System.out.print("Lựa chọn không hợp lệ. Vui lòng nhập số: ");
+                scanner.nextLine();
+            }
+        }
+    }
+
     private boolean confirmExit(Scanner scanner) {
-        System.out.print("Bạn có muốn thoát chương trình không (Y/N): ");
-        String confirmation = scanner.nextLine().trim().toUpperCase();
-        return confirmation.equals("Y");
+        while (true) {
+            System.out.print("Bạn có muốn thoát chương trình không (Y/N): ");
+            String confirmation = scanner.nextLine().trim().toUpperCase();
+            if (confirmation.equals("Y")) {
+                return true;
+            } else if (confirmation.equals("N")) {
+                return false;
+            } else {
+                System.out.println("Lựa chọn không hợp lệ. Vui lòng nhập Y hoặc N.");
+            }
+        }
     }
 
     private void goBack(Scanner scanner) {
