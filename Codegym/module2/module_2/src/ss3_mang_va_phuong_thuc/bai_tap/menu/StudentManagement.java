@@ -7,9 +7,9 @@ public class StudentManagement {
     private Student[] student = new Student[MAX_STUDENT];
 
     public StudentManagement() {
-        student[0] = new Student("Vương", 1);
-        student[1] = new Student("Chiến", 2);
-        student[2] = new Student("Vĩnh", 3);
+        student[0] = new Student("Vuong", 1);
+        student[1] = new Student("Chien", 2);
+        student[2] = new Student("Vinh", 3);
     }
 
 
@@ -81,6 +81,32 @@ public class StudentManagement {
             System.out.println("Không tìm thấy sinh viên này!");
         }
     }
+
+    public void searchStudent(Scanner scanner) {
+        while (true) {
+            System.out.print("Nhập tên sinh viên cần tìm: ");
+            String query = scanner.nextLine().toLowerCase();
+            boolean found = false;
+
+            for (int i = 0; i < student.length; i++) {
+                if (student[i] != null) {
+                    String name = student[i].getName().toLowerCase();
+                    if (name.contains(query)) {
+                        System.out.println("Đã tìm thấy sinh viên:");
+                        System.out.println(student[i]);
+                        found = true;
+                    }
+                }
+            }
+
+            if (found) {
+                break;
+            } else {
+                System.out.println("Không tìm thấy sinh viên có tên \"" + query + "\". Vui lòng nhập lại.");
+            }
+        }
+    }
+
 
     private Student findStudentById(int id) {
         for (Student student : student) {

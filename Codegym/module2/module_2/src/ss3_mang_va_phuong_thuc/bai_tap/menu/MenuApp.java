@@ -3,28 +3,20 @@ package ss3_mang_va_phuong_thuc.bai_tap.menu;
 import java.util.Scanner;
 
 public class MenuApp {
-    public static void main(String[] args) {
-        showMenu();
+    private StudentManagement studentManagement;
+
+    public MenuApp() {
+        studentManagement = new StudentManagement();
     }
 
-    public static void showMenu() {
-        StudentManagement studentManagement = new StudentManagement();
-        Scanner scanner = new Scanner(System.in);
+    public void show(Scanner scanner) {
         int choice;
-
         do {
-            System.out.println();
-            System.out.println("================= [ MENU ] ==================");
-            System.out.println("1. Hiển thị");
-            System.out.println("2. Thêm sinh viên");
-            System.out.println("3. Cập nhập thông tin sinh viên");
-            System.out.println("4. Xoá sinh viên");
-            System.out.println("5. Tìm sinh viên");
-            System.out.println("6. Thoát chương trình");
-            System.out.println("=============================================");
+            MenuPrinter.printMainMenu();
             System.out.print("Nhập lựa chọn: ");
             choice = scanner.nextInt();
             scanner.nextLine();
+
             switch (choice) {
                 case 1:
                     studentManagement.displayStudent();
@@ -43,7 +35,7 @@ public class MenuApp {
                     goBack(scanner);
                     break;
                 case 5:
-
+                    studentManagement.searchStudent(scanner);
                     goBack(scanner);
                     break;
                 case 6:
@@ -54,20 +46,18 @@ public class MenuApp {
                     }
                     break;
                 default:
-                    System.out.println("Có lỗi vui lòng thử lại!");
+                    System.out.println("Có lỗi, vui lòng thử lại!");
             }
         } while (choice != 6);
-
-        scanner.close();
     }
 
-    public static boolean confirmExit(Scanner scanner) {
+    private boolean confirmExit(Scanner scanner) {
         System.out.print("Bạn có muốn thoát chương trình (Y/N): ");
-        String confirmation = scanner.next().trim().toUpperCase();
+        String confirmation = scanner.nextLine().trim().toUpperCase();
         return confirmation.equals("Y");
     }
 
-    public static void goBack(Scanner scanner) {
+    private void goBack(Scanner scanner) {
         System.out.println("Bấm Enter để quay về...");
         scanner.nextLine();
     }
