@@ -1,24 +1,17 @@
 package bai_tap_them.case_study_furuma.controllers;
 
-import java.util.InputMismatchException;
+import bai_tap_them.case_study_furuma.utils.MenuPrinter;
+
 import java.util.Scanner;
 
 public class FuramaController {
+
     public void displayMainMenu() {
         Scanner scanner = new Scanner(System.in);
         int choice;
 
         do {
-            System.out.println("================= [ MENU ] ==================");
-            System.out.println("1.\tEmployee Management");
-            System.out.println("2.\tCustomer Management");
-            System.out.println("3.\tFacility Management ");
-            System.out.println("4.\tBooking Management");
-            System.out.println("5.\tPromotion Management");
-            System.out.println("6.\tExit");
-            System.out.println("=============================================");
-
-            System.out.print("Enter your choice: ");
+            MenuPrinter.printMainMenu();
             choice = validateMenuChoice(scanner, 1, 6);
 
             switch (choice) {
@@ -54,13 +47,7 @@ public class FuramaController {
     private void displayEmployeeMenu(Scanner scanner) {
         int choice;
         do {
-            System.out.println("================= [ Employee Management ] ==================");
-            System.out.println("1.\tDisplay list employees");
-            System.out.println("2.\tAdd new employee");
-            System.out.println("3.\tEdit employee");
-            System.out.println("4.\tReturn main menu");
-            System.out.println("============================================================");
-            System.out.print("Enter you choice: ");
+            MenuPrinter.printEmployeeMenu();
             choice = validateMenuChoice(scanner, 1, 4);
 
             switch (choice) {
@@ -84,14 +71,7 @@ public class FuramaController {
     private void displayCustomerMenu(Scanner scanner) {
         int choice;
         do {
-            System.out.println("================= [ Customer Management ] ==================");
-            System.out.println("1.\tDisplay list customers");
-            System.out.println("2.\tAdd new customer");
-            System.out.println("3.\tEdit customer");
-            System.out.println("4.\tReturn main menu");
-            System.out.println("============================================================");
-
-            System.out.print("Enter your choice: ");
+            MenuPrinter.printCustomerMenu();
             choice = validateMenuChoice(scanner, 1, 4);
 
             switch (choice) {
@@ -115,14 +95,7 @@ public class FuramaController {
     private void displayFacilityMenu(Scanner scanner) {
         int choice;
         do {
-            System.out.println("========== Facility Management ==========");
-            System.out.println("1. Display list facility");
-            System.out.println("2. Add new facility");
-            System.out.println("3. Display list facility maintenance");
-            System.out.println("4. Return to main menu");
-            System.out.println("=========================================");
-            System.out.print("Enter your choice: ");
-
+            MenuPrinter.printFacilityMenu();
             choice = validateMenuChoice(scanner, 1, 4);
 
             switch (choice) {
@@ -146,15 +119,7 @@ public class FuramaController {
     private void displayBookingMenu(Scanner scanner) {
         int choice;
         do {
-            System.out.println("========== Booking Management ==========");
-            System.out.println("1. Add new booking");
-            System.out.println("2. Display list booking");
-            System.out.println("3. Create new contracts");
-            System.out.println("4. Display list contracts");
-            System.out.println("5. Edit contracts");
-            System.out.println("6. Return to main menu");
-            System.out.println("========================================");
-            System.out.print("Enter your choice: ");
+            MenuPrinter.printBookingMenu();
 
             choice = validateMenuChoice(scanner, 1, 6);
 
@@ -185,13 +150,7 @@ public class FuramaController {
     private void displayPromotionMenu(Scanner scanner) {
         int choice;
         do {
-            System.out.println("========== Promotion Management ==========");
-            System.out.println("1. Display list customers use service");
-            System.out.println("2. Display list customers get voucher");
-            System.out.println("3. Return to main menu");
-            System.out.println("==========================================");
-            System.out.print("Enter your choice: ");
-
+            MenuPrinter.printPromotionMenu();
             choice = validateMenuChoice(scanner, 1, 3);
 
             switch (choice) {
@@ -228,16 +187,19 @@ public class FuramaController {
         int choice = -1;
         while (true) {
             try {
-                choice = scanner.nextInt();
-                scanner.nextLine();
+                String input = scanner.nextLine().trim();
+                if (input.isEmpty()) {
+                    System.out.println("Input cannot be empty. Please enter a number between " + min + " and " + max + ":");
+                    continue;
+                }
+                choice = Integer.parseInt(input);
                 if (choice >= min && choice <= max) {
                     return choice;
                 } else {
-                    System.out.print("Invalid choice. Please enter a number between " + min + " and " + max + ": ");
+                    System.out.println("Invalid choice. Please enter a number between " + min + " and " + max + ":");
                 }
-            } catch (InputMismatchException e) {
-                System.out.print("Invalid choice. Please try again!");
-                scanner.nextLine();
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid choice. Please try again!");
             }
         }
     }
