@@ -3,22 +3,19 @@ package ss5_access_modifier.bai_tap.product_management;
 import java.text.DecimalFormat;
 
 public class Product {
+    private static int autoId = 1;
     private int id;
     private String name;
     private double price;
 
-    public Product(int id, String name, double price) {
-        this.id = id;
+    public Product(String name, double price) {
+        this.id = autoId++;
         this.name = name;
         this.price = price;
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -39,10 +36,10 @@ public class Product {
 
     public String toString() {
         DecimalFormat df = new DecimalFormat("#,###");
-        return "List{" +
-                "id= " + id +
-                ", name= '" + name + '\'' +
-                ", price= " + df.format(price) + " VNĐ" +
-                '}';
+        return "------------------------------\n" +
+                "ID      : " + id + "\n" +
+                "Name    : " + name + "\n" +
+                "Price   : " + df.format(price) + " VNĐ\n" +
+                "------------------------------";
     }
 }
