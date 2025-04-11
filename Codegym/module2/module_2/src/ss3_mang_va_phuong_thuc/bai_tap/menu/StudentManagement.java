@@ -5,43 +5,98 @@ import java.util.Scanner;
 public class StudentManagement {
     private static final int MAX_STUDENT = 100;
     private Student[] student = new Student[MAX_STUDENT];
-    private int studentCout = 0;
 
     public StudentManagement() {
-        String[] names = {"Vương", "Chiến", "Vĩnh"};
-        int[] ids = {101, 102, 103};
-
-        for (int i = 0; i < 3; i++) {
-            student[studentCout++] = new Student(names[i], ids[i]);
-        }
+        student[0] = new Student("Vương", 1);
+        student[1] = new Student("Chiến", 2);
+        student[2] = new Student("Vĩnh", 3);
     }
+
 
     public void addStudent(Scanner scanner) {
-        if (studentCout >= MAX_STUDENT) {
-            System.out.println("Không thể thêm học sinh! Đã đầy danh sách.");
-            return;
+        for (int i = 0; i < student.length; i++) {
+            if (student[i] == null) {
+                System.out.print("Nhập ID học sinh: ");
+                int id = scanner.nextInt();
+                scanner.nextLine();
+                System.out.print("Nhập tên học sinh: ");
+                String name = scanner.nextLine();
+
+                student[i] = new Student(name, id);
+                System.out.println("Thêm học sinh thành công!");
+                return;
+            }
         }
 
-        System.out.print("Nhập ID học sinh: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Nhập tên học sinh: ");
-        String name = scanner.nextLine();
-
-        student[studentCout++] = new Student(name, id);
-        System.out.println("Thêm học sinh thành công!");
+        System.out.println("Không thể thêm học sinh! Danh sách đã đầy.");
     }
 
+
     public void displayStudent() {
-        if (studentCout == 0) {
+        boolean hasStudent = false;
+
+        for (Student value : student) {
+            if (value != null) {
+                System.out.println(value);
+                hasStudent = true;
+            }
+        }
+        if (!hasStudent) {
             System.out.println("Hiện tại không có học sinh nào!");
-        } else {
-            System.out.println("Danh sách sinh viên:");
-            for (int i = 0; i < studentCout; i++) {
-                System.out.println(student[i]);
+        }
+    }
+
+    public void updateStudent(Scanner scanner) {
+        while (true) {
+            System.out.print("Nhập id sinh viên để cập nhập: ");
+            int id = scanner.nextInt();
+            scanner.nextLine();
+            Student student = findStudentById(id);
+            if (student != null) {
+                System.out.print("Nhập tên mới cho sinh viên: ");
+                String name = scanner.nextLine();
+                student.setName(name);
+                System.out.println("Cập nhập thông tin cho sinh viên " + id + " thanh cong!");
+                break;
+            } else {
+                System.out.println("Sinh viên không tồn tại!");
             }
         }
     }
 
+    public void deleteStudent(Scanner scanner) {
+        System.out.print("Nhập id sinh viên để xoá: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
 
+        int index = findStudentIndexById(id);
+
+        if (index != -1) {
+            for (int i = 0; i < MAX_STUDENT - 1; i++) {
+                student[i] = student[i + 1];
+            }
+            student[MAX_STUDENT - 1] = null;
+            System.out.println("Xoá sinh viên có id " + id + " thanh cong");
+        } else {
+            System.out.println("Không tìm thấy sinh viên này!");
+        }
+    }
+
+    private Student findStudentById(int id) {
+        for (Student student : student) {
+            if (student != null && student.getId() == id) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    private int findStudentIndexById(int id) {
+        for (int i = 0; i < MAX_STUDENT; i++) {
+            if (student[i] != null && student[i].getId() == id) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }

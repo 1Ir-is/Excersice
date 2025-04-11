@@ -35,11 +35,11 @@ public class MenuApp {
                     goBack(scanner);
                     break;
                 case 3:
-
+                    studentManagement.updateStudent(scanner);
                     goBack(scanner);
                     break;
                 case 4:
-
+                    studentManagement.deleteStudent(scanner);
                     goBack(scanner);
                     break;
                 case 5:
@@ -62,7 +62,7 @@ public class MenuApp {
     }
 
     public static boolean confirmExit(Scanner scanner) {
-        System.out.print("Bạn có muốn thoát chương trình (Y/N)");
+        System.out.print("Bạn có muốn thoát chương trình (Y/N): ");
         String confirmation = scanner.next().trim().toUpperCase();
         return confirmation.equals("Y");
     }
