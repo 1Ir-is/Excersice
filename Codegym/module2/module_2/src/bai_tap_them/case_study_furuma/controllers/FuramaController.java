@@ -12,7 +12,7 @@ public class FuramaController {
 
         do {
             MenuPrinter.printMainMenu();
-            choice = validateMenuChoice(scanner, 1, 6);
+            choice = validateMenuChoice(scanner, 6);
 
             switch (choice) {
                 case 1:
@@ -48,7 +48,7 @@ public class FuramaController {
         int choice;
         do {
             MenuPrinter.printEmployeeMenu();
-            choice = validateMenuChoice(scanner, 1, 4);
+            choice = validateMenuChoice(scanner, 4);
 
             switch (choice) {
                 case 1:
@@ -72,7 +72,7 @@ public class FuramaController {
         int choice;
         do {
             MenuPrinter.printCustomerMenu();
-            choice = validateMenuChoice(scanner, 1, 4);
+            choice = validateMenuChoice(scanner, 4);
 
             switch (choice) {
                 case 1:
@@ -96,7 +96,7 @@ public class FuramaController {
         int choice;
         do {
             MenuPrinter.printFacilityMenu();
-            choice = validateMenuChoice(scanner, 1, 4);
+            choice = validateMenuChoice(scanner, 4);
 
             switch (choice) {
                 case 1:
@@ -121,7 +121,7 @@ public class FuramaController {
         do {
             MenuPrinter.printBookingMenu();
 
-            choice = validateMenuChoice(scanner, 1, 6);
+            choice = validateMenuChoice(scanner, 6);
 
             switch (choice) {
                 case 1:
@@ -151,7 +151,7 @@ public class FuramaController {
         int choice;
         do {
             MenuPrinter.printPromotionMenu();
-            choice = validateMenuChoice(scanner, 1, 3);
+            choice = validateMenuChoice(scanner, 3);
 
             switch (choice) {
                 case 1:
@@ -183,20 +183,20 @@ public class FuramaController {
         }
     }
 
-    private int validateMenuChoice(Scanner scanner, int min, int max) {
-        int choice = -1;
+    private int validateMenuChoice(Scanner scanner, int max) {
+        int choice;
         while (true) {
             try {
                 String input = scanner.nextLine().trim();
                 if (input.isEmpty()) {
-                    System.out.println("Input cannot be empty. Please enter a number between " + min + " and " + max + ":");
+                    System.out.println("Input cannot be empty. Please enter a number between " + 1 + " and " + max + ":");
                     continue;
                 }
                 choice = Integer.parseInt(input);
-                if (choice >= min && choice <= max) {
+                if (choice >= 1 && choice <= max) {
                     return choice;
                 } else {
-                    System.out.println("Invalid choice. Please enter a number between " + min + " and " + max + ":");
+                    System.out.println("Invalid choice. Please enter a number between " + 1 + " and " + max + ":");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid choice. Please try again!");
