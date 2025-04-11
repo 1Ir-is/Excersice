@@ -36,10 +36,6 @@ public class Product {
 
     public String toString() {
         DecimalFormat df = new DecimalFormat("#,###");
-        return "------------------------------\n" +
-                "ID      : " + id + "\n" +
-                "Name    : " + name + "\n" +
-                "Price   : " + df.format(price) + " VNĐ\n" +
-                "------------------------------";
+        return String.format("%-5d %-25s %-10s", id, name, df.format(price));
     }
 }

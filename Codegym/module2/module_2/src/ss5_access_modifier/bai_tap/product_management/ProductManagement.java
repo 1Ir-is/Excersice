@@ -15,7 +15,7 @@ public class ProductManagement {
 
     public void displayProduct() {
         boolean hasProduct = false;
-
+        System.out.printf("%-5s %-25s %-10s\n", "Id", "Tên", "Gía");
         for (int i = 0; i < products.length; i++) {
             if (products[i] != null) {
                 System.out.println(products[i]);
