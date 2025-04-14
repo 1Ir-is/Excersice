@@ -3,11 +3,6 @@ package ss6_inheritance_polymorphism.bai_tap.bai_tap_1;
 public class Cylinder extends Circle {
     private double height;
 
-    public Cylinder() {
-        super();
-        this.height = 1.0;
-    }
-
     public Cylinder(double radius, String color, double height) {
         super(radius, color);
         this.height = height;
