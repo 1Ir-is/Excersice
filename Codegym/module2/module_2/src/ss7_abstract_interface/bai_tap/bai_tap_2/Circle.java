@@ -1,4 +1,4 @@
-package ss7_abstract_interface.bai_tap.bai_tap_1;
+package ss7_abstract_interface.bai_tap.bai_tap_2;
 
 public class Circle extends Shape implements IResizeable {
     private double radius = 1.0;

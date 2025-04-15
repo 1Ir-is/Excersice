@@ -1,5 +1,5 @@
 package ss7_abstract_interface.bai_tap.bai_tap_1;
 
-public interface Resizeable {
+public interface IResizeable {
     void resize(double percent);
 }
