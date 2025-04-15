@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class ProductManagement {
     private static final int MAX_PRODUCT = 100;
-    private static Product[] products = new Product[MAX_PRODUCT];
+    private static final Product[] products = new Product[MAX_PRODUCT];
 
     static {
         products[0] = new Product("Samsung Galaxy Note 10", 10000000);
@@ -43,8 +43,8 @@ public class ProductManagement {
 
     private int getProductCount() {
         int count = 0;
-        for (Product product : products) {
-            if (product != null) {
+        for (int i = 0; i < products.length; i++) {
+            if (products[i] != null) {
                 count++;
             }
         }
