@@ -1,6 +1,5 @@
 package ss5_access_modifier.bai_tap.product_management;
 
-import ss3_mang_va_phuong_thuc.bai_tap.menu.MenuPrinter;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -41,6 +40,14 @@ public class MenuApp {
                     goBack(scanner);
                     break;
                 case 6:
+                    productManagement.sortByName();
+                    goBack(scanner);
+                    break;
+                case 7:
+                    productManagement.sortByPrice();
+                    goBack(scanner);
+                    break;
+                case 8:
                     if (confirmExit(scanner)) {
                         System.out.println("Thoát chương trình!");
                     } else {
@@ -50,7 +57,7 @@ public class MenuApp {
                 default:
                     System.out.println("Lựa chọn không hợp lệ, vui lòng thử lại!");
             }
-        } while (choice != 6);
+        } while (choice != 8);
     }
 
     private int validateMenuChoice(Scanner scanner) {
@@ -59,10 +66,10 @@ public class MenuApp {
             try {
                 choice = scanner.nextInt();
                 scanner.nextLine();
-                if (choice >= 1 && choice <= 6) {
+                if (choice >= 1 && choice <= 8) {
                     return choice;
                 } else {
-                    System.out.print("Lựa chọn phải từ 1 đến 6. Vui lòng nhập lại: ");
+                    System.out.print("Lựa chọn phải từ 1 đến 8. Vui lòng nhập lại: ");
                 }
             } catch (InputMismatchException e) {
                 System.out.print("Lựa chọn không hợp lệ. Vui lòng nhập số: ");

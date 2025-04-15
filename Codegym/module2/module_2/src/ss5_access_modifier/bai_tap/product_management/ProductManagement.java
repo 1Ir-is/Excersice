@@ -1,5 +1,7 @@
 package ss5_access_modifier.bai_tap.product_management;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class ProductManagement {
@@ -25,6 +27,28 @@ public class ProductManagement {
         if (!hasProduct) {
             System.out.println("Hiện đang không có sản phẩm nào!");
         }
+    }
+
+    public void sortByName() {
+        Arrays.sort(products, 0, getProductCount());
+        System.out.println("Sắp xếp sản phẩm theo tên thành công!");
+        displayProduct();
+    }
+
+    public void sortByPrice() {
+        Arrays.sort(products, 0, getProductCount(), new PriceComparator());
+        System.out.println("Sắp xếp sản phẩm theo giá thành công!");
+        displayProduct();
+    }
+
+    private int getProductCount() {
+        int count = 0;
+        for (Product product : products) {
+            if (product != null) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public void addProduct(Scanner scanner) {
