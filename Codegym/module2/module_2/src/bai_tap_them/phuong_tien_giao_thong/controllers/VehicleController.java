@@ -19,7 +19,7 @@ public class VehicleController {
         int choice;
         do {
             MenuPrinter.printMainMenu();
-            choice = validateMenuChoice(scanner, 4);
+            choice = validateMenuChoice(4);
             switch (choice) {
                 case 1:
                     addVehicle();
@@ -31,7 +31,7 @@ public class VehicleController {
                     deleteVehicle();
                     break;
                 case 4:
-                    if (confirmExit(scanner)) {
+                    if (confirmExit()) {
                         System.out.println("Thoát chương trình!");
                     } else {
                         choice = -1;
@@ -43,7 +43,7 @@ public class VehicleController {
             }
         } while (choice != 4);
     }
-
+    
     private static void addTruck() {
         System.out.print("Nhập biển kiểm soát: ");
         String licensePlate = scanner.nextLine().trim();
@@ -90,7 +90,7 @@ public class VehicleController {
 
     private void addVehicle() {
         MenuPrinter.printAddNewMenu();
-        int vehicleType = validateMenuChoice(scanner, 4);
+        int vehicleType = validateMenuChoice(4);
         switch (vehicleType) {
             case 1:
                 addTruck();
@@ -114,7 +114,7 @@ public class VehicleController {
 
     private void displayVehicle() {
         MenuPrinter.printDisplayVehicleTypeMenu();
-        int vehicleType = validateMenuChoice(scanner, 4);
+        int vehicleType = validateMenuChoice(4);
         Vehicle[] vehicles = service.getAllVehicles();
         boolean hasVehicle = false;
 
@@ -166,7 +166,7 @@ public class VehicleController {
             System.out.println("Không tìm thấy phương tiện với biển kiểm soát là: " + licensePlate);
             return;
         }
-        System.out.print("Bạn có chắc chắn muốn xoá phương tiện với biển kiểm soát " + licensePlate + " không?");
+        System.out.print("Bạn có chắc chắn muốn xoá phương tiện với biển kiểm soát " + licensePlate + " không (Y/N)? ");
         String confirmation = scanner.nextLine().trim().toUpperCase();
         if (confirmation.equals("Y")) {
             service.deleteVehicle(licensePlate);
@@ -178,7 +178,7 @@ public class VehicleController {
 
     }
 
-    private boolean confirmExit(Scanner scanner) {
+    private boolean confirmExit() {
         while (true) {
             System.out.print("Bạn có chắc chắn muốn thoát khỏi chương trình không (Y/N): ");
             String confirmation = scanner.nextLine().trim().toUpperCase();
@@ -193,7 +193,7 @@ public class VehicleController {
     }
 
 
-    private int validateMenuChoice(Scanner scanner, int max) {
+    private int validateMenuChoice(int max) {
         int choice;
         while (true) {
             try {

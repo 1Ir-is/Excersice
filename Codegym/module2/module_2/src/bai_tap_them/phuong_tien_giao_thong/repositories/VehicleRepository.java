@@ -36,7 +36,6 @@ public class VehicleRepository implements IVehicleRepository {
                 return;
             }
         }
-        System.out.print("Danh sách phương tiện đã đầy!");
     }
 
     @Override
@@ -47,11 +46,9 @@ public class VehicleRepository implements IVehicleRepository {
                     vehicles[j] = vehicles[j + 1];
                 }
                 vehicles[vehicles.length - 1] = null;
-                System.out.println("Phương tiện với biển kiểm soát " + licensePlate + " đã xoá thành công.");
                 return;
             }
         }
-        System.out.println("Phương tiện với biển kiểm soát " + licensePlate + " không tìm thấy.");
     }
 
 
@@ -65,5 +62,4 @@ public class VehicleRepository implements IVehicleRepository {
         // Không tìm thấy
         return null;
     }
-
 }

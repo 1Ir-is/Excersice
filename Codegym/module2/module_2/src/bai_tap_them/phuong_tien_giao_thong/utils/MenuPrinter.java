@@ -12,6 +12,7 @@ public class MenuPrinter {
     }
 
     public static void printAddNewMenu() {
+        System.out.println();
         System.out.println("========= [ THÊM MỚI PHƯƠNG TIỆN ] =========");
         System.out.println("1.\tThêm xe tải ");
         System.out.println("2.\tThêm ô tô ");
@@ -22,6 +23,7 @@ public class MenuPrinter {
     }
 
     public static void printDisplayVehicleTypeMenu() {
+        System.out.println();
         System.out.println("========= [ HIỂN THỊ PHƯƠNG TIỆN ] =========");
         System.out.println("1.\tHiển thị xe tải ");
         System.out.println("2.\tHiển thị ô tô ");
