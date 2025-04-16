@@ -18,6 +18,16 @@ public class MenuPrinter {
         System.out.println("3.\tThêm xe máy ");
         System.out.println("4.\tQuay lại menu chính");
         System.out.println("============================================");
-        System.out.print("Chọn loại phương tiện: ");
+        System.out.print("Chọn chức năng: ");
+    }
+
+    public static void printDisplayVehicleTypeMenu() {
+        System.out.println("========= [ HIỂN THỊ PHƯƠNG TIỆN ] =========");
+        System.out.println("1.\tHiển thị xe tải ");
+        System.out.println("2.\tHiển thị ô tô ");
+        System.out.println("3.\tHiển thị xe máy ");
+        System.out.println("4.\tQuay lại menu chính");
+        System.out.println("============================================");
+        System.out.print("Chọn chức năng: ");
     }
 }

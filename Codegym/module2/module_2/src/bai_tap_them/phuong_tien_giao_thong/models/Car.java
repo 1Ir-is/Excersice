@@ -30,7 +30,7 @@ public class Car extends Vehicle {
 
     @Override
     public void displayInfo() {
-        System.out.printf("Car [License Plate: %s, Manufacturer: %s, Year: %d, Owner: %s, Seats: %d, Type: %s]%n",
+        System.out.printf("Xe ô tô [Biển kiểm soát: %s, hãng sản xuất: %s, năm sản xuất: %d, chủ sở hữu: %s, số chỗ ngồi: %d, loại xe: %s]%n",
                 getLicensePlate(), getManufacturer(), getYearOfManufacture(), getOwner(), numberOfSeats, carType);
     }
 }

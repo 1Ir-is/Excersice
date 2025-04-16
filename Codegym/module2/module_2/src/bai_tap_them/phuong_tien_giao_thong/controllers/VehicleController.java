@@ -87,7 +87,47 @@ public class VehicleController {
     }
 
     private void displayVehicle() {
+        MenuPrinter.printDisplayVehicleTypeMenu();
+        int vehicleType = validateMenuChoice(scanner, 4);
+        Vehicle[] vehicles = service.getAllVehicles();
+        boolean hasVehicle = false;
 
+        switch (vehicleType) {
+            case 1:
+                System.out.println("Danh sách xe tải:");
+                for (Vehicle vehicle : vehicles) {
+                    if (vehicle instanceof Truck) {
+                        vehicle.displayInfo();
+                        hasVehicle = true;
+                    }
+                }
+                break;
+            case 2:
+                System.out.println("Danh sách xe ô tô:");
+                for (Vehicle vehicle : vehicles) {
+                    if (vehicle instanceof Car) {
+                        vehicle.displayInfo();
+                        hasVehicle = true;
+                    }
+                }
+                break;
+            case 3:
+                System.out.println("Danh sách xe máy:");
+                for (Vehicle vehicle : vehicles) {
+                    if (vehicle instanceof Motorcycle) {
+                        vehicle.displayInfo();
+                        hasVehicle = true;
+                    }
+                }
+                break;
+            case 4:
+                return;
+            default:
+                System.out.println("Lựa chọn không hợp lệ!");
+        }
+        if (!hasVehicle) {
+            System.out.println("Không có phương tiện nào thuộc loại này!");
+        }
     }
 
     private void deleteVehicle() {
@@ -96,14 +136,14 @@ public class VehicleController {
 
     private boolean confirmExit(Scanner scanner) {
         while (true) {
-            System.out.print("Are you sure want to exit the program? (Y/N): ");
+            System.out.print("Bạn có chắc chắn muốn thoát khỏi chương trình không (Y/N): ");
             String confirmation = scanner.nextLine().trim().toUpperCase();
             if (confirmation.equals("Y")) {
                 return true;
             } else if (confirmation.equals("N")) {
                 return false;
             } else {
-                System.out.println("Invalid option. Please try again!");
+                System.out.println("Không hợp lệ!");
             }
         }
     }
@@ -115,17 +155,17 @@ public class VehicleController {
             try {
                 String input = scanner.nextLine().trim();
                 if (input.isEmpty()) {
-                    System.out.println("Input cannot be empty. Please enter a number between " + 1 + " and " + max + ":");
+                    System.out.println("Không hợp lệ, vui lòng nhập từ " + 1 + " đến " + max + ":");
                     continue;
                 }
                 choice = Integer.parseInt(input);
                 if (choice >= 1 && choice <= max) {
                     return choice;
                 } else {
-                    System.out.println("Invalid choice. Please enter a number between " + 1 + " and " + max + ":");
+                    System.out.println("Không hợp lệ, vui lòng nhập từ " + 1 + " đến " + max + ":");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid choice. Please try again!");
+                System.out.println("Không hợp lệ!");
             }
         }
     }

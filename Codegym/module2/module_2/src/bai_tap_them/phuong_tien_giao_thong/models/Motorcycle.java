@@ -20,7 +20,7 @@ public class Motorcycle extends Vehicle {
 
     @Override
     public void displayInfo() {
-        System.out.printf("Motorcycle [License Plate: %s, Manufacturer: %s, Year: %d, Owner: %s, Power: %.2f HP]%n",
+        System.out.printf("Xe máy [Biển kiểm soát: %s, Hãng sản xuất: %s, Năm sản xuất: %d, Chủ sở hữu: %s, Công suất: %.2f HP]%n",
                 getLicensePlate(), getManufacturer(), getYearOfManufacture(), getOwner(), power);
     }
 }

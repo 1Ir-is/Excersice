@@ -19,7 +19,7 @@ public class Truck extends Vehicle {
 
     @Override
     public void displayInfo() {
-        System.out.printf("Truck [License Plate: %s, Manufacturer: %s, Year: %d, Owner: %s, Load Capacity: %.2f tons]%n",
+        System.out.printf("Xe tải [Biển kiểm soát: %s, Hãng sản xuất: %s, Năm sản xuất: %d, Chủ sở hữu: %s, Trọng tải: %.2f tấn]%n",
                 getLicensePlate(), getManufacturer(), getYearOfManufacture(), getOwner(), loadCapacity);
     }
 }
