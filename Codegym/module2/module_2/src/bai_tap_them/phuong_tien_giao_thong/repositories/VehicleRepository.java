@@ -36,22 +36,34 @@ public class VehicleRepository implements IVehicleRepository {
                 return;
             }
         }
-        System.out.print("Vehicle array is full");
+        System.out.print("Danh sách phương tiện đã đầy!");
     }
 
     @Override
     public void deleteVehicle(String licensePlate) {
-
+        for (int i = 0; i < vehicles.length; i++) {
+            if (vehicles[i] != null && vehicles[i].getLicensePlate().equals(licensePlate)) {
+                for (int j = i; j < vehicles.length - 1; j++) {
+                    vehicles[j] = vehicles[j + 1];
+                }
+                vehicles[vehicles.length - 1] = null;
+                System.out.println("Phương tiện với biển kiểm soát " + licensePlate + " đã xoá thành công.");
+                return;
+            }
+        }
+        System.out.println("Phương tiện với biển kiểm soát " + licensePlate + " không tìm thấy.");
     }
+
 
     @Override
     public Vehicle findByLicensePlate(String licensePlate) {
-        for (Vehicle vehicle : vehicles) {
-            if (vehicle != null && vehicle.getLicensePlate().equals(licensePlate)) {
-                return vehicle;
+        for (int i = 0; i < vehicles.length; i++) {
+            if (vehicles[i] != null && vehicles[i].getLicensePlate().equals(licensePlate)) {
+                return vehicles[i];
             }
         }
-        // ko tim thay
+        // Không tìm thấy
         return null;
     }
+
 }

@@ -12,12 +12,11 @@ import java.awt.*;
 import java.util.Scanner;
 
 public class VehicleController {
-    private final IVehicleService service = new VehicleService();
-    private final Scanner scanner = new Scanner(System.in);
+    private static final IVehicleService service = new VehicleService();
+    private static final Scanner scanner = new Scanner(System.in);
 
     public void displayMenu() {
         int choice;
-
         do {
             MenuPrinter.printMainMenu();
             choice = validateMenuChoice(scanner, 4);
@@ -45,9 +44,7 @@ public class VehicleController {
         } while (choice != 4);
     }
 
-    private void addVehicle() {
-        MenuPrinter.printAddNewMenu();
-        int vehicleType = validateMenuChoice(scanner, 4);
+    private static void addTruck() {
         System.out.print("Nhập biển kiểm soát: ");
         String licensePlate = scanner.nextLine().trim();
         System.out.print("Nhập hãng sản xuất: ");
@@ -56,26 +53,55 @@ public class VehicleController {
         int yearOfManufacture = Integer.parseInt(scanner.nextLine().trim());
         System.out.print("Nhập tên chủ sở hữu: ");
         String owner = scanner.nextLine().trim();
+        System.out.print("Nhập tải trọng (tấn): ");
+        double loadCapacity = Double.parseDouble(scanner.nextLine().trim());
+        service.addVehicle(new Truck(licensePlate, manufacture, yearOfManufacture, owner, loadCapacity));
+    }
 
+    private static void addCar() {
+        System.out.print("Nhập biển kiểm soát: ");
+        String licensePlate = scanner.nextLine().trim();
+        System.out.print("Nhập hãng sản xuất: ");
+        String manufacture = scanner.nextLine().trim();
+        System.out.print("Nhập năm sản xuất: ");
+        int yearOfManufacture = Integer.parseInt(scanner.nextLine().trim());
+        System.out.print("Nhập tên chủ sở hữu: ");
+        String owner = scanner.nextLine().trim();
+        System.out.print("Nhập số chỗ ngồi: ");
+        int numberOfSeats = Integer.parseInt(scanner.nextLine().trim());
+        System.out.print("Nhập kiểu xe (du lịch, xe khách): ");
+        String carType = scanner.nextLine().trim();
+        service.addVehicle(new Car(licensePlate, manufacture, yearOfManufacture, owner, numberOfSeats, carType));
+    }
+
+    private static void addMotorcycle() {
+        System.out.print("Nhập biển kiểm soát: ");
+        String licensePlate = scanner.nextLine().trim();
+        System.out.print("Nhập hãng sản xuất: ");
+        String manufacture = scanner.nextLine().trim();
+        System.out.print("Nhập năm sản xuất: ");
+        int yearOfManufacture = Integer.parseInt(scanner.nextLine().trim());
+        System.out.print("Nhập tên chủ sở hữu: ");
+        String owner = scanner.nextLine().trim();
+        System.out.print("Nhập công suất (HP): ");
+        double power = Double.parseDouble(scanner.nextLine().trim());
+        service.addVehicle(new Motorcycle(licensePlate, manufacture, yearOfManufacture, owner, power));
+    }
+
+    private void addVehicle() {
+        MenuPrinter.printAddNewMenu();
+        int vehicleType = validateMenuChoice(scanner, 4);
         switch (vehicleType) {
             case 1:
-                System.out.print("Nhập tải trọng (tấn): ");
-                double loadCapacity = Double.parseDouble(scanner.nextLine().trim());
-                service.addVehicle(new Truck(licensePlate, manufacture, yearOfManufacture, owner, loadCapacity));
+                addTruck();
                 System.out.println("Thêm xe tải mới thành công!");
                 break;
             case 2:
-                System.out.print("Nhập số chỗ ngồi: ");
-                int numberOfSeats = Integer.parseInt(scanner.nextLine().trim());
-                System.out.print("Nhập kiểu xe (du lịch, xe khách): ");
-                String carType = scanner.nextLine().trim();
-                service.addVehicle(new Car(licensePlate, manufacture, yearOfManufacture, owner, numberOfSeats, carType));
+                addCar();
                 System.out.println("Thêm xe ô tô mới thành công!");
                 break;
             case 3:
-                System.out.print("Nhập công suất (HP): ");
-                double power = Double.parseDouble(scanner.nextLine().trim());
-                service.addVehicle(new Motorcycle(licensePlate, manufacture, yearOfManufacture, owner, power));
+                addMotorcycle();
                 System.out.println("Thêm xe máy thành công!");
                 break;
             case 4:
@@ -95,27 +121,27 @@ public class VehicleController {
         switch (vehicleType) {
             case 1:
                 System.out.println("Danh sách xe tải:");
-                for (Vehicle vehicle : vehicles) {
-                    if (vehicle instanceof Truck) {
-                        vehicle.displayInfo();
+                for (int i = 0; i < vehicles.length; i++) {
+                    if (vehicles[i] instanceof Truck) {
+                        vehicles[i].displayInfo();
                         hasVehicle = true;
                     }
                 }
                 break;
             case 2:
                 System.out.println("Danh sách xe ô tô:");
-                for (Vehicle vehicle : vehicles) {
-                    if (vehicle instanceof Car) {
-                        vehicle.displayInfo();
+                for (int i = 0; i < vehicles.length; i++) {
+                    if (vehicles[i] instanceof Car) {
+                        vehicles[i].displayInfo();
                         hasVehicle = true;
                     }
                 }
                 break;
             case 3:
                 System.out.println("Danh sách xe máy:");
-                for (Vehicle vehicle : vehicles) {
-                    if (vehicle instanceof Motorcycle) {
-                        vehicle.displayInfo();
+                for (int i = 0; i < vehicles.length; i++) {
+                    if (vehicles[i] instanceof Motorcycle) {
+                        vehicles[i].displayInfo();
                         hasVehicle = true;
                     }
                 }
@@ -125,12 +151,30 @@ public class VehicleController {
             default:
                 System.out.println("Lựa chọn không hợp lệ!");
         }
+
         if (!hasVehicle) {
             System.out.println("Không có phương tiện nào thuộc loại này!");
         }
     }
 
+
     private void deleteVehicle() {
+        System.out.print("Nhập biển kiểm soát xe mà bạn muốn xoá: ");
+        String licensePlate = scanner.nextLine().trim();
+        Vehicle vehicle = service.findByLicensePlate(licensePlate);
+        if (vehicle == null) {
+            System.out.println("Không tìm thấy phương tiện với biển kiểm soát là: " + licensePlate);
+            return;
+        }
+        System.out.print("Bạn có chắc chắn muốn xoá phương tiện với biển kiểm soát " + licensePlate + " không?");
+        String confirmation = scanner.nextLine().trim().toUpperCase();
+        if (confirmation.equals("Y")) {
+            service.deleteVehicle(licensePlate);
+            System.out.println("Đã xoá phương tiện có biển kiểm soát " + licensePlate + ", Bấm Enter để quay lại!");
+            scanner.nextLine();
+        } else {
+            System.out.println("Huỷ thao tác xoá, quay lại màn hình chính!");
+        }
 
     }
 

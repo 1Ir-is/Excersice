@@ -17,4 +17,14 @@ public class VehicleService implements IVehicleService {
     public void addVehicle(Vehicle vehicle) {
         repository.addVehicle(vehicle);
     }
+
+    @Override
+    public Vehicle findByLicensePlate(String licensePlate) {
+        return repository.findByLicensePlate(licensePlate);
+    }
+
+    @Override
+    public void deleteVehicle(String licensePlate) {
+        repository.deleteVehicle(licensePlate);
+    }
 }
