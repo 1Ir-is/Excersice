@@ -1,9 +1,6 @@
 package bai_tap_them.phuong_tien_giao_thong.controllers;
 
-import bai_tap_them.phuong_tien_giao_thong.models.Car;
-import bai_tap_them.phuong_tien_giao_thong.models.Motorcycle;
-import bai_tap_them.phuong_tien_giao_thong.models.Truck;
-import bai_tap_them.phuong_tien_giao_thong.models.Vehicle;
+import bai_tap_them.phuong_tien_giao_thong.models.*;
 import bai_tap_them.phuong_tien_giao_thong.services.IVehicleService;
 import bai_tap_them.phuong_tien_giao_thong.services.VehicleService;
 import bai_tap_them.phuong_tien_giao_thong.utils.MenuPrinter;
@@ -43,73 +40,88 @@ public class VehicleController {
             }
         } while (choice != 4);
     }
-    
-    private static void addTruck() {
-        System.out.print("Nhập biển kiểm soát: ");
-        String licensePlate = scanner.nextLine().trim();
-        System.out.print("Nhập hãng sản xuất: ");
-        String manufacture = scanner.nextLine().trim();
-        System.out.print("Nhập năm sản xuất: ");
-        int yearOfManufacture = Integer.parseInt(scanner.nextLine().trim());
-        System.out.print("Nhập tên chủ sở hữu: ");
-        String owner = scanner.nextLine().trim();
-        System.out.print("Nhập tải trọng (tấn): ");
-        double loadCapacity = Double.parseDouble(scanner.nextLine().trim());
-        service.addVehicle(new Truck(licensePlate, manufacture, yearOfManufacture, owner, loadCapacity));
-    }
 
-    private static void addCar() {
-        System.out.print("Nhập biển kiểm soát: ");
-        String licensePlate = scanner.nextLine().trim();
-        System.out.print("Nhập hãng sản xuất: ");
-        String manufacture = scanner.nextLine().trim();
-        System.out.print("Nhập năm sản xuất: ");
-        int yearOfManufacture = Integer.parseInt(scanner.nextLine().trim());
-        System.out.print("Nhập tên chủ sở hữu: ");
-        String owner = scanner.nextLine().trim();
-        System.out.print("Nhập số chỗ ngồi: ");
-        int numberOfSeats = Integer.parseInt(scanner.nextLine().trim());
-        System.out.print("Nhập kiểu xe (du lịch, xe khách): ");
-        String carType = scanner.nextLine().trim();
-        service.addVehicle(new Car(licensePlate, manufacture, yearOfManufacture, owner, numberOfSeats, carType));
-    }
+    private CommonFields inputCommonFields() {
+        String licensePlate;
+        while (true) {
+            System.out.print("Nhập biển kiểm soát: ");
+            licensePlate = scanner.nextLine().trim();
+            if (!licensePlate.isEmpty()) {
+                break;
+            } else {
+                System.out.println("Biển kiểm soát không được để trống.");
+            }
+        }
 
-    private static void addMotorcycle() {
-        System.out.print("Nhập biển kiểm soát: ");
-        String licensePlate = scanner.nextLine().trim();
-        System.out.print("Nhập hãng sản xuất: ");
-        String manufacture = scanner.nextLine().trim();
-        System.out.print("Nhập năm sản xuất: ");
-        int yearOfManufacture = Integer.parseInt(scanner.nextLine().trim());
-        System.out.print("Nhập tên chủ sở hữu: ");
-        String owner = scanner.nextLine().trim();
-        System.out.print("Nhập công suất (HP): ");
-        double power = Double.parseDouble(scanner.nextLine().trim());
-        service.addVehicle(new Motorcycle(licensePlate, manufacture, yearOfManufacture, owner, power));
+        String manufacture;
+        while (true) {
+            System.out.print("Nhập hãng sản xuất: ");
+            manufacture = scanner.nextLine().trim();
+            if (!manufacture.isEmpty()) {
+                break;
+            } else {
+                System.out.println("Hãng sản xuất không được để trống.");
+            }
+        }
+
+        int yearOfManufacture;
+        while (true) {
+            try {
+                System.out.print("Nhập năm sản xuất: ");
+                yearOfManufacture = Integer.parseInt(scanner.nextLine().trim());
+                if (yearOfManufacture > 0) {
+                    break;
+                } else {
+                    System.out.println("Năm sản xuất phải lớn hơn 0.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Vui lòng nhập một số nguyên hợp lệ.");
+            }
+        }
+
+        String owner;
+        while (true) {
+            System.out.print("Nhập tên chủ sở hữu: ");
+            owner = scanner.nextLine().trim();
+            if (!owner.isEmpty()) {
+                break;
+            } else {
+                System.out.println("Tên chủ sở hữu không được để trống.");
+            }
+        }
+
+        return new CommonFields(licensePlate, manufacture, yearOfManufacture, owner);
     }
 
     private void addVehicle() {
         MenuPrinter.printAddNewMenu();
         int vehicleType = validateMenuChoice(4);
+        Vehicle vehicle = null;
+
+        CommonFields commonFields = inputCommonFields();
         switch (vehicleType) {
             case 1:
-                addTruck();
-                System.out.println("Thêm xe tải mới thành công!");
+                vehicle = new Truck(commonFields.getLicensePlate(), commonFields.getManufacture(),
+                        commonFields.getYearOfManufacture(), commonFields.getOwner(), 0);
                 break;
             case 2:
-                addCar();
-                System.out.println("Thêm xe ô tô mới thành công!");
+                vehicle = new Car(commonFields.getLicensePlate(), commonFields.getManufacture(),
+                        commonFields.getYearOfManufacture(), commonFields.getOwner(), 0, null);
                 break;
             case 3:
-                addMotorcycle();
-                System.out.println("Thêm xe máy thành công!");
+                vehicle = new Motorcycle(commonFields.getLicensePlate(), commonFields.getManufacture(),
+                        commonFields.getYearOfManufacture(), commonFields.getOwner(), 0);
                 break;
             case 4:
                 return;
             default:
                 System.out.println("Lựa chọn không hợp lệ!");
-
+                return;
         }
+
+        vehicle.inputSpecificFields(scanner);
+        service.addVehicle(vehicle);
+        System.out.println("Thêm phương tiện mới thành công!");
     }
 
     private void displayVehicle() {

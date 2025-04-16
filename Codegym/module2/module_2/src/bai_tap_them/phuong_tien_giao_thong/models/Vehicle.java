@@ -1,5 +1,7 @@
 package bai_tap_them.phuong_tien_giao_thong.models;
 
+import java.util.Scanner;
+
 public abstract class Vehicle {
     private String licensePlate;
     private String manufacturer;
@@ -44,6 +46,8 @@ public abstract class Vehicle {
     public void setOwner(String owner) {
         this.owner = owner;
     }
+    
+    public abstract void inputSpecificFields(Scanner scanner);
 
     public abstract void displayInfo();
 }
