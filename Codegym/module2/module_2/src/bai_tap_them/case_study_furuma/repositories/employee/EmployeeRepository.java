@@ -1,11 +1,20 @@
 package bai_tap_them.case_study_furuma.repositories.employee;
 
+import bai_tap_them.case_study_furuma.models.Employee;
+
+import java.util.ArrayList;
+
 public class EmployeeRepository implements IEmployeeRepository {
+    private static final ArrayList<Employee> employees = new ArrayList<>();
+
     @Override
-    public void save() {
+    public void save(ArrayList<Employee> updatedList) {
+        employees.clear();
+        employees.addAll(updatedList);
     }
 
     @Override
-    public void findAll() {
+    public ArrayList<Employee> findAll() {
+        return employees;
     }
 }
