@@ -1,4 +1,4 @@
-package bai_tap_them.case_study_furuma.model;
+package bai_tap_them.case_study_furuma.models;
 
 public class Employee extends Person {
     private String qualification;
