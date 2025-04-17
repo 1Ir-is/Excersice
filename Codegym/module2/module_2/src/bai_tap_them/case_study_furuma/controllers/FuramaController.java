@@ -1,10 +1,14 @@
 package bai_tap_them.case_study_furuma.controllers;
 
+import bai_tap_them.case_study_furuma.services.employee.EmployeeService;
+import bai_tap_them.case_study_furuma.services.employee.IEmployeeService;
 import bai_tap_them.case_study_furuma.utils.MenuPrinter;
 
 import java.util.Scanner;
 
 public class FuramaController {
+
+    private final IEmployeeService employeeService = new EmployeeService();
 
     public void displayMainMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -52,13 +56,13 @@ public class FuramaController {
 
             switch (choice) {
                 case 1:
-                    System.out.println("Display list employees");
+                    employeeService.display();
                     break;
                 case 2:
-                    System.out.println("Add new employee");
+                    employeeService.add();
                     break;
                 case 3:
-                    System.out.println("Edit employee");
+                    employeeService.edit();
                     break;
                 case 4:
                     return;

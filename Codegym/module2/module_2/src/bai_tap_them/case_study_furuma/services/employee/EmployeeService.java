@@ -29,13 +29,78 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public void add() {
+        ArrayList<Employee> employees = employeeRepository.findAll();
 
+        System.out.print("Enter employee ID (format: NV-YYYY): ");
+        String id = validateInput("NV-\\d{4}", "Invalid ID format. Please use NV-YYYY.");
+
+        System.out.print("Enter employee name: ");
+        String name = validateInput("[A-Z][a-z]*(\\s[A-Z][a-z]*)*", "Name must capitalize the first letter of each word.");
+
+        System.out.print("Enter date of birth (dd/MM/yyyy): ");
+        String dateOfBirth = validateDateOfBirth();
+
+        System.out.print("Enter gender: ");
+        String gender = scanner.nextLine();
+
+        System.out.print("Enter ID card number (9 or 12 digits): ");
+        String idCard = validateInput("\\d{9}|\\d{12}", "ID card must be 9 or 12 digits.");
+
+        System.out.print("Enter phone number (starts with 0, 10 digits): ");
+        String phoneNumber = validateInput("0\\d{9}", "Phone number must start with 0 and have 10 digits.");
+
+        System.out.print("Enter email: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Enter position: ");
+        String position = scanner.nextLine();
+
+        System.out.print("Enter qualification: ");
+        String qualification = scanner.nextLine();
+
+        System.out.print("Enter salary: ");
+        double salary = validateSalary();
+
+        Employee employee = new Employee(id, name, dateOfBirth, gender, idCard, phoneNumber, email, position, qualification, salary);
+        employees.add(employee);
+        employeeRepository.save(new ArrayList<>(employees));
+        System.out.println("Employee added successfully.");
     }
 
     @Override
     public void edit() {
+        ArrayList<Employee> employees = employeeRepository.findAll();
+        System.out.print("Enter the ID of the employee to edit: ");
+        String id = scanner.nextLine();
 
+        Employee employeeToEdit = null;
+        for (int i = 0; i < employees.size(); i++) {
+            if (employees.get(i).getId().equals(id)) {
+                employeeToEdit = employees.get(i);
+            }
+        }
+
+        if (employeeToEdit == null) {
+            System.out.println("Employee not found.");
+            return;
+        }
+
+        System.out.print("Enter new name (leave blank to keep current): ");
+        String name = scanner.nextLine();
+        if (!name.isEmpty()) {
+            employeeToEdit.setName(name);
+        }
+
+        System.out.print("Enter new salary (leave blank to keep current): ");
+        String salaryInput = scanner.nextLine();
+        if (!salaryInput.isEmpty()) {
+            employeeToEdit.setSalary(Double.parseDouble(salaryInput));
+        }
+
+        employeeRepository.save(employees);
+        System.out.println("Employee updated successfully.");
     }
+
 
     private String validateInput(String regex, String errorMessage) {
         while (true) {
