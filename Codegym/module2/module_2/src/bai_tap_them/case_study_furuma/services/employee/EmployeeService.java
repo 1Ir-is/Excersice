@@ -90,9 +90,10 @@ public class EmployeeService implements IEmployeeService {
         String id = scanner.nextLine();
 
         Employee employeeToEdit = null;
-        for (Employee emp : employees) {
-            if (emp.getId().equals(id)) {
-                employeeToEdit = emp;
+
+        for (int i = 0; i < employees.size(); i++) {
+            if (employees.get(i).getId().equals(id)) {
+                employeeToEdit = employees.get(i);
                 break;
             }
         }
@@ -160,7 +161,7 @@ public class EmployeeService implements IEmployeeService {
         while (true) {
             try {
                 double salary = scanner.nextDouble();
-                scanner.nextLine(); // clear buffer
+                scanner.nextLine();
                 if (salary > 0) {
                     return salary;
                 } else {
@@ -168,7 +169,7 @@ public class EmployeeService implements IEmployeeService {
                 }
             } catch (Exception e) {
                 System.out.println("Invalid salary, please enter a valid number!");
-                scanner.nextLine(); // clear buffer again
+                scanner.nextLine();
             }
         }
     }

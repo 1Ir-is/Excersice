@@ -9,8 +9,6 @@ import bai_tap_them.case_study_furuma.utils.MenuPrinter;
 import java.util.Scanner;
 
 public class FuramaController {
-
-    Scanner scanner = new Scanner(System.in);
     IEmployeeRepository employeeRepository = new EmployeeRepository();
     IEmployeeService employeeService = new EmployeeService(employeeRepository);
 
@@ -25,18 +23,23 @@ public class FuramaController {
             switch (choice) {
                 case 1:
                     displayEmployeeMenu(scanner);
+                    goBack(scanner);
                     break;
                 case 2:
                     displayCustomerMenu(scanner);
+                    goBack(scanner);
                     break;
                 case 3:
                     displayFacilityMenu(scanner);
+                    goBack(scanner);
                     break;
                 case 4:
                     displayBookingMenu(scanner);
+                    goBack(scanner);
                     break;
                 case 5:
                     displayPromotionMenu(scanner);
+                    goBack(scanner);
                     break;
                 case 6:
                     if (confirmExit(scanner)) {
@@ -210,5 +213,10 @@ public class FuramaController {
                 System.out.println("Invalid choice. Please try again!");
             }
         }
+    }
+
+    private void goBack(Scanner scanner) {
+        System.out.println("Press Enter to return....");
+        scanner.nextLine();
     }
 }
