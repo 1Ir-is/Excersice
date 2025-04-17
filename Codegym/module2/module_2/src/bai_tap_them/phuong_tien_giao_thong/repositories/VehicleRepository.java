@@ -5,58 +5,42 @@ import bai_tap_them.phuong_tien_giao_thong.models.Motorcycle;
 import bai_tap_them.phuong_tien_giao_thong.models.Truck;
 import bai_tap_them.phuong_tien_giao_thong.models.Vehicle;
 
+import java.util.ArrayList;
+
 public class VehicleRepository implements IVehicleRepository {
-    private static final int MAX_VEHICLES = 100;
-    private static final Vehicle[] vehicles = new Vehicle[MAX_VEHICLES];
+    private static final ArrayList<Vehicle> vehicles = new ArrayList<>();
 
     static {
-        vehicles[0] = new Truck("51C-12345", "Hyundai", 2015, "Huynh Minh Huy", 5.0);
-        vehicles[1] = new Truck("51C-67890", "Isuzu", 2018, "Tran Trung Chien", 8.0);
-        vehicles[2] = new Truck("51C-54321", "Hino", 2020, "Nguyen Duc Vinh", 10.0);
+        vehicles.add(new Truck("51C-12345", "Hyundai", 2015, "Huynh Minh Huy", 5.0));
+        vehicles.add(new Truck("51C-67890", "Isuzu", 2018, "Tran Trung Chien", 8.0));
+        vehicles.add(new Truck("51C-54321", "Hino", 2020, "Nguyen Duc Vinh", 10.0));
 
-        vehicles[3] = new Car("30A-12345", "Toyota", 2017, "Phan Ta Anh Vuong", 5, "Du lich");
-        vehicles[4] = new Car("30A-67890", "Honda", 2019, "Le Van Tam", 7, "Xe khach");
-        vehicles[5] = new Car("30A-54321", "Mazda", 2021, "Nguyen Thanh Nhon", 4, "Du lich");
+        vehicles.add(new Car("30A-12345", "Toyota", 2017, "Phan Ta Anh Vuong", 5, "Du lich"));
 
-        vehicles[6] = new Motorcycle("59B1-12345", "Yamaha", 2016, "Ton That Duy", 150.0);
-        vehicles[7] = new Motorcycle("59B1-67890", "Honda", 2018, "Le Thu Thao", 125.0);
-        vehicles[8] = new Motorcycle("59B1-54321", "Suzuki", 2020, "Pham Ngoc Khanh", 175.0);
+        vehicles.add(new Motorcycle("59B1-12345", "Yamaha", 2016, "Ton That Duy", 150.0));
     }
 
     @Override
-    public Vehicle[] getAllVehicles() {
+    public ArrayList<Vehicle> getAllVehicles() {
         return vehicles;
     }
 
     @Override
     public void addVehicle(Vehicle vehicle) {
-        for (int i = 0; i < vehicles.length; i++) {
-            if (vehicles[i] == null) {
-                vehicles[i] = vehicle;
-                return;
-            }
-        }
+        vehicles.add(vehicle);
     }
 
     @Override
     public void deleteVehicle(String licensePlate) {
-        for (int i = 0; i < vehicles.length; i++) {
-            if (vehicles[i] != null && vehicles[i].getLicensePlate().equals(licensePlate)) {
-                for (int j = i; j < vehicles.length - 1; j++) {
-                    vehicles[j] = vehicles[j + 1];
-                }
-                vehicles[vehicles.length - 1] = null;
-                return;
-            }
-        }
+        vehicles.remove(findByLicensePlate(licensePlate));
     }
 
 
     @Override
     public Vehicle findByLicensePlate(String licensePlate) {
-        for (int i = 0; i < vehicles.length; i++) {
-            if (vehicles[i] != null && vehicles[i].getLicensePlate().equals(licensePlate)) {
-                return vehicles[i];
+        for (int i = 0; i < vehicles.size(); i++) {
+            if (vehicles.get(i) != null && vehicles.get(i).getLicensePlate().equals(licensePlate)) {
+                return vehicles.get(i);
             }
         }
         // Không tìm thấy

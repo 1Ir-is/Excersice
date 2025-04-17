@@ -2,8 +2,10 @@ package bai_tap_them.phuong_tien_giao_thong.repositories;
 
 import bai_tap_them.phuong_tien_giao_thong.models.Vehicle;
 
+import java.util.ArrayList;
+
 public interface IVehicleRepository {
-    Vehicle[] getAllVehicles();
+    ArrayList<Vehicle> getAllVehicles();
 
     void addVehicle(Vehicle vehicle);
 

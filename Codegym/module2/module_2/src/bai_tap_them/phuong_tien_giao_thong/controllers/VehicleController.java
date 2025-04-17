@@ -6,6 +6,7 @@ import bai_tap_them.phuong_tien_giao_thong.services.VehicleService;
 import bai_tap_them.phuong_tien_giao_thong.utils.MenuPrinter;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class VehicleController {
@@ -127,33 +128,33 @@ public class VehicleController {
     private void displayVehicle() {
         MenuPrinter.printDisplayVehicleTypeMenu();
         int vehicleType = validateMenuChoice(4);
-        Vehicle[] vehicles = service.getAllVehicles();
+        ArrayList<Vehicle> vehicles = service.getAllVehicles();
         boolean hasVehicle = false;
 
         switch (vehicleType) {
             case 1:
                 System.out.println("Danh sách xe tải:");
-                for (int i = 0; i < vehicles.length; i++) {
-                    if (vehicles[i] instanceof Truck) {
-                        vehicles[i].displayInfo();
+                for (int i = 0; i < vehicles.size(); i++) {
+                    if (vehicles.get(i) instanceof Truck) {
+                        vehicles.get(i).displayInfo();
                         hasVehicle = true;
                     }
                 }
                 break;
             case 2:
                 System.out.println("Danh sách xe ô tô:");
-                for (int i = 0; i < vehicles.length; i++) {
-                    if (vehicles[i] instanceof Car) {
-                        vehicles[i].displayInfo();
+                for (int i = 0; i < vehicles.size(); i++) {
+                    if (vehicles.get(i) instanceof Car) {
+                        vehicles.get(i).displayInfo();
                         hasVehicle = true;
                     }
                 }
                 break;
             case 3:
                 System.out.println("Danh sách xe máy:");
-                for (int i = 0; i < vehicles.length; i++) {
-                    if (vehicles[i] instanceof Motorcycle) {
-                        vehicles[i].displayInfo();
+                for (int i = 0; i < vehicles.size(); i++) {
+                    if (vehicles.get(i) instanceof Motorcycle) {
+                        vehicles.get(i).displayInfo();
                         hasVehicle = true;
                     }
                 }
