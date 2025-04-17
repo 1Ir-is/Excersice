@@ -8,12 +8,6 @@ public class EmployeeRepository implements IEmployeeRepository {
     private static final ArrayList<Employee> employees = new ArrayList<>();
 
     @Override
-    public void save(ArrayList<Employee> updatedList) {
-        employees.clear();
-        employees.addAll(updatedList);
-    }
-
-    @Override
     public ArrayList<Employee> findAll() {
         return employees;
     }

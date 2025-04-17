@@ -1,7 +1,6 @@
 package bai_tap_them.case_study_furuma.services.employee;
 
 import bai_tap_them.case_study_furuma.models.Employee;
-import bai_tap_them.case_study_furuma.repositories.employee.EmployeeRepository;
 import bai_tap_them.case_study_furuma.repositories.employee.IEmployeeRepository;
 
 import java.time.LocalDate;
@@ -12,25 +11,39 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class EmployeeService implements IEmployeeService {
-    private final IEmployeeRepository employeeRepository = new EmployeeRepository();
+    private final IEmployeeRepository employeeRepository;
     private final Scanner scanner = new Scanner(System.in);
+
+    public EmployeeService(IEmployeeRepository repository) {
+        this.employeeRepository = repository;
+    }
 
     @Override
     public void display() {
         ArrayList<Employee> employees = employeeRepository.findAll();
+
         if (employees.isEmpty()) {
             System.out.println("No employee found!");
-        } else {
-            for (int i = 0; i < employees.size(); i++) {
-                System.out.println(employees.get(i).getDetails());
-            }
+            return;
         }
+
+        String line = "+--------+----------------------+------------+--------+--------------+--------------+----------------------+------------------+------------------+---------------+";
+        String headerFormat = "| %-6s | %-20s | %-10s | %-6s | %-12s | %-12s | %-20s | %-16s | %-16s | %-13s |%n";
+
+        System.out.println(line);
+        System.out.printf(headerFormat, "ID", "Name", "DOB", "Gender", "ID Card", "Phone", "Email", "Qualification", "Position", "Salary (VND)");
+        System.out.println(line);
+
+        for (int i = 0; i < employees.size(); i++) {
+            System.out.println(employees.get(i).getDetails());
+        }
+        System.out.println(line);
+        System.out.println();
     }
+
 
     @Override
     public void add() {
-        ArrayList<Employee> employees = employeeRepository.findAll();
-
         System.out.print("Enter employee ID (format: NV-YYYY): ");
         String id = validateInput("NV-\\d{4}", "Invalid ID format. Please use NV-YYYY.");
 
@@ -62,21 +75,25 @@ public class EmployeeService implements IEmployeeService {
         double salary = validateSalary();
 
         Employee employee = new Employee(id, name, dateOfBirth, gender, idCard, phoneNumber, email, position, qualification, salary);
+        ArrayList<Employee> employees = employeeRepository.findAll();
         employees.add(employee);
-        employeeRepository.save(new ArrayList<>(employees));
+
         System.out.println("Employee added successfully.");
     }
+
 
     @Override
     public void edit() {
         ArrayList<Employee> employees = employeeRepository.findAll();
+
         System.out.print("Enter the ID of the employee to edit: ");
         String id = scanner.nextLine();
 
         Employee employeeToEdit = null;
-        for (int i = 0; i < employees.size(); i++) {
-            if (employees.get(i).getId().equals(id)) {
-                employeeToEdit = employees.get(i);
+        for (Employee emp : employees) {
+            if (emp.getId().equals(id)) {
+                employeeToEdit = emp;
+                break;
             }
         }
 
@@ -94,17 +111,27 @@ public class EmployeeService implements IEmployeeService {
         System.out.print("Enter new salary (leave blank to keep current): ");
         String salaryInput = scanner.nextLine();
         if (!salaryInput.isEmpty()) {
-            employeeToEdit.setSalary(Double.parseDouble(salaryInput));
+            try {
+                double newSalary = Double.parseDouble(salaryInput);
+                if (newSalary > 0) {
+                    employeeToEdit.setSalary(newSalary);
+                } else {
+                    System.out.println("Invalid salary, keeping current value.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input, salary unchanged.");
+            }
         }
-
-        employeeRepository.save(employees);
         System.out.println("Employee updated successfully.");
     }
 
-
     private String validateInput(String regex, String errorMessage) {
         while (true) {
-            String input = scanner.nextLine();
+            String input = scanner.nextLine().trim();
+            if (input.isEmpty()) {
+                System.out.println("Input cannot be empty. Please enter again:");
+                continue;
+            }
             if (Pattern.matches(regex, input)) {
                 return input;
             }
@@ -133,13 +160,15 @@ public class EmployeeService implements IEmployeeService {
         while (true) {
             try {
                 double salary = scanner.nextDouble();
+                scanner.nextLine(); // clear buffer
                 if (salary > 0) {
                     return salary;
                 } else {
                     System.out.println("Salary must be greater than 0!");
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid salary, please enter a valid salary!");
+            } catch (Exception e) {
+                System.out.println("Invalid salary, please enter a valid number!");
+                scanner.nextLine(); // clear buffer again
             }
         }
     }

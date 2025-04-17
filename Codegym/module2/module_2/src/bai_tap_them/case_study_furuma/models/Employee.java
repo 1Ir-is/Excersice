@@ -1,5 +1,7 @@
 package bai_tap_them.case_study_furuma.models;
 
+import java.text.DecimalFormat;
+
 public class Employee extends Person {
     private String qualification;
     private String position;
@@ -39,6 +41,20 @@ public class Employee extends Person {
 
     @Override
     public String getDetails() {
-        return "Employee: " + getName() + ", Position: " + position + ", Qualification: " + qualification + ", Salary: " + salary;
+        DecimalFormat df = new DecimalFormat("#,###");
+
+        return String.format(
+                "| %-6s | %-20s | %-10s | %-6s | %-12s | %-12s | %-20s | %-16s | %-16s | %-13s |",
+                getId(),
+                getName(),
+                getDateOfBirth(),
+                getGender(),
+                getIdCard(),
+                getPhoneNumber(),
+                getEmail(),
+                qualification,
+                position,
+                df.format(salary)
+        );
     }
 }
