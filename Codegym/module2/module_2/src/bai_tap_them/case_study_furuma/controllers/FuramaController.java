@@ -33,19 +33,15 @@ public class FuramaController {
                     break;
                 case 2:
                     displayCustomerMenu(scanner);
-                    goBack(scanner);
                     break;
                 case 3:
                     displayFacilityMenu(scanner);
-                    goBack(scanner);
                     break;
                 case 4:
                     displayBookingMenu(scanner);
-                    goBack(scanner);
                     break;
                 case 5:
                     displayPromotionMenu(scanner);
-                    goBack(scanner);
                     break;
                 case 6:
                     if (confirmExit(scanner)) {
@@ -100,7 +96,8 @@ public class FuramaController {
                     goBack(scanner);
                     break;
                 case 2:
-                    System.out.println("Add new customers");
+                    customerService.add();
+                    goBack(scanner);
                     break;
                 case 3:
                     System.out.println("Edit customer");
