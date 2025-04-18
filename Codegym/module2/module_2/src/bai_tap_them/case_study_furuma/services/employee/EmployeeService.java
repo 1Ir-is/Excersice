@@ -81,7 +81,7 @@ public class EmployeeService implements IEmployeeService {
         String phoneNumber = validateInput("0\\d{9}", "Phone number must start with 0 and have 10 digits.");
 
         System.out.print("Enter email: ");
-        String email = scanner.nextLine();
+        String email = validateInput("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", "Invalid email. Please try again!");
 
         System.out.print("Enter position: ");
         String position = scanner.nextLine();
