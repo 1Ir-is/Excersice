@@ -1,6 +1,5 @@
 package bai_tap_them.case_study_furuma.models;
 
-import java.text.DecimalFormat;
 
 public class Customer extends Person {
 

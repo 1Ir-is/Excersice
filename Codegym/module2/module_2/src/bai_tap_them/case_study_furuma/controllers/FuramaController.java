@@ -9,6 +9,7 @@ import bai_tap_them.case_study_furuma.services.customer.ICustomerService;
 import bai_tap_them.case_study_furuma.services.employee.EmployeeService;
 import bai_tap_them.case_study_furuma.services.employee.IEmployeeService;
 import bai_tap_them.case_study_furuma.utils.MenuPrinter;
+import bai_tap_them.case_study_furuma.utils.ValidationUtils;
 
 import java.util.Scanner;
 
@@ -25,7 +26,7 @@ public class FuramaController {
 
         do {
             MenuPrinter.printMainMenu();
-            choice = validateMenuChoice(scanner, 6);
+            choice = ValidationUtils.validateMenuChoice(scanner, 6);
 
             switch (choice) {
                 case 1:
@@ -61,7 +62,7 @@ public class FuramaController {
         int choice;
         do {
             MenuPrinter.printEmployeeMenu();
-            choice = validateMenuChoice(scanner, 4);
+            choice = ValidationUtils.validateMenuChoice(scanner, 4);
 
             switch (choice) {
                 case 1:
@@ -88,7 +89,7 @@ public class FuramaController {
         int choice;
         do {
             MenuPrinter.printCustomerMenu();
-            choice = validateMenuChoice(scanner, 4);
+            choice = ValidationUtils.validateMenuChoice(scanner, 4);
 
             switch (choice) {
                 case 1:
@@ -115,7 +116,7 @@ public class FuramaController {
         int choice;
         do {
             MenuPrinter.printFacilityMenu();
-            choice = validateMenuChoice(scanner, 4);
+            choice = ValidationUtils.validateMenuChoice(scanner, 4);
 
             switch (choice) {
                 case 1:
@@ -140,7 +141,7 @@ public class FuramaController {
         do {
             MenuPrinter.printBookingMenu();
 
-            choice = validateMenuChoice(scanner, 6);
+            choice = ValidationUtils.validateMenuChoice(scanner, 6);
 
             switch (choice) {
                 case 1:
@@ -170,7 +171,7 @@ public class FuramaController {
         int choice;
         do {
             MenuPrinter.printPromotionMenu();
-            choice = validateMenuChoice(scanner, 3);
+            choice = ValidationUtils.validateMenuChoice(scanner, 3);
 
             switch (choice) {
                 case 1:
@@ -198,27 +199,6 @@ public class FuramaController {
                 return false;
             } else {
                 System.out.println("Invalid option. Please try again!");
-            }
-        }
-    }
-
-    private int validateMenuChoice(Scanner scanner, int max) {
-        int choice;
-        while (true) {
-            try {
-                String input = scanner.nextLine().trim();
-                if (input.isEmpty()) {
-                    System.out.println("Input cannot be empty. Please enter a number between " + 1 + " and " + max + ":");
-                    continue;
-                }
-                choice = Integer.parseInt(input);
-                if (choice >= 1 && choice <= max) {
-                    return choice;
-                } else {
-                    System.out.println("Invalid choice. Please enter a number between " + 1 + " and " + max + ":");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid choice. Please try again!");
             }
         }
     }

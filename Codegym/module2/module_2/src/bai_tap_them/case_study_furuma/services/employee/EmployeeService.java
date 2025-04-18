@@ -2,13 +2,10 @@ package bai_tap_them.case_study_furuma.services.employee;
 
 import bai_tap_them.case_study_furuma.models.Employee;
 import bai_tap_them.case_study_furuma.repositories.employee.IEmployeeRepository;
+import bai_tap_them.case_study_furuma.utils.ValidationUtils;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class EmployeeService implements IEmployeeService {
     private final IEmployeeRepository employeeRepository;
@@ -49,7 +46,7 @@ public class EmployeeService implements IEmployeeService {
         System.out.print("Enter employee ID (format: NV-YYYY): ");
         String id;
         while (true) {
-            id = validateInput("NV-\\d{4}", "Invalid ID format. Please use NV-YYYY.");
+            id = ValidationUtils.validateInput("NV-\\d{4}", "Invalid ID format. Please use NV-YYYY.");
             boolean isDuplicate = false;
             for (int i = 0; i < employees.size(); i++) {
                 if (employees.get(i).getId().equals(id)) {
@@ -66,31 +63,31 @@ public class EmployeeService implements IEmployeeService {
         }
 
         System.out.print("Enter employee name: ");
-        String name = validateInput("[A-Z][a-z]*(\\s[A-Z][a-z]*)*", "Name must capitalize the first letter of each word.");
+        String name = ValidationUtils.validateInput("[A-Z][a-z]*(\\s[A-Z][a-z]*)*", "Name must capitalize the first letter of each word.");
 
         System.out.print("Enter date of birth (dd/MM/yyyy): ");
-        String dateOfBirth = validateDateOfBirth();
+        String dateOfBirth = ValidationUtils.validateDateOfBirth();
 
         System.out.print("Enter gender: ");
-        String gender = validateGender();
+        String gender = ValidationUtils.validateGender();
 
         System.out.print("Enter ID card number (9 or 12 digits): ");
-        String idCard = validateInput("\\d{9}|\\d{12}", "ID card must be 9 or 12 digits.");
+        String idCard = ValidationUtils.validateInput("\\d{9}|\\d{12}", "ID card must be 9 or 12 digits.");
 
         System.out.print("Enter phone number (starts with 0, 10 digits): ");
-        String phoneNumber = validateInput("0\\d{9}", "Phone number must start with 0 and have 10 digits.");
+        String phoneNumber = ValidationUtils.validateInput("0\\d{9}", "Phone number must start with 0 and have 10 digits.");
 
         System.out.print("Enter email: ");
-        String email = validateInput("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", "Invalid email. Please try again!");
+        String email = ValidationUtils.validateInput("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", "Invalid email. Please try again!");
 
         System.out.print("Enter position: ");
-        String position = validateNonNumericInput("Position cannot contain number. Please try again!");
+        String position = ValidationUtils.validateNonNumericInput("Position cannot contain number. Please try again!");
 
         System.out.print("Enter qualification: ");
-        String qualification = validateNonNumericInput("Qualification cannot contain number. Please try again!");
+        String qualification = ValidationUtils.validateNonNumericInput("Qualification cannot contain number. Please try again!");
 
         System.out.print("Enter salary: ");
-        double salary = validateSalary();
+        double salary = ValidationUtils.validateSalary();
 
         Employee employee = new Employee(id, name, dateOfBirth, gender, idCard, phoneNumber, email, position, qualification, salary);
         employees.add(employee);
@@ -142,99 +139,5 @@ public class EmployeeService implements IEmployeeService {
             }
         }
         System.out.println("Employee updated successfully.");
-    }
-
-    private String validateGender() {
-        while (true) {
-            String input = scanner.nextLine().trim();
-            if (input.equalsIgnoreCase("Male") || input.equalsIgnoreCase("Female")) {
-                return input;
-            }
-            System.out.println("Invalid gender. Please enter [Male] or [Female]!");
-        }
-    }
-
-    private String validateNonNumericInput(String errorMessage) {
-        while (true) {
-            String input = scanner.nextLine().trim();
-            boolean hasDigit = false;
-
-            for (int i = 0; i < input.length(); i++) {
-                char character = input.charAt(i);
-                if (Character.isDigit(character)) {
-                    hasDigit = true;
-                    break;
-                }
-            }
-
-            if (!hasDigit) {
-                return input;
-            }
-
-            System.out.println(errorMessage);
-        }
-    }
-
-    private String validateInput(String regex, String errorMessage) {
-        while (true) {
-            String input = scanner.nextLine().trim();
-            if (input.isEmpty()) {
-                System.out.println("Input cannot be empty. Please enter again:");
-                continue;
-            }
-            if (Pattern.matches(regex, input)) {
-                return input;
-            }
-            System.out.println(errorMessage);
-        }
-    }
-
-    private String validateDateOfBirth() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        while (true) {
-            try {
-                String input = scanner.nextLine();
-                String[] parts = input.split("/");
-                int day = Integer.parseInt(parts[0]);
-                int month = Integer.parseInt(parts[1]);
-                int year = Integer.parseInt(parts[2]);
-
-                if (month == 2) {
-                    boolean isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-                    int maxDays = isLeapYear ? 29 : 28;
-                    if (day > maxDays) {
-                        System.out.println("Invalid date for February. Please try again!");
-                        continue;
-                    }
-                }
-
-                LocalDate date = LocalDate.parse(input, formatter);
-
-                if (Period.between(date, LocalDate.now()).getYears() >= 18) {
-                    return input;
-                } else {
-                    System.out.println("Employee must be at least 18 years old!");
-                }
-            } catch (Exception e) {
-                System.out.println("Invalid date format, please use [dd/MM/yyyy]!");
-            }
-        }
-    }
-
-    private double validateSalary() {
-        while (true) {
-            try {
-                double salary = scanner.nextDouble();
-                scanner.nextLine();
-                if (salary > 0) {
-                    return salary;
-                } else {
-                    System.out.println("Salary must be greater than 0!");
-                }
-            } catch (Exception e) {
-                System.out.println("Invalid salary, please enter a valid number!");
-                scanner.nextLine();
-            }
-        }
     }
 }
