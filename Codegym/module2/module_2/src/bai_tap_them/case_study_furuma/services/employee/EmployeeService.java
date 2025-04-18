@@ -57,7 +57,7 @@ public class EmployeeService implements IEmployeeService {
                     break;
                 }
             }
-            
+
             if (isDuplicate) {
                 System.out.println("ID already exists. Please enter a different ID.");
             } else {
@@ -162,7 +162,22 @@ public class EmployeeService implements IEmployeeService {
         while (true) {
             try {
                 String input = scanner.nextLine();
+                String[] parts = input.split("/");
+                int day = Integer.parseInt(parts[0]);
+                int month = Integer.parseInt(parts[1]);
+                int year = Integer.parseInt(parts[2]);
+
+                if (month == 2) {
+                    boolean isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+                    int maxDays = isLeapYear ? 29 : 28;
+                    if (day > maxDays) {
+                        System.out.println("Invalid date for February. Please try again!");
+                        continue;
+                    }
+                }
+
                 LocalDate date = LocalDate.parse(input, formatter);
+
                 if (Period.between(date, LocalDate.now()).getYears() >= 18) {
                     return input;
                 } else {
