@@ -23,7 +23,6 @@ public class FuramaController {
             switch (choice) {
                 case 1:
                     displayEmployeeMenu(scanner);
-                    goBack(scanner);
                     break;
                 case 2:
                     displayCustomerMenu(scanner);
@@ -64,12 +63,15 @@ public class FuramaController {
             switch (choice) {
                 case 1:
                     employeeService.display();
+                    goBack(scanner);
                     break;
                 case 2:
                     employeeService.add();
+                    goBack(scanner);
                     break;
                 case 3:
                     employeeService.edit();
+                    goBack(scanner);
                     break;
                 case 4:
                     return;
