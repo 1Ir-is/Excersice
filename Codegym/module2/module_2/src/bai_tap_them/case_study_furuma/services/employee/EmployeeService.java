@@ -84,10 +84,10 @@ public class EmployeeService implements IEmployeeService {
         String email = validateInput("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", "Invalid email. Please try again!");
 
         System.out.print("Enter position: ");
-        String position = scanner.nextLine();
+        String position = validateNonNumericInput("Position cannot contain number. Please try again!");
 
         System.out.print("Enter qualification: ");
-        String qualification = scanner.nextLine();
+        String qualification = validateNonNumericInput("Qualification cannot contain number. Please try again!");
 
         System.out.print("Enter salary: ");
         double salary = validateSalary();
@@ -150,6 +150,27 @@ public class EmployeeService implements IEmployeeService {
                 return input;
             }
             System.out.println("Invalid gender. Please enter [Male] or [Female]!");
+        }
+    }
+
+    private String validateNonNumericInput(String errorMessage) {
+        while (true) {
+            String input = scanner.nextLine().trim();
+            boolean hasDigit = false;
+
+            for (int i = 0; i < input.length(); i++) {
+                char character = input.charAt(i);
+                if (Character.isDigit(character)) {
+                    hasDigit = true;
+                    break;
+                }
+            }
+
+            if (!hasDigit) {
+                return input;
+            }
+
+            System.out.println(errorMessage);
         }
     }
 
