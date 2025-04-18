@@ -1,7 +1,11 @@
 package bai_tap_them.case_study_furuma.controllers;
 
+import bai_tap_them.case_study_furuma.repositories.customer.CustomerRepository;
+import bai_tap_them.case_study_furuma.repositories.customer.ICustomerRepository;
 import bai_tap_them.case_study_furuma.repositories.employee.EmployeeRepository;
 import bai_tap_them.case_study_furuma.repositories.employee.IEmployeeRepository;
+import bai_tap_them.case_study_furuma.services.customer.CustomerService;
+import bai_tap_them.case_study_furuma.services.customer.ICustomerService;
 import bai_tap_them.case_study_furuma.services.employee.EmployeeService;
 import bai_tap_them.case_study_furuma.services.employee.IEmployeeService;
 import bai_tap_them.case_study_furuma.utils.MenuPrinter;
@@ -11,6 +15,9 @@ import java.util.Scanner;
 public class FuramaController {
     private final IEmployeeRepository employeeRepository = new EmployeeRepository();
     private final IEmployeeService employeeService = new EmployeeService(employeeRepository);
+
+    private final ICustomerRepository customerRepository = new CustomerRepository();
+    private final ICustomerService customerService = new CustomerService(customerRepository);
 
     public void displayMainMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -89,7 +96,8 @@ public class FuramaController {
 
             switch (choice) {
                 case 1:
-                    System.out.println("Display list customers");
+                    customerService.display();
+                    goBack(scanner);
                     break;
                 case 2:
                     System.out.println("Add new customers");
