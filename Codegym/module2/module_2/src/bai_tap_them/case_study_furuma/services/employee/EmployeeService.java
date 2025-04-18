@@ -72,7 +72,7 @@ public class EmployeeService implements IEmployeeService {
         String dateOfBirth = validateDateOfBirth();
 
         System.out.print("Enter gender: ");
-        String gender = scanner.nextLine();
+        String gender = validateGender();
 
         System.out.print("Enter ID card number (9 or 12 digits): ");
         String idCard = validateInput("\\d{9}|\\d{12}", "ID card must be 9 or 12 digits.");
@@ -141,6 +141,16 @@ public class EmployeeService implements IEmployeeService {
             }
         }
         System.out.println("Employee updated successfully.");
+    }
+
+    private String validateGender() {
+        while (true) {
+            String input = scanner.nextLine().trim();
+            if (input.equalsIgnoreCase("Male") || input.equalsIgnoreCase("Female")) {
+                return input;
+            }
+            System.out.println("Invalid gender. Please enter [Male] or [Female]!");
+        }
     }
 
     private String validateInput(String regex, String errorMessage) {
