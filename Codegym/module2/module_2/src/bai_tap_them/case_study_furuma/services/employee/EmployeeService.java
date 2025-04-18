@@ -103,21 +103,22 @@ public class EmployeeService implements IEmployeeService {
     public void edit() {
         ArrayList<Employee> employees = employeeRepository.findAll();
 
-        System.out.print("Enter the ID of the employee to edit: ");
-        String id = scanner.nextLine();
-
         Employee employeeToEdit = null;
 
-        for (int i = 0; i < employees.size(); i++) {
-            if (employees.get(i).getId().equals(id)) {
-                employeeToEdit = employees.get(i);
-                break;
-            }
-        }
+        while (employeeToEdit == null) {
+            System.out.print("Enter the ID of the employee to edit: ");
+            String id = scanner.nextLine();
 
-        if (employeeToEdit == null) {
-            System.out.println("Employee not found.");
-            return;
+            for (int i = 0; i < employees.size(); i++) {
+                Employee employee = employees.get(i);
+                if (employee.getId().equals(id)) {
+                    employeeToEdit = employee;
+                    break;
+                }
+            }
+            if (employeeToEdit == null) {
+                System.out.println("Invalid ID. Please try again.");
+            }
         }
 
         System.out.print("Enter new name (leave blank to keep current): ");
