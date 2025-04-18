@@ -44,8 +44,26 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public void add() {
+        ArrayList<Employee> employees = employeeRepository.findAll();
+
         System.out.print("Enter employee ID (format: NV-YYYY): ");
-        String id = validateInput("NV-\\d{4}", "Invalid ID format. Please use NV-YYYY.");
+        String id;
+        while (true) {
+            id = validateInput("NV-\\d{4}", "Invalid ID format. Please use NV-YYYY.");
+            boolean isDuplicate = false;
+            for (int i = 0; i < employees.size(); i++) {
+                if (employees.get(i).getId().equals(id)) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+            
+            if (isDuplicate) {
+                System.out.println("ID already exists. Please enter a different ID.");
+            } else {
+                break;
+            }
+        }
 
         System.out.print("Enter employee name: ");
         String name = validateInput("[A-Z][a-z]*(\\s[A-Z][a-z]*)*", "Name must capitalize the first letter of each word.");
@@ -75,7 +93,6 @@ public class EmployeeService implements IEmployeeService {
         double salary = validateSalary();
 
         Employee employee = new Employee(id, name, dateOfBirth, gender, idCard, phoneNumber, email, position, qualification, salary);
-        ArrayList<Employee> employees = employeeRepository.findAll();
         employees.add(employee);
 
         System.out.println("Employee added successfully.");

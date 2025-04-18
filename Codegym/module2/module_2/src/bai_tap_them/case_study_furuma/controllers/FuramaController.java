@@ -9,8 +9,8 @@ import bai_tap_them.case_study_furuma.utils.MenuPrinter;
 import java.util.Scanner;
 
 public class FuramaController {
-    IEmployeeRepository employeeRepository = new EmployeeRepository();
-    IEmployeeService employeeService = new EmployeeService(employeeRepository);
+    private final IEmployeeRepository employeeRepository = new EmployeeRepository();
+    private final IEmployeeService employeeService = new EmployeeService(employeeRepository);
 
     public void displayMainMenu() {
         Scanner scanner = new Scanner(System.in);
