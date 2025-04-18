@@ -100,7 +100,8 @@ public class FuramaController {
                     goBack(scanner);
                     break;
                 case 3:
-                    System.out.println("Edit customer");
+                    customerService.edit();
+                    goBack(scanner);
                     break;
                 case 4:
                     return;

@@ -4,7 +4,6 @@ package bai_tap_them.case_study_furuma.services.customer;
 import bai_tap_them.case_study_furuma.models.Customer;
 import bai_tap_them.case_study_furuma.repositories.customer.ICustomerRepository;
 
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -99,7 +98,37 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public void edit() {
+        ArrayList<Customer> customers = customerRepository.findAll();
 
+        Customer customerToEdit = null;
+
+        while (customerToEdit == null) {
+            System.out.print("Enter the ID of the customer to edit: ");
+            String id = scanner.nextLine();
+
+            for (int i = 0; i < customers.size(); i++) {
+                Customer customer = customers.get(i);
+                if (customer.getId().equals(id)) {
+                    customerToEdit = customer;
+                    break;
+                }
+            }
+            if (customerToEdit == null) {
+                System.out.println("Invalid ID. Please try again!");
+            }
+        }
+
+        System.out.print("Enter new name (leave blank to keep current): ");
+        String name = scanner.nextLine();
+        if (!name.isEmpty()) {
+            customerToEdit.setName(name);
+        }
+        System.out.print("Enter new address (leave blank to keep current): ");
+        String addressInput = scanner.nextLine();
+        if (!addressInput.isEmpty()) {
+            customerToEdit.setAddress(addressInput);
+        }
+        System.out.println("Customer updated successfully.");
     }
 
     private String validateDateOfBirth() {
@@ -131,7 +160,7 @@ public class CustomerService implements ICustomerService {
                 }
 
             } catch (Exception e) {
-                System.out.print("Invalid date format. Please use [dd/MM/yyyy] format!");
+                System.out.print("Invalid date format. Please use [dd/MM/yyyy] format: ");
             }
         }
     }
@@ -177,7 +206,7 @@ public class CustomerService implements ICustomerService {
             if (input.equalsIgnoreCase("Male") || input.equalsIgnoreCase("Female")) {
                 return input;
             }
-            System.out.print("Invalid gender. Please enter [Male] or [Female]!");
+            System.out.print("Invalid gender. Please enter [Male] or [Female]: ");
         }
     }
 }
