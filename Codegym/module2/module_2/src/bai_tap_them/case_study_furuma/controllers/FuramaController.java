@@ -10,6 +10,7 @@ import bai_tap_them.case_study_furuma.services.employee.EmployeeService;
 import bai_tap_them.case_study_furuma.services.employee.IEmployeeService;
 import bai_tap_them.case_study_furuma.utils.MenuPrinter;
 import bai_tap_them.case_study_furuma.utils.ValidationUtils;
+import bai_tap_them.case_study_furuma.view.CommonView;
 
 import java.util.Scanner;
 
@@ -26,7 +27,7 @@ public class FuramaController {
 
         do {
             MenuPrinter.printMainMenu();
-            choice = ValidationUtils.validateMenuChoice(scanner, 6);
+            choice = CommonView.getChoice(6);
 
             switch (choice) {
                 case 1:
@@ -62,7 +63,7 @@ public class FuramaController {
         int choice;
         do {
             MenuPrinter.printEmployeeMenu();
-            choice = ValidationUtils.validateMenuChoice(scanner, 4);
+            choice = CommonView.getChoice(4);
 
             switch (choice) {
                 case 1:
@@ -89,7 +90,7 @@ public class FuramaController {
         int choice;
         do {
             MenuPrinter.printCustomerMenu();
-            choice = ValidationUtils.validateMenuChoice(scanner, 4);
+            choice = CommonView.getChoice(4);
 
             switch (choice) {
                 case 1:
@@ -116,7 +117,7 @@ public class FuramaController {
         int choice;
         do {
             MenuPrinter.printFacilityMenu();
-            choice = ValidationUtils.validateMenuChoice(scanner, 4);
+            choice = CommonView.getChoice(4);
 
             switch (choice) {
                 case 1:
@@ -141,7 +142,7 @@ public class FuramaController {
         do {
             MenuPrinter.printBookingMenu();
 
-            choice = ValidationUtils.validateMenuChoice(scanner, 6);
+            choice = CommonView.getChoice(6);
 
             switch (choice) {
                 case 1:
@@ -171,7 +172,7 @@ public class FuramaController {
         int choice;
         do {
             MenuPrinter.printPromotionMenu();
-            choice = ValidationUtils.validateMenuChoice(scanner, 3);
+            choice = CommonView.getChoice(3);
 
             switch (choice) {
                 case 1:

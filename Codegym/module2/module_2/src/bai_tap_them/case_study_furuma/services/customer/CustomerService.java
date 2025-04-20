@@ -3,6 +3,7 @@ package bai_tap_them.case_study_furuma.services.customer;
 import bai_tap_them.case_study_furuma.models.Customer;
 import bai_tap_them.case_study_furuma.repositories.customer.ICustomerRepository;
 import bai_tap_them.case_study_furuma.utils.ValidationUtils;
+import bai_tap_them.case_study_furuma.view.CommonView;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -85,8 +86,7 @@ public class CustomerService implements ICustomerService {
         for (int i = 0; i < customerTypes.length; i++) {
             System.out.println((i + 1) + ". " + customerTypes[i]);
         }
-        System.out.print("Your choice: ");
-        int customerTypeChoice = ValidationUtils.validateMenuChoice(scanner, customerTypes.length);
+        int customerTypeChoice = CommonView.getChoice(customerTypes.length);
         String customerType = customerTypes[customerTypeChoice - 1];
 
         System.out.print("Enter customer address: ");
@@ -120,11 +120,46 @@ public class CustomerService implements ICustomerService {
             }
         }
 
-        System.out.print("Enter new name (leave blank to keep current): ");
-        String name = scanner.nextLine();
-        if (!name.isEmpty()) {
-            customerToEdit.setName(name);
+        System.out.print("Enter new phone number (leave blank to keep current): ");
+        String phoneNumber = scanner.nextLine();
+        if (!phoneNumber.isEmpty()) {
+            if (phoneNumber.matches("0\\d{9}")) {
+                customerToEdit.setPhoneNumber(phoneNumber);
+            } else {
+                System.out.println("Invalid phone number format. Keeping current value.");
+            }
         }
+
+        System.out.print("Enter new email (leave blank to keep current): ");
+        String email = scanner.nextLine();
+        if (!email.isEmpty()) {
+            if (email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
+                customerToEdit.setName(email);
+            } else {
+                System.out.println("Invalid email format. Keeping current value.");
+            }
+        }
+
+        String[] customerTypes = {"Diamond", "Platinum", "Gold", "Silver", "Member"};
+        System.out.println("Select new customer type for this customer (leave blank to keep current): ");
+        for (int i = 0; i < customerTypes.length; i++) {
+            System.out.println((i + 1) + ". " + customerTypes[i]);
+        }
+        System.out.print("Your choice: ");
+        String customerTypeInput = scanner.nextLine();
+        if (!customerTypeInput.isEmpty()) {
+            try {
+                int customerTypeChoice = Integer.parseInt(customerTypeInput);
+                if (customerTypeChoice >= 1 && customerTypeChoice <= customerTypes.length) {
+                    customerToEdit.setCustomerType(customerTypes[customerTypeChoice - 1]);
+                } else {
+                    System.out.println("Invalid choice. Keeping current customer type for this customer.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Keeping current customer type for this customer.");
+            }
+        }
+
         System.out.print("Enter new address (leave blank to keep current): ");
         String addressInput = scanner.nextLine();
         if (!addressInput.isEmpty()) {

@@ -3,6 +3,7 @@ package bai_tap_them.case_study_furuma.services.employee;
 import bai_tap_them.case_study_furuma.models.Employee;
 import bai_tap_them.case_study_furuma.repositories.employee.IEmployeeRepository;
 import bai_tap_them.case_study_furuma.utils.ValidationUtils;
+import bai_tap_them.case_study_furuma.view.CommonView;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -85,9 +86,7 @@ public class EmployeeService implements IEmployeeService {
         for (int i = 0; i < qualifications.length; i++) {
             System.out.println((i + 1) + ". " + qualifications[i]);
         }
-        System.out.print("Your choice: ");
-
-        int qualificationChoice = ValidationUtils.validateMenuChoice(scanner, qualifications.length);
+        int qualificationChoice = CommonView.getChoice(qualifications.length);
         String qualification = qualifications[qualificationChoice - 1];
 
         String[] positions = {"Receptionist", "Waiter", "Specialist", "Supervisor", "Manager", "Director"};
@@ -95,9 +94,7 @@ public class EmployeeService implements IEmployeeService {
         for (int i = 0; i < positions.length; i++) {
             System.out.println((i + 1) + ". " + positions[i]);
         }
-        System.out.print("Your choice: ");
-
-        int positionChoice = ValidationUtils.validateMenuChoice(scanner, positions.length);
+        int positionChoice = CommonView.getChoice(positions.length);
         String position = positions[positionChoice - 1];
 
         System.out.print("Enter salary: ");
@@ -132,10 +129,67 @@ public class EmployeeService implements IEmployeeService {
             }
         }
 
-        System.out.print("Enter new name (leave blank to keep current): ");
-        String name = scanner.nextLine();
-        if (!name.isEmpty()) {
-            employeeToEdit.setName(name);
+        System.out.print("Enter new phone number (leave blank to keep current): ");
+        String phoneNumber = scanner.nextLine();
+        if (!phoneNumber.isEmpty()) {
+            if (phoneNumber.matches("0\\d{9}")) {
+                employeeToEdit.setPhoneNumber(phoneNumber);
+            } else {
+                System.out.println("Invalid phone number format. Keeping current value.");
+            }
+
+        }
+
+        System.out.print("Enter new email (leave blank to keep current): ");
+        String email = scanner.nextLine();
+        if (!email.isEmpty()) {
+            if (email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
+                employeeToEdit.setEmail(email);
+            } else {
+                System.out.println("Invalid email format. Keeping current value. ");
+            }
+        }
+
+        String[] qualifications = {"Intermediate", "College", "University", "Postgraduate"};
+        System.out.println("Select new qualification (leave blank to keep current): ");
+        for (int i = 0; i < qualifications.length; i++) {
+            System.out.println((i + 1) + ". " + qualifications[i]);
+        }
+
+        System.out.print("Your choice: ");
+        String qualificationInput = scanner.nextLine();
+        if (!qualificationInput.isEmpty()) {
+            try {
+                int qualificationChoice = Integer.parseInt(qualificationInput);
+                if (qualificationChoice >= 1 && qualificationChoice <= qualifications.length) {
+                    employeeToEdit.setQualification(qualifications[qualificationChoice - 1]);
+                } else {
+                    System.out.println("Invalid choice. Keeping current qualification. ");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Keeping current qualification. ");
+            }
+        }
+
+        String[] positions = {"Receptionist", "Waiter", "Specialist", "Supervisor", "Manager", "Director"};
+        System.out.println("Select new position (leave blank to keep current): ");
+        for (int i = 0; i < positions.length; i++) {
+            System.out.println((i + 1) + ". " + positions[i]);
+        }
+
+        System.out.print("Your choice: ");
+        String positionInput = scanner.nextLine();
+        if (!positionInput.isEmpty()) {
+            try {
+                int positionChoice = Integer.parseInt(positionInput);
+                if (positionChoice >= 1 && positionChoice <= positions.length) {
+                    employeeToEdit.setPosition(positions[positionChoice - 1]);
+                } else {
+                    System.out.println("Invalid choice. Keeping current position.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Keeping current position.");
+            }
         }
 
         System.out.print("Enter new salary (leave blank to keep current): ");
