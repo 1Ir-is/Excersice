@@ -48,8 +48,8 @@ public class EmployeeService implements IEmployeeService {
         while (true) {
             id = ValidationUtils.validateInput("NV-\\d{4}", "Invalid ID format. Please use NV-YYYY.");
             boolean isDuplicate = false;
-            for (int i = 0; i < employees.size(); i++) {
-                if (employees.get(i).getId().equals(id)) {
+            for (Employee employee : employees) {
+                if (employee.getId().equals(id)) {
                     isDuplicate = true;
                     break;
                 }
@@ -80,11 +80,25 @@ public class EmployeeService implements IEmployeeService {
         System.out.print("Enter email: ");
         String email = ValidationUtils.validateInput("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", "Invalid email. Please try again!");
 
-        System.out.print("Enter position: ");
-        String position = ValidationUtils.validateNonNumericInput("Position cannot contain number. Please try again!");
+        String[] qualifications = {"Intermediate", "College", "University", "Postgraduate"};
+        System.out.println("Select qualification: ");
+        for (int i = 0; i < qualifications.length; i++) {
+            System.out.println((i + 1) + ". " + qualifications[i]);
+        }
+        System.out.print("Your choice: ");
 
-        System.out.print("Enter qualification: ");
-        String qualification = ValidationUtils.validateNonNumericInput("Qualification cannot contain number. Please try again!");
+        int qualificationChoice = ValidationUtils.validateMenuChoice(scanner, qualifications.length);
+        String qualification = qualifications[qualificationChoice - 1];
+
+        String[] positions = {"Receptionist", "Waiter", "Specialist", "Supervisor", "Manager", "Director"};
+        System.out.println("Select position: ");
+        for (int i = 0; i < positions.length; i++) {
+            System.out.println((i + 1) + ". " + positions[i]);
+        }
+        System.out.print("Your choice: ");
+
+        int positionChoice = ValidationUtils.validateMenuChoice(scanner, positions.length);
+        String position = positions[positionChoice - 1];
 
         System.out.print("Enter salary: ");
         double salary = ValidationUtils.validateSalary();

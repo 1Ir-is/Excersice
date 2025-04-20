@@ -80,8 +80,14 @@ public class CustomerService implements ICustomerService {
         System.out.print("Enter email: ");
         String email = ValidationUtils.validateInput("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", "Invalid email. Please try again!");
 
-        System.out.print("Enter customer type: ");
-        String customerType = ValidationUtils.validateNonNumericInput("Customer Type cannot contain number. Please try again!");
+        String[] customerTypes = {"Diamond", "Platinum", "Gold", "Silver", "Member"};
+        System.out.println("Select customer type:");
+        for (int i = 0; i < customerTypes.length; i++) {
+            System.out.println((i + 1) + ". " + customerTypes[i]);
+        }
+        System.out.print("Your choice: ");
+        int customerTypeChoice = ValidationUtils.validateMenuChoice(scanner, customerTypes.length);
+        String customerType = customerTypes[customerTypeChoice - 1];
 
         System.out.print("Enter customer address: ");
         String address = scanner.nextLine();
