@@ -101,7 +101,6 @@ public class CustomerService implements ICustomerService {
     @Override
     public void edit() {
         ArrayList<Customer> customers = customerRepository.findAll();
-
         Customer customerToEdit = null;
 
         while (customerToEdit == null) {
@@ -145,6 +144,7 @@ public class CustomerService implements ICustomerService {
         for (int i = 0; i < customerTypes.length; i++) {
             System.out.println((i + 1) + ". " + customerTypes[i]);
         }
+
         System.out.print("Your choice: ");
         String customerTypeInput = scanner.nextLine();
         if (!customerTypeInput.isEmpty()) {
