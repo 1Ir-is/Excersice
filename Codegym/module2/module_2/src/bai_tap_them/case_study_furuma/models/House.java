@@ -30,6 +30,16 @@ public class House extends Facility {
 
     @Override
     public String getDetails() {
-        return "House: " + getName() + ", Room Standard: " + roomStandard + ", Number of floor: " + numberOfFloor;
+        return "House{" +
+                "id='" + getId() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", area=" + getArea() +
+                ", rentalCost=" + getRentalCost() +
+                ", maxPeople=" + getMaxPeople() +
+                ", rentalType='" + getRentalType() + '\'' +
+                ", roomStandard='" + roomStandard + '\'' +
+                ", numberOfFloors=" + numberOfFloor +
+                '}';
     }
+
 }

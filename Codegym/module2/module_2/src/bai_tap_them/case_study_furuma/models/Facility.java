@@ -66,4 +66,10 @@ public abstract class Facility {
     }
 
     public abstract String getDetails();
+
+
+    @Override
+    public String toString() {
+        return getDetails();
+    }
 }

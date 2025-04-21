@@ -73,7 +73,7 @@ public class EmployeeService implements IEmployeeService {
         String gender = ValidationUtils.validateGender();
 
         System.out.print("Enter ID card number (9 or 12 digits): ");
-        String idCard = ValidationUtils.validateInput("\\d{9}|\\d{12}", "ID card must be 9 or 12 digits.");
+        String idCard = ValidationUtils.validateInput("^\\d{9}(\\d{3})?", "ID card must be 9 or 12 digits.");
 
         System.out.print("Enter phone number (starts with 0, 10 digits): ");
         String phoneNumber = ValidationUtils.validateInput("0\\d{9}", "Phone number must start with 0 and have 10 digits.");

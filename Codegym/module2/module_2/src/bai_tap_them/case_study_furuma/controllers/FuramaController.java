@@ -4,10 +4,14 @@ import bai_tap_them.case_study_furuma.repositories.customer.CustomerRepository;
 import bai_tap_them.case_study_furuma.repositories.customer.ICustomerRepository;
 import bai_tap_them.case_study_furuma.repositories.employee.EmployeeRepository;
 import bai_tap_them.case_study_furuma.repositories.employee.IEmployeeRepository;
+import bai_tap_them.case_study_furuma.repositories.facility.FacilityRepository;
+import bai_tap_them.case_study_furuma.repositories.facility.IFacilityRepository;
 import bai_tap_them.case_study_furuma.services.customer.CustomerService;
 import bai_tap_them.case_study_furuma.services.customer.ICustomerService;
 import bai_tap_them.case_study_furuma.services.employee.EmployeeService;
 import bai_tap_them.case_study_furuma.services.employee.IEmployeeService;
+import bai_tap_them.case_study_furuma.services.facility.FacilityService;
+import bai_tap_them.case_study_furuma.services.facility.IFacilityService;
 import bai_tap_them.case_study_furuma.utils.MenuPrinter;
 import bai_tap_them.case_study_furuma.utils.ValidationUtils;
 import bai_tap_them.case_study_furuma.view.CommonView;
@@ -20,6 +24,9 @@ public class FuramaController {
 
     private final ICustomerRepository customerRepository = new CustomerRepository();
     private final ICustomerService customerService = new CustomerService(customerRepository);
+
+    private final IFacilityRepository facilityRepository = new FacilityRepository();
+    private final IFacilityService facilityService = new FacilityService(facilityRepository);
 
     public void displayMainMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -121,7 +128,7 @@ public class FuramaController {
 
             switch (choice) {
                 case 1:
-                    System.out.println("Display list facility");
+                    facilityService.display();
                     break;
                 case 2:
                     System.out.println("Add new facility");

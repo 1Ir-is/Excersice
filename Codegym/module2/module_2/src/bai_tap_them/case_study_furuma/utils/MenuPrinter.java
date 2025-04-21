@@ -58,4 +58,12 @@ public class MenuPrinter {
         System.out.println("3. Return main menu");
         System.out.println("==========================================");
     }
+
+    public static void printAddNewFacilityMenu() {
+        System.out.println("========== Add New Facility ==========");
+        System.out.println("1. Add new villa");
+        System.out.println("2. Add new house");
+        System.out.println("3. Add new room");
+        System.out.println("4. Back to menu");
+    }
 }
