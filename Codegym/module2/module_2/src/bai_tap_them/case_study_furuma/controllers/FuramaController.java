@@ -75,15 +75,15 @@ public class FuramaController {
             switch (choice) {
                 case 1:
                     employeeService.display();
-                    goBack(scanner);
+                    CommonView.goBack(scanner);
                     break;
                 case 2:
                     employeeService.add();
-                    goBack(scanner);
+                    CommonView.goBack(scanner);
                     break;
                 case 3:
                     employeeService.edit();
-                    goBack(scanner);
+                    CommonView.goBack(scanner);
                     break;
                 case 4:
                     return;
@@ -102,15 +102,15 @@ public class FuramaController {
             switch (choice) {
                 case 1:
                     customerService.display();
-                    goBack(scanner);
+                    CommonView.goBack(scanner);
                     break;
                 case 2:
                     customerService.add();
-                    goBack(scanner);
+                    CommonView.goBack(scanner);
                     break;
                 case 3:
                     customerService.edit();
-                    goBack(scanner);
+                    CommonView.goBack(scanner);
                     break;
                 case 4:
                     return;
@@ -129,12 +129,15 @@ public class FuramaController {
             switch (choice) {
                 case 1:
                     facilityService.display();
+                    CommonView.goBack(scanner);
                     break;
                 case 2:
-                    System.out.println("Add new facility");
+                    facilityService.add();
+                    CommonView.goBack(scanner);
                     break;
                 case 3:
                     System.out.println("Display list facility maintenance");
+                    CommonView.goBack(scanner);
                     break;
                 case 4:
                     return;
@@ -211,8 +214,4 @@ public class FuramaController {
         }
     }
 
-    private void goBack(Scanner scanner) {
-        System.out.println("Press Enter to return....");
-        scanner.nextLine();
-    }
 }

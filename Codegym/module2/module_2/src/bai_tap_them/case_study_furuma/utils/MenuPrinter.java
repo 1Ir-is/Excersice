@@ -65,5 +65,6 @@ public class MenuPrinter {
         System.out.println("2. Add new house");
         System.out.println("3. Add new room");
         System.out.println("4. Back to menu");
+        System.out.println("======================================");
     }
 }

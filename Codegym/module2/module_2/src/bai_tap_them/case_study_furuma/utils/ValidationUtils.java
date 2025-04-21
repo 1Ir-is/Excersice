@@ -103,7 +103,7 @@ public class ValidationUtils {
         }
     }
 
-    public static int validateMenuChoice(Scanner scanner, int max) {
+    public static int validateMenuChoice(int max) {
         int choice;
         while (true) {
             try {
@@ -120,6 +120,36 @@ public class ValidationUtils {
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid choice. Please try again!");
+            }
+        }
+    }
+
+    public static double validateDouble(double minValue) {
+        while (true) {
+            try {
+                double value = Double.parseDouble(scanner.nextLine());
+                if (value > minValue) {
+                    return value;
+                } else {
+                    System.out.println("Value must be greater than " + minValue + ". Please try again!");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please try again!");
+            }
+        }
+    }
+
+    public static int validateInt(int minValue, int maxValue) {
+        while (true) {
+            try {
+                int value = Integer.parseInt(scanner.nextLine());
+                if (value > 0 && value < 20) {
+                    return value;
+                } else {
+                    System.out.print("Value must be from " + minValue + " to " + maxValue + ". Please try again!");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please try again!");
             }
         }
     }

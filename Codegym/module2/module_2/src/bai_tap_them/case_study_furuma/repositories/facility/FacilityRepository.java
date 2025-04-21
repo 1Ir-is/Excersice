@@ -16,9 +16,8 @@ public class FacilityRepository implements IFacilityRepository {
     }
 
     @Override
-
     public void add(Facility facility) {
-
+        facilities.put(facility, 0);
     }
 
     @Override
