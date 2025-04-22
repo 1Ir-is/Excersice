@@ -79,11 +79,13 @@ public class ProductService implements IProductService {
     public void sortByPriceAsc() {
         productRepository.sortByPriceAsc();
         System.out.println("Đã sắp xếp giá theo tăng dần!");
+        displayProducts();
     }
 
     @Override
     public void sortByPriceDesc() {
         productRepository.sortByPriceDesc();
         System.out.println("Đã sắp xếp giá theo giảm dần");
+        displayProducts();
     }
 }
