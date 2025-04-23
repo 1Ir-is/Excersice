@@ -1,5 +1,6 @@
 package bai_tap_them.case_study_furuma.models;
 
+
 public class Customer extends Person {
 
     private String customerType;
@@ -30,6 +31,17 @@ public class Customer extends Person {
 
     @Override
     public String getDetails() {
-        return "Customer: " + getName() + ", Customer Type: " + customerType + ", Address: " + address;
+        return String.format(
+                "| %-6s | %-20s | %-10s | %-6s | %-12s | %-12s | %-20s | %-16s | %-16s |",
+                getId(),
+                getName(),
+                getDateOfBirth(),
+                getGender(),
+                getIdCard(),
+                getPhoneNumber(),
+                getEmail(),
+                customerType,
+                address
+        );
     }
 }

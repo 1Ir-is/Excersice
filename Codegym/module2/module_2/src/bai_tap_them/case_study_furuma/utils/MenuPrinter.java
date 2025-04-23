@@ -11,7 +11,6 @@ public class MenuPrinter {
         System.out.println("5.\tPromotion Management");
         System.out.println("6.\tExit");
         System.out.println("=============================================");
-        System.out.print("Enter your choice: ");
     }
 
     public static void printEmployeeMenu() {
@@ -21,7 +20,6 @@ public class MenuPrinter {
         System.out.println("3.\tEdit employee");
         System.out.println("4.\tReturn main menu");
         System.out.println("============================================================");
-        System.out.print("Enter your choice: ");
     }
 
     public static void printCustomerMenu() {
@@ -31,7 +29,6 @@ public class MenuPrinter {
         System.out.println("3.\tEdit customer");
         System.out.println("4.\tReturn main menu");
         System.out.println("============================================================");
-        System.out.print("Enter your choice: ");
     }
 
     public static void printFacilityMenu() {
@@ -41,7 +38,6 @@ public class MenuPrinter {
         System.out.println("3. Display list facility maintenance");
         System.out.println("4. Return to main menu");
         System.out.println("=========================================");
-        System.out.print("Enter your choice: ");
     }
 
     public static void printBookingMenu() {
@@ -53,7 +49,6 @@ public class MenuPrinter {
         System.out.println("5. Edit contracts");
         System.out.println("6. Return to main menu");
         System.out.println("========================================");
-        System.out.print("Enter your choice: ");
     }
 
     public static void printPromotionMenu() {
@@ -62,6 +57,14 @@ public class MenuPrinter {
         System.out.println("2. Display list customers get voucher");
         System.out.println("3. Return main menu");
         System.out.println("==========================================");
-        System.out.print("Enter your choice: ");
+    }
+
+    public static void printAddNewFacilityMenu() {
+        System.out.println("========== Add New Facility ==========");
+        System.out.println("1. Add new villa");
+        System.out.println("2. Add new house");
+        System.out.println("3. Add new room");
+        System.out.println("4. Back to menu");
+        System.out.println("======================================");
     }
 }

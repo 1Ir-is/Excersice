@@ -9,8 +9,26 @@ public class Room extends Facility {
         this.freeService = freeService;
     }
 
+    public String getFreeService() {
+        return freeService;
+    }
+
+    public void setFreeService(String freeService) {
+        this.freeService = freeService;
+    }
+
     @Override
     public String getDetails() {
-        return "Room: " + getName() + "Free service: " + freeService;
+        return "Room{" +
+                "id='" + getId() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", area=" + getArea() +
+                ", rentalCost=" + getRentalCost() +
+                ", maxPeople=" + getMaxPeople() +
+                ", rentalType='" + getRentalType() + '\'' +
+                ", freeService='" + freeService + '\'' +
+                '}';
     }
+
+
 }

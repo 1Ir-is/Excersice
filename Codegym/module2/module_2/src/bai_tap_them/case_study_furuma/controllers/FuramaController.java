@@ -1,10 +1,24 @@
 package bai_tap_them.case_study_furuma.controllers;
 
+import bai_tap_them.case_study_furuma.repositories.booking.BookingRepository;
+import bai_tap_them.case_study_furuma.repositories.booking.IBookingRepository;
+import bai_tap_them.case_study_furuma.repositories.customer.CustomerRepository;
+import bai_tap_them.case_study_furuma.repositories.customer.ICustomerRepository;
 import bai_tap_them.case_study_furuma.repositories.employee.EmployeeRepository;
 import bai_tap_them.case_study_furuma.repositories.employee.IEmployeeRepository;
+import bai_tap_them.case_study_furuma.repositories.facility.FacilityRepository;
+import bai_tap_them.case_study_furuma.repositories.facility.IFacilityRepository;
+import bai_tap_them.case_study_furuma.services.booking.BookingService;
+import bai_tap_them.case_study_furuma.services.booking.IBookingService;
+import bai_tap_them.case_study_furuma.services.customer.CustomerService;
+import bai_tap_them.case_study_furuma.services.customer.ICustomerService;
 import bai_tap_them.case_study_furuma.services.employee.EmployeeService;
 import bai_tap_them.case_study_furuma.services.employee.IEmployeeService;
+import bai_tap_them.case_study_furuma.services.facility.FacilityService;
+import bai_tap_them.case_study_furuma.services.facility.IFacilityService;
 import bai_tap_them.case_study_furuma.utils.MenuPrinter;
+import bai_tap_them.case_study_furuma.utils.ValidationUtils;
+import bai_tap_them.case_study_furuma.view.CommonView;
 
 import java.util.Scanner;
 
@@ -12,34 +26,38 @@ public class FuramaController {
     private final IEmployeeRepository employeeRepository = new EmployeeRepository();
     private final IEmployeeService employeeService = new EmployeeService(employeeRepository);
 
+    private final ICustomerRepository customerRepository = new CustomerRepository();
+    private final ICustomerService customerService = new CustomerService(customerRepository);
+
+    private final IFacilityRepository facilityRepository = new FacilityRepository();
+    private final IFacilityService facilityService = new FacilityService(facilityRepository);
+
+    private final IBookingRepository bookingRepository = new BookingRepository();
+    private final IBookingService bookingService = new BookingService(bookingRepository);
+
     public void displayMainMenu() {
         Scanner scanner = new Scanner(System.in);
         int choice;
 
         do {
             MenuPrinter.printMainMenu();
-            choice = validateMenuChoice(scanner, 6);
+            choice = CommonView.getChoice(6);
 
             switch (choice) {
                 case 1:
                     displayEmployeeMenu(scanner);
-                    goBack(scanner);
                     break;
                 case 2:
                     displayCustomerMenu(scanner);
-                    goBack(scanner);
                     break;
                 case 3:
                     displayFacilityMenu(scanner);
-                    goBack(scanner);
                     break;
                 case 4:
                     displayBookingMenu(scanner);
-                    goBack(scanner);
                     break;
                 case 5:
                     displayPromotionMenu(scanner);
-                    goBack(scanner);
                     break;
                 case 6:
                     if (confirmExit(scanner)) {
@@ -59,17 +77,20 @@ public class FuramaController {
         int choice;
         do {
             MenuPrinter.printEmployeeMenu();
-            choice = validateMenuChoice(scanner, 4);
+            choice = CommonView.getChoice(4);
 
             switch (choice) {
                 case 1:
                     employeeService.display();
+                    CommonView.goBack(scanner);
                     break;
                 case 2:
                     employeeService.add();
+                    CommonView.goBack(scanner);
                     break;
                 case 3:
                     employeeService.edit();
+                    CommonView.goBack(scanner);
                     break;
                 case 4:
                     return;
@@ -83,17 +104,20 @@ public class FuramaController {
         int choice;
         do {
             MenuPrinter.printCustomerMenu();
-            choice = validateMenuChoice(scanner, 4);
+            choice = CommonView.getChoice(4);
 
             switch (choice) {
                 case 1:
-                    System.out.println("Display list customers");
+                    customerService.display();
+                    CommonView.goBack(scanner);
                     break;
                 case 2:
-                    System.out.println("Add new customers");
+                    customerService.add();
+                    CommonView.goBack(scanner);
                     break;
                 case 3:
-                    System.out.println("Edit customer");
+                    customerService.edit();
+                    CommonView.goBack(scanner);
                     break;
                 case 4:
                     return;
@@ -107,17 +131,20 @@ public class FuramaController {
         int choice;
         do {
             MenuPrinter.printFacilityMenu();
-            choice = validateMenuChoice(scanner, 4);
+            choice = CommonView.getChoice(4);
 
             switch (choice) {
                 case 1:
-                    System.out.println("Display list facility");
+                    facilityService.display();
+                    CommonView.goBack(scanner);
                     break;
                 case 2:
-                    System.out.println("Add new facility");
+                    facilityService.add();
+                    CommonView.goBack(scanner);
                     break;
                 case 3:
-                    System.out.println("Display list facility maintenance");
+                    facilityService.displayFacilitiesNeedingMaintenance();
+                    CommonView.goBack(scanner);
                     break;
                 case 4:
                     return;
@@ -132,14 +159,14 @@ public class FuramaController {
         do {
             MenuPrinter.printBookingMenu();
 
-            choice = validateMenuChoice(scanner, 6);
+            choice = CommonView.getChoice(6);
 
             switch (choice) {
                 case 1:
                     System.out.println("Adding a new booking...");
                     break;
                 case 2:
-                    System.out.println("Displaying list of bookings...");
+                    bookingService.displayBooking();
                     break;
                 case 3:
                     System.out.println("Creating new contracts...");
@@ -162,7 +189,7 @@ public class FuramaController {
         int choice;
         do {
             MenuPrinter.printPromotionMenu();
-            choice = validateMenuChoice(scanner, 3);
+            choice = CommonView.getChoice(3);
 
             switch (choice) {
                 case 1:
@@ -192,31 +219,5 @@ public class FuramaController {
                 System.out.println("Invalid option. Please try again!");
             }
         }
-    }
-
-    private int validateMenuChoice(Scanner scanner, int max) {
-        int choice;
-        while (true) {
-            try {
-                String input = scanner.nextLine().trim();
-                if (input.isEmpty()) {
-                    System.out.println("Input cannot be empty. Please enter a number between " + 1 + " and " + max + ":");
-                    continue;
-                }
-                choice = Integer.parseInt(input);
-                if (choice >= 1 && choice <= max) {
-                    return choice;
-                } else {
-                    System.out.println("Invalid choice. Please enter a number between " + 1 + " and " + max + ":");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid choice. Please try again!");
-            }
-        }
-    }
-
-    private void goBack(Scanner scanner) {
-        System.out.println("Press Enter to return....");
-        scanner.nextLine();
     }
 }
