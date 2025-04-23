@@ -11,9 +11,6 @@ public class Booking implements Comparable<Booking> {
     private String customerId;
     private String facilityId;
 
-    public Booking() {
-    }
-
     public Booking(String bookingId, String bookingDate, String startDate, String endDate, String customerId, String facilityId) {
         this.bookingId = bookingId;
         this.bookingDate = bookingDate;
