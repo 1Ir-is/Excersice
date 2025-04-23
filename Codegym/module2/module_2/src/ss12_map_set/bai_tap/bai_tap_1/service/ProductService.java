@@ -15,62 +15,73 @@ public class ProductService implements IProductService {
     public void addProduct() {
         System.out.print("Nhập id: ");
         int id = Integer.parseInt(scanner.nextLine());
-
-        System.out.print("Nhập tên: ");
+        System.out.print("Nhập tên sản phẩm: ");
         String name = scanner.nextLine();
-
-        System.out.print("Nhập giá: ");
+        System.out.print("Nhập giá sản phẩm: ");
         double price = Double.parseDouble(scanner.nextLine());
 
-        productRepository.add(new Product(id, name, price));
-        System.out.println("Thêm sản phẩm thành công!");
+        Product product = new Product(id, name, price);
+        productRepository.add(product);
+        System.out.println("Sản phẩm thêm thành công!");
     }
 
     @Override
     public void editProduct() {
-        System.out.print("Nhập id cần sửa: ");
+        System.out.print("Nhập id để cập nhập: ");
         int id = Integer.parseInt(scanner.nextLine());
+        Product existingProduct = productRepository.findById(id);
 
-        Product productExisting = productRepository.findById(id);
-        if (productExisting == null) {
-            System.out.println("Không tìm thấy sản phẩm này!");
-            return;
+        if (existingProduct != null) {
+            System.out.print("Nhập tên mới: ");
+            String name = scanner.nextLine();
+            System.out.print("Nhập giá mới: ");
+            double price = Double.parseDouble(scanner.nextLine());
+
+            Product updatedProduct = new Product(id, name, price);
+            productRepository.update(id, updatedProduct);
+            System.out.println("Cập nhập thành công!");
+        } else {
+            System.out.println("Sản phẩm không tìm thấy!");
         }
-        System.out.print("Nhập tên mới: ");
-        String name = scanner.nextLine();
-        System.out.print("Nhập giá mới: ");
-        double price = Double.parseDouble(scanner.nextLine());
-        productRepository.update(id, new Product(id, name, price));
-        System.out.println("Cập nhập sản phẩm thành công! ");
     }
 
     @Override
     public void removeProduct() {
-        System.out.print("Nhập id cần xoá: ");
+        System.out.print("Nhập id để xoá: ");
         int id = Integer.parseInt(scanner.nextLine());
-        productRepository.remove(id);
-        System.out.println("Xoá sản phẩm có id " + id + " thành công!");
+        Product product = productRepository.findById(id);
+
+        if (product != null) {
+            productRepository.remove(id);
+            System.out.println("Xoá sản phẩm thành công!");
+        } else {
+            System.out.println("Sản phẩm không tìm thấy!");
+        }
     }
 
     @Override
     public void displayProducts() {
-        List<Product> productList = productRepository.findAll();
-        for (int i = 0; i < productList.size(); i++) {
-            System.out.println(productList.get(i));
+        List<Product> products = productRepository.findAll();
+        if (products.isEmpty()) {
+            System.out.println("Không tìm thấy sản phẩm nào!");
+        } else {
+            for (Product product : products) {
+                System.out.println(product);
+            }
         }
     }
 
     @Override
     public void searchByName() {
-        System.out.print("Nhập tên bạn cần tìm: ");
+        System.out.print("Nhập tên sản phẩm: ");
         String name = scanner.nextLine();
+        List<Product> products = productRepository.findByName(name);
 
-        List<Product> productList = productRepository.findByName(name);
-        if (productList.isEmpty()) {
-            System.out.println("Không tìm thấy sản phẩm này!");
+        if (products.isEmpty()) {
+            System.out.println("Không tìm thấy sản phẩm nào!");
         } else {
-            for (int i = 0; i < productList.size(); i++) {
-                System.out.println(productList.get(i));
+            for (Product product : products) {
+                System.out.println(product);
             }
         }
     }
@@ -78,14 +89,12 @@ public class ProductService implements IProductService {
     @Override
     public void sortByPriceAsc() {
         productRepository.sortByPriceAsc();
-        System.out.println("Đã sắp xếp giá theo tăng dần!");
-        displayProducts();
+        System.out.println("Sắp xếp theo giá tăng dần!");
     }
 
     @Override
     public void sortByPriceDesc() {
         productRepository.sortByPriceDesc();
-        System.out.println("Đã sắp xếp giá theo giảm dần");
-        displayProducts();
+        System.out.println("Sắp xếp theo giá giảm dần!");
     }
 }
