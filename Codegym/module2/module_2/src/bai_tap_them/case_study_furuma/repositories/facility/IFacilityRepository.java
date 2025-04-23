@@ -4,9 +4,10 @@ import bai_tap_them.case_study_furuma.models.Facility;
 import bai_tap_them.case_study_furuma.repositories.Repository;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
-public interface IFacilityRepository extends Repository<Facility> {
+public interface IFacilityRepository {
     void add(Facility facility);
-
-    LinkedHashMap<Facility, Integer> findFacilitiesNeedingMaintenance();
+    Map<Facility, Integer> findAll();
+    Map<Facility, Integer> findFacilitiesNeedingMaintenance();
 }

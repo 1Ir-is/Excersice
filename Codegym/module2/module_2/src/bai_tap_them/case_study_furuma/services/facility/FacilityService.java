@@ -10,10 +10,7 @@ import bai_tap_them.case_study_furuma.utils.ValidationUtils;
 import bai_tap_them.case_study_furuma.view.CommonView;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class FacilityService implements IFacilityService {
 
@@ -27,33 +24,38 @@ public class FacilityService implements IFacilityService {
 
     @Override
     public void displayFacilities() {
-        ArrayList<Facility> facilities = facilityRepository.findAll();
+        Map<Facility, Integer> facilities = facilityRepository.findAll();
+
         if (facilities.isEmpty()) {
             System.out.println("No facilities available.");
             return;
         }
-        System.out.println();
-        System.out.printf("%-10s %-20s %-8s %-12s %-12s %-15s %-15s %-8s %-10s %-20s\n",
-                "ID", "Name", "Area", "RentalCost", "MaxPeople", "RentalType", "RoomStandard", "Floors", "PoolArea", "FreeService");
-        System.out.println("---------------------------------------------------------------------------------------------------------------------------------------");
 
-        for (int i = 0; i < facilities.size(); i++) {
-            Facility f = facilities.get(i);
+        System.out.println();
+        System.out.printf("%-10s %-20s %-8s %-12s %-12s %-15s %-15s %-8s %-10s %-20s %-15s\n",
+                "ID", "Name", "Area", "RentalCost", "MaxPeople", "RentalType", "RoomStandard",
+                "Floors", "PoolArea", "FreeService", "UsageCount");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
+
+        for (Map.Entry<Facility, Integer> entry : facilities.entrySet()) {
+            Facility f = entry.getKey();
+            int usageCount = entry.getValue();
 
             if (f instanceof Villa v) {
-                System.out.printf("%-10s %-20s %-8.1f %-12.1f %-12d %-15s %-15s %-8d %-10s %-20s\n",
+                System.out.printf("%-10s %-20s %-8.1f %-12.1f %-12d %-15s %-15s %-8d %-10s %-20s %-15d\n",
                         v.getId(), v.getName(), v.getArea(), v.getRentalCost(), v.getMaxPeople(),
-                        v.getRentalType(), v.getRoomStandard(), v.getNumberOfFloor(), v.getPoolArea() + " m²", "-");
+                        v.getRentalType(), v.getRoomStandard(), v.getNumberOfFloor(), v.getPoolArea() + " m²", "-", usageCount);
             } else if (f instanceof House h) {
-                System.out.printf("%-10s %-20s %-8.1f %-12.1f %-12d %-15s %-15s %-8d %-10s %-20s\n",
+                System.out.printf("%-10s %-20s %-8.1f %-12.1f %-12d %-15s %-15s %-8d %-10s %-20s %-15d\n",
                         h.getId(), h.getName(), h.getArea(), h.getRentalCost(), h.getMaxPeople(),
-                        h.getRentalType(), h.getRoomStandard(), h.getNumberOfFloor(), "-", "-");
+                        h.getRentalType(), h.getRoomStandard(), h.getNumberOfFloor(), "-", "-", usageCount);
             } else if (f instanceof Room r) {
-                System.out.printf("%-10s %-20s %-8.1f %-12.1f %-12d %-15s %-15s %-8s %-10s %-20s\n",
+                System.out.printf("%-10s %-20s %-8.1f %-12.1f %-12d %-15s %-15s %-8s %-10s %-20s %-15d\n",
                         r.getId(), r.getName(), r.getArea(), r.getRentalCost(), r.getMaxPeople(),
-                        r.getRentalType(), "-", "-", "-", r.getFreeService());
+                        r.getRentalType(), "-", "-", "-", r.getFreeService(), usageCount);
             }
         }
+
         System.out.println();
     }
 
@@ -168,6 +170,17 @@ public class FacilityService implements IFacilityService {
 
     @Override
     public void displayFacilitiesNeedingMaintenance() {
+        Map<Facility, Integer> needingMaintenance = facilityRepository.findFacilitiesNeedingMaintenance();
 
+        if (needingMaintenance.isEmpty()) {
+            System.out.println("No facilities need maintenance.");
+        } else {
+            List<Map.Entry<Facility, Integer>> entryList = new ArrayList<>(needingMaintenance.entrySet());
+
+            for (int i = 0; i < entryList.size(); i++) {
+                Map.Entry<Facility, Integer> entry = entryList.get(i);
+                System.out.println(entry.getKey() + ", Usage Count: " + entry.getValue());
+            }
+        }
     }
 }

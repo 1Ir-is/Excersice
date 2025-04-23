@@ -1,11 +1,15 @@
 package bai_tap_them.case_study_furuma.controllers;
 
+import bai_tap_them.case_study_furuma.repositories.booking.BookingRepository;
+import bai_tap_them.case_study_furuma.repositories.booking.IBookingRepository;
 import bai_tap_them.case_study_furuma.repositories.customer.CustomerRepository;
 import bai_tap_them.case_study_furuma.repositories.customer.ICustomerRepository;
 import bai_tap_them.case_study_furuma.repositories.employee.EmployeeRepository;
 import bai_tap_them.case_study_furuma.repositories.employee.IEmployeeRepository;
 import bai_tap_them.case_study_furuma.repositories.facility.FacilityRepository;
 import bai_tap_them.case_study_furuma.repositories.facility.IFacilityRepository;
+import bai_tap_them.case_study_furuma.services.booking.BookingService;
+import bai_tap_them.case_study_furuma.services.booking.IBookingService;
 import bai_tap_them.case_study_furuma.services.customer.CustomerService;
 import bai_tap_them.case_study_furuma.services.customer.ICustomerService;
 import bai_tap_them.case_study_furuma.services.employee.EmployeeService;
@@ -27,6 +31,9 @@ public class FuramaController {
 
     private final IFacilityRepository facilityRepository = new FacilityRepository();
     private final IFacilityService facilityService = new FacilityService(facilityRepository);
+
+    private final IBookingRepository bookingRepository = new BookingRepository();
+    private final IBookingService bookingService = new BookingService(bookingRepository);
 
     public void displayMainMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -136,7 +143,7 @@ public class FuramaController {
                     CommonView.goBack(scanner);
                     break;
                 case 3:
-                    System.out.println("Display list facility maintenance");
+                    facilityService.displayFacilitiesNeedingMaintenance();
                     CommonView.goBack(scanner);
                     break;
                 case 4:
@@ -159,7 +166,7 @@ public class FuramaController {
                     System.out.println("Adding a new booking...");
                     break;
                 case 2:
-                    System.out.println("Displaying list of bookings...");
+                    bookingService.displayBooking();
                     break;
                 case 3:
                     System.out.println("Creating new contracts...");
