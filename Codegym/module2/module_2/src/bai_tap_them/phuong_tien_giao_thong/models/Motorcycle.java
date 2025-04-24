@@ -43,4 +43,9 @@ public class Motorcycle extends Vehicle {
         System.out.printf("Xe máy [Biển kiểm soát: %s, Hãng sản xuất: %s, Năm sản xuất: %d, Chủ sở hữu: %s, Công suất: %.2f HP]%n",
                 getLicensePlate(), getManufacturer(), getYearOfManufacture(), getOwner(), power);
     }
+
+    @Override
+    public String toCSV() {
+        return "Motorcycle," + super.toCSV() + "," + power;
+    }
 }

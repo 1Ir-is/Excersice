@@ -5,9 +5,8 @@ import bai_tap_them.phuong_tien_giao_thong.services.IVehicleService;
 import bai_tap_them.phuong_tien_giao_thong.services.VehicleService;
 import bai_tap_them.phuong_tien_giao_thong.utils.MenuPrinter;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
 
 public class VehicleController {
     private static final IVehicleService service = new VehicleService();
@@ -128,7 +127,7 @@ public class VehicleController {
     private void displayVehicle() {
         MenuPrinter.printDisplayVehicleTypeMenu();
         int vehicleType = validateMenuChoice(4);
-        ArrayList<Vehicle> vehicles = service.getAllVehicles();
+        List<Vehicle> vehicles = service.getAllVehicles();
         boolean hasVehicle = false;
 
         switch (vehicleType) {

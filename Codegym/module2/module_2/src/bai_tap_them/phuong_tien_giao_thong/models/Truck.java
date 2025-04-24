@@ -41,4 +41,9 @@ public class Truck extends Vehicle {
         System.out.printf("Xe tải [Biển kiểm soát: %s, Hãng sản xuất: %s, Năm sản xuất: %d, Chủ sở hữu: %s, Trọng tải: %.2f tấn]%n",
                 getLicensePlate(), getManufacturer(), getYearOfManufacture(), getOwner(), loadCapacity);
     }
+
+    @Override
+    public String toCSV() {
+        return "Truck," + super.toCSV() + "," + loadCapacity;
+    }
 }

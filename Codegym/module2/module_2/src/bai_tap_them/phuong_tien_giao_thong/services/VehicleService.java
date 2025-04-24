@@ -5,13 +5,14 @@ import bai_tap_them.phuong_tien_giao_thong.repositories.IVehicleRepository;
 import bai_tap_them.phuong_tien_giao_thong.repositories.VehicleRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class VehicleService implements IVehicleService {
     private final IVehicleRepository repository = new VehicleRepository();
 
 
     @Override
-    public ArrayList<Vehicle> getAllVehicles() {
+    public List<Vehicle> getAllVehicles() {
         return repository.getAllVehicles();
     }
 

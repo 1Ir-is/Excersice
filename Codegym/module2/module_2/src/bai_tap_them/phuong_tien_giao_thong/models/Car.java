@@ -63,4 +63,9 @@ public class Car extends Vehicle {
         System.out.printf("Xe ô tô [Biển kiểm soát: %s, hãng sản xuất: %s, năm sản xuất: %d, chủ sở hữu: %s, số chỗ ngồi: %d, loại xe: %s]%n",
                 getLicensePlate(), getManufacturer(), getYearOfManufacture(), getOwner(), numberOfSeats, carType);
     }
+
+    @Override
+    public String toCSV() {
+        return "Car," + super.toCSV() + "," + numberOfSeats + "," + carType;
+    }
 }

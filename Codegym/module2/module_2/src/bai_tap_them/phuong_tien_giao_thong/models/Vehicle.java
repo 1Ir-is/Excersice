@@ -50,4 +50,8 @@ public abstract class Vehicle {
     public abstract void inputSpecificFields(Scanner scanner);
 
     public abstract void displayInfo();
+
+    public String toCSV() {
+        return licensePlate + "," + manufacturer + "," + yearOfManufacture + "," + owner;
+    }
 }
