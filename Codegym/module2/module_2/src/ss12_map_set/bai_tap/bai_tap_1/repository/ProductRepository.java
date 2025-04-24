@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRepository implements IProductRepository {
-    private static final String FILE_PATH = "D:/Excersice/Codegym/module2/module_2/src/ss12_map_set/bai_tap/bai_tap_1/data/products.csv";
+    private static final String FILE_PATH = "ss12_map_set/bai_tap/bai_tap_1/data/products.csv";
 
     private final List<Product> productList = new ArrayList<>();
 
@@ -90,13 +90,13 @@ public class ProductRepository implements IProductRepository {
             }
         } catch (IOException e) {
             System.out.println("Error reading CSV file: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Error number: " + e.getMessage());
         }
     }
 
     private void saveToCSV() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
-            writer.write("Id, Name, Price");
-            writer.newLine();
             for (Product product : productList) {
                 writer.write(product.getId() + "," + product.getName() + "," + product.getPrice());
                 writer.newLine();
