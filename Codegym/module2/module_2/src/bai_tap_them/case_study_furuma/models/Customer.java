@@ -31,8 +31,21 @@ public class Customer extends Person {
 
     @Override
     public String getDetails() {
-        return String.format(
-                "| %-6s | %-20s | %-10s | %-6s | %-12s | %-12s | %-20s | %-16s | %-16s |",
+        return String.join("\n",
+                "ID: " + getId(),
+                "Name: " + getName(),
+                "Date of Birth: " + getDateOfBirth(),
+                "Gender: " + getGender(),
+                "ID Card: " + getIdCard(),
+                "Phone: " + getPhoneNumber(),
+                "Email: " + getEmail(),
+                "Customer Type: " + customerType,
+                "Address: " + address
+        );
+    }
+
+    public String toCSV() {
+        return String.join(",",
                 getId(),
                 getName(),
                 getDateOfBirth(),
@@ -42,6 +55,21 @@ public class Customer extends Person {
                 getEmail(),
                 customerType,
                 address
+        );
+    }
+
+    public static Customer fromCSV(String csvLine) {
+        String[] parts = csvLine.split(",");
+        return new Customer(
+                parts[0],
+                parts[1],
+                parts[2],
+                parts[3],
+                parts[4],
+                parts[5],
+                parts[6],
+                parts[7],
+                parts[8]
         );
     }
 }

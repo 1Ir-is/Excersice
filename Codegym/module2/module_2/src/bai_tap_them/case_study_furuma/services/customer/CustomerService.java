@@ -25,38 +25,29 @@ public class CustomerService implements ICustomerService {
             return;
         }
 
-        String line = "+--------+----------------------+------------+--------+--------------+--------------+----------------------+------------------+------------------+";
-        String headerFormat = "| %-6s | %-20s | %-10s | %-6s | %-12s | %-12s | %-20s | %-16s | %-16s |%n";
-
-        System.out.println(line);
-        System.out.printf(headerFormat, "ID", "Name", "DOB", "Gender", "ID Card", "Phone", "Email", "Customer Type", "Address");
-        System.out.println(line);
-
-        for (int i = 0; i < customers.size(); i++) {
-            System.out.println(customers.get(i).getDetails());
+        System.out.println("Customer List:");
+        for (Customer customer : customers) {
+            System.out.println("--------------------------------------------------");
+            System.out.println("ID: " + customer.getId());
+            System.out.println("Name: " + customer.getName());
+            System.out.println("Date of Birth: " + customer.getDateOfBirth());
+            System.out.println("Gender: " + customer.getGender());
+            System.out.println("ID Card: " + customer.getIdCard());
+            System.out.println("Phone: " + customer.getPhoneNumber());
+            System.out.println("Email: " + customer.getEmail());
+            System.out.println("Customer Type: " + customer.getCustomerType());
+            System.out.println("Address: " + customer.getAddress());
         }
-
-        System.out.println(line);
-        System.out.println();
+        System.out.println("--------------------------------------------------");
     }
 
     @Override
     public void add() {
-        ArrayList<Customer> customers = customerRepository.findAll();
-
         System.out.print("Enter customer ID (format: KH-YYYY): ");
         String id;
         while (true) {
             id = ValidationUtils.validateInput("KH-\\d{4}", "Invalid ID format. Please use [KH-YYYY] format!");
-            boolean isDuplicate = false;
-            for (int i = 0; i < customers.size(); i++) {
-                if (customers.get(i).getId().equals(id)) {
-                    isDuplicate = true;
-                    break;
-                }
-            }
-
-            if (isDuplicate) {
+            if (customerRepository.findById(id) != null) {
                 System.out.print("ID already exists. Please enter a different ID: ");
             } else {
                 break;
@@ -81,39 +72,26 @@ public class CustomerService implements ICustomerService {
         System.out.print("Enter email: ");
         String email = ValidationUtils.validateInput("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", "Invalid email. Please try again!");
 
-        String[] customerTypes = {"Diamond", "Platinum", "Gold", "Silver", "Member"};
-        System.out.println("Select customer type:");
-        for (int i = 0; i < customerTypes.length; i++) {
-            System.out.println((i + 1) + ". " + customerTypes[i]);
-        }
-        int customerTypeChoice = CommonView.getChoice(customerTypes.length);
-        String customerType = customerTypes[customerTypeChoice - 1];
+        String customerType = selectCustomerType();
 
         System.out.print("Enter customer address: ");
         String address = scanner.nextLine();
 
         Customer customer = new Customer(id, name, dateOfBirth, gender, idCard, phoneNumber, email, customerType, address);
-        customers.add(customer);
+        customerRepository.add(customer);
 
         System.out.println("Customer added successfully.");
     }
 
     @Override
     public void edit() {
-        ArrayList<Customer> customers = customerRepository.findAll();
         Customer customerToEdit = null;
 
         while (customerToEdit == null) {
             System.out.print("Enter the ID of the customer to edit: ");
             String id = scanner.nextLine();
+            customerToEdit = customerRepository.findById(id);
 
-            for (int i = 0; i < customers.size(); i++) {
-                Customer customer = customers.get(i);
-                if (customer.getId().equals(id)) {
-                    customerToEdit = customer;
-                    break;
-                }
-            }
             if (customerToEdit == null) {
                 System.out.println("Invalid ID. Please try again!");
             }
@@ -133,31 +111,15 @@ public class CustomerService implements ICustomerService {
         String email = scanner.nextLine();
         if (!email.isEmpty()) {
             if (email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
-                customerToEdit.setName(email);
+                customerToEdit.setEmail(email);
             } else {
                 System.out.println("Invalid email format. Keeping current value.");
             }
         }
 
-        String[] customerTypes = {"Diamond", "Platinum", "Gold", "Silver", "Member"};
-        System.out.println("Select new customer type for this customer (leave blank to keep current): ");
-        for (int i = 0; i < customerTypes.length; i++) {
-            System.out.println((i + 1) + ". " + customerTypes[i]);
-        }
-
-        System.out.print("Your choice: ");
-        String customerTypeInput = scanner.nextLine();
-        if (!customerTypeInput.isEmpty()) {
-            try {
-                int customerTypeChoice = Integer.parseInt(customerTypeInput);
-                if (customerTypeChoice >= 1 && customerTypeChoice <= customerTypes.length) {
-                    customerToEdit.setCustomerType(customerTypes[customerTypeChoice - 1]);
-                } else {
-                    System.out.println("Invalid choice. Keeping current customer type for this customer.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Keeping current customer type for this customer.");
-            }
+        String customerType = selectCustomerType();
+        if (!customerType.isEmpty()) {
+            customerToEdit.setCustomerType(customerType);
         }
 
         System.out.print("Enter new address (leave blank to keep current): ");
@@ -165,6 +127,17 @@ public class CustomerService implements ICustomerService {
         if (!addressInput.isEmpty()) {
             customerToEdit.setAddress(addressInput);
         }
+
         System.out.println("Customer updated successfully.");
+    }
+
+    private String selectCustomerType() {
+        String[] customerTypes = {"Diamond", "Platinum", "Gold", "Silver", "Member"};
+        System.out.println("Select customer type:");
+        for (int i = 0; i < customerTypes.length; i++) {
+            System.out.println((i + 1) + ". " + customerTypes[i]);
+        }
+        int choice = CommonView.getChoice(customerTypes.length);
+        return customerTypes[choice - 1];
     }
 }

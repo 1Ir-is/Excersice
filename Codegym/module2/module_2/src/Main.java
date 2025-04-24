@@ -1,16 +1,38 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+package bai_tap_them.case_study_furuma.repositories.customer;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+import bai_tap_them.case_study_furuma.models.Customer;
+import bai_tap_them.case_study_furuma.utils.SaveFileUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main implements ICustomerRepository {
+    private static final String CUSTOMER_FILE = "D:/New Study/Excersise/Codegym/module2/module_2/src/bai_tap_them/case_study_furuma/data/customers.csv";
+
+    @Override
+    public ArrayList<Customer> findAll() {
+        List<String> lines = SaveFileUtils.readFromFile(CUSTOMER_FILE);
+        ArrayList<Customer> customers = new ArrayList<>();
+        for (String line : lines) {
+            customers.add(Customer.fromCSV(line));
         }
+        return customers;
+    }
+
+    @Override
+    public Customer findById(String id) {
+        for (Customer customer : findAll()) {
+            if (customer.getId().equals(id)) {
+                return customer;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void add(Customer customer) {
+        List<String> dataLines = new ArrayList<>();
+        dataLines.add(customer.toCSV());
+        SaveFileUtils.writeToFile(CUSTOMER_FILE, dataLines, true);
     }
 }

@@ -1,20 +1,40 @@
 package bai_tap_them.case_study_furuma.repositories.customer;
 
 import bai_tap_them.case_study_furuma.models.Customer;
+import bai_tap_them.case_study_furuma.utils.SaveFileUtils;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerRepository implements ICustomerRepository {
-    private static final ArrayList<Customer> customers = new ArrayList<>();
+    private static final String CUSTOMER_FILE = "bai_tap_them/case_study_furuma/data/customers.csv";
 
-    static {
-        customers.add(new Customer("KH-0001", "Le Van Tam", "01/01/2004", "Male", "123456789", "0914234903", "tam@example.com", "Diamond", "Viet Nam"));
-        customers.add(new Customer("KH-0002", "Ton That Duy", "01/01/2004", "Male", "234567890", "09123832834", "duy@example.com", "Gold", "Viet Nam"));
-        customers.add(new Customer("KH-0003", "Nguyen Thanh Nhon", "01/01/2004", "Male", "345678901", "02934092343", "nhon@example.com", "Silver", "Viet Nam"));
+
+    @Override
+    public Customer findById(String id) {
+        for (Customer customer : findAll()) {
+            if (customer.getId().equals(id)) {
+                return customer;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void add(Customer customer) {
+        List<String> dataLines = new ArrayList<>();
+        dataLines.add(customer.toCSV());
+        SaveFileUtils.writeToFile(CUSTOMER_FILE, dataLines, true);
     }
 
     @Override
     public ArrayList<Customer> findAll() {
+        List<String> lines = SaveFileUtils.readFromFile(CUSTOMER_FILE);
+        ArrayList<Customer> customers = new ArrayList<>();
+        for (String line : lines){
+            customers.add(Customer.fromCSV(line));
+        }
         return customers;
     }
 }
