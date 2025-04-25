@@ -41,15 +41,27 @@ public class VehicleController {
         } while (choice != 4);
     }
 
-    private CommonFields inputCommonFields() {
+    private CommonFields inputCommonFields(int vehicleType) {
         String licensePlate;
         while (true) {
             System.out.print("Nhập biển kiểm soát: ");
             licensePlate = scanner.nextLine().trim();
-            if (!licensePlate.isEmpty()) {
+            if (licensePlate.isEmpty()) {
+                System.out.println("Biển kiểm soát không được để trống.");
+                continue;
+            }
+
+            boolean isValid = switch (vehicleType) {
+                case 1 -> isValidTruckPlate(licensePlate);
+                case 2 -> isValidCarPlate(licensePlate);
+                case 3 -> isValidMotorcyclePlate(licensePlate);
+                default -> false;
+            };
+
+            if (isValid) {
                 break;
             } else {
-                System.out.println("Biển kiểm soát không được để trống.");
+                System.out.println("Biển kiểm soát không đúng định dạng cho loại xe đã chọn. Vui lòng thử lại.");
             }
         }
 
@@ -98,7 +110,7 @@ public class VehicleController {
         int vehicleType = validateMenuChoice(4);
         Vehicle vehicle = null;
 
-        CommonFields commonFields = inputCommonFields();
+        CommonFields commonFields = inputCommonFields(vehicleType);
         switch (vehicleType) {
             case 1:
                 vehicle = new Truck(commonFields.getLicensePlate(), commonFields.getManufacture(),
@@ -225,4 +237,16 @@ public class VehicleController {
             }
         }
     }
+    private boolean isValidTruckPlate(String plate) {
+        return plate.matches("^[0-9]{2}[A-Z]{1,2}-[0-9]{3}\\.[0-9]{2}$");
+    }
+
+    private boolean isValidCarPlate(String plate) {
+        return plate.matches("^[0-9]{2}[A-Z]-[0-9]{3}\\.[0-9]{2}$");
+    }
+
+    private boolean isValidMotorcyclePlate(String plate) {
+        return plate.matches("^[0-9]{2}-[A-Z]{1,2}[0-9]? [0-9]{3}\\.[0-9]{2}$");
+    }
+
 }
