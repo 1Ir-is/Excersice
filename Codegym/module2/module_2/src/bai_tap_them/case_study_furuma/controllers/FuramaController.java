@@ -33,7 +33,7 @@ public class FuramaController {
     private final IFacilityService facilityService = new FacilityService(facilityRepository);
 
     private final IBookingRepository bookingRepository = new BookingRepository();
-    private final IBookingService bookingService = new BookingService(bookingRepository);
+    private final IBookingService bookingService = new BookingService(bookingRepository, customerRepository, facilityRepository);
 
     public void displayMainMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -163,7 +163,7 @@ public class FuramaController {
 
             switch (choice) {
                 case 1:
-                    System.out.println("Adding a new booking...");
+                    bookingService.addBooking();
                     break;
                 case 2:
                     bookingService.displayBooking();

@@ -23,6 +23,43 @@ public class ValidationUtils {
         }
     }
 
+    public static boolean validateNotEmpty(String input, String errorMessage) {
+        if (input == null || input.trim().isEmpty()) {
+            System.out.println(errorMessage);
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean validateDateFormat(String date, String errorMessage) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        try {
+            LocalDate.parse(date, formatter);
+            return false;
+        } catch (Exception e) {
+            System.out.println(errorMessage);
+            return true;
+        }
+    }
+
+    public static boolean validateStartBeforeEnd(String startDate, String endDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        try {
+            LocalDate start = LocalDate.parse(startDate, formatter);
+            LocalDate end = LocalDate.parse(endDate, formatter);
+
+            if (start.isBefore(end)) {
+                return true;
+            } else {
+                System.out.println("Start date must be earlier than end date!");
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println("Error parsing date. Please enter in right format!");
+            return false;
+        }
+    }
+
     public static String validateDateOfBirth() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         while (true) {

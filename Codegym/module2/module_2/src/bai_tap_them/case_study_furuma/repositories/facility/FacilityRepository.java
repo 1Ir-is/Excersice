@@ -10,6 +10,10 @@ public class FacilityRepository implements IFacilityRepository {
     private static final LinkedHashMap<Facility, Integer> facilities = new LinkedHashMap<>();
     private static final String FACILITIES_FILE = "bai_tap_them/case_study_furuma/data/facilities.csv";
 
+    static {
+        loadFromCSV();
+    }
+
     @Override
     public void add(Facility facility) {
         facilities.put(facility, 0);

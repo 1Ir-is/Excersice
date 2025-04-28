@@ -69,8 +69,10 @@ public class Booking implements Comparable<Booking> {
     }
 
     @Override
-    //Danh sách booking hiển thị phải được sắp xếp theo thứ tự ngày tháng booking gần nhất,
-    // nếu trùng nhau thì sắp xếp theo ngày kết thúc thuê.
+    /*********************************************************************************
+     * Danh sách booking hiển thị phải được sắp xếp theo thứ tự ngày tháng booking gần nhất, *
+     * nếu trùng nhau thì sắp xếp theo ngày kết thúc thuê.                                   *
+     *********************************************************************************/
     public int compareTo(Booking other) {
         //Danh sách booking hiển thị phải được sắp xếp theo thứ tự ngày tháng booking gần nhất,
         int startComparison = this.startDate.compareTo(other.startDate);
@@ -96,13 +98,36 @@ public class Booking implements Comparable<Booking> {
 
     @Override
     public String toString() {
-        return "Booking{" +
-                "bookingId='" + bookingId + '\'' +
-                ", bookingDate='" + bookingDate + '\'' +
-                ", startDate='" + startDate + '\'' +
-                ", endDate='" + endDate + '\'' +
-                ", customerId='" + customerId + '\'' +
-                ", facilityId='" + facilityId + '\'' +
-                '}';
+        return String.join("\n",
+                "Booking Details:",
+                "Booking ID: " + bookingId,
+                "Booking Date: " + bookingDate,
+                "Start Date: " + startDate,
+                "End Date: " + endDate,
+                "Customer ID: " + customerId,
+                "Facility ID: " + facilityId
+        );
+    }
+    public String toCSV() {
+        return String.join(",",
+            bookingId,
+            bookingDate,
+            startDate,
+            endDate,
+            customerId,
+            facilityId
+        );
+    }
+
+    public static Booking fromCSV(String csvLine) {
+        String[] parts = csvLine.split(",");
+        return new Booking(
+                parts[0],
+                parts[1],
+                parts[2],
+                parts[3],
+                parts[4],
+                parts[5]
+        );
     }
 }
