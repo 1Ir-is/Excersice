@@ -31,33 +31,35 @@ public class FacilityService implements IFacilityService {
             return;
         }
 
-        System.out.println();
-        System.out.printf("%-10s %-20s %-8s %-12s %-12s %-15s %-15s %-8s %-10s %-20s %-15s\n",
-                "ID", "Name", "Area", "RentalCost", "MaxPeople", "RentalType", "RoomStandard",
-                "Floors", "PoolArea", "FreeService", "UsageCount");
-        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
-
+        System.out.println("Facility List:");
         for (Map.Entry<Facility, Integer> entry : facilities.entrySet()) {
-            Facility f = entry.getKey();
+            Facility facility = entry.getKey();
             int usageCount = entry.getValue();
 
-            if (f instanceof Villa v) {
-                System.out.printf("%-10s %-20s %-8.1f %-12.1f %-12d %-15s %-15s %-8d %-10s %-20s %-15d\n",
-                        v.getId(), v.getName(), v.getArea(), v.getRentalCost(), v.getMaxPeople(),
-                        v.getRentalType(), v.getRoomStandard(), v.getNumberOfFloor(), v.getPoolArea() + " m²", "-", usageCount);
-            } else if (f instanceof House h) {
-                System.out.printf("%-10s %-20s %-8.1f %-12.1f %-12d %-15s %-15s %-8d %-10s %-20s %-15d\n",
-                        h.getId(), h.getName(), h.getArea(), h.getRentalCost(), h.getMaxPeople(),
-                        h.getRentalType(), h.getRoomStandard(), h.getNumberOfFloor(), "-", "-", usageCount);
-            } else if (f instanceof Room r) {
-                System.out.printf("%-10s %-20s %-8.1f %-12.1f %-12d %-15s %-15s %-8s %-10s %-20s %-15d\n",
-                        r.getId(), r.getName(), r.getArea(), r.getRentalCost(), r.getMaxPeople(),
-                        r.getRentalType(), "-", "-", "-", r.getFreeService(), usageCount);
-            }
-        }
+            System.out.println("--------------------------------------------------");
+            System.out.println("ID: " + facility.getId());
+            System.out.println("Name: " + facility.getName());
+            System.out.println("Area: " + facility.getArea() + " m²");
+            System.out.println("Rental Cost: " + facility.getRentalCost());
+            System.out.println("Max People: " + facility.getMaxPeople());
+            System.out.println("Rental Type: " + facility.getRentalType());
 
-        System.out.println();
+            if (facility instanceof Villa villa) {
+                System.out.println("Room Standard: " + villa.getRoomStandard());
+                System.out.println("Number of Floors: " + villa.getNumberOfFloor());
+                System.out.println("Pool Area: " + villa.getPoolArea() + " m²");
+            } else if (facility instanceof House house) {
+                System.out.println("Room Standard: " + house.getRoomStandard());
+                System.out.println("Number of Floors: " + house.getNumberOfFloor());
+            } else if (facility instanceof Room room) {
+                System.out.println("Free Service: " + room.getFreeService());
+            }
+
+            System.out.println("Usage Count: " + usageCount);
+        }
+        System.out.println("--------------------------------------------------");
     }
+
 
 
     @Override

@@ -40,16 +40,33 @@ public class Villa extends Facility {
 
     @Override
     public String getDetails() {
-        return "Villa{" +
-                "id='" + getId() + '\'' +
-                ", name='" + getName() + '\'' +
-                ", area=" + getArea() +
-                ", rentalCost=" + getRentalCost() +
-                ", maxPeople=" + getMaxPeople() +
-                ", rentalType='" + getRentalType() + '\'' +
-                ", roomStandard='" + roomStandard + '\'' +
-                ", poolArea=" + poolArea +
-                ", numberOfFloors=" + numberOfFloor +
-                '}';
+        return String.join("\n",
+                "Villa Details:",
+                "ID: " + getId(),
+                "Name: " + getName(),
+                "Area: " + getArea(),
+                "Rental Cost: " + getRentalCost(),
+                "Max People: " + getMaxPeople(),
+                "Rental Type: " + getRentalType(),
+                "Room Standard: " + roomStandard,
+                "Pool Area: " + poolArea,
+                "Number of Floors: " + numberOfFloor
+        );
+    }
+
+    @Override
+    public String toCSV() {
+        return String.join(",",
+                "Villa",
+                getId(),
+                getName(),
+                String.valueOf(getArea()),
+                String.valueOf(getRentalCost()),
+                String.valueOf(getMaxPeople()),
+                getRentalType(),
+                roomStandard,
+                String.valueOf(poolArea),
+                String.valueOf(numberOfFloor)
+        );
     }
 }

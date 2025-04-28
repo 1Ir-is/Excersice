@@ -18,7 +18,6 @@ public class LongestString {
                 if (input.charAt(i) >= current.charAt(current.length() - 1)) {
                     current += input.charAt(i);
                 } else {
-                    // reset nếu không liên tiếp tăng
                     if (current.length() > longest.length()) {
                         longest = current;
                     }

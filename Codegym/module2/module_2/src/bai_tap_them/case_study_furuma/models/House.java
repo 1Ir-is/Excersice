@@ -30,16 +30,32 @@ public class House extends Facility {
 
     @Override
     public String getDetails() {
-        return "House{" +
-                "id='" + getId() + '\'' +
-                ", name='" + getName() + '\'' +
-                ", area=" + getArea() +
-                ", rentalCost=" + getRentalCost() +
-                ", maxPeople=" + getMaxPeople() +
-                ", rentalType='" + getRentalType() + '\'' +
-                ", roomStandard='" + roomStandard + '\'' +
-                ", numberOfFloors=" + numberOfFloor +
-                '}';
+        return String.join("\n",
+                "House Details:",
+                "ID: " + getId(),
+                "Name: " + getName(),
+                "Area: " + getArea(),
+                "Rental Cost: " + getRentalCost(),
+                "Max People: " + getMaxPeople(),
+                "Rental Type: " + getRentalType(),
+                "Room Standard: " + roomStandard,
+                "Number of Floors: " + numberOfFloor
+        );
+    }
+
+    @Override
+    public String toCSV() {
+        return String.join(",",
+                "House",
+                getId(),
+                getName(),
+                String.valueOf(getArea()),
+                String.valueOf(getRentalCost()),
+                String.valueOf(getMaxPeople()),
+                getRentalType(),
+                roomStandard,
+                String.valueOf(numberOfFloor)
+        );
     }
 
 }

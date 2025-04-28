@@ -19,15 +19,30 @@ public class Room extends Facility {
 
     @Override
     public String getDetails() {
-        return "Room{" +
-                "id='" + getId() + '\'' +
-                ", name='" + getName() + '\'' +
-                ", area=" + getArea() +
-                ", rentalCost=" + getRentalCost() +
-                ", maxPeople=" + getMaxPeople() +
-                ", rentalType='" + getRentalType() + '\'' +
-                ", freeService='" + freeService + '\'' +
-                '}';
+        return String.join("\n",
+                "Room Details:",
+                "ID: " + getId(),
+                "Name: " + getName(),
+                "Area: " + getArea(),
+                "Rental Cost: " + getRentalCost(),
+                "Max People: " + getMaxPeople(),
+                "Rental Type: " + getRentalType(),
+                "Free Service: " + freeService
+        );
+    }
+
+    @Override
+    public String toCSV() {
+        return String.join(",",
+                "Room",
+                getId(),
+                getName(),
+                String.valueOf(getArea()),
+                String.valueOf(getRentalCost()),
+                String.valueOf(getMaxPeople()),
+                getRentalType(),
+                freeService
+        );
     }
 
 
