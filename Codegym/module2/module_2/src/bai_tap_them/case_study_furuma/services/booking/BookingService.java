@@ -106,6 +106,7 @@ public class BookingService implements IBookingService {
         int serviceType;
         do {
             try {
+                System.out.print("Select service type: ");
                 serviceType = Integer.parseInt(scanner.nextLine());
                 if (serviceType < 1 || serviceType > 3) {
                     System.out.println("Invalid service type! Please select 1, 2, or 3.");
@@ -142,7 +143,8 @@ public class BookingService implements IBookingService {
 
         for (int i = 0; i < availableFacilities.size(); i++) {
             Facility facility = availableFacilities.get(i);
-            System.out.println((i + 1) + ". " + facility.getId() + " - " + facility.getName());
+            boolean isBooked = isFacilityBooked(facility.getId());
+            System.out.println((i + 1) + ". " + facility.getId() + " - " + facility.getName() + (isBooked ? " (Already Booked)" : ""));
         }
 
         int selectedIndex;
@@ -151,8 +153,15 @@ public class BookingService implements IBookingService {
             try {
                 selectedIndex = Integer.parseInt(scanner.nextLine());
                 if (selectedIndex >= 1 && selectedIndex <= availableFacilities.size()) {
-                    selectedFacility = availableFacilities.get(selectedIndex - 1);
-                    break;
+                    Facility tempFacility = availableFacilities.get(selectedIndex - 1);
+
+                    if (isFacilityBooked(tempFacility.getId())) {
+                        System.out.println("This service has already been booked! Please select another one.");
+                    } else {
+                        selectedFacility = tempFacility;
+                        break;
+                    }
+
                 } else {
                     System.out.println("Invalid selection! Please choose between 1 and " + availableFacilities.size());
                 }
@@ -160,6 +169,7 @@ public class BookingService implements IBookingService {
                 System.out.println("Invalid input! Please enter a number.");
             }
         } while (true);
+
 
         System.out.println("Service selected successfully: " + selectedFacility.getName());
 
@@ -194,4 +204,15 @@ public class BookingService implements IBookingService {
             }
         }
     }
+
+    private boolean isFacilityBooked(String facilityId) {
+        TreeSet<Booking> bookings = bookingRepository.findAll();
+        for (Booking booking : bookings) {
+            if (booking.getFacilityId().equals(facilityId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

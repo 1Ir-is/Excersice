@@ -6,20 +6,16 @@ import bai_tap_them.case_study_furuma.models.Room;
 import bai_tap_them.case_study_furuma.models.Villa;
 import bai_tap_them.case_study_furuma.repositories.facility.IFacilityRepository;
 import bai_tap_them.case_study_furuma.utils.MenuPrinter;
-import bai_tap_them.case_study_furuma.utils.ValidationUtils;
 import bai_tap_them.case_study_furuma.view.CommonView;
 import bai_tap_them.case_study_furuma.view.HouseView;
 import bai_tap_them.case_study_furuma.view.RoomView;
 import bai_tap_them.case_study_furuma.view.VillaView;
 
-import javax.swing.*;
-import java.math.RoundingMode;
 import java.util.*;
 
 public class FacilityService implements IFacilityService {
 
     private final IFacilityRepository facilityRepository;
-    private final Scanner scanner = new Scanner(System.in);
 
     public FacilityService(IFacilityRepository repository) {
         this.facilityRepository = repository;
