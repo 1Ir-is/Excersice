@@ -1,3 +1,6 @@
 Villa,SVVL-0001,Luxury Villa,40.0,100.0,5,Year,Luxury,40.0,4,0
 House,SVHO-0001,Luxury House,40.0,100.0,5,Year,Luxury House,5,0
 Room,SVRO-0001,Luxury Room,40.0,100.0,5,Year,BreakFast,0
+Villa,SVVL-1005,Deluxe Villa,40.0,100.0,6,Year,Deluxe,40.0,4,0
+House,SVHO-1007,Deluxe House,40.0,45.0,4,Month,Deluxe,4,0
+Room,SVRO-2000,Deluxe Room,40.0,10.0,4,Day,BreakFast,0

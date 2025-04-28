@@ -8,8 +8,12 @@ import bai_tap_them.case_study_furuma.repositories.facility.IFacilityRepository;
 import bai_tap_them.case_study_furuma.utils.MenuPrinter;
 import bai_tap_them.case_study_furuma.utils.ValidationUtils;
 import bai_tap_them.case_study_furuma.view.CommonView;
+import bai_tap_them.case_study_furuma.view.HouseView;
+import bai_tap_them.case_study_furuma.view.RoomView;
+import bai_tap_them.case_study_furuma.view.VillaView;
 
 import javax.swing.*;
+import java.math.RoundingMode;
 import java.util.*;
 
 public class FacilityService implements IFacilityService {
@@ -84,24 +88,15 @@ public class FacilityService implements IFacilityService {
     }
 
     private void addNewVilla() {
-        System.out.print("Enter ID (format: SVVL-YYYY): ");
-        String id = ValidationUtils.validateInput("SVVL-\\d{4}", "Invalid ID format!");
-        System.out.print("Enter name: ");
-        String name = ValidationUtils.validateInput("[A-Z][a-z]*(\\s[A-Z][a-z]*)*", "Invalid name format!");
-        System.out.print("Enter area (>30): ");
-        double area = ValidationUtils.validateDouble(30);
-        System.out.print("Enter rental cost (>0): ");
-        double rentalCost = ValidationUtils.validateDouble(0);
-        System.out.print("Enter max people (1-19): ");
-        int maxPeople = ValidationUtils.validateInt(1, 19);
-        System.out.print("Enter rental type: ");
-        String rentalType = scanner.nextLine();
-        System.out.print("Enter room standard: ");
-        String roomStandard = scanner.nextLine();
-        System.out.print("Enter pool area (>30): ");
-        double poolArea = ValidationUtils.validateDouble(30);
-        System.out.print("Enter number of floors (>0): ");
-        int numberOfFloors = ValidationUtils.validateInt(1, Integer.MAX_VALUE);
+        String id = VillaView.inputId("SVVL-\\d{4}", "Invalid ID format!");
+        String name = VillaView.inputName();
+        double area = VillaView.inputArea();
+        double rentalCost = VillaView.inputRentalCost();
+        int maxPeople = VillaView.inputMaxPeople();
+        String rentalType = VillaView.inputRentalType();
+        String roomStandard = VillaView.inputRoomStandard();
+        double poolArea = VillaView.inputPoolArea();
+        int numberOfFloors = VillaView.inputNumberOfFloors();
 
         Villa villa = new Villa(id, name, area, rentalCost, maxPeople, rentalType, roomStandard, poolArea, numberOfFloors);
         facilityRepository.add(villa);
@@ -110,22 +105,14 @@ public class FacilityService implements IFacilityService {
     }
 
     private void addNewHouse() {
-        System.out.print("Enter ID (format: SVHO-YYYY): ");
-        String id = ValidationUtils.validateInput("SVHO-\\d{4}", "Invalid Id format. Please try again!");
-        System.out.print("Enter name: ");
-        String name = ValidationUtils.validateInput("[A-Z][a-z]*(\\s[A-Z][a-z]*)*", "Invalid name format!");
-        System.out.print("Enter area (>30): ");
-        double area = ValidationUtils.validateDouble(30);
-        System.out.print("Enter rental cost (>0): ");
-        double rentalCost = ValidationUtils.validateDouble(0);
-        System.out.print("Enter max people (1-19): ");
-        int maxPeople = ValidationUtils.validateInt(1, 19);
-        System.out.print("Enter rental type: ");
-        String rentalType = scanner.nextLine();
-        System.out.print("Enter room standard: ");
-        String roomStandard = ValidationUtils.validateNonNumericInput("Cannot contain number. Please try again!");
-        System.out.print("Enter number of floor (>0): ");
-        int numberOfFloors = ValidationUtils.validateInt(1, Integer.MAX_VALUE);
+        String id = HouseView.inputId("SVHO-\\d{4}", "Invalid ID format!");
+        String name = HouseView.inputName();
+        double area = HouseView.inputArea();
+        double rentalCost = HouseView.inputRentalCost();
+        int maxPeople = HouseView.inputMaxPeople();
+        String rentalType = HouseView.inputRentalType();
+        String roomStandard = HouseView.inputRoomStandard();
+        int numberOfFloors = HouseView.inputNumberOfFloors();
 
         House house = new House(id, name, area, rentalCost, maxPeople, rentalType, roomStandard, numberOfFloors);
         facilityRepository.add(house);
@@ -134,20 +121,13 @@ public class FacilityService implements IFacilityService {
     }
 
     private void addNewRoom() {
-        System.out.print("Enter ID (format: SVRO-YYYY): ");
-        String id = ValidationUtils.validateInput("SVRO-\\d{4}", "Invalid Id format. Please try again!");
-        System.out.print("Enter name: ");
-        String name = ValidationUtils.validateInput("[A-Z][a-z]*(\\s[A-Z][a-z]*)*", "Invalid name format!");
-        System.out.print("Enter area (>30): ");
-        double area = ValidationUtils.validateDouble(30);
-        System.out.print("Enter rental cost (>0): ");
-        double rentalCost = ValidationUtils.validateDouble(0);
-        System.out.print("Enter max people (1-19): ");
-        int maxPeople = ValidationUtils.validateInt(1, 19);
-        System.out.print("Enter rental type: ");
-        String rentalType = scanner.nextLine();
-        System.out.print("Enter free service: ");
-        String freeService = scanner.nextLine();
+        String id = RoomView.inputId("SVRO-\\d{4}", "Invalid ID format!");
+        String name = RoomView.inputName();
+        double area = RoomView.inputArea();
+        double rentalCost = RoomView.inputRentalCost();
+        int maxPeople = RoomView.inputMaxPeople();
+        String rentalType = RoomView.inputRentalType();
+        String freeService = RoomView.inputFreeService();
 
         Room room = new Room(id, name, area, rentalCost, maxPeople, rentalType, freeService);
         facilityRepository.add(room);

@@ -5,6 +5,7 @@ import bai_tap_them.case_study_furuma.models.Employee;
 import bai_tap_them.case_study_furuma.repositories.employee.IEmployeeRepository;
 import bai_tap_them.case_study_furuma.utils.ValidationUtils;
 import bai_tap_them.case_study_furuma.view.CommonView;
+import bai_tap_them.case_study_furuma.view.EmployeeView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -49,11 +50,9 @@ public class EmployeeService implements IEmployeeService {
     @Override
     public void add() {
         ArrayList<Employee> employees = employeeRepository.findAll();
-
-        System.out.print("Enter employee ID (format: NV-YYYY): ");
         String id;
         while (true) {
-            id = ValidationUtils.validateInput("NV-\\d{4}", "Invalid ID format. Please use NV-YYYY.");
+            id = EmployeeView.inputEmployeeId();
             boolean isDuplicate = false;
             for (Employee employee : employees) {
                 if (employee.getId().equals(id)) {
@@ -69,42 +68,15 @@ public class EmployeeService implements IEmployeeService {
             }
         }
 
-        System.out.print("Enter employee name: ");
-        String name = ValidationUtils.validateInput("[A-Z][a-z]*(\\s[A-Z][a-z]*)*", "Name must capitalize the first letter of each word.");
-
-        System.out.print("Enter date of birth (dd/MM/yyyy): ");
-        String dateOfBirth = ValidationUtils.validateDateOfBirth();
-
-        System.out.print("Enter gender: ");
-        String gender = ValidationUtils.validateGender();
-
-        System.out.print("Enter ID card number (9 or 12 digits): ");
-        String idCard = ValidationUtils.validateInput("^\\d{9}(\\d{3})?", "ID card must be 9 or 12 digits.");
-
-        System.out.print("Enter phone number (starts with 0, 10 digits): ");
-        String phoneNumber = ValidationUtils.validateInput("0\\d{9}", "Phone number must start with 0 and have 10 digits.");
-
-        System.out.print("Enter email: ");
-        String email = ValidationUtils.validateInput("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", "Invalid email. Please try again!");
-
-        String[] qualifications = {"Intermediate", "College", "University", "Postgraduate"};
-        System.out.println("Select qualification: ");
-        for (int i = 0; i < qualifications.length; i++) {
-            System.out.println((i + 1) + ". " + qualifications[i]);
-        }
-        int qualificationChoice = CommonView.getChoice(qualifications.length);
-        String qualification = qualifications[qualificationChoice - 1];
-
-        String[] positions = {"Receptionist", "Waiter", "Specialist", "Supervisor", "Manager", "Director"};
-        System.out.println("Select position: ");
-        for (int i = 0; i < positions.length; i++) {
-            System.out.println((i + 1) + ". " + positions[i]);
-        }
-        int positionChoice = CommonView.getChoice(positions.length);
-        String position = positions[positionChoice - 1];
-
-        System.out.print("Enter salary: ");
-        double salary = ValidationUtils.validateSalary();
+        String name = EmployeeView.inputEmployeeName();
+        String dateOfBirth = EmployeeView.inputEmployeeDOB();
+        String gender = EmployeeView.inputEmployeeGender();
+        String idCard = EmployeeView.inputEmployeeIdCard();
+        String phoneNumber = EmployeeView.inputEmployeePhoneNumber();
+        String email = EmployeeView.inputEmployeeEmail();
+        String qualification = EmployeeView.inputEmployeeQualification();
+        String position = EmployeeView.inputEmployeePosition();
+        double salary = EmployeeView.inputEmployeeSalary();
 
         Employee employee = new Employee(id, name, dateOfBirth, gender, idCard, phoneNumber, email, qualification, position, salary);
         employeeRepository.add(employee);
