@@ -2,6 +2,8 @@ package bai_tap_them.case_study_furuma.controllers;
 
 import bai_tap_them.case_study_furuma.repositories.booking.BookingRepository;
 import bai_tap_them.case_study_furuma.repositories.booking.IBookingRepository;
+import bai_tap_them.case_study_furuma.repositories.contract.ContractRepository;
+import bai_tap_them.case_study_furuma.repositories.contract.IContractRepository;
 import bai_tap_them.case_study_furuma.repositories.customer.CustomerRepository;
 import bai_tap_them.case_study_furuma.repositories.customer.ICustomerRepository;
 import bai_tap_them.case_study_furuma.repositories.employee.EmployeeRepository;
@@ -10,6 +12,8 @@ import bai_tap_them.case_study_furuma.repositories.facility.FacilityRepository;
 import bai_tap_them.case_study_furuma.repositories.facility.IFacilityRepository;
 import bai_tap_them.case_study_furuma.services.booking.BookingService;
 import bai_tap_them.case_study_furuma.services.booking.IBookingService;
+import bai_tap_them.case_study_furuma.services.contract.ContactService;
+import bai_tap_them.case_study_furuma.services.contract.IContactService;
 import bai_tap_them.case_study_furuma.services.customer.CustomerService;
 import bai_tap_them.case_study_furuma.services.customer.ICustomerService;
 import bai_tap_them.case_study_furuma.services.employee.EmployeeService;
@@ -34,6 +38,9 @@ public class FuramaController {
 
     private final IBookingRepository bookingRepository = new BookingRepository();
     private final IBookingService bookingService = new BookingService(bookingRepository, customerRepository, facilityRepository);
+
+    private final IContractRepository contractRepository = new ContractRepository();
+    private final IContactService contactService = new ContactService(bookingRepository, facilityRepository, contractRepository);
 
     public void displayMainMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -169,10 +176,10 @@ public class FuramaController {
                     bookingService.displayBooking();
                     break;
                 case 3:
-                    System.out.println("Creating new contracts...");
+                    contactService.add();
                     break;
                 case 4:
-                    System.out.println("Displaying list of contracts...");
+                    contactService.display();
                     break;
                 case 5:
                     System.out.println("Editing contracts...");

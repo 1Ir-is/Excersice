@@ -1,0 +1,108 @@
+package bai_tap_them.case_study_furuma.services.contract;
+
+import bai_tap_them.case_study_furuma.models.*;
+import bai_tap_them.case_study_furuma.repositories.booking.IBookingRepository;
+import bai_tap_them.case_study_furuma.repositories.contract.IContractRepository;
+import bai_tap_them.case_study_furuma.repositories.facility.IFacilityRepository;
+import bai_tap_them.case_study_furuma.utils.ValidationUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.TreeSet;
+
+public class ContactService implements IContactService {
+
+    private final IBookingRepository bookingRepository;
+    private final IFacilityRepository facilityRepository;
+    private final IContractRepository contractRepository;
+
+    public ContactService(IBookingRepository bookingRepository, IFacilityRepository facilityRepository, IContractRepository contractRepository) {
+        this.bookingRepository = bookingRepository;
+        this.facilityRepository = facilityRepository;
+        this.contractRepository = contractRepository;
+    }
+
+
+    @Override
+    public void display() {
+        List<Contract> contracts = contractRepository.findAll();
+        if (contracts.isEmpty()) {
+            System.out.println("No contracts found!");
+            return;
+        }
+
+        System.out.println("======== Customer List ========");
+        for (Contract contract : contracts) {
+            System.out.println("Contract number: " + contract.getContractNumber());
+            System.out.println("Booking ID: " + contract.getBookingId());
+            System.out.println("Deposit: " + contract.getDeposit());
+            System.out.println("Total Amount: " + contract.getTotalPayment());
+        }
+        System.out.println("===============================");
+    }
+
+    @Override
+    public void add() {
+        TreeSet<Booking> bookings = bookingRepository.findAll();
+
+        List<Booking> eligibleBookings = new ArrayList<>();
+        for (Booking booking : bookings) {
+            Facility facility = facilityRepository.findById(booking.getFacilityId());
+            if (facility != null && (facility instanceof Villa || facility instanceof House)) {
+                eligibleBookings.add(booking);
+            }
+        }
+
+        if (eligibleBookings.isEmpty()) {
+            System.out.println("No eligible bookings found for contract creation (only Villa and House are allowed).");
+            return;
+        }
+
+        System.out.println("Eligible Booking: ");
+        for (int i = 0; i < eligibleBookings.size(); i++) {
+            Booking booking = eligibleBookings.get(i);
+            System.out.println((i + 1) + ". " + booking.getBookingId());
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        int selectedIndex;
+        Booking selectedBooking = null;
+
+        do {
+            System.out.print("Select booking number to create contract: ");
+            try {
+                selectedIndex = Integer.parseInt(scanner.nextLine());
+                if (selectedIndex >= 1 && selectedIndex <= eligibleBookings.size()) {
+                    selectedBooking = eligibleBookings.get(selectedIndex - 1);
+                    break;
+                } else {
+                    System.out.println("Invalid selection! Try again.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input! Enter a number.");
+            }
+        } while (true);
+        String contractNumber;
+        do {
+            System.out.print("Enter contract number: ");
+            contractNumber = scanner.nextLine();
+        } while (!ValidationUtils.validateNotEmpty(contractNumber, "Cannot be empty!"));
+
+        System.out.print("Enter deposit: ");
+        double deposit = Double.parseDouble(scanner.nextLine());
+
+        System.out.print("Enter total payment: ");
+        double totalPayment = Double.parseDouble(scanner.nextLine());
+
+        Contract contract = new Contract(contractNumber, selectedBooking.getBookingId(), deposit, totalPayment);
+        contractRepository.add(contract);
+        System.out.println("Contract created successfully!");
+
+    }
+
+    @Override
+    public void edit() {
+
+    }
+}

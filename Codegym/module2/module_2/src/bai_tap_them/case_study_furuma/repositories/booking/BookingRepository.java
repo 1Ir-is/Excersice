@@ -12,6 +12,9 @@ public class BookingRepository implements IBookingRepository {
     private static final TreeSet<Booking> bookings = new TreeSet<>(new BookingComparator());
     private static final String BOOKING_FILE = "bai_tap_them/case_study_furuma/data/bookings.csv";
 
+    public BookingRepository() {
+        loadBookingsFromFile();
+    }
 
     @Override
     public TreeSet<Booking> findAll() {
@@ -36,7 +39,4 @@ public class BookingRepository implements IBookingRepository {
             bookings.add(Booking.fromCSV(line));
         }
     }
-
-
-
 }
