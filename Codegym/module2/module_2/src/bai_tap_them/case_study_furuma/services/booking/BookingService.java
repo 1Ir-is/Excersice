@@ -176,6 +176,11 @@ public class BookingService implements IBookingService {
         Booking booking = new Booking(bookingId, bookingDate, startDate, endDate, selectedCustomer.getId(), selectedFacility.getId());
         bookingRepository.add(booking);
         System.out.println("New booking added successfully!");
+
+        facilityRepository.incrementUsageCount(selectedFacility.getId());
+        if (facilityRepository.findFacilitiesNeedingMaintenance().containsKey(selectedFacility)) {
+            System.out.println("Warning: This facility has reached usage limit and needs maintenance!");
+        }
     }
 
     @Override

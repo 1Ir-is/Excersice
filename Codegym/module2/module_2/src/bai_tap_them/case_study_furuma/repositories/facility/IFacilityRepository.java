@@ -17,4 +17,5 @@ public interface IFacilityRepository {
     Map<Facility, Integer> findAll();
 
     Map<Facility, Integer> findFacilitiesNeedingMaintenance();
+    void incrementUsageCount(String id);
 }

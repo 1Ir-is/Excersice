@@ -32,6 +32,17 @@ public class FacilityRepository implements IFacilityRepository {
     }
 
     @Override
+    public void incrementUsageCount(String id) {
+        for (Map.Entry<Facility, Integer> entry : facilities.entrySet()) {
+            if (entry.getKey().getId().equals(id)) {
+                facilities.put(entry.getKey(), entry.getValue() + 1);
+                saveToCSV();
+                break;
+            }
+        }
+    }
+
+    @Override
     public Map<Facility, Integer> findAll() {
         return facilities;
     }
