@@ -108,7 +108,6 @@ public class ContractService implements IContractService {
         selectedBooking.setContracted(true);
         bookingRepository.update(selectedBooking);
         System.out.println("Contract created successfully!");
-
     }
 
     @Override

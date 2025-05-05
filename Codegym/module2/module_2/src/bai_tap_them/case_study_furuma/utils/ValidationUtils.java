@@ -102,24 +102,23 @@ public class ValidationUtils {
         }
     }
 
-    public static String validateNonNumericInput(String errorMessage) {
+    public static int validatePositiveInt(String errorMessage) {
         while (true) {
             String input = scanner.nextLine().trim();
-            boolean hasDigit = false;
-
-            for (int i = 0; i < input.length(); i++) {
-                char character = input.charAt(i);
-                if (Character.isDigit(character)) {
-                    hasDigit = true;
-                    break;
+            if (input.isEmpty()) {
+                System.out.println("Input cannot be empty. Please enter again:");
+                continue;
+            }
+            try {
+                int value = Integer.parseInt(input);
+                if (value >= 0) {
+                    return value;
+                } else {
+                    System.out.println(errorMessage);
                 }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number format. Please try again!");
             }
-
-            if (!hasDigit) {
-                return input;
-            }
-
-            System.out.println(errorMessage);
         }
     }
 

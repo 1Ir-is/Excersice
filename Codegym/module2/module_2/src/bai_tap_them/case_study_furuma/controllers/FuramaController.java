@@ -10,6 +10,8 @@ import bai_tap_them.case_study_furuma.repositories.employee.EmployeeRepository;
 import bai_tap_them.case_study_furuma.repositories.employee.IEmployeeRepository;
 import bai_tap_them.case_study_furuma.repositories.facility.FacilityRepository;
 import bai_tap_them.case_study_furuma.repositories.facility.IFacilityRepository;
+import bai_tap_them.case_study_furuma.repositories.promotion.IPromotionRepository;
+import bai_tap_them.case_study_furuma.repositories.promotion.PromotionRepository;
 import bai_tap_them.case_study_furuma.services.booking.BookingService;
 import bai_tap_them.case_study_furuma.services.booking.IBookingService;
 import bai_tap_them.case_study_furuma.services.contract.ContractService;
@@ -20,6 +22,8 @@ import bai_tap_them.case_study_furuma.services.employee.EmployeeService;
 import bai_tap_them.case_study_furuma.services.employee.IEmployeeService;
 import bai_tap_them.case_study_furuma.services.facility.FacilityService;
 import bai_tap_them.case_study_furuma.services.facility.IFacilityService;
+import bai_tap_them.case_study_furuma.services.promotion.IPromotionService;
+import bai_tap_them.case_study_furuma.services.promotion.PromotionService;
 import bai_tap_them.case_study_furuma.utils.MenuPrinter;
 import bai_tap_them.case_study_furuma.view.CommonView;
 
@@ -41,6 +45,11 @@ public class FuramaController {
     private final IContractRepository contractRepository = new ContractRepository();
     private final IContractService contactService = new ContractService(bookingRepository, facilityRepository, contractRepository);
 
+    private final IPromotionRepository promotionRepository = new PromotionRepository();
+    private final IPromotionService promotionService = new PromotionService(promotionRepository);
+
+    private final Scanner scanner = new Scanner(System.in);
+
     public void displayMainMenu() {
         Scanner scanner = new Scanner(System.in);
         int choice;
@@ -51,19 +60,19 @@ public class FuramaController {
 
             switch (choice) {
                 case 1:
-                    displayEmployeeMenu(scanner);
+                    displayEmployeeMenu();
                     break;
                 case 2:
-                    displayCustomerMenu(scanner);
+                    displayCustomerMenu();
                     break;
                 case 3:
-                    displayFacilityMenu(scanner);
+                    displayFacilityMenu();
                     break;
                 case 4:
-                    displayBookingMenu(scanner);
+                    displayBookingMenu();
                     break;
                 case 5:
-                    displayPromotionMenu(scanner);
+                    displayPromotionMenu();
                     break;
                 case 6:
                     if (confirmExit(scanner)) {
@@ -79,7 +88,7 @@ public class FuramaController {
         } while (choice != 6);
     }
 
-    private void displayEmployeeMenu(Scanner scanner) {
+    private void displayEmployeeMenu() {
         int choice;
         do {
             MenuPrinter.printEmployeeMenu();
@@ -106,7 +115,7 @@ public class FuramaController {
         } while (true);
     }
 
-    private void displayCustomerMenu(Scanner scanner) {
+    private void displayCustomerMenu() {
         int choice;
         do {
             MenuPrinter.printCustomerMenu();
@@ -133,7 +142,7 @@ public class FuramaController {
         } while (true);
     }
 
-    private void displayFacilityMenu(Scanner scanner) {
+    private void displayFacilityMenu() {
         int choice;
         do {
             MenuPrinter.printFacilityMenu();
@@ -160,7 +169,7 @@ public class FuramaController {
         } while (true);
     }
 
-    private void displayBookingMenu(Scanner scanner) {
+    private void displayBookingMenu() {
         int choice;
         do {
             MenuPrinter.printBookingMenu();
@@ -170,18 +179,23 @@ public class FuramaController {
             switch (choice) {
                 case 1:
                     bookingService.addBooking();
+                    CommonView.goBack(scanner);
                     break;
                 case 2:
                     bookingService.displayBooking();
+                    CommonView.goBack(scanner);
                     break;
                 case 3:
                     contactService.add();
+                    CommonView.goBack(scanner);
                     break;
                 case 4:
                     contactService.display();
+                    CommonView.goBack(scanner);
                     break;
                 case 5:
                     contactService.edit();
+                    CommonView.goBack(scanner);
                     break;
                 case 6:
                     return;
@@ -191,7 +205,7 @@ public class FuramaController {
         } while (true);
     }
 
-    private void displayPromotionMenu(Scanner scanner) {
+    private void displayPromotionMenu() {
         int choice;
         do {
             MenuPrinter.printPromotionMenu();
@@ -199,18 +213,19 @@ public class FuramaController {
 
             switch (choice) {
                 case 1:
-                    System.out.println("Displaying list of customers using services...");
+                    promotionService.displayCustomersByYear();
+                    CommonView.goBack(scanner);
                     break;
                 case 2:
-                    System.out.println("Displaying list of customers getting vouchers...");
+                    promotionService.distributeVouchers();
+                    CommonView.goBack(scanner);
                     break;
                 case 3:
-                    System.out.println("Returning to main menu...");
-                    break;
+                    return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
-        } while (choice != 3);
+        } while (true);
     }
 
     private boolean confirmExit(Scanner scanner) {
