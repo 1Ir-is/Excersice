@@ -67,14 +67,20 @@ public class ContractService implements IContractService {
             System.out.println((i + 1) + ". Booking Id: " + booking.getBookingId() + " | Facility: " + facilityInfo);
         }
 
+        System.out.println("0. Cancel");
+
         Scanner scanner = new Scanner(System.in);
         int selectedIndex;
         Booking selectedBooking = null;
 
         do {
-            System.out.print("Select booking number to create contract: ");
+            System.out.print("Select booking number to create contract (0 to cancel): ");
             try {
                 selectedIndex = Integer.parseInt(scanner.nextLine());
+                if (selectedIndex == 0) {
+                    System.out.println("Cancelled contract creation!");
+                    return;
+                }
                 if (selectedIndex >= 1 && selectedIndex <= eligibleBookings.size()) {
                     selectedBooking = eligibleBookings.get(selectedIndex - 1);
                     break;
@@ -140,10 +146,20 @@ public class ContractService implements IContractService {
         } while (true);
 
         System.out.println("Editing Contract: " + selectedContract.getContractNumber());
-        System.out.print("Enter new deposit (current is: " + selectedContract.getDeposit() + "): ");
-        double newDeposit = Double.parseDouble(scanner.nextLine());
-        System.out.print("Enter new total payment (current is: " + selectedContract.getTotalPayment() + "): ");
-        double newTotalPayment = Double.parseDouble(scanner.nextLine());
+
+        System.out.print("Enter new deposit leave blank to keep current (current is: " + selectedContract.getDeposit() + "): ");
+        String depositInput = scanner.nextLine();
+        double newDeposit = selectedContract.getDeposit();
+        if (!depositInput.trim().isEmpty()) {
+            newDeposit = Double.parseDouble(depositInput);
+        }
+
+        System.out.print("Enter new total payment leave blank to keep current (current is: " + selectedContract.getTotalPayment() + "): ");
+        String totalPaymentInput = scanner.nextLine();
+        double newTotalPayment = selectedContract.getTotalPayment();
+        if (!totalPaymentInput.trim().isEmpty()) {
+            newTotalPayment = Double.parseDouble(totalPaymentInput);
+        }
 
         selectedContract.setDeposit(newDeposit);
         selectedContract.setTotalPayment(newTotalPayment);
