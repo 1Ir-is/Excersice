@@ -71,12 +71,19 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public void edit() {
+        ArrayList<Customer> customers = customerRepository.findAll();
         Customer customerToEdit = null;
 
         while (customerToEdit == null) {
             System.out.print("Enter the ID of the customer to edit: ");
             String id = scanner.nextLine();
-            customerToEdit = customerRepository.findById(id);
+
+            for (Customer customer : customers) {
+                if (customer.getId().equals(id)) {
+                    customerToEdit = customer;
+                    break;
+                }
+            }
 
             if (customerToEdit == null) {
                 System.out.println("Invalid ID. Please try again!");
@@ -113,9 +120,10 @@ public class CustomerService implements ICustomerService {
         if (!addressInput.isEmpty()) {
             customerToEdit.setAddress(addressInput);
         }
-
+        customerRepository.saveAll(customers);
         System.out.println("Customer updated successfully.");
     }
+
 
     private String selectCustomerType() {
         String[] customerTypes = {"Diamond", "Platinum", "Gold", "Silver", "Member"};

@@ -27,15 +27,18 @@ public class BookingRepository implements IBookingRepository {
         saveAllBookingsToFile();
     }
 
-
-    public void update(Booking updatedBooking) {
-        if (bookings.remove(updatedBooking)) {
-            bookings.add(updatedBooking);
-            saveAllBookingsToFile();
-        } else {
-            System.out.println("Booking not found to update: " + updatedBooking.getBookingId());
+    @Override
+    public boolean update(Booking updatedBooking) {
+        for (Booking booking : bookings) {
+            if (booking.getBookingId().equals(updatedBooking.getBookingId())) {
+                booking.setContracted(updatedBooking.isContracted());
+                saveAllBookingsToFile();
+                return true;
+            }
         }
+        return false;
     }
+
 
     private void saveAllBookingsToFile() {
         List<String> dataLines = new ArrayList<>();
@@ -52,3 +55,4 @@ public class BookingRepository implements IBookingRepository {
         }
     }
 }
+

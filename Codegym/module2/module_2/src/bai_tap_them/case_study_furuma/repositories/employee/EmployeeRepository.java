@@ -25,4 +25,14 @@ public class EmployeeRepository implements IEmployeeRepository {
         }
         return employees;
     }
+
+    @Override
+    public void saveAll(List<Employee> employees) {
+        List<String> dataLines = new ArrayList<>();
+        for (Employee employee : employees) {
+            dataLines.add(employee.toCSV());
+        }
+        SaveFileUtils.writeToFile(EMPLOYEE_FILE, dataLines, false);
+    }
+
 }

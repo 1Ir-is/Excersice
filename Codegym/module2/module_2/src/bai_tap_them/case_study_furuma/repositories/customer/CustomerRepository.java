@@ -1,6 +1,7 @@
 package bai_tap_them.case_study_furuma.repositories.customer;
 
 import bai_tap_them.case_study_furuma.models.Customer;
+import bai_tap_them.case_study_furuma.models.Employee;
 import bai_tap_them.case_study_furuma.utils.SaveFileUtils;
 
 import java.lang.reflect.Array;
@@ -19,6 +20,15 @@ public class CustomerRepository implements ICustomerRepository {
             }
         }
         return null;
+    }
+
+    @Override
+    public void saveAll(List<Customer> customers) {
+        List<String> dataLines = new ArrayList<>();
+        for (Customer customer : customers) {
+            dataLines.add(customer.toCSV());
+        }
+        SaveFileUtils.writeToFile(CUSTOMER_FILE, dataLines, false);
     }
 
     @Override

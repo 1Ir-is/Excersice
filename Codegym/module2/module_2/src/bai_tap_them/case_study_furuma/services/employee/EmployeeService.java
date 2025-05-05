@@ -184,5 +184,6 @@ public class EmployeeService implements IEmployeeService {
             }
         }
         System.out.println("Employee updated successfully.");
+        employeeRepository.saveAll(employees);
     }
 }
