@@ -24,13 +24,25 @@ public class BookingRepository implements IBookingRepository {
     @Override
     public void add(Booking booking) {
         bookings.add(booking);
-        saveBookingToFile(booking);
+        saveAllBookingsToFile();
     }
 
-    private void saveBookingToFile(Booking booking) {
+
+    public void update(Booking updatedBooking) {
+        if (bookings.remove(updatedBooking)) {
+            bookings.add(updatedBooking);
+            saveAllBookingsToFile();
+        } else {
+            System.out.println("Booking not found to update: " + updatedBooking.getBookingId());
+        }
+    }
+
+    private void saveAllBookingsToFile() {
         List<String> dataLines = new ArrayList<>();
-        dataLines.add(booking.toCSV());
-        SaveFileUtils.writeToFile(BOOKING_FILE, dataLines, true);
+        for (Booking booking : bookings) {
+            dataLines.add(booking.toCSV());
+        }
+        SaveFileUtils.writeToFile(BOOKING_FILE, dataLines, false);
     }
 
     private void loadBookingsFromFile() {

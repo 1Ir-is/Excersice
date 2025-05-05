@@ -12,8 +12,8 @@ import bai_tap_them.case_study_furuma.repositories.facility.FacilityRepository;
 import bai_tap_them.case_study_furuma.repositories.facility.IFacilityRepository;
 import bai_tap_them.case_study_furuma.services.booking.BookingService;
 import bai_tap_them.case_study_furuma.services.booking.IBookingService;
-import bai_tap_them.case_study_furuma.services.contract.ContactService;
-import bai_tap_them.case_study_furuma.services.contract.IContactService;
+import bai_tap_them.case_study_furuma.services.contract.ContractService;
+import bai_tap_them.case_study_furuma.services.contract.IContractService;
 import bai_tap_them.case_study_furuma.services.customer.CustomerService;
 import bai_tap_them.case_study_furuma.services.customer.ICustomerService;
 import bai_tap_them.case_study_furuma.services.employee.EmployeeService;
@@ -21,7 +21,6 @@ import bai_tap_them.case_study_furuma.services.employee.IEmployeeService;
 import bai_tap_them.case_study_furuma.services.facility.FacilityService;
 import bai_tap_them.case_study_furuma.services.facility.IFacilityService;
 import bai_tap_them.case_study_furuma.utils.MenuPrinter;
-import bai_tap_them.case_study_furuma.utils.ValidationUtils;
 import bai_tap_them.case_study_furuma.view.CommonView;
 
 import java.util.Scanner;
@@ -40,7 +39,7 @@ public class FuramaController {
     private final IBookingService bookingService = new BookingService(bookingRepository, customerRepository, facilityRepository);
 
     private final IContractRepository contractRepository = new ContractRepository();
-    private final IContactService contactService = new ContactService(bookingRepository, facilityRepository, contractRepository);
+    private final IContractService contactService = new ContractService(bookingRepository, facilityRepository, contractRepository);
 
     public void displayMainMenu() {
         Scanner scanner = new Scanner(System.in);

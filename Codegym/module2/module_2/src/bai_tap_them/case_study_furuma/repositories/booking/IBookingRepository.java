@@ -7,7 +7,7 @@ import java.util.TreeSet;
 
 public interface IBookingRepository {
     TreeSet<Booking> findAll();
-
+    void update(Booking updatedBooking);
     void add(Booking booking);
 }
 

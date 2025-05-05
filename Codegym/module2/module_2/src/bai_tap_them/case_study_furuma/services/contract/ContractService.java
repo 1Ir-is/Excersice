@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.TreeSet;
 
-public class ContactService implements IContactService {
+public class ContractService implements IContractService {
 
     private final IBookingRepository bookingRepository;
     private final IFacilityRepository facilityRepository;
     private final IContractRepository contractRepository;
 
-    public ContactService(IBookingRepository bookingRepository, IFacilityRepository facilityRepository, IContractRepository contractRepository) {
+    public ContractService(IBookingRepository bookingRepository, IFacilityRepository facilityRepository, IContractRepository contractRepository) {
         this.bookingRepository = bookingRepository;
         this.facilityRepository = facilityRepository;
         this.contractRepository = contractRepository;
@@ -51,7 +51,7 @@ public class ContactService implements IContactService {
         List<Booking> eligibleBookings = new ArrayList<>();
         for (Booking booking : bookings) {
             Facility facility = facilityRepository.findById(booking.getFacilityId());
-            if (facility != null && (facility instanceof Villa || facility instanceof House)) {
+            if (facility != null && (facility instanceof Villa || facility instanceof House) && !booking.isContracted()) {
                 eligibleBookings.add(booking);
             }
         }
@@ -64,7 +64,9 @@ public class ContactService implements IContactService {
         System.out.println("Eligible Booking: ");
         for (int i = 0; i < eligibleBookings.size(); i++) {
             Booking booking = eligibleBookings.get(i);
-            System.out.println((i + 1) + ". " + booking.getBookingId());
+            Facility facility = facilityRepository.findById(booking.getFacilityId());
+            String facilityInfo = (facility != null) ? facility.getId() + " - " + facility.getName() : "Unknown Facility";
+            System.out.println((i + 1) + ". Booking Id: " + booking.getBookingId() + " | Facility: " + facilityInfo);
         }
 
         Scanner scanner = new Scanner(System.in);
@@ -99,6 +101,8 @@ public class ContactService implements IContactService {
 
         Contract contract = new Contract(contractNumber, selectedBooking.getBookingId(), deposit, totalPayment);
         contractRepository.add(contract);
+        selectedBooking.setContracted(true);
+        bookingRepository.update(selectedBooking);
         System.out.println("Contract created successfully!");
 
     }

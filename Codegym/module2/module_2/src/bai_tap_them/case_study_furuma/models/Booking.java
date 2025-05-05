@@ -10,6 +10,7 @@ public class Booking implements Comparable<Booking> {
     private String endDate;
     private String customerId;
     private String facilityId;
+    private boolean isContracted;
 
     public Booking(String bookingId, String bookingDate, String startDate, String endDate, String customerId, String facilityId) {
         this.bookingId = bookingId;
@@ -67,6 +68,14 @@ public class Booking implements Comparable<Booking> {
     public void setFacilityId(String facilityId) {
         this.facilityId = facilityId;
     }
+    public boolean isContracted() {
+        return isContracted;
+    }
+
+    public void setContracted(boolean contracted) {
+        isContracted = contracted;
+    }
+
 
     @Override
     /*********************************************************************************
