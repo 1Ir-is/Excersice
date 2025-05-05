@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface IContractRepository {
     void add(Contract contract);
+    void update(Contract updatedContract);
     List<Contract> findAll();
 }

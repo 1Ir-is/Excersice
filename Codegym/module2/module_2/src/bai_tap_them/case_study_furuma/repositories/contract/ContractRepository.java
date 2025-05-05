@@ -21,6 +21,26 @@ public class ContractRepository implements IContractRepository {
     }
 
     @Override
+    public void update(Contract updatedContract) {
+        List<String> lines = SaveFileUtils.readFromFile(CONTRACTS_FILE);
+        List<String> updateLines = new ArrayList<>();
+
+        for (String line : lines) {
+            String[] parts = line.split(",");
+            if (parts.length == 4 && parts[0].equals(updatedContract.getContractNumber())) {
+                updateLines.add(updatedContract.getContractNumber() + "," +
+                        updatedContract.getBookingId() + "," +
+                        updatedContract.getDeposit() + "," +
+                        updatedContract.getTotalPayment());
+            } else {
+                updateLines.add(line);
+            }
+        }
+
+        SaveFileUtils.writeToFile(CONTRACTS_FILE, updateLines, false);
+    }
+
+    @Override
     public List<Contract> findAll() {
         List<String> lines = SaveFileUtils.readFromFile(CONTRACTS_FILE);
         List<Contract> contracts = new ArrayList<>();

@@ -117,5 +117,36 @@ public class ContactService implements IContactService {
             System.out.println((i + 1) + ". Contract number: " + contract.getContractNumber());
         }
         System.out.println("===============================");
+
+        Scanner scanner = new Scanner(System.in);
+        int selectedIndex;
+        Contract selectedContract = null;
+
+        do {
+            System.out.print("Select contract number to edit: ");
+            try {
+                selectedIndex = Integer.parseInt(scanner.nextLine());
+                if (selectedIndex >= 1 && selectedIndex <= contracts.size()) {
+                    selectedContract = contracts.get(selectedIndex - 1);
+                    break;
+                } else {
+                    System.out.println("Invalid selection! Try again.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input! Please enter a number.");
+            }
+        } while (true);
+
+        System.out.println("Editing Contract: " + selectedContract.getContractNumber());
+        System.out.print("Enter new deposit (current is: " + selectedContract.getDeposit() + "): ");
+        double newDeposit = Double.parseDouble(scanner.nextLine());
+        System.out.print("Enter new total payment (current is: " + selectedContract.getTotalPayment() + "): ");
+        double newTotalPayment = Double.parseDouble(scanner.nextLine());
+
+        selectedContract.setDeposit(newDeposit);
+        selectedContract.setTotalPayment(newTotalPayment);
+
+        contractRepository.update(selectedContract);
+        System.out.println("Contract updated successfully!");
     }
 }
