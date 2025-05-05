@@ -38,8 +38,10 @@ public class ContactService implements IContactService {
             System.out.println("Booking ID: " + contract.getBookingId());
             System.out.println("Deposit: " + contract.getDeposit());
             System.out.println("Total Amount: " + contract.getTotalPayment());
+            System.out.println();
         }
         System.out.println("===============================");
+        System.out.println();
     }
 
     @Override
@@ -103,6 +105,17 @@ public class ContactService implements IContactService {
 
     @Override
     public void edit() {
+        List<Contract> contracts = contractRepository.findAll();
+        if (contracts.isEmpty()) {
+            System.out.println("No contracts found to edit!");
+            return;
+        }
 
+        System.out.println("======== Contract List ========");
+        for (int i = 0; i < contracts.size(); i++) {
+            Contract contract = contracts.get(i);
+            System.out.println((i + 1) + ". Contract number: " + contract.getContractNumber());
+        }
+        System.out.println("===============================");
     }
 }

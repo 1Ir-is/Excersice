@@ -182,7 +182,7 @@ public class FuramaController {
                     contactService.display();
                     break;
                 case 5:
-                    System.out.println("Editing contracts...");
+                    contactService.edit();
                     break;
                 case 6:
                     return;
