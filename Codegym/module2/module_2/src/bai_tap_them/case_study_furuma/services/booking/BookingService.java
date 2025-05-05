@@ -98,77 +98,95 @@ public class BookingService implements IBookingService {
         System.out.println("Customer selected successfully: " + selectedCustomer.getName());
 
         // chon facility
-        System.out.println("Select service type: ");
-        System.out.println("1. Villa");
-        System.out.println("2. House");
-        System.out.println("3. Room");
-
-        int serviceType;
-        do {
-            try {
-                System.out.print("Select service type: ");
-                serviceType = Integer.parseInt(scanner.nextLine());
-                if (serviceType < 1 || serviceType > 3) {
-                    System.out.println("Invalid service type! Please select 1, 2, or 3.");
-                } else {
-                    break;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input! Please enter a number (1, 2, or 3).");
-            }
-        } while (true);
-
         Facility selectedFacility = null;
-        List<Facility> availableFacilities = new ArrayList<>();
 
-        switch (serviceType) {
-            case 1:
-                System.out.println("Available Villas:");
-                availableFacilities = facilityRepository.findAllByType("Villa");
-                break;
-            case 2:
-                System.out.println("Available Houses:");
-                availableFacilities = facilityRepository.findAllByType("House");
-                break;
-            case 3:
-                System.out.println("Available Rooms:");
-                availableFacilities = facilityRepository.findAllByType("Room");
-                break;
-        }
+        while (true) {
+            System.out.println("Select service type: ");
+            System.out.println("1. Villa");
+            System.out.println("2. House");
+            System.out.println("3. Room");
 
-        if (availableFacilities.isEmpty()) {
-            System.out.println("No available services for the selected type! Cannot proceed.");
-            return;
-        }
-
-        for (int i = 0; i < availableFacilities.size(); i++) {
-            Facility facility = availableFacilities.get(i);
-            boolean isBooked = isFacilityBooked(facility.getId());
-            System.out.println((i + 1) + ". " + facility.getId() + " - " + facility.getName() + (isBooked ? " (Already Booked)" : ""));
-        }
-
-        int selectedIndex;
-        do {
-            System.out.print("Select service number (1-" + availableFacilities.size() + "): ");
-            try {
-                selectedIndex = Integer.parseInt(scanner.nextLine());
-                if (selectedIndex >= 1 && selectedIndex <= availableFacilities.size()) {
-                    Facility tempFacility = availableFacilities.get(selectedIndex - 1);
-
-                    if (isFacilityBooked(tempFacility.getId())) {
-                        System.out.println("This service has already been booked! Please select another one.");
+            int serviceType;
+            do {
+                try {
+                    System.out.print("Select service type: ");
+                    serviceType = Integer.parseInt(scanner.nextLine());
+                    if (serviceType < 1 || serviceType > 3) {
+                        System.out.println("Invalid service type! Please select 1, 2, or 3.");
                     } else {
-                        selectedFacility = tempFacility;
                         break;
                     }
-
-                } else {
-                    System.out.println("Invalid selection! Please choose between 1 and " + availableFacilities.size());
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input! Please enter a number (1, 2, or 3).");
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input! Please enter a number.");
+            } while (true);
+
+
+            List<Facility> availableFacilities = new ArrayList<>();
+
+            switch (serviceType) {
+                case 1:
+                    System.out.println("Available Villas:");
+                    availableFacilities = facilityRepository.findAllByType("Villa");
+                    break;
+                case 2:
+                    System.out.println("Available Houses:");
+                    availableFacilities = facilityRepository.findAllByType("House");
+                    break;
+                case 3:
+                    System.out.println("Available Rooms:");
+                    availableFacilities = facilityRepository.findAllByType("Room");
+                    break;
             }
-        } while (true);
+
+            if (availableFacilities.isEmpty()) {
+                System.out.println("No available services for the selected type! Cannot proceed.");
+                continue;
+            }
+
+            for (int i = 0; i < availableFacilities.size(); i++) {
+                Facility facility = availableFacilities.get(i);
+                boolean isBooked = isFacilityBooked(facility.getId());
+                System.out.println((i + 1) + ". " + facility.getId() + " - " + facility.getName() + (isBooked ? " (Already Booked)" : ""));
+            }
+
+            boolean allBooked = true;
+            for (Facility facility : availableFacilities) {
+                if (!isFacilityBooked(facility.getId())) {
+                    allBooked = false;
+                    break;
+                }
+            }
+
+            if (allBooked) {
+                System.out.println("All services of this type are already booked! Please choose another service.");
+                continue;
+            }
+
+            int selectedIndex;
+            do {
+                System.out.print("Select service number (1-" + availableFacilities.size() + "): ");
+                try {
+                    selectedIndex = Integer.parseInt(scanner.nextLine());
+                    if (selectedIndex >= 1 && selectedIndex <= availableFacilities.size()) {
+                        Facility tempFacility = availableFacilities.get(selectedIndex - 1);
+
+                        if (isFacilityBooked(tempFacility.getId())) {
+                            System.out.println("This service has already been booked! Please select another one.");
+                        } else {
+                            selectedFacility = tempFacility;
+                            break;
+                        }
+
+                    } else {
+                        System.out.println("Invalid selection! Please choose between 1 and " + availableFacilities.size());
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input! Please enter a number.");
+                }
+            } while (true);
+            break;
+        }
 
 
         System.out.println("Service selected successfully: " + selectedFacility.getName());
