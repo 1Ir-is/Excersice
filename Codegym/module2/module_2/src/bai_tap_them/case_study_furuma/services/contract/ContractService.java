@@ -6,10 +6,7 @@ import bai_tap_them.case_study_furuma.repositories.contract.IContractRepository;
 import bai_tap_them.case_study_furuma.repositories.facility.IFacilityRepository;
 import bai_tap_them.case_study_furuma.utils.ValidationUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.TreeSet;
+import java.util.*;
 
 public class ContractService implements IContractService {
 
@@ -46,10 +43,11 @@ public class ContractService implements IContractService {
 
     @Override
     public void add() {
-        TreeSet<Booking> bookings = bookingRepository.findAll();
+        Queue<Booking> bookings = new LinkedList<>(bookingRepository.findAll());
 
         List<Booking> eligibleBookings = new ArrayList<>();
-        for (Booking booking : bookings) {
+        while (!bookings.isEmpty()) {
+            Booking booking = bookings.poll();
             Facility facility = facilityRepository.findById(booking.getFacilityId());
             if (facility != null && (facility instanceof Villa || facility instanceof House) && !booking.isContracted()) {
                 eligibleBookings.add(booking);
