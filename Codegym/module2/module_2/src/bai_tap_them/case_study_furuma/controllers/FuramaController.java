@@ -25,7 +25,7 @@ import bai_tap_them.case_study_furuma.services.facility.IFacilityService;
 import bai_tap_them.case_study_furuma.services.promotion.IPromotionService;
 import bai_tap_them.case_study_furuma.services.promotion.PromotionService;
 import bai_tap_them.case_study_furuma.utils.MenuPrinter;
-import bai_tap_them.case_study_furuma.view.CommonView;
+import bai_tap_them.case_study_furuma.views.CommonView;
 
 import java.util.Scanner;
 

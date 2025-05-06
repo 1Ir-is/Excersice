@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ContractRepository implements IContractRepository {
 
-    private static final String CONTRACTS_FILE = "bai_tap_them/case_study_furuma/data/contracts.csv";
+    private static final String CONTRACTS_FILE = "bai_tap_them/case_study_furuma/datas/contracts.csv";
 
     @Override
     public void add(Contract contract) {

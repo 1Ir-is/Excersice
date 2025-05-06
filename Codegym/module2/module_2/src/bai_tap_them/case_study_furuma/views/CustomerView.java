@@ -1,4 +1,4 @@
-package bai_tap_them.case_study_furuma.view;
+package bai_tap_them.case_study_furuma.views;
 
 import bai_tap_them.case_study_furuma.utils.ValidationUtils;
 
@@ -40,6 +40,16 @@ public class CustomerView {
     public static String inputCustomerEmail() {
         System.out.print("Enter customer email: ");
         return ValidationUtils.validateInput("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", "Invalid email. Please try again!");
+    }
+
+    public static String selectCustomerType() {
+        String[] customerTypes = {"Diamond", "Platinum", "Gold", "Silver", "Member"};
+        System.out.println("Select customer type:");
+        for (int i = 0; i < customerTypes.length; i++) {
+            System.out.println((i + 1) + ". " + customerTypes[i]);
+        }
+        int choice = CommonView.getChoice(customerTypes.length);
+        return customerTypes[choice - 1];
     }
 
     public static String inputAddress() {

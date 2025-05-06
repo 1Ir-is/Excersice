@@ -1,8 +1,9 @@
-package bai_tap_them.case_study_furuma.view;
+package bai_tap_them.case_study_furuma.views;
 
 import bai_tap_them.case_study_furuma.utils.ValidationUtils;
 
-public class HouseView extends FacilityView {
+public class VillaView extends FacilityView {
+
     public static String inputRoomStandard() {
         String roomStandard;
         do {
@@ -10,6 +11,11 @@ public class HouseView extends FacilityView {
             roomStandard = scanner.nextLine();
         } while (!ValidationUtils.validateNotEmpty(roomStandard, "Room standard cannot be empty, please re-enter."));
         return roomStandard;
+    }
+
+    public static double inputPoolArea() {
+        System.out.print("Enter pool area (>30): ");
+        return ValidationUtils.validateDouble(30);
     }
 
     public static int inputNumberOfFloors() {

@@ -8,7 +8,7 @@ import java.util.*;
 public class FacilityRepository implements IFacilityRepository {
 
     private static final LinkedHashMap<Facility, Integer> facilities = new LinkedHashMap<>();
-    private static final String FACILITIES_FILE = "bai_tap_them/case_study_furuma/data/facilities.csv";
+    private static final String FACILITIES_FILE = "bai_tap_them/case_study_furuma/datas/facilities.csv";
 
     static {
         loadFromCSV();

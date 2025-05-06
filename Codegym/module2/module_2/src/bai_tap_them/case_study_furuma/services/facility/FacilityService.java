@@ -6,10 +6,10 @@ import bai_tap_them.case_study_furuma.models.Room;
 import bai_tap_them.case_study_furuma.models.Villa;
 import bai_tap_them.case_study_furuma.repositories.facility.IFacilityRepository;
 import bai_tap_them.case_study_furuma.utils.MenuPrinter;
-import bai_tap_them.case_study_furuma.view.CommonView;
-import bai_tap_them.case_study_furuma.view.HouseView;
-import bai_tap_them.case_study_furuma.view.RoomView;
-import bai_tap_them.case_study_furuma.view.VillaView;
+import bai_tap_them.case_study_furuma.views.CommonView;
+import bai_tap_them.case_study_furuma.views.HouseView;
+import bai_tap_them.case_study_furuma.views.RoomView;
+import bai_tap_them.case_study_furuma.views.VillaView;
 
 import java.util.*;
 

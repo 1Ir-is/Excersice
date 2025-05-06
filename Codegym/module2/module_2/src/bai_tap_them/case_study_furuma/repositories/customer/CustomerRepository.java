@@ -1,15 +1,13 @@
 package bai_tap_them.case_study_furuma.repositories.customer;
 
 import bai_tap_them.case_study_furuma.models.Customer;
-import bai_tap_them.case_study_furuma.models.Employee;
 import bai_tap_them.case_study_furuma.utils.SaveFileUtils;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerRepository implements ICustomerRepository {
-    private static final String CUSTOMER_FILE = "bai_tap_them/case_study_furuma/data/customers.csv";
+    private static final String CUSTOMER_FILE = "bai_tap_them/case_study_furuma/datas/customers.csv";
 
 
     @Override

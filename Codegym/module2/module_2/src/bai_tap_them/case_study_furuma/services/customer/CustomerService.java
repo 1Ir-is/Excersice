@@ -2,9 +2,8 @@ package bai_tap_them.case_study_furuma.services.customer;
 
 import bai_tap_them.case_study_furuma.models.Customer;
 import bai_tap_them.case_study_furuma.repositories.customer.ICustomerRepository;
-import bai_tap_them.case_study_furuma.utils.ValidationUtils;
-import bai_tap_them.case_study_furuma.view.CommonView;
-import bai_tap_them.case_study_furuma.view.CustomerView;
+import bai_tap_them.case_study_furuma.views.CommonView;
+import bai_tap_them.case_study_furuma.views.CustomerView;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -60,7 +59,7 @@ public class CustomerService implements ICustomerService {
         String idCard = CustomerView.inputCustomerIdCard();
         String phoneNumber = CustomerView.inputCustomerPhoneNumber();
         String email = CustomerView.inputCustomerEmail();
-        String customerType = selectCustomerType();
+        String customerType = CustomerView.selectCustomerType();
         String address = CustomerView.inputAddress();
 
         Customer customer = new Customer(id, name, dateOfBirth, gender, idCard, phoneNumber, email, customerType, address);
@@ -110,9 +109,25 @@ public class CustomerService implements ICustomerService {
             }
         }
 
-        String customerType = selectCustomerType();
-        if (!customerType.isEmpty()) {
-            customerToEdit.setCustomerType(customerType);
+        String[] customerTypes = {"Diamond", "Platinum", "Gold", "Silver", "Member"};
+        System.out.println("Select customer type (leave blank to keep current): ");
+        for (int i = 0; i < customerTypes.length; i++) {
+            System.out.println((i + 1) + ". " + customerTypes[i]);
+        }
+
+        System.out.print("Your choice: ");
+        String customerTypeInput = scanner.nextLine();
+        if (!customerTypeInput.isEmpty()) {
+            try {
+                int customerTypeChoice = Integer.parseInt(customerTypeInput);
+                if (customerTypeChoice >= 1 && customerTypeChoice <= customerTypes.length) {
+                    customerToEdit.setCustomerType(customerTypes[customerTypeChoice - 1]);
+                } else {
+                    System.out.println("Invalid choice. Keeping current customer type.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Keeping current customer type.");
+            }
         }
 
         System.out.print("Enter new address (leave blank to keep current): ");
@@ -122,16 +137,5 @@ public class CustomerService implements ICustomerService {
         }
         customerRepository.saveAll(customers);
         System.out.println("Customer updated successfully.");
-    }
-
-
-    private String selectCustomerType() {
-        String[] customerTypes = {"Diamond", "Platinum", "Gold", "Silver", "Member"};
-        System.out.println("Select customer type:");
-        for (int i = 0; i < customerTypes.length; i++) {
-            System.out.println((i + 1) + ". " + customerTypes[i]);
-        }
-        int choice = CommonView.getChoice(customerTypes.length);
-        return customerTypes[choice - 1];
     }
 }

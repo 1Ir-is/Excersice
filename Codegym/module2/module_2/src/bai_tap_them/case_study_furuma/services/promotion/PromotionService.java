@@ -2,8 +2,7 @@ package bai_tap_them.case_study_furuma.services.promotion;
 
 import bai_tap_them.case_study_furuma.models.Customer;
 import bai_tap_them.case_study_furuma.repositories.promotion.IPromotionRepository;
-import bai_tap_them.case_study_furuma.view.CustomerView;
-import bai_tap_them.case_study_furuma.view.DistributeVoucherView;
+import bai_tap_them.case_study_furuma.views.DistributeVoucherView;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -44,7 +43,19 @@ public class PromotionService implements IPromotionService {
         int totalVoucher = tenPercent + twentyPercent + fiftyPercent;
         int currentMonth = LocalDate.now().getMonthValue();
 
-        Stack<Customer> customerStack = promotionRepository.getCustomerForVoucher(currentMonth, totalVoucher);
+        Stack<Customer> customerStack;
+
+        try {
+            customerStack = promotionRepository.getCustomerForVoucher(currentMonth, totalVoucher);
+        } catch (RuntimeException e) {
+            System.out.println("Error retrieving customers for voucher distribution: " + e.getMessage());
+            return;
+        }
+
+        if (customerStack.isEmpty()) {
+            System.out.println("No customers eligible for voucher distribution in current month.");
+            return;
+        }
 
         System.out.println("Distributing Vouchers....");
         while (!customerStack.isEmpty()) {
@@ -61,4 +72,5 @@ public class PromotionService implements IPromotionService {
             }
         }
     }
+
 }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeRepository implements IEmployeeRepository {
-    private static final String EMPLOYEE_FILE = "bai_tap_them/case_study_furuma/data/employees.csv";
+    private static final String EMPLOYEE_FILE = "bai_tap_them/case_study_furuma/datas/employees.csv";
 
     @Override
     public void add(Employee employee) {

@@ -14,8 +14,8 @@ import java.util.Stack;
 import java.util.TreeSet;
 
 public class PromotionRepository implements IPromotionRepository {
-    private static final String BOOKING_FILE = "bai_tap_them/case_study_furuma/data/bookings.csv";
-    private static final String CUSTOMER_FILE = "bai_tap_them/case_study_furuma/data/customers.csv";
+    private static final String BOOKING_FILE = "bai_tap_them/case_study_furuma/datas/bookings.csv";
+    private static final String CUSTOMER_FILE = "bai_tap_them/case_study_furuma/datas/customers.csv";
     private static final List<Customer> customers = new ArrayList<>();
     private static final TreeSet<Booking> bookings = new TreeSet<>(new BookingComparator());
 
@@ -52,20 +52,22 @@ public class PromotionRepository implements IPromotionRepository {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         for (Booking booking : bookings) {
+            LocalDate bookingDate;
             try {
-                LocalDate bookingDate = LocalDate.parse(booking.getBookingDate(), formatter);
-                if (bookingDate.getMonthValue() == month) {
-                    for (Customer customer : customers) {
-                        if (customer.getId().equals(booking.getCustomerId())) {
-                            customerStack.push(customer);
-                            if (customerStack.size() == totalVoucher) {
-                                return customerStack;
-                            }
+                bookingDate = LocalDate.parse(booking.getBookingDate(), formatter);
+            } catch (DateTimeParseException e) {
+                throw new RuntimeException("Invalid date format in booking: " + booking.getBookingDate(), e);
+            }
+
+            if (bookingDate.getMonthValue() == month) {
+                for (Customer customer : customers) {
+                    if (customer.getId().equals(booking.getCustomerId())) {
+                        customerStack.push(customer);
+                        if (customerStack.size() == totalVoucher) {
+                            return customerStack;
                         }
                     }
                 }
-            } catch (DateTimeParseException dateTimeParseException) {
-                System.err.println("Invalid date format booking: " + booking.getBookingDate());
             }
         }
         return customerStack;

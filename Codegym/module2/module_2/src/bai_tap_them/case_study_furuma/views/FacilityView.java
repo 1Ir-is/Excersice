@@ -1,4 +1,4 @@
-package bai_tap_them.case_study_furuma.view;
+package bai_tap_them.case_study_furuma.views;
 
 import bai_tap_them.case_study_furuma.utils.ValidationUtils;
 

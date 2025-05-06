@@ -1,11 +1,8 @@
 package bai_tap_them.case_study_furuma.services.employee;
 
-import bai_tap_them.case_study_furuma.models.Customer;
 import bai_tap_them.case_study_furuma.models.Employee;
 import bai_tap_them.case_study_furuma.repositories.employee.IEmployeeRepository;
-import bai_tap_them.case_study_furuma.utils.ValidationUtils;
-import bai_tap_them.case_study_furuma.view.CommonView;
-import bai_tap_them.case_study_furuma.view.EmployeeView;
+import bai_tap_them.case_study_furuma.views.EmployeeView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
