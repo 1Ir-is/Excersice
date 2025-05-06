@@ -51,7 +51,6 @@ public class FuramaController {
     private final Scanner scanner = new Scanner(System.in);
 
     public void displayMainMenu() {
-        Scanner scanner = new Scanner(System.in);
         int choice;
 
         do {
@@ -75,7 +74,7 @@ public class FuramaController {
                     displayPromotionMenu();
                     break;
                 case 6:
-                    if (confirmExit(scanner)) {
+                    if (confirmExit()) {
                         System.out.println("Exit the program!");
                     } else {
                         choice = -1;
@@ -228,7 +227,7 @@ public class FuramaController {
         } while (true);
     }
 
-    private boolean confirmExit(Scanner scanner) {
+    private boolean confirmExit() {
         while (true) {
             System.out.print("Are you sure want to exit the program? (Y/N): ");
             String confirmation = scanner.nextLine().trim().toUpperCase();
