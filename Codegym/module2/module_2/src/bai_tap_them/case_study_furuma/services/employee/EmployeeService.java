@@ -124,6 +124,8 @@ public class EmployeeService implements IEmployeeService {
             }
         }
 
+
+
         String[] qualifications = {"Intermediate", "College", "University", "Postgraduate"};
         System.out.println("Select new qualification (leave blank to keep current): ");
         for (int i = 0; i < qualifications.length; i++) {
