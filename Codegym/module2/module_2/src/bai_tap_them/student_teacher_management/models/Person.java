@@ -1,20 +1,16 @@
 package bai_tap_them.student_teacher_management.models;
 
 public abstract class Person {
-    private String id;
-    private String name;
-    private String dateOfBirth;
-    private String gender;
-    private String email;
-    private String phoneNumber;
+    protected String id;
+    protected String name;
+    protected String gender;
+    protected String dateOfBirth;
 
-    public Person(String id, String name, String dateOfBirth, String gender, String email, String phoneNumber) {
+    public Person(String id, String name, String gender, String dateOfBirth) {
         this.id = id;
         this.name = name;
-        this.dateOfBirth = dateOfBirth;
         this.gender = gender;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getId() {
@@ -33,14 +29,6 @@ public abstract class Person {
         this.name = name;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
     public String getGender() {
         return gender;
     }
@@ -49,21 +37,15 @@ public abstract class Person {
         this.gender = gender;
     }
 
-    public String getEmail() {
-        return email;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
+    public abstract String toCSV();
     public abstract String getDetails();
 }
+

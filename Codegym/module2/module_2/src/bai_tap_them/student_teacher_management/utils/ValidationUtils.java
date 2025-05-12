@@ -93,4 +93,36 @@ public class ValidationUtils {
             }
         }
     }
+
+    public static double validateSalary() {
+        while (true) {
+            try {
+                double salary = scanner.nextDouble();
+                scanner.nextLine();
+                if (salary > 0) {
+                    return salary;
+                } else {
+                    System.out.println("Salary must be greater than 0!");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid salary, please enter a valid number!");
+                scanner.nextLine();
+            }
+        }
+    }
+
+    public static double validateDouble(double minValue) {
+        while (true) {
+            try {
+                double value = Double.parseDouble(scanner.nextLine());
+                if (value > minValue) {
+                    return value;
+                } else {
+                    System.out.println("Value must be greater than " + minValue + ". Please try again!");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please try again!");
+            }
+        }
+    }
 }

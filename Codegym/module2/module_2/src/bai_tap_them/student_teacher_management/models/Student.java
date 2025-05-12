@@ -2,10 +2,12 @@ package bai_tap_them.student_teacher_management.models;
 
 public class Student extends Person {
     private String className;
+    private double grade;
 
-    public Student(String id, String name, String dateOfBirth, String gender, String email, String phoneNumber, String className) {
-        super(id, name, dateOfBirth, gender, email, phoneNumber);
+    public Student(String id, String name, String gender, String dateOfBirth, String className, double grade) {
+        super(id, name, gender, dateOfBirth);
         this.className = className;
+        this.grade = grade;
     }
 
     public String getClassName() {
@@ -16,40 +18,32 @@ public class Student extends Person {
         this.className = className;
     }
 
+    public double getGrade() {
+        return grade;
+    }
+
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
+
+    @Override
+    public String toCSV() {
+        return id + "," + name + "," + gender + "," + dateOfBirth + "," + className + "," + grade;
+    }
+
     @Override
     public String getDetails() {
-        return String.join("\n",
-                "Student Information:",
-                "Id: " + getId(),
-                "Name: " + getName(),
-                "Date of Birth: " + getDateOfBirth(),
-                "Gender: " + getGender(),
-                "Email: " + getEmail(),
-                "Phone Number: " + getPhoneNumber(),
-                "Class Name: " + className);
+        return "Student ID: " + id + ", Name: " + name + ", Gender: " + gender + ", DOB: " + dateOfBirth +
+                ", Class: " + className + ", Grade: " + grade;
     }
 
-    public String toCSV() {
-        return String.join(",",
-                getId(),
-                getName(),
-                getDateOfBirth(),
-                getGender(),
-                getEmail(),
-                getPhoneNumber(),
-                className);
+    @Override
+    public String toString() {
+        return getDetails();
     }
 
-    public static Student fromCSV(String csvLine) {
-        String[] parts = csvLine.split(",");
-        return new Student(
-                parts[0],
-                parts[1],
-                parts[2],
-                parts[3],
-                parts[4],
-                parts[5],
-                parts[6]
-        );
+    public static Student fromCSV(String csv) {
+        String[] parts = csv.split(",");
+        return new Student(parts[0], parts[1], parts[2], parts[3], parts[4], Double.parseDouble(parts[5]));
     }
 }
