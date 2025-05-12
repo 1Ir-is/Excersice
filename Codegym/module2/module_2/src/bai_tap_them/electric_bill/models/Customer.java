@@ -1,8 +1,8 @@
 package bai_tap_them.electric_bill.models;
 
 public abstract class Customer {
-    private String id;
-    private String name;
+    protected String id;
+    protected String name;
 
     public Customer(String id, String name) {
         this.id = id;
@@ -26,4 +26,5 @@ public abstract class Customer {
     }
 
     public abstract String toCSV();
+    public abstract String getDetails();
 }

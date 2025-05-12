@@ -1,5 +1,6 @@
 package bai_tap_them.student_teacher_management.repositories;
 
+import bai_tap_them.student_teacher_management.models.Student;
 import bai_tap_them.student_teacher_management.models.Teacher;
 import bai_tap_them.student_teacher_management.utils.SaveFileUtils;
 
@@ -15,8 +16,9 @@ public class TeacherRepository implements IPersonRepository<Teacher> {
         List<String> lines = SaveFileUtils.readFromFile(FILE_PATH);
         List<Teacher> teachers = new ArrayList<>();
         for (String line : lines) {
-            if (line.startsWith("Teacher,")) {
-                teachers.add(Teacher.fromCSV(line.substring(8)));
+            String[] parts = line.split(",", 2);
+            if (parts.length > 1 && "Teacher".equals(parts[0])) {
+                teachers.add(Teacher.fromCSV(parts[1]));
             }
         }
         return teachers;

@@ -1,12 +1,13 @@
-package bai_tap_them.electric_bill.repositories.bill;
+package bai_tap_them.electric_bill.repositories;
 
 import bai_tap_them.electric_bill.models.Bill;
 
 import java.util.List;
 
 public interface IBillRepository {
-    void add(Bill bill);
     List<Bill> findAll();
-    Bill findById(String id);
+    void save(List<Bill> bills);
+    void add(Bill bill);
     void update(Bill bill);
+    Bill findById(int id);
 }

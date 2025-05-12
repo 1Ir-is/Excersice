@@ -12,8 +12,31 @@ public class ForeignCustomer extends Customer {
         return nationality;
     }
 
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
     @Override
     public String toCSV() {
-        return "FOREIGN," + getId() + "," + getName() + "," + nationality;
+        return id + "," + name + "," + nationality;
+    }
+
+    @Override
+    public String getDetails() {
+        return "FOREIGN: " + id + ", Name: " + name + ", Nationality: " + nationality;
+    }
+
+    @Override
+    public String toString() {
+        return getDetails();
+    }
+
+    public static ForeignCustomer fromCSV(String csv) {
+        String[] parts = csv.split(",");
+        return new ForeignCustomer(
+                parts[0],
+                parts[1],
+                parts[2]
+        );
     }
 }

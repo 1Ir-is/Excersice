@@ -1,7 +1,9 @@
 package bai_tap_them.electric_bill.services.customers;
 
-public interface ICustomerService {
-    void addCustomer();
-    void displayCustomers();
-    void searchCustomerByName();
+import java.util.List;
+
+public interface ICustomerService<T> {
+    List<T> getAll();
+    void add(T customer);
+    List<T> searchByName(String keyword);
 }

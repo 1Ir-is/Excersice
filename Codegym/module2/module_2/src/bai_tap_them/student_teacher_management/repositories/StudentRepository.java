@@ -14,8 +14,9 @@ public class StudentRepository implements IPersonRepository<Student> {
         List<String> lines = SaveFileUtils.readFromFile(FILE_PATH);
         List<Student> students = new ArrayList<>();
         for (String line : lines) {
-            if (line.startsWith("Student,")) {
-                students.add(Student.fromCSV(line.substring(8)));
+            String[] parts = line.split(",", 2);
+            if (parts.length > 1 && "Student".equals(parts[0])) {
+                students.add(Student.fromCSV(parts[1]));
             }
         }
         return students;

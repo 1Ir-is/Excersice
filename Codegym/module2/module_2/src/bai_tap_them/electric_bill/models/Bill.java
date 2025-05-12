@@ -3,15 +3,16 @@ package bai_tap_them.electric_bill.models;
 import java.time.LocalDate;
 
 public class Bill {
-    private String billId;
+    private static int idCounter = 1;
+    private int billId;
     private String customerId;
     private LocalDate billDate;
     private int quantity;
     private double unitPrice;
     private double totalAmount;
 
-    public Bill(String billId, String customerId, LocalDate billDate, int quantity, double unitPrice, double totalAmount) {
-        this.billId = billId;
+    public Bill(String customerId, LocalDate billDate, int quantity, double unitPrice, double totalAmount) {
+        this.billId = idCounter++;
         this.customerId = customerId;
         this.billDate = billDate;
         this.quantity = quantity;
@@ -19,7 +20,7 @@ public class Bill {
         this.totalAmount = totalAmount;
     }
 
-    public String getBillId() {
+    public int getBillId() {
         return billId;
     }
 
@@ -27,23 +28,49 @@ public class Bill {
         return customerId;
     }
 
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
     public LocalDate getBillDate() {
         return billDate;
+    }
+
+    public void setBillDate(LocalDate billDate) {
+        this.billDate = billDate;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public double getUnitPrice() {
         return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
     public double getTotalAmount() {
         return totalAmount;
     }
 
-    public String toCSV() {
-        return billId + "," + customerId + "," + billDate + "," + quantity + "," + unitPrice + "," + totalAmount;
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    @Override
+    public String toString() {
+        return "Bill ID: " + billId +
+                ", Customer ID: " + customerId +
+                ", Bill Date: " + billDate +
+                ", Quantity: " + quantity +
+                ", Unit Price: " + unitPrice +
+                ", Total Amount: " + totalAmount;
     }
 }
