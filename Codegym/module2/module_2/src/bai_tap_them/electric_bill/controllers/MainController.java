@@ -1,11 +1,7 @@
 package bai_tap_them.electric_bill.controllers;
 
-import bai_tap_them.electric_bill.models.Bill;
 import bai_tap_them.electric_bill.models.ForeignCustomer;
 import bai_tap_them.electric_bill.models.VietnameseCustomer;
-import bai_tap_them.electric_bill.services.bill.IBillService;
-import bai_tap_them.electric_bill.repositories.customers.VietnamCustomerRepository;
-import bai_tap_them.electric_bill.views.BillView;
 import bai_tap_them.electric_bill.utils.ValidationUtils;
 
 import java.util.List;
@@ -14,12 +10,10 @@ import java.util.Scanner;
 public class MainController {
     private final VietnamCustomerController vietnamController = new VietnamCustomerController();
     private final ForeignCustomerController foreignController = new ForeignCustomerController();
-    private final IBillService billService;
-    private final VietnamCustomerRepository customerRepository;
+    private final BillController billController;
 
-    public MainController(IBillService billService, VietnamCustomerRepository customerRepository) {
-        this.billService = billService;
-        this.customerRepository = customerRepository;
+    public MainController(BillController billController) {
+        this.billController = billController;
     }
 
     public void displayMainMenu() {
@@ -49,13 +43,13 @@ public class MainController {
                     searchCustomer();
                     break;
                 case 4:
-                    addBill();
+                    billController.addBill();
                     break;
                 case 5:
-                    editBill();
+                    billController.editBill();
                     break;
                 case 6:
-                    displayBillDetails();
+                    billController.displayBillDetails();
                     break;
                 case 7:
                     exit = true;
@@ -109,53 +103,6 @@ public class MainController {
 
         if (vietnamResults.isEmpty() && foreignResults.isEmpty()) {
             System.out.println("Not found.");
-        }
-    }
-
-    private void addBill() {
-        List<VietnameseCustomer> customers = customerRepository.findAll();
-        Bill bill = BillView.getBillInput(customers);
-        if (bill != null) {
-            billService.addBill(bill);
-            System.out.println("Bill added successfully!");
-        } else {
-            System.out.println("Failed to add bill.");
-        }
-    }
-
-    private void editBill() {
-        List<Bill> bills = billService.getAllBills();
-        BillView.displayBills(bills);
-
-        int billId = BillView.getBillIdInput();
-        Bill bill = billService.findBillById(billId);
-
-        if (bill == null) {
-            System.out.println("Bill not found.");
-            return;
-        }
-
-        String newCustomerId = BillView.getCustomerIdInput(customerRepository.findAll());
-        if (newCustomerId != null) {
-            bill.setCustomerId(newCustomerId);
-            billService.editBill(bill);
-            System.out.println("Bill updated successfully!");
-        } else {
-            System.out.println("Failed to update bill.");
-        }
-    }
-
-    private void displayBillDetails() {
-        List<Bill> bills = billService.getAllBills();
-        BillView.displayBills(bills);
-
-        int billId = BillView.getBillIdInput();
-        Bill bill = billService.findBillById(billId);
-
-        if (bill != null) {
-            BillView.displayBillDetails(bill, customerRepository.findAll());
-        } else {
-            System.out.println("Bill not found.");
         }
     }
 }
