@@ -32,3 +32,9 @@ insert into Teacher (id, name, age, country) values
 (2,'Tran Thi Binh', 42, 'Vietnam'),
 (3,'John Smith', 38, 'USA'),
 (4,'Nguyen Thi Lan', 29, 'Vietnam');
+
+update Teacher
+set name = 'Huynh Minh Huy'
+where id = 1;
+
+delete from Teacher where id = 4;
