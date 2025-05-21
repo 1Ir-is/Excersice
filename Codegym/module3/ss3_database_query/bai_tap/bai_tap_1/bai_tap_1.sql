@@ -89,29 +89,34 @@ VALUES (1, 1, 8, 1),
  (1, 2, 10, 2),
  (2, 1, 12, 1);
  
--- 1. Hiển thị danh sách tất cả các học viên
+-- 1. Hiển thị tất cả các sinh viên có tên bắt đầu bảng ký tự ‘h’
+select *
+from student
+where studentname like "H%";
+
+-- 2. Hiển thị các thông tin lớp học có thời gian bắt đầu vào tháng 12.
+select *
+from class
+where month(startdate) = 12;
+
+-- 3. Hiển thị tất cả các thông tin môn học có credit trong khoảng từ 3-5.
+select *
+from subject
+where Credit between 3 and 5;
+
+-- 4. Thay đổi mã lớp(ClassID) của sinh viên có tên ‘Hung’ là 2.
+update student
+set classid = 2
+where studentname = "Hung";
+
 select * from student;
 
--- 2. Hiển thị danh sách các học viên đang theo học.
-select * 
-from student
-where Status = true;
+-- 5. Hiển thị các thông tin: StudentName, SubName, Mark. 
+-- Dữ liệu sắp xếp theo điểm thi (mark) giảm dần. nếu trùng sắp theo tên tăng dần.
 
--- 3. Hiển thị danh sách các môn học có thời gian học nhỏ hơn 10 giờ.
-select * 
-from subject
-where Credit < 10;
-
--- 4. Hiển thị danh sách học viên lớp A1
-select student.*, class.classname
-from student
-join class on student.classid = class.classid
-where class.classname = "A1";
-
-
--- 5. Hiển thị điểm môn CF của các học viên.
-select student.*, subject.subname, subject.credit, mark.mark
+select student.studentname, subject.subname, mark.mark
 from student
 join mark on student.studentid = mark.studentid
-join subject on subject.subid = mark.subid
-where subject.subname = "CF"
+join subject on mark.subid = subject.subid
+order by mark.mark, student.studentname
+
