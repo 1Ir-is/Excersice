@@ -70,8 +70,7 @@ select
     khach_hang.c_age as tuoi,
     don_hang.o_id as order_id,
     don_hang.o_date as order_date,
-    group_concat(san_pham.p_name separator ',') as san_pham_da_mua,
-    sum(san_pham.p_price * chi_tiet_don_hang.od_quantity) as tong_tien
+    group_concat(san_pham.p_name separator ',') as san_pham_da_mua
 from khach_hang
 join don_hang on khach_hang.c_id = don_hang.c_id
 join chi_tiet_don_hang on don_hang.o_id = chi_tiet_don_hang.o_id
