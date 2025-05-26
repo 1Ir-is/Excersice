@@ -1,0 +1,41 @@
+package controllers;
+
+import models.User;
+import services.user.UserService;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+import java.io.IOException;
+
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
+    private final UserService userService = new UserService();
+
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+
+        User user = userService.login(email, password);
+        if (user != null) {
+            HttpSession session = req.getSession();
+            session.setAttribute("user", user);
+
+            // phan quyen
+            if (user.getMaVaiTro() == 0) { // admin
+                resp.sendRedirect(req.getContextPath() + "/admin/dashboard");
+            } else { // user
+                resp.sendRedirect(req.getContextPath() + "/");
+            }
+        } else {
+            req.setAttribute("error", "Email hoặc mật khẩu không đúng!");
+            req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+        }
+    }
+
+}
