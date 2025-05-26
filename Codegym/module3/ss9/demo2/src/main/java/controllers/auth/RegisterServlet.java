@@ -15,7 +15,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/views/register.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/auth/register.jsp").forward(req, resp);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class RegisterServlet extends HttpServlet {
 
         if (userService.isEmailExists(email)) {
             req.setAttribute("error", "Email đã được đăng ký!");
-            req.getRequestDispatcher("/views/register.jsp").forward(req, resp);
+            req.getRequestDispatcher("/views/auth/register.jsp").forward(req, resp);
             return;
         }
 
@@ -39,7 +39,7 @@ public class RegisterServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/login");
         } else {
             req.setAttribute("error", "Đăng ký thất bại. Vui lòng thử lại!");
-            req.getRequestDispatcher("/views/register.jsp").forward(req, resp);
+            req.getRequestDispatcher("/views/auth/register.jsp").forward(req, resp);
         }
     }
 }

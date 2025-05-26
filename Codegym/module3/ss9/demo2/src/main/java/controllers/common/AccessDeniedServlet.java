@@ -9,6 +9,6 @@ import java.io.IOException;
 public class AccessDeniedServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/views/access_denied.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/common/access_denied.jsp").forward(req, resp);
     }
 }

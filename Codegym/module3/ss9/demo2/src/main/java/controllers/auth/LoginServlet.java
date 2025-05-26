@@ -13,7 +13,7 @@ public class LoginServlet extends HttpServlet {
     private final UserService userService = new UserService();
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/auth/login.jsp").forward(req, resp);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
             }
         } else {
             req.setAttribute("error", "Email hoặc mật khẩu không đúng!");
-            req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+            req.getRequestDispatcher("/views/auth/login.jsp").forward(req, resp);
         }
     }
 
