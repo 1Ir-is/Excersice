@@ -40,6 +40,3 @@ bin/
 
 ### Mac OS ###
 .DS_Store
-
-# Cấu hình database cá nhân (không đẩy lên Git)
-src/main/resources/config.properties

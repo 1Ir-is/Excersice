@@ -28,7 +28,7 @@ public class JDBCUtil {
         }
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver"); // Nạp driver
+            Class.forName("com.mysql.cj.jdbc.Driver"); // nap driver
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Không tìm thấy driver MySQL", e);
         }
