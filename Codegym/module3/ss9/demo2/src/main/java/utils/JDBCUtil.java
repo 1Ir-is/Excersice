@@ -1,20 +1,40 @@
 package utils;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class JDBCUtil {
-    private static final String URL = "jdbc:mysql://localhost:3306/book_management?useSSL=false&serverTimezone=UTC";
-    private static final String USER = "root"; // đổi nếu dùng username khác
-    private static final String PASSWORD = "codegym123456789"; // thay bằng mật khẩu MySQL thật
+    private static final String URL;
+    private static final String USER;
+    private static final String PASSWORD;
+
+    static {
+        Properties props = new Properties();
+        try (InputStream input = JDBCUtil.class.getClassLoader().getResourceAsStream("config.properties")) {
+            if (input != null) {
+                props.load(input);
+                URL = props.getProperty("db.url");
+                USER = props.getProperty("db.user");
+                PASSWORD = props.getProperty("db.password");
+            } else {
+                throw new RuntimeException("Không tìm thấy file cấu hình!");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Lỗi khi đọc config.properties", e);
+        }
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); // Nạp driver
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Không tìm thấy driver MySQL", e);
+        }
+    }
 
     public static Connection getConnection() throws SQLException {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver"); // nạp driver
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }

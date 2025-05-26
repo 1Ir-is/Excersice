@@ -12,6 +12,7 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     private final UserService userService = new UserService();
 
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/views/auth/login.jsp").forward(req, resp);
     }
@@ -25,11 +26,22 @@ public class LoginServlet extends HttpServlet {
         if (user != null) {
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
+            session.setMaxInactiveInterval(30 * 60); // 30 phut
+
+            // ghi nho dang nhap qua cookie neu co
+            if (req.getParameter("remember") != null) {
+                Cookie emailCookie = new Cookie("email", email);
+                Cookie passCookie = new Cookie("password", password);
+                emailCookie.setMaxAge(7 * 24 * 60 * 60); // 7 ngay
+                passCookie.setMaxAge(7 * 24 * 60 * 60);
+                resp.addCookie(emailCookie);
+                resp.addCookie(passCookie);
+            }
 
             // phan quyen
-            if (user.getMaVaiTro() == 0) { // admin
+            if (user.getMaVaiTro() == 0) {
                 resp.sendRedirect(req.getContextPath() + "/admin/dashboard");
-            } else { // user
+            } else {
                 resp.sendRedirect(req.getContextPath() + "/");
             }
         } else {
@@ -37,5 +49,4 @@ public class LoginServlet extends HttpServlet {
             req.getRequestDispatcher("/views/auth/login.jsp").forward(req, resp);
         }
     }
-
 }

@@ -13,6 +13,11 @@
 <form method="post" action="<%= request.getContextPath() %>/login">
     Email: <input type="email" name="email" required><br><br>
     Mật khẩu: <input type="password" name="password" required><br><br>
+
+    <label>
+        <input type="checkbox" name="remember"> Ghi nhớ đăng nhập
+    </label><br><br>
+
     <button type="submit">Đăng nhập</button>
 </form>
 
