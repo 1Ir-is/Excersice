@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Phim Hoạt Hình</title>
+    <style>
+      body {
+        background: #f5f5f5;
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        max-width: 940px;
+        margin: 16px auto 0 auto;
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        padding: 0 0 16px 0;
+      }
+      .header {
+        display: flex;
+        align-items: center;
+        padding: 16px 24px 8px 24px;
+        border-bottom: 1px solid #e0e0e0;
+        background: #fff;
+      }
+      .logo {
+        height: 40px;
+        width: 40px;
+      }
+      .menu {
+        text-align: center;
+        padding: 12px 0;
+        border-bottom: 1px solid #e0e0e0;
+        background: #fff;
+        font-size: 1.05em;
+      }
+      .menu a {
+        color: #222;
+        text-decoration: none;
+        margin: 0 12px;
+      }
+      .menu span {
+        color: #888;
+        margin: 0 6px;
+      }
+      .main-content {
+        display: flex;
+        gap: 16px;
+        padding: 16px 16px 0 16px;
+      }
+      .left-col {
+        width: 260px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .left-item {
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        margin-bottom: 0;
+      }
+      .left-item img {
+        width: 100%;
+        display: block;
+      }
+      .left-item .title {
+        font-weight: bold;
+        font-size: 1.05em;
+        margin: 8px 8px 0 8px;
+      }
+      .left-item .meta {
+        color: #222;
+        font-size: 0.95em;
+        margin: 4px 8px 0 8px;
+      }
+      .left-item .channel {
+        color: #666;
+        font-size: 0.95em;
+        margin: 0 8px 8px 8px;
+      }
+      .center-col {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .center-video {
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        position: relative;
+      }
+      .center-video iframe,
+      .center-video img {
+        width: 100%;
+        height: 260px;
+        display: block;
+      }
+      .center-video .video-title {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 1.1em;
+        max-width: 90%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .center-info {
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        padding: 8px 12px 12px 12px;
+      }
+      .center-info .title {
+        font-weight: bold;
+        font-size: 1.1em;
+        margin-bottom: 2px;
+      }
+      .center-info .meta {
+        color: #222;
+        font-size: 0.97em;
+        margin-bottom: 4px;
+      }
+      .center-info .author {
+        color: #666;
+        font-size: 0.97em;
+        margin-bottom: 8px;
+      }
+      .center-info .desc {
+        color: #222;
+        font-size: 1em;
+        margin-bottom: 8px;
+      }
+      .footer {
+        text-align: center;
+        color: #444;
+        font-size: 1em;
+        background: #f5f5f5;
+        padding: 16px 0 12px 0;
+        margin-top: 16px;
+        border-top: 1px solid #e0e0e0;
+      }
+      @media (max-width: 900px) {
+        .container {
+          max-width: 100%;
+        }
+        .main-content {
+          flex-direction: column;
+        }
+        .left-col,
+        .center-col {
+          width: 100%;
+        }
+        .center-video iframe,
+        .center-video img {
+          height: 200px;
+        }
+      }
+      @media (max-width: 600px) {
+        .header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .main-content {
+          padding: 8px;
+          gap: 8px;
+        }
+        .footer {
+          font-size: 0.95em;
+        }
+        .center-video iframe,
+        .center-video img {
+          height: 140px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <img
+          src="https://yt3.googleusercontent.com/ytc/AIdro_lJyW1xhmbCveGlMO0_pYQJSOx7QexTFlcU78cgGTGxcXQ=s160-c-k-c0x00ffffff-no-rj"
+          alt="Phim Hoạt Hình"
+          class="logo"
+        />
+      </div>
+
+      <div class="menu">
+        <a href="#">Phim hoạt hình</a>
+        <span>|</span>
+        <a href="#">Phim hoạt hình yêu thích</a>
+        <span>|</span>
+        <a href="#">Nhân vật hoạt hình</a>
+        <span>|</span>
+        <a href="#">Góp ý</a>
+      </div>
+
+      <div class="main-content">
+        <div class="left-col">
+          <div class="left-item">
+            <img
+              src="https://i.ytimg.com/vi/EGoE47R1rYM/maxresdefault.jpg"
+              alt="Welcom đến với khách sạn Nobi"
+            />
+            <div class="title">
+              Welcom đến với khách sạn Nobi -
+              <span style="font-weight: normal">5,147,528 lượt xem</span>
+            </div>
+            <div class="channel">POP Kids</div>
+          </div>
+
+          <div class="left-item">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpWQNmOeZxF55XsPDNtV14oE9-aD5WWyEDaw&s"
+              alt="Đội bóng 11 người Nobita"
+            />
+            <div class="title">
+              Đội bóng 11 người Nobita -
+              <span style="font-weight: normal">5,147,528 lượt xem</span>
+            </div>
+            <div class="channel">POP Kids</div>
+          </div>
+
+          <div class="left-item">
+            <img
+              src="https://i.ytimg.com/vi/dKmQHIl70Bc/sddefault.jpg"
+              alt="Còi điều khiển vật"
+            />
+            <div class="title">
+              Còi điều khiển vật -
+              <span style="font-weight: normal">5,147,528 lượt xem</span>
+            </div>
+            <div class="channel">POP Kids</div>
+          </div>
+
+          <div class="left-item">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3zdWLt1q2HErbymVZ07JtEBOumtaQYSKF9A&s"
+              alt="Chiếc máy tạo kẹo bông"
+            />
+            <div class="title">
+              Chiếc máy tạo kẹo bông -
+              <span style="font-weight: normal">5,147,528 lượt xem</span>
+            </div>
+            <div class="channel">POP Kids</div>
+          </div>
+        </div>
+
+        <div class="center-col">
+          <div class="center-video">
+            <span class="video-title"
+              >Doreamon Ep 430 - Tớ là Mari đây &amp; Gậy di chuyển</span
+            >
+            <iframe
+              src="https://www.youtube.com/embed/U7dpo6uSipE"
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="center-info">
+            <div class="title">Tớ là Mari</div>
+            <div class="meta">5,147,528 lượt xem</div>
+            <div class="author">Tác giả</div>
+            <div class="desc">
+              Bộ phim kể về câu chuyện Thạch Sanh chém Trăn Tinh cứu dân, bắn
+              Đại Bàng cứu công chúa, dùng tiếng đàn nhân nghĩa dẹp tan quân xâm
+              lăng. Nhưng cuộc đời Thạch Sanh luôn bị tên Lý Thông làm cho điều
+              đứng. Cuối cùng chính nghĩa đã thắng. Tên Lý Thông gian ác bị đền
+              tội. Mời các bạn cùng đón xem và cảm nhận.<br /><br />
+              Bộ phim kể về câu chuyện Thạch Sanh chém Trăn Tinh cứu dân, bắn
+              Đại Bàng cứu công chúa, dùng tiếng đàn nhân nghĩa dẹp tan quân xâm
+              lăng. Nhưng cuộc đời Thạch Sanh luôn bị tên Lý Thông làm cho điều
+              đứng. Cuối cùng chính nghĩa đã thắng. Tên Lý Thông gian ác bị đền
+              tội. Mời các bạn cùng đón xem và cảm nhận.<br /><br />
+              Bộ phim kể về câu chuyện Thạch Sanh chém Trăn Tinh cứu dân, bắn
+              Đại Bàng cứu công chúa, dùng tiếng đàn nhân nghĩa dẹp tan quân xâm
+              lăng. Nhưng cuộc đời Thạch Sanh luôn bị tên Lý Thông làm cho điều
+              đứng. Cuối cùng chính nghĩa đã thắng. Tên Lý Thông gian ác bị đền
+              tội. Mời các bạn cùng đón xem và cảm nhận.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">© 2017 - Thiết kế web bởi trang hoathinhvn.net</div>
+    </div>
+  </body>
+</html>

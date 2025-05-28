@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        max-width: 700px;
+        margin: 20px auto;
+        font-family: Arial, sans-serif;
+      }
+      header,
+      nav,
+      footer {
+        border: 1px solid #888;
+        padding: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      .main-content {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      section {
+        flex: 2;
+        border: 1px solid #888;
+        padding: 10px;
+      }
+      aside {
+        flex: 1;
+        border: 1px solid #888;
+        padding: 10px;
+      }
+      article {
+        border: 1px solid #bbb;
+        margin-bottom: 10px;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Monday Times</h1>
+    </header>
+
+    <nav>
+      <ul
+        style="
+          list-style-type: none;
+          padding: 0;
+          display: flex;
+          gap: 10px;
+          justify-content: center;
+        "
+      >
+        <li>News</li>
+        <li>Sports</li>
+        <li>Weather</li>
+      </ul>
+    </nav>
+
+    <div class="main-content">
+      <section>
+        <h2>News Section</h2>
+        <article>
+          <h2>News Article</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </article>
+        <article>
+          <h2>News Article</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </article>
+      </section>
+      <aside>
+        <h2>Sidebar</h2>
+        <p>Latest News</p>
+        <ul>
+          <li>Breaking News 1</li>
+          <li>Breaking News 2</li>
+          <li>Breaking News 3</li>
+        </ul>
+        <p>Weather Updates</p>
+        <ul>
+          <li>Sunny</li>
+          <li>Cloudy</li>
+          <li>Rainy</li>
+        </ul>
+      </aside>
+    </div>
+
+    <footer>
+      <p>&copy; 2014 Monday Times. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
