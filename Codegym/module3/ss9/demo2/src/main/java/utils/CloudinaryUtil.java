@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class CloudinaryUtil {
     private static final Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
-            "cloud_name", "dnrxauvuu",
-            "api_key", "413839991841514",
-            "api_secret", "1nTDYBnVtoMe6AzXGK1z52gFhjg"
+            "cloud_name", ConfigReader.get("cloudinary.cloud_name"),
+            "api_key", ConfigReader.get("cloudinary.api_key"),
+            "api_secret", ConfigReader.get("cloudinary.api_secret")
     ));
 
     public static String uploadFile(InputStream is, String fileName) throws IOException {
