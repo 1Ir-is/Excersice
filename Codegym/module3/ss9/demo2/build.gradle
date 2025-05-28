@@ -26,7 +26,9 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'com.cloudinary:cloudinary-http44:1.29.0'
 }
+
 
 test {
     useJUnitPlatform()
@@ -47,6 +49,8 @@ tasks.named('processResources') {
 }
 
 war {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }

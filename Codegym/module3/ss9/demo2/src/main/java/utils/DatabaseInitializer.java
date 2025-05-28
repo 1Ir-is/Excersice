@@ -26,7 +26,7 @@ public class DatabaseInitializer {
                  Statement stmt = conn.createStatement()) {
 
                 stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS bookdb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
-                System.out.println(">>> Database 'bookdb' đã được tạo hoặc đã tồn tại.");
+                System.out.println(">>> Database 'bookdb' da duoc tao hoac da ton tai.");
             }
 
             // Sau khi tạo DB, kết nối lại để tạo bảng
@@ -38,11 +38,11 @@ public class DatabaseInitializer {
                         stmt.execute(sql);
                     }
                 }
-                System.out.println(">>> Các bảng đã được tạo.");
+                System.out.println(">>> Cac bang da duoc tao thanh cong!!!.");
             }
 
         } catch (Exception e) {
-            System.out.println("Lỗi khi khởi tạo database:");
+            System.out.println("Loi khi khoi tao database:" + e.getMessage());
             e.printStackTrace();
         }
     }

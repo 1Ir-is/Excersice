@@ -1,11 +1,12 @@
 package services.user;
 
 import models.User;
+import repositories.user.IUserRepository;
 import repositories.user.UserRepository;
 
 public class UserService implements IUserService {
 
-    private final UserRepository userRepository = new UserRepository();
+    private final IUserRepository userRepository = new UserRepository();
 
     @Override
     public User login(String email, String password) {

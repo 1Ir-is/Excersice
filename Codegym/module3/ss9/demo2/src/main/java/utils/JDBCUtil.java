@@ -21,16 +21,16 @@ public class JDBCUtil {
                 USER = props.getProperty("db.user");
                 PASSWORD = props.getProperty("db.password");
             } else {
-                throw new RuntimeException("Không tìm thấy file cấu hình!");
+                throw new RuntimeException("Khong tim thay file cau hinh!");
             }
         } catch (IOException e) {
-            throw new RuntimeException("Lỗi khi đọc config.properties", e);
+            throw new RuntimeException("Loi khi doc file config.properties", e);
         }
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // nap driver
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Không tìm thấy driver MySQL", e);
+            throw new RuntimeException("Khong tim thay driver MySQL", e);
         }
     }
 

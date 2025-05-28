@@ -5,9 +5,12 @@
   Time: 1:59 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
-<head><title>Login</title></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
 <body>
 <h2>Đăng nhập</h2>
 <form method="post" action="<%= request.getContextPath() %>/login">

@@ -5,13 +5,14 @@
   Time: 2:51 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="models.User" %>
 <%
   User user = (User) session.getAttribute("user");
 %>
 <html>
 <head>
+  <meta charset="UTF-8">
   <title>Admin Dashboard</title>
 </head>
 <body>
@@ -22,9 +23,12 @@
 %>
 <p>Chào mừng quản trị viên: <strong><%= user.getTen() %></strong></p>
 <ul>
+  <li><a href="<%= request.getContextPath() %>/admin/books">Quản lý sách</a></li>
+  <li><a href="<%= request.getContextPath() %>/admin/categories">Quản lý danh muc</a></li>
   <li><a href="<%= request.getContextPath() %>/some-admin-action">Quản lý người dùng</a></li>
   <li><a href="<%= request.getContextPath() %>/another-admin-action">Thống kê</a></li>
 </ul>
+
 <a href="<%= request.getContextPath() %>/logout">Đăng xuất</a>
 <%
 } else {

@@ -5,13 +5,16 @@
   Time: 2:00 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="models.User" %>
 <%
   User user = (User) session.getAttribute("user");
 %>
 <html>
-<head><title>Home</title></head>
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+</head>
 <body>
 <h2>Trang chủ</h2>
 
