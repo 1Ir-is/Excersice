@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Thông Tin Cá Nhân | 4Book</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <style>
+      body {
+        background: #f7f7f9;
+        font-family: "Roboto", Arial, sans-serif;
+      }
+      .profile-container {
+        max-width: 700px;
+        margin: 5rem auto;
+        background: #fff;
+        border-radius: 1rem;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+        padding: 4rem 3rem;
+      }
+      .profile-title {
+        font-size: 2.7rem;
+        color: #219150;
+        font-weight: 700;
+        margin-bottom: 2.5rem;
+        text-align: center;
+      }
+      .profile-info {
+        font-size: 1.4rem;
+        color: #222;
+        line-height: 2.5;
+      }
+      .profile-info i {
+        color: #27ae60;
+        margin-right: 1rem;
+        min-width: 28px;
+        text-align: center;
+      }
+      .profile-avatar {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+      }
+      .profile-avatar img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #27ae60;
+        box-shadow: 0 2px 12px #27ae6033;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <!-- header 1 start -->
+      <div class="header-1">
+        <a href="#" class="logo"><i class="fas fa-book"></i> 4Book</a>
+
+        <form action="" class="search-form">
+          <input
+            type="search"
+            name=""
+            placeholder="Tìm kiếm ..."
+            id="search-box"
+          />
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="icons">
+          <div id="search-btn" class="fas fa-search"></div>
+          <a href="#" class="fas fa-heart"></a>
+          <a href="#" class="fas fa-shopping-cart"></a>
+
+          <div class="dropdown">
+            <div id="login-btn" class="fas fa-user dropbtn"></div>
+            <div class="dropdown-content">
+              <a class="drop-content" href="profile.html">Thông tin</a>
+              <a class="drop-content" href="history.html">Lich sử mua hàng</a>
+              <a class="drop-content" href="#">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- header 1 end -->
+
+      <!-- header 2 start -->
+      <div class="header-2">
+        <nav class="navbar">
+          <a class="dropbtn" href="#Home">Trang chủ</a>
+          <a class="dropbtn" href="books.html">Tất cả sách</a>
+          <a class="dropbtn" href="#Featured">Nổi bật</a>
+          <div class="dropdown">
+            <a class="dropbtn" href="#Arrivals">Sách mới</a>
+            <div class="dropdown-content">
+              <a class="drop-content" href="#">Vừa phát hành</a>
+              <a class="drop-content" href="#">Bán chạy</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <a class="dropbtn" href="#Category">Thể loại</a>
+            <div class="dropdown-content">
+              <a class="drop-content" href="#">Kinh dị</a>
+              <a class="drop-content" href="#">Lãng mạn</a>
+              <a class="drop-content" href="#">Người lớn</a>
+            </div>
+          </div>
+          <a class="dropbtn" href="#reviews">Đánh giá</a>
+          <a class="dropbtn" href="#blogs">Blog</a>
+        </nav>
+      </div>
+
+      <!-- header 2 end -->
+    </header>
+    <section class="profile-container">
+      <div class="profile-title">
+        <i class="fas fa-user"></i> Thông Tin Cá Nhân
+      </div>
+      <div class="profile-avatar">
+        <img src="image/avatar_default.png" alt="Avatar" />
+      </div>
+      <div class="profile-info">
+        <div><i class="fas fa-user"></i> Họ tên: Nguyễn Văn A</div>
+        <div><i class="fas fa-envelope"></i> Email: nguyenvana@email.com</div>
+        <div><i class="fas fa-phone"></i> Số điện thoại: 0123 456 789</div>
+        <div>
+          <i class="fas fa-map-marker-alt"></i> Địa chỉ: 123 Đường Sách, Quận 1,
+          TP.HCM
+        </div>
+        <!-- Thêm các thông tin khác nếu cần -->
+      </div>
+    </section>
+  </body>
+</html>

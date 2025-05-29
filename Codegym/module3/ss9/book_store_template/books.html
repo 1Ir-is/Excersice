@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Danh Sách Sách | 4Book</title>
+    <!-- Icon -->
+    <link rel="icon" type="image/x-icon" href="/image/book-shop.png" />
+
+    <!-- Font awesome cdn link -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Custom Css file link-->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Có thể copy phần header từ index.html sang -->
+
+    <header class="header">
+      <!-- header 1 start -->
+      <div class="header-1">
+        <a href="#" class="logo"><i class="fas fa-book"></i> 4Book</a>
+
+        <form action="" class="search-form">
+          <input
+            type="search"
+            name=""
+            placeholder="Tìm kiếm ..."
+            id="search-box"
+          />
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="icons">
+          <div id="search-btn" class="fas fa-search"></div>
+          <a href="#" class="fas fa-heart"></a>
+          <a href="cart.html" class="fas fa-shopping-cart"></a>
+
+          <div class="dropdown">
+            <div id="login-btn" class="fas fa-user dropbtn"></div>
+            <div class="dropdown-content">
+              <a class="drop-content" href="profile.html">Thông tin</a>
+              <a class="drop-content" href="history.html">Lich sử mua hàng</a>
+              <a class="drop-content" href="#">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- header 1 end -->
+
+      <!-- header 2 start -->
+
+      <div class="header-2">
+        <nav class="navbar">
+          <a class="dropbtn" href="books.html">Khám phá sách hay</a>
+          <div class="dropdown">
+            <a class="dropbtn" href="#Category">Thể loại</a>
+            <div class="dropdown-content">
+              <a class="drop-content" href="#">Kinh dị</a>
+              <a class="drop-content" href="#">Lãng mạn</a>
+              <a class="drop-content" href="#">Người lớn</a>
+            </div>
+          </div>
+          <a class="dropbtn" href="#reviews">Đánh giá</a>
+          <a class="dropbtn" href="#blogs">Blog</a>
+        </nav>
+      </div>
+
+      <!-- header 2 end -->
+    </header>
+    <!-- header section end -->
+
+    <!-- bottom navbar start-->
+
+    <header class="mobile-header">
+      <div
+        class="mobile-header-logo"
+        style="text-align: center; padding-top: 1rem"
+      >
+        <!-- Thay src bằng đường dẫn logo của bạn -->
+        <img src="image/book-shop.png" alt="4Book Logo" style="height: 38px" />
+      </div>
+      <div class="mobile-header-bar">
+        <a href="#" class="header-icon-left fas fa-list"></a>
+        <form class="mobile-search-form">
+          <input type="text" placeholder="Tìm Kiếm Sách..." />
+        </form>
+        <div class="header-icons">
+          <a href="cart.html" class="fas fa-shopping-cart"></a>
+          <a href="#" id="mobile-login-btn" class="fas fa-user"></a>
+        </div>
+      </div>
+    </header>
+
+    <div id="mobile-sidebar" class="mobile-sidebar">
+      <div class="sidebar-header">
+        <span id="close-sidebar" class="fas fa-arrow-left"></span>
+        <span class="sidebar-title">Danh Mục Sản Phẩm</span>
+      </div>
+      <ul class="sidebar-menu">
+        <li>
+          <a href="books.html"><b>Tất Cả Sản Phẩm</b></a>
+        </li>
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <b>Thể Loại</b>
+            <span class="fas fa-chevron-down" style="float: right"></span>
+          </a>
+          <ul class="submenu">
+            <li><a href="#">Văn Học</a></li>
+            <li><a href="#">Kinh Tế</a></li>
+            <li><a href="#">Tâm Lý - Kỹ Năng Sống</a></li>
+            <li><a href="#">Thiếu Nhi</a></li>
+            <li><a href="#">Giáo Khoa - Tham Khảo</a></li>
+            <!-- Thêm các thể loại khác -->
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+    <!-- bottom navbar start-->
+
+    <section class="books-list" style="padding: 5rem 9%">
+      <h1 class="heading"><span>Tất cả Sách</span></h1>
+      <div class="books-grid">
+        <!-- Thay các box dưới bằng dữ liệu sách thực tế -->
+        <div class="book-box">
+          <div class="image">
+            <a href="book_detail.html">
+              <img src="image/book_1.jpg" alt="Sách 1" />
+            </a>
+          </div>
+          <div class="content">
+            <h3>
+              <a
+                href="book_detail.html"
+                style="color: inherit; text-decoration: none"
+                >Tên Sách 1</a
+              >
+            </h3>
+            <div class="price">369.000đ</div>
+            <a href="#" class="btn">Thêm vào giỏ</a>
+          </div>
+        </div>
+        <!-- Thêm các book-box khác tương tự -->
+      </div>
+    </section>
+    <!-- Custom JS file link -->
+    <script>
+      const sidebar = document.getElementById("mobile-sidebar");
+      const overlay = document.getElementById("sidebar-overlay");
+      const openBtn = document.querySelector(".header-icon-left");
+      const closeBtn = document.getElementById("close-sidebar");
+      const mobileLoginBtn = document.querySelector("#mobile-login-btn");
+      // Dropdown for bottom-navbar Featured
+      document.addEventListener("DOMContentLoaded", function () {
+        var btn = document.getElementById("featured-btn");
+        var dropdown = document.querySelector(".bottom-dropdown");
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          dropdown.classList.toggle("open");
+        });
+        // Đóng dropdown khi bấm ra ngoài
+        document.addEventListener("click", function (e) {
+          if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove("open");
+          }
+        });
+      });
+
+      openBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        sidebar.classList.add("open");
+        overlay.classList.add("show");
+      });
+      closeBtn.addEventListener("click", function () {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("show");
+      });
+      overlay.addEventListener("click", function () {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("show");
+      });
+      document.querySelectorAll(".submenu-toggle").forEach(function (toggle) {
+        toggle.addEventListener("click", function (e) {
+          e.preventDefault();
+          const parent = this.closest(".has-submenu");
+          parent.classList.toggle("open");
+        });
+      });
+
+      if (mobileLoginBtn) {
+        mobileLoginBtn.onclick = () => {
+          loginForm.classList.toggle("active");
+        };
+      }
+    </script>
+    <script src="js/app.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

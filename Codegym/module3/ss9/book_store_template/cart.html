@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Giỏ Hàng | 4Book</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <style>
+      body {
+        background: #f7f7f9;
+        font-family: "Roboto", Arial, sans-serif;
+      }
+      .cart-container {
+        max-width: 900px;
+        margin: 5rem auto;
+        background: #fff;
+        border-radius: 1rem;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+        padding: 3rem 2.5rem;
+      }
+      .cart-title {
+        font-size: 2.7rem;
+        color: #219150;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+      .cart-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 2.5rem;
+      }
+      .cart-table th,
+      .cart-table td {
+        padding: 1.6rem 1.2rem;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+        font-size: 1.35rem;
+      }
+      .cart-table th {
+        color: #27ae60;
+        font-weight: 700;
+        background: #f8f8fa;
+      }
+      .cart-table img {
+        width: 90px;
+        border-radius: 0.4rem;
+        box-shadow: 0 1px 4px #27ae6022;
+        max-height: 120px;
+      }
+      .cart-table .remove-btn {
+        color: #fff;
+        background: #e74c3c;
+        border: none;
+        border-radius: 0.4rem;
+        padding: 0.5rem 1.2rem;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.2s;
+      }
+      .cart-table .remove-btn:hover {
+        background: #c0392b;
+      }
+      .cart-total {
+        text-align: right;
+        font-size: 1.7rem;
+        color: #222;
+        margin-bottom: 2rem;
+      }
+      .cart-total span {
+        color: #27ae60;
+        font-size: 1.7rem;
+        font-weight: 700;
+        margin-left: 1rem;
+      }
+      .cart-actions {
+        text-align: right;
+      }
+      .cart-actions .btn {
+        font-size: 1.3rem;
+        padding: 1.2rem 3.5rem;
+        border-radius: 2rem;
+        background: #27ae60;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        transition: background 0.2s, transform 0.2s;
+        box-shadow: 0 2px 8px #27ae6033;
+        letter-spacing: 1px;
+        margin-left: 1rem;
+      }
+      .cart-actions .btn:hover {
+        background: #219150;
+        transform: translateY(-2px) scale(1.04);
+      }
+      .cart-empty {
+        text-align: center;
+        color: #888;
+        font-size: 1.3rem;
+        margin: 3rem 0;
+      }
+      /* Số lượng */
+      .qty-btn {
+        background: #27ae60;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 38px;
+        height: 38px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        margin: 0 4px;
+        transition: background 0.2s;
+      }
+      .qty-btn:hover {
+        background: #219150;
+      }
+      .qty-input {
+        width: 55px;
+        text-align: center;
+        border: none;
+        background: transparent;
+        font-size: 1.3rem;
+        pointer-events: none;
+      }
+      @media (max-width: 700px) {
+        .cart-container {
+          padding: 1rem 0.2rem;
+        }
+        .cart-table th,
+        .cart-table td {
+          font-size: 1rem;
+          padding: 0.7rem 0.3rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <!-- header 1 start -->
+      <div class="header-1">
+        <a href="#" class="logo"><i class="fas fa-book"></i> 4Book</a>
+
+        <form action="" class="search-form">
+          <input
+            type="search"
+            name=""
+            placeholder="Tìm kiếm ..."
+            id="search-box"
+          />
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="icons">
+          <div id="search-btn" class="fas fa-search"></div>
+          <a href="#" class="fas fa-heart"></a>
+          <a href="#" class="fas fa-shopping-cart"></a>
+
+          <div class="dropdown">
+            <div id="login-btn" class="fas fa-user dropbtn"></div>
+            <div class="dropdown-content">
+              <a class="drop-content" href="#">Profile</a>
+              <a class="drop-content" href="#">Settings</a>
+              <a class="drop-content" href="#">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- header 1 end -->
+
+      <!-- header 2 start -->
+      <div class="header-2">
+        <nav class="navbar">
+          <a class="dropbtn" href="#Home">Trang chủ</a>
+          <a class="dropbtn" href="books.html">Tất cả sách</a>
+          <a class="dropbtn" href="#Featured">Nổi bật</a>
+          <div class="dropdown">
+            <a class="dropbtn" href="#Arrivals">Sách mới</a>
+            <div class="dropdown-content">
+              <a class="drop-content" href="#">Vừa phát hành</a>
+              <a class="drop-content" href="#">Bán chạy</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <a class="dropbtn" href="#Category">Thể loại</a>
+            <div class="dropdown-content">
+              <a class="drop-content" href="#">Kinh dị</a>
+              <a class="drop-content" href="#">Lãng mạn</a>
+              <a class="drop-content" href="#">Người lớn</a>
+            </div>
+          </div>
+          <a class="dropbtn" href="#reviews">Đánh giá</a>
+          <a class="dropbtn" href="#blogs">Blog</a>
+        </nav>
+      </div>
+
+      <!-- header 2 end -->
+    </header>
+    <section class="cart-container">
+      <div class="cart-title">
+        <i class="fas fa-shopping-cart"></i> Giỏ Hàng Của Bạn
+      </div>
+      <!-- Nếu giỏ hàng rỗng thì hiện dòng dưới, nếu có sản phẩm thì ẩn -->
+      <!-- <div class="cart-empty">Giỏ hàng của bạn đang trống.</div> -->
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Ảnh</th>
+            <th>Tên Sách</th>
+            <th>Giá</th>
+            <th>Số Lượng</th>
+            <th>Thành Tiền</th>
+            <th>Xóa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img src="image/book_1.jpg" alt="Tên Sách 1" /></td>
+            <td>Tên Sách 1</td>
+            <td class="unit-price" data-price="369000">369.000đ</td>
+            <td>
+              <button class="qty-btn" onclick="changeQty(-1, this)">-</button>
+              <input type="text" class="qty-input" value="1" min="1" readonly />
+              <button class="qty-btn" onclick="changeQty(1, this)">+</button>
+            </td>
+            <td class="item-total">369.000đ</td>
+            <td>
+              <button class="remove-btn"><i class="fas fa-trash"></i></button>
+            </td>
+          </tr>
+          <!-- Thêm các dòng sách khác nếu có -->
+        </tbody>
+      </table>
+      <div class="cart-total">
+        Tổng cộng: <span id="cart-grand-total">369.000đ</span>
+      </div>
+      <div class="cart-actions">
+        <button class="btn">Tiếp tục mua sắm</button>
+        <button class="btn">Thanh toán</button>
+      </div>
+    </section>
+    <script>
+      function formatVND(number) {
+        return number.toLocaleString("vi-VN") + "đ";
+      }
+      function changeQty(change, btn) {
+        const input = btn.parentElement.querySelector(".qty-input");
+        let qty = parseInt(input.value, 10) || 1;
+        qty += change;
+        if (qty < 1) qty = 1;
+        input.value = qty;
+
+        // Cập nhật thành tiền cho dòng này
+        const row = btn.closest("tr");
+        const unitPrice = parseInt(
+          row.querySelector(".unit-price").getAttribute("data-price"),
+          10
+        );
+        const itemTotal = unitPrice * qty;
+        row.querySelector(".item-total").textContent = formatVND(itemTotal);
+
+        // Cập nhật tổng cộng
+        updateGrandTotal();
+      }
+      function updateGrandTotal() {
+        let total = 0;
+        document.querySelectorAll(".cart-table tbody tr").forEach((row) => {
+          const itemTotal = row.querySelector(".item-total");
+          if (itemTotal) {
+            let value = itemTotal.textContent.replace(/[^\d]/g, "");
+            total += parseInt(value, 10) || 0;
+          }
+        });
+        document.getElementById("cart-grand-total").textContent =
+          formatVND(total);
+      }
+      // Xóa sản phẩm khỏi giỏ
+      document.querySelectorAll(".remove-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const row = btn.closest("tr");
+          row.parentNode.removeChild(row);
+          updateGrandTotal();
+        });
+      });
+    </script>
+  </body>
+</html>

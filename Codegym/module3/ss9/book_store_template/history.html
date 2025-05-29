@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lịch Sử Mua Hàng | 4Book</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <style>
+      body {
+        background: #f7f7f9;
+        font-family: "Roboto", Arial, sans-serif;
+      }
+      .history-container {
+        max-width: 1100px;
+        margin: 5rem auto;
+        background: #fff;
+        border-radius: 1.2rem;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+        padding: 4rem 3rem;
+      }
+      .history-title {
+        font-size: 2.7rem;
+        color: #219150;
+        font-weight: 700;
+        margin-bottom: 2.5rem;
+        text-align: center;
+      }
+      .history-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 2.5rem;
+      }
+      .history-table th,
+      .history-table td {
+        padding: 2rem 1.2rem;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+        font-size: 1.35rem;
+      }
+      .history-table th {
+        font-size: 1.4rem;
+        color: #27ae60;
+        font-weight: 700;
+        background: #f8f8fa;
+      }
+      .history-table img {
+        width: 100px;
+        height: 140px;
+        border-radius: 0.4rem;
+        box-shadow: 0 1px 8px #27ae6022;
+      }
+      .history-status {
+        font-weight: 600;
+        color: #27ae60;
+      }
+      .history-status.cancel {
+        color: #e74c3c;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <!-- header 1 start -->
+      <div class="header-1">
+        <a href="#" class="logo"><i class="fas fa-book"></i> 4Book</a>
+
+        <form action="" class="search-form">
+          <input
+            type="search"
+            name=""
+            placeholder="Tìm kiếm ..."
+            id="search-box"
+          />
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="icons">
+          <div id="search-btn" class="fas fa-search"></div>
+          <a href="#" class="fas fa-heart"></a>
+          <a href="#" class="fas fa-shopping-cart"></a>
+
+          <div class="dropdown">
+            <div id="login-btn" class="fas fa-user dropbtn"></div>
+            <div class="dropdown-content">
+              <a class="drop-content" href="profile.html">Thông tin</a>
+              <a class="drop-content" href="history.html">Lich sử mua hàng</a>
+              <a class="drop-content" href="#">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- header 1 end -->
+
+      <!-- header 2 start -->
+      <div class="header-2">
+        <nav class="navbar">
+          <a class="dropbtn" href="#Home">Trang chủ</a>
+          <a class="dropbtn" href="books.html">Tất cả sách</a>
+          <a class="dropbtn" href="#Featured">Nổi bật</a>
+          <div class="dropdown">
+            <a class="dropbtn" href="#Arrivals">Sách mới</a>
+            <div class="dropdown-content">
+              <a class="drop-content" href="#">Vừa phát hành</a>
+              <a class="drop-content" href="#">Bán chạy</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <a class="dropbtn" href="#Category">Thể loại</a>
+            <div class="dropdown-content">
+              <a class="drop-content" href="#">Kinh dị</a>
+              <a class="drop-content" href="#">Lãng mạn</a>
+              <a class="drop-content" href="#">Người lớn</a>
+            </div>
+          </div>
+          <a class="dropbtn" href="#reviews">Đánh giá</a>
+          <a class="dropbtn" href="#blogs">Blog</a>
+        </nav>
+      </div>
+
+      <!-- header 2 end -->
+    </header>
+    <section class="history-container">
+      <div class="history-title">
+        <i class="fas fa-history"></i> Lịch Sử Mua Hàng
+      </div>
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>Ngày</th>
+            <th>Ảnh</th>
+            <th>Tên Sách</th>
+            <th>Số Lượng</th>
+            <th>Giá</th>
+            <th>Trạng Thái</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>28/05/2025</td>
+            <td><img src="image/book_1.jpg" alt="Tên Sách 1" /></td>
+            <td>Tên Sách 1</td>
+            <td>1</td>
+            <td>369.000đ</td>
+            <td class="history-status">Đã giao</td>
+          </tr>
+          <tr>
+            <td>20/05/2025</td>
+            <td><img src="image/book_2.jpg" alt="Tên Sách 2" /></td>
+            <td>Tên Sách 2</td>
+            <td>2</td>
+            <td>500.000đ</td>
+            <td class="history-status cancel">Đã hủy</td>
+          </tr>
+          <!-- Thêm các dòng khác nếu cần -->
+        </tbody>
+      </table>
+    </section>
+  </body>
+</html>
