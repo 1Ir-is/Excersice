@@ -118,6 +118,19 @@
         margin-bottom: 1.2rem;
         line-height: 1.6;
       }
+
+      .book-price-desktop {
+        color: #27ae60;
+        font-size: 2.2rem;
+        font-weight: bold;
+        margin-bottom: 1.2rem;
+      }
+
+      .book-currency {
+        font-size: 1.5rem;
+        color: #888;
+        margin-left: 0.3rem;
+      }
       @media (max-width: 991px) {
         .book-detail-main {
           flex-direction: column;
@@ -157,6 +170,10 @@
         }
         .book-detail-main {
           padding: 10px 2px;
+        }
+        .book-price-desktop {
+          font-size: 2.5rem;
+          margin-bottom: 1.5rem;
         }
       }
     </style>
@@ -299,6 +316,9 @@
         </div>
         <div class="book-detail-right">
           <h2 class="book-title-desktop">Tên Sách 1</h2>
+          <div class="book-price-desktop">
+            <span>120.000</span> <span class="book-currency">VND</span>
+          </div>
           <table class="book-table-desktop">
             <tr>
               <td>Nhà Cung Cấp</td>
