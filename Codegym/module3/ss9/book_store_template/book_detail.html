@@ -2,6 +2,7 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chi Tiết Sách</title>
     <link rel="stylesheet" href="css/style.css" />
     <!-- Font Awesome cho icon -->
@@ -10,131 +11,152 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
     <style>
-      body {
-        background: linear-gradient(120deg, #e0ffe7 0%, #f9f6ff 100%);
+      /* Fahasa style desktop detail */
+      .book-detail-fahasa-desktop {
+        background: #f5f5f7;
+        min-height: 100vh;
+        padding: 32px 0;
       }
-      .book-detail-container {
+      .book-detail-main {
         display: flex;
-        gap: 3rem;
-        padding: 5rem 9%;
-        align-items: flex-start;
-        flex-wrap: wrap;
+        max-width: 1200px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 4px 32px #0001;
+        padding: 32px 32px 40px 32px;
+        gap: 40px;
       }
-      .book-detail-image {
-        flex: 1 1 320px;
-        max-width: 340px;
-        text-align: center;
-      }
-      .book-detail-image img {
-        width: 100%;
-        max-width: 300px;
-        border-radius: 1.2rem;
-        box-shadow: 0 8px 32px 0 rgba(39, 174, 96, 0.25),
-          0 1.5px 8px 0 rgba(52, 152, 219, 0.12);
-        border: 4px solid #27ae60;
-        background: #f8f8f8;
-        transition: transform 0.3s;
-      }
-      .book-detail-image img:hover {
-        transform: scale(1.05) rotate(-2deg);
-        box-shadow: 0 12px 40px 0 rgba(39, 174, 96, 0.35),
-          0 2px 12px 0 rgba(52, 152, 219, 0.18);
-      }
-      .book-detail-info {
-        flex: 2 1 400px;
-        max-width: 700px;
-        background: linear-gradient(120deg, #f9fff6 60%, #e0f7fa 100%);
-        border-radius: 1.2rem;
-        padding: 3rem 2.5rem;
-        box-shadow: 0 4px 24px 0 rgba(39, 174, 96, 0.1);
-        border: 2px solid #27ae60;
-        position: relative;
-        overflow: hidden;
-      }
-      .book-detail-info h2 {
-        font-size: 2.8rem;
-        color: #219150;
-        margin-bottom: 1.2rem;
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-shadow: 1px 2px 8px #c8f7c5;
-      }
-      .book-detail-info .meta {
-        font-size: 1.5rem;
-        color: #555;
-        margin-bottom: 1.2rem;
+      .book-detail-left {
+        flex: 1.1;
         display: flex;
-        gap: 2.5rem;
+        flex-direction: column;
         align-items: center;
       }
-      .book-detail-info .meta span {
+      .book-main-img {
+        width: 340px;
+        max-width: 100%;
+        border-radius: 12px;
+        box-shadow: 0 2px 16px #0002;
+        margin-bottom: 18px;
+        background: #fff;
+      }
+      .book-thumb-list {
         display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: #222;
-        font-weight: 500;
-        background: #e8f8f5;
-        border-radius: 0.5rem;
-        padding: 0.2rem 1rem;
-        box-shadow: 0 1px 4px #d4efdf44;
+        gap: 12px;
+        margin-bottom: 24px;
       }
-      .book-detail-info .meta span i {
-        color: #27ae60;
-        font-size: 1.3rem;
-      }
-      .book-detail-info .price {
-        font-size: 2.2rem;
-        color: #fff;
-        font-weight: bold;
-        margin-bottom: 1.2rem;
-        background: linear-gradient(90deg, #27ae60 60%, #2196f3 100%);
-        display: inline-block;
-        padding: 0.6rem 2.2rem;
-        border-radius: 2rem;
-        box-shadow: 0 2px 12px #27ae6044;
-        letter-spacing: 1px;
-      }
-      .book-detail-info .desc {
-        font-size: 1.5rem;
-        color: #222;
-        margin-bottom: 2rem;
-        line-height: 1.7;
-        background: #fffbe7;
-        border-left: 4px solid #27ae60;
-        padding: 1.2rem 1.5rem;
-        border-radius: 0.5rem;
-        box-shadow: 0 1px 8px #f9e79f44;
-      }
-      .book-detail-info .btn {
-        font-size: 1.7rem;
-        padding: 1rem 3rem;
-        border-radius: 2rem;
-        background: linear-gradient(90deg, #27ae60 60%, #2196f3 100%);
-        color: #fff;
-        font-weight: 700;
+      .book-thumb {
+        width: 64px;
+        height: 64px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid #eee;
+        background: #fff;
         cursor: pointer;
+        transition: border 0.2s;
+      }
+      .book-thumb:hover {
+        border: 2px solid #27ae60;
+      }
+      .add-cart-btn-desktop {
+        width: 90%;
+        background: #27ae60;
+        color: #fff;
+        font-size: 1.25rem;
+        font-weight: 600;
         border: none;
-        transition: background 0.3s, transform 0.2s;
-        display: inline-block;
-        box-shadow: 0 2px 12px #27ae6044;
-        letter-spacing: 1px;
+        border-radius: 24px;
+        padding: 1.2rem 0;
+        box-shadow: 0 2px 8px #c9212733;
+        cursor: pointer;
+        transition: background 0.2s;
+        margin-top: 12px;
       }
-      .book-detail-info .btn:hover {
-        background: linear-gradient(90deg, #2196f3 60%, #27ae60 100%);
-        transform: scale(1.05);
-        box-shadow: 0 4px 24px #2196f344;
+      .add-cart-btn-desktop:hover {
+        background: #219150;
       }
-      @media (max-width: 900px) {
-        .book-detail-container {
+      .book-detail-right {
+        flex: 1.5;
+        background: #fff;
+        border-radius: 12px;
+        padding: 18px 24px;
+        box-shadow: 0 2px 8px #0001;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+      .book-title-desktop {
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: #222;
+        margin-bottom: 1.5rem;
+      }
+      .book-table-desktop {
+        width: 100%;
+        font-size: 1.45rem;
+        margin-bottom: 1.5rem;
+        border-collapse: collapse;
+      }
+      .book-table-desktop td {
+        padding: 1rem 0.7rem;
+        border-bottom: 1px solid #f0f0f0;
+        color: #222;
+        font-size: 1.25rem;
+      }
+      .book-table-desktop td:first-child {
+        color: #888;
+        width: 32%;
+        font-weight: 500;
+      }
+      .book-desc-desktop {
+        background: #f9f9f9;
+        border-radius: 8px;
+        padding: 1.3rem 1.2rem;
+        font-size: 1.22rem;
+        color: #444;
+        margin-bottom: 1.2rem;
+        line-height: 1.6;
+      }
+      @media (max-width: 991px) {
+        .book-detail-main {
           flex-direction: column;
-          align-items: center;
-          padding: 3rem 1rem;
+          padding: 18px 6px;
+          gap: 18px;
         }
-        .book-detail-info {
-          max-width: 100%;
+        .book-detail-right {
+          padding: 12px 6px;
         }
-        .book-detail-image {
-          max-width: 100%;
+        .book-main-img {
+          width: 220px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .book-title-desktop {
+          font-size: 3.2rem;
+          margin-bottom: 2rem;
+        }
+        .book-table-desktop {
+          font-size: 2.1rem;
+        }
+        .book-table-desktop td {
+          font-size: 1.8rem;
+          padding: 1.5rem 1rem;
+        }
+        .book-desc-desktop {
+          font-size: 1.7rem;
+          padding: 1.5rem 1.2rem;
+        }
+        .add-cart-btn-desktop {
+          font-size: 2rem;
+          padding: 2rem 0;
+          width: 100%;
+          border-radius: 26px;
+          margin: 2.5rem 0 2.5rem 0;
+        }
+        .book-detail-main {
+          padding: 10px 2px;
         }
       }
     </style>
@@ -197,18 +219,10 @@
       <!-- header 1 end -->
 
       <!-- header 2 start -->
+
       <div class="header-2">
         <nav class="navbar">
-          <a class="dropbtn" href="#Home">Trang chủ</a>
-          <a class="dropbtn" href="books.html">Tất cả sách</a>
-          <a class="dropbtn" href="#Featured">Nổi bật</a>
-          <div class="dropdown">
-            <a class="dropbtn" href="#Arrivals">Sách mới</a>
-            <div class="dropdown-content">
-              <a class="drop-content" href="#">Vừa phát hành</a>
-              <a class="drop-content" href="#">Bán chạy</a>
-            </div>
-          </div>
+          <a class="dropbtn" href="books.html">Khám phá sách hay</a>
           <div class="dropdown">
             <a class="dropbtn" href="#Category">Thể loại</a>
             <div class="dropdown-content">
@@ -221,32 +235,145 @@
           <a class="dropbtn" href="#blogs">Blog</a>
         </nav>
       </div>
+
       <!-- header 2 end -->
     </header>
-    <section class="book-detail-container">
-      <div class="book-detail-image">
-        <img src="image/book_1.jpg" alt="Tên Sách 1" />
+    <!-- header section end -->
+    <!-- bottom navbar start-->
+
+    <header class="mobile-header">
+      <div
+        class="mobile-header-logo"
+        style="text-align: center; padding-top: 1rem"
+      >
+        <!-- Thay src bằng đường dẫn logo của bạn -->
+        <img src="image/book-shop.png" alt="4Book Logo" style="height: 38px" />
       </div>
-      <div class="book-detail-info">
-        <h2>Tên Sách 1</h2>
-        <div class="meta">
-          <span><i class="fas fa-user"></i> Tác giả: Nguyễn Văn A</span>
-          <span><i class="fas fa-tags"></i> Thể loại: Tiểu thuyết</span>
+      <div class="mobile-header-bar">
+        <a href="#" class="header-icon-left fas fa-list"></a>
+        <form class="mobile-search-form">
+          <input type="text" placeholder="Tìm Kiếm Sách..." />
+        </form>
+        <div class="header-icons">
+          <a href="cart.html" class="fas fa-shopping-cart"></a>
+          <a href="#" id="mobile-login-btn" class="fas fa-user"></a>
         </div>
-        <div class="meta">
-          <span><i class="fas fa-building"></i> Nhà xuất bản: Kim Đồng</span>
-          <span><i class="fas fa-calendar-alt"></i> Năm xuất bản: 2024</span>
+      </div>
+    </header>
+
+    <div id="mobile-sidebar" class="mobile-sidebar">
+      <div class="sidebar-header">
+        <span id="close-sidebar" class="fas fa-arrow-left"></span>
+        <span class="sidebar-title">Danh Mục Sản Phẩm</span>
+      </div>
+      <ul class="sidebar-menu">
+        <li>
+          <a href="books.html"><b>Tất Cả Sản Phẩm</b></a>
+        </li>
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <b>Thể Loại</b>
+            <span class="fas fa-chevron-down" style="float: right"></span>
+          </a>
+          <ul class="submenu">
+            <li><a href="#">Văn Học</a></li>
+            <li><a href="#">Kinh Tế</a></li>
+            <li><a href="#">Tâm Lý - Kỹ Năng Sống</a></li>
+            <li><a href="#">Thiếu Nhi</a></li>
+            <li><a href="#">Giáo Khoa - Tham Khảo</a></li>
+            <!-- Thêm các thể loại khác -->
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <section class="book-detail-fahasa-desktop">
+      <div class="book-detail-main">
+        <div class="book-detail-left">
+          <img src="image/book_1.jpg" alt="Tên Sách 1" class="book-main-img" />
+
+          <button class="add-cart-btn-desktop">
+            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
+          </button>
         </div>
-        <div class="price">369.000đ</div>
-        <div class="desc">
-          Đây là mô tả ngắn về cuốn sách. Nội dung hấp dẫn, phù hợp với nhiều
-          lứa tuổi, giúp bạn khám phá thế giới mới qua từng trang sách.
+        <div class="book-detail-right">
+          <h2 class="book-title-desktop">Tên Sách 1</h2>
+          <table class="book-table-desktop">
+            <tr>
+              <td>Nhà Cung Cấp</td>
+              <td>Kim Đồng</td>
+            </tr>
+            <tr>
+              <td>Tác giả</td>
+              <td>Nguyễn Văn A</td>
+            </tr>
+            <tr>
+              <td>Năm XB</td>
+              <td>2024</td>
+            </tr>
+            <tr>
+              <td>Thể loại</td>
+              <td>Tiểu thuyết</td>
+            </tr>
+            <!-- Thêm các dòng khác nếu muốn -->
+          </table>
+          <div class="book-desc-desktop">
+            Đây là mô tả ngắn về cuốn sách. Nội dung hấp dẫn, phù hợp với nhiều
+            lứa tuổi, giúp bạn khám phá thế giới mới qua từng trang sách.
+          </div>
         </div>
-        <a href="cart.html" class="btn">Thêm vào giỏ hàng</a>
       </div>
     </section>
 
     <script>
+      const sidebar = document.getElementById("mobile-sidebar");
+      const overlay = document.getElementById("sidebar-overlay");
+      const openBtn = document.querySelector(".header-icon-left");
+      const closeBtn = document.getElementById("close-sidebar");
+      const mobileLoginBtn = document.querySelector("#mobile-login-btn");
+      // Dropdown for bottom-navbar Featured
+      document.addEventListener("DOMContentLoaded", function () {
+        var btn = document.getElementById("featured-btn");
+        var dropdown = document.querySelector(".bottom-dropdown");
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          dropdown.classList.toggle("open");
+        });
+        // Đóng dropdown khi bấm ra ngoài
+        document.addEventListener("click", function (e) {
+          if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove("open");
+          }
+        });
+      });
+
+      openBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        sidebar.classList.add("open");
+        overlay.classList.add("show");
+      });
+      closeBtn.addEventListener("click", function () {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("show");
+      });
+      overlay.addEventListener("click", function () {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("show");
+      });
+      document.querySelectorAll(".submenu-toggle").forEach(function (toggle) {
+        toggle.addEventListener("click", function (e) {
+          e.preventDefault();
+          const parent = this.closest(".has-submenu");
+          parent.classList.toggle("open");
+        });
+      });
+
+      if (mobileLoginBtn) {
+        mobileLoginBtn.onclick = () => {
+          loginForm.classList.toggle("active");
+        };
+      }
       // Lấy số lượng từ localStorage (nếu có)
       function getCartCount() {
         return parseInt(localStorage.getItem("cartCount") || "0", 10);
@@ -269,5 +396,8 @@
         }
       });
     </script>
+
+    <script src="js/app.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>

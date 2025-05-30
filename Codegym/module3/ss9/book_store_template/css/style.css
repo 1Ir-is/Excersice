@@ -1505,3 +1505,21 @@ section {
     right: 8px;
   }
 }
+
+@media (max-width: 600px) {
+  .books-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
+  .books-grid .book-box {
+    padding: 1rem 0.5rem;
+  }
+  .books-grid .book-box .image {
+    height: 140px;
+    padding: 0.5rem;
+  }
+  .books-grid .book-box .image img {
+    height: 110px;
+  }
+}
