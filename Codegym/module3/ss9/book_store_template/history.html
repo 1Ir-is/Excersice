@@ -2,6 +2,7 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lịch Sử Mua Hàng | 4Book</title>
     <link rel="stylesheet" href="css/style.css" />
     <link
@@ -59,9 +60,54 @@
       .history-status.cancel {
         color: #e74c3c;
       }
+      /* Responsive for mobile */
+      @media (max-width: 600px) {
+        .history-container {
+          padding: 2rem 1rem;
+          margin: 1rem;
+        }
+
+        .history-title {
+          font-size: 1.8rem; /* Giảm kích thước tiêu đề */
+        }
+
+        .history-table {
+          width: 100%;
+          font-size: 1rem; /* Giảm kích thước chữ trong bảng */
+        }
+
+        .history-table th,
+        .history-table td {
+          padding: 1rem 0.5rem; /* Giảm padding để tiết kiệm không gian */
+          font-size: 0.9rem;
+        }
+
+        .history-table img {
+          width: 70px; /* Giảm kích thước ảnh */
+          height: 100px;
+        }
+
+        .history-status {
+          font-size: 0.9rem; /* Giảm kích thước chữ trạng thái */
+        }
+
+        .history-table th {
+          font-size: 1rem; /* Giảm kích thước chữ tiêu đề cột */
+        }
+
+        /* Ẩn các cột không cần thiết trên điện thoại */
+        .history-table th:nth-child(4),
+        .history-table td:nth-child(4),
+        .history-table th:nth-child(5),
+        .history-table td:nth-child(5) {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
+    <!-- header section start -->
+
     <header class="header">
       <!-- header 1 start -->
       <div class="header-1">
@@ -80,7 +126,7 @@
         <div class="icons">
           <div id="search-btn" class="fas fa-search"></div>
           <a href="#" class="fas fa-heart"></a>
-          <a href="#" class="fas fa-shopping-cart"></a>
+          <a href="cart.html" class="fas fa-shopping-cart"></a>
 
           <div class="dropdown">
             <div id="login-btn" class="fas fa-user dropbtn"></div>
@@ -95,18 +141,10 @@
       <!-- header 1 end -->
 
       <!-- header 2 start -->
+
       <div class="header-2">
         <nav class="navbar">
-          <a class="dropbtn" href="#Home">Trang chủ</a>
-          <a class="dropbtn" href="books.html">Tất cả sách</a>
-          <a class="dropbtn" href="#Featured">Nổi bật</a>
-          <div class="dropdown">
-            <a class="dropbtn" href="#Arrivals">Sách mới</a>
-            <div class="dropdown-content">
-              <a class="drop-content" href="#">Vừa phát hành</a>
-              <a class="drop-content" href="#">Bán chạy</a>
-            </div>
-          </div>
+          <a class="dropbtn" href="books.html">Khám phá sách hay</a>
           <div class="dropdown">
             <a class="dropbtn" href="#Category">Thể loại</a>
             <div class="dropdown-content">
@@ -122,6 +160,57 @@
 
       <!-- header 2 end -->
     </header>
+    <!-- header section end -->
+
+    <!-- bottom navbar start-->
+
+    <header class="mobile-header">
+      <div
+        class="mobile-header-logo"
+        style="text-align: center; padding-top: 1rem"
+      >
+        <!-- Thay src bằng đường dẫn logo của bạn -->
+        <img src="image/book-shop.png" alt="4Book Logo" style="height: 38px" />
+      </div>
+      <div class="mobile-header-bar">
+        <a href="#" class="header-icon-left fas fa-list"></a>
+        <form class="mobile-search-form">
+          <input type="text" placeholder="Tìm Kiếm Sách..." />
+        </form>
+        <div class="header-icons">
+          <a href="cart.html" class="fas fa-shopping-cart"></a>
+          <a href="#" id="mobile-login-btn" class="fas fa-user"></a>
+        </div>
+      </div>
+    </header>
+
+    <div id="mobile-sidebar" class="mobile-sidebar">
+      <div class="sidebar-header">
+        <span id="close-sidebar" class="fas fa-arrow-left"></span>
+        <span class="sidebar-title">Danh Mục Sản Phẩm</span>
+      </div>
+      <ul class="sidebar-menu">
+        <li>
+          <a href="books.html"><b>Tất Cả Sản Phẩm</b></a>
+        </li>
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <b>Thể Loại</b>
+            <span class="fas fa-chevron-down" style="float: right"></span>
+          </a>
+          <ul class="submenu">
+            <li><a href="#">Văn Học</a></li>
+            <li><a href="#">Kinh Tế</a></li>
+            <li><a href="#">Tâm Lý - Kỹ Năng Sống</a></li>
+            <li><a href="#">Thiếu Nhi</a></li>
+            <li><a href="#">Giáo Khoa - Tham Khảo</a></li>
+            <!-- Thêm các thể loại khác -->
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+    <!-- bottom navbar start-->
     <section class="history-container">
       <div class="history-title">
         <i class="fas fa-history"></i> Lịch Sử Mua Hàng
@@ -158,5 +247,137 @@
         </tbody>
       </table>
     </section>
+    <!-- footer section start -->
+    <section class="footer">
+      <div class="box-container">
+        <div class="box">
+          <h3>Địa chỉ của chúng tôi</h3>
+          <a href="#"><i class="fas fa-map-marker-alt"></i> Việt Nam </a>
+          <a href="#"><i class="fas fa-map-marker-alt"></i> Nhật Bản </a>
+          <a href="#"><i class="fas fa-map-marker-alt"></i> Hàn Quốc </a>
+          <a href="#"><i class="fas fa-map-marker-alt"></i> Hoa Kỳ </a>
+          <a href="#"><i class="fas fa-map-marker-alt"></i> Ấn Độ </a>
+          <a href="#"><i class="fas fa-map-marker-alt"></i> Pháp </a>
+        </div>
+
+        <div class="box">
+          <h3>Liên kết nhanh</h3>
+          <a href="#"><i class="fas fa-arrow-right"></i> Trang chủ </a>
+          <a href="#"><i class="fas fa-arrow-right"></i> Nổi bật </a>
+          <a href="#"><i class="fas fa-arrow-right"></i> Sách mới </a>
+          <a href="#"><i class="fas fa-arrow-right"></i> Đánh giá </a>
+          <a href="#"><i class="fas fa-arrow-right"></i> Blog </a>
+        </div>
+
+        <div class="box">
+          <h3>Liên kết khác</h3>
+          <a href="#"
+            ><i class="fas fa-arrow-right"></i> Thông tin tài khoản
+          </a>
+          <a href="#"><i class="fas fa-arrow-right"></i> Đơn hàng đã đặt </a>
+          <a href="#"><i class="fas fa-arrow-right"></i> Chính sách bảo mật </a>
+          <a href="#"
+            ><i class="fas fa-arrow-right"></i> Phương thức thanh toán
+          </a>
+          <a href="#"
+            ><i class="fas fa-arrow-right"></i> Dịch vụ của chúng tôi
+          </a>
+        </div>
+
+        <div class="box">
+          <h3>Thông tin liên hệ</h3>
+          <a href="#"><i class="fas fa-phone"></i> +123-456-7890 </a>
+          <a href="#"><i class="fas fa-phone"></i> +111-222-3333 </a>
+          <a href="#"><i class="fas fa-envelope"></i> 4bookstore@gmail.com </a>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.751890135277!2d108.20973629999999!3d16.078359799999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219a486b7f699%3A0xae6269b629a63e82!2zQ29kZUd5bSDEkMOgIE7hurVuZw!5e0!3m2!1svi!2s!4v1748497453775!5m2!1svi!2s"
+            width="100%"
+            height="220"
+            style="border: 0; border-radius: 8px; margin-top: 10px"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Bản đồ CodeGym Đà Nẵng"
+          ></iframe>
+        </div>
+      </div>
+      <div class="share">
+        <a href="#" class="fab fa-facebook-f"></a>
+        <a href="#" class="fab fa-twitter"></a>
+        <a href="#" class="fab fa-instagram"></a>
+        <a href="#" class="fab fa-linkedin"></a>
+        <a href="#" class="fab fa-github"></a>
+      </div>
+
+      <div class="credit">
+        Được tạo ra bởi <span> 4B Corporation</span> | Đã đăng ký bản quyền
+      </div>
+      <div class="gov-cert">
+        <img
+          src="https://nhasachphuongnam.com/images/promo/126/bo-cong-thuong-130x87_new1.png"
+          alt="Đã thông báo Bộ Công Thương"
+          style="height: 65px; margin-right: 5px"
+        />
+        <img
+          src="https://nhasachphuongnam.com/images/promo/126/Untitled-1.png"
+          alt="Chứng nhận"
+          style="height: 65px"
+        />
+      </div>
+    </section>
+    <!-- footer section end -->
+
+    <!-- Custom JS file link -->
+    <script>
+      const sidebar = document.getElementById("mobile-sidebar");
+      const overlay = document.getElementById("sidebar-overlay");
+      const openBtn = document.querySelector(".header-icon-left");
+      const closeBtn = document.getElementById("close-sidebar");
+      const mobileLoginBtn = document.querySelector("#mobile-login-btn");
+      // Dropdown for bottom-navbar Featured
+      document.addEventListener("DOMContentLoaded", function () {
+        var btn = document.getElementById("featured-btn");
+        var dropdown = document.querySelector(".bottom-dropdown");
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          dropdown.classList.toggle("open");
+        });
+        // Đóng dropdown khi bấm ra ngoài
+        document.addEventListener("click", function (e) {
+          if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove("open");
+          }
+        });
+      });
+
+      openBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        sidebar.classList.add("open");
+        overlay.classList.add("show");
+      });
+      closeBtn.addEventListener("click", function () {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("show");
+      });
+      overlay.addEventListener("click", function () {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("show");
+      });
+      document.querySelectorAll(".submenu-toggle").forEach(function (toggle) {
+        toggle.addEventListener("click", function (e) {
+          e.preventDefault();
+          const parent = this.closest(".has-submenu");
+          parent.classList.toggle("open");
+        });
+      });
+
+      if (mobileLoginBtn) {
+        mobileLoginBtn.onclick = () => {
+          loginForm.classList.toggle("active");
+        };
+      }
+    </script>
+    <script src="js/app.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
