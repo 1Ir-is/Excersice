@@ -9,7 +9,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/adminpage.css" />
-    <title>Chỉnh sửa sách</title>
+    <title>Tạo sách mới</title>
     <style>
       .form-container {
         max-width: 600px;
@@ -29,13 +29,13 @@
 
       .form-group {
         display: flex;
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: column; /* Đảm bảo label và input xếp chồng nhau */
+        align-items: flex-start; /* Căn label và input theo chiều dọc */
         margin-bottom: 1.5rem;
       }
 
       .form-group label {
-        width: 100%;
+        width: 100%; /* Đảm bảo label chiếm toàn bộ chiều rộng */
         margin-bottom: 0.5rem;
         font-weight: bold;
         color: #333;
@@ -44,23 +44,22 @@
       .form-group input,
       .form-group select,
       .form-group textarea {
-        width: 100%;
+        width: 100%; /* Đảm bảo input, select, textarea chiếm toàn bộ chiều rộng */
         padding: 0.8rem;
         border: 1px solid #ddd;
         border-radius: 5px;
         font-size: 1rem;
-        box-sizing: border-box;
+        box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước */
       }
-
       .form-group input[type="file"] {
         padding: 0.4rem;
       }
 
       .form-actions {
-        margin-top: 1.5rem;
+        margin-top: 1.5rem; /* Tăng khoảng cách giữa các trường và nút hành động */
         display: flex;
         justify-content: space-between;
-        gap: 1.5rem;
+        gap: 1.5rem; /* Tăng khoảng cách giữa các nút */
       }
 
       .btn {
@@ -88,6 +87,29 @@
       .btn-cancel:hover {
         background: #c0392b;
       }
+
+      .actions {
+        margin-top: 1rem; /* Tăng khoảng cách giữa breadcrumb và nút */
+      }
+
+      .btn-back {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #fff;
+        background: #3498db;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background 0.3s ease;
+      }
+
+      .btn-back:hover {
+        background: #2980b9;
+      }
+
       @media screen and (max-width: 768px) {
         /* Form Container */
         .form-container {
@@ -167,6 +189,7 @@
       </ul>
     </section>
     <!-- SIDEBAR -->
+
     <!-- NAVBAR -->
     <section id="content">
       <!-- NAVBAR -->
@@ -209,84 +232,42 @@
       <!-- NAVBAR -->
       <main>
         <div class="page-header">
-          <h1 class="title">Chỉnh sửa sách</h1>
+          <h1 class="title">Quản lý thể loại</h1>
           <ul class="breadcrumbs">
             <li><a href="AdminPage.html">Home</a></li>
             <li class="divider">/</li>
-            <li><a href="admin_book.html">Quản lý sách</a></li>
-            <li class="divider">/</li>
-            <li><a href="#" class="active">Chỉnh sửa sách</a></li>
+            <li><a href="#" class="active">Quản lý thể loại</a></li>
           </ul>
+          <div class="actions">
+            <a href="AdminPage.html" class="btn-back">
+              <i class="bx bxs-home"></i> Quay lại trang chính
+            </a>
+          </div>
         </div>
         <div class="form-container">
-          <h1>Chỉnh sửa sách</h1>
+          <h1>Thêm thể loại mới</h1>
           <form action="#" method="POST" enctype="multipart/form-data">
             <div class="form-group">
-              <label for="book-name">Tên sách</label>
+              <label for="book-name">Tên thể loại</label>
               <input
                 type="text"
                 id="book-name"
                 name="book-name"
-                placeholder="Nhập tên sách"
-                value="Sách A"
+                placeholder="Nhập tên thể loại"
                 required
               />
-            </div>
-            <div class="form-group">
-              <label for="price">Giá</label>
-              <input
-                type="number"
-                id="price"
-                name="price"
-                placeholder="Nhập giá sách"
-                value="100000"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="publisher">Nhà xuất bản</label>
-              <input
-                type="text"
-                id="publisher"
-                name="publisher"
-                placeholder="Nhập nhà xuất bản"
-                value="Nhà xuất bản A"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="author">Tác giả</label>
-              <input
-                type="text"
-                id="author"
-                name="author"
-                placeholder="Nhập tên tác giả"
-                value="Tác giả A"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="category">Thể loại</label>
-              <select id="category" name="category" required>
-                <option value="" disabled>Chọn thể loại</option>
-                <option value="fiction" selected>Tiểu thuyết</option>
-                <option value="science">Khoa học</option>
-                <option value="history">Lịch sử</option>
-                <option value="technology">Công nghệ</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="image">Upload ảnh</label>
-              <input type="file" id="image" name="image" accept="image/*" />
             </div>
             <div class="form-actions">
-              <button type="submit" class="btn btn-submit">Lưu thay đổi</button>
-              <a href="admin_book.html" class="btn btn-cancel">Hủy</a>
+              <button type="submit" class="btn btn-submit">Tạo thể loại</button>
+              <a href="admin_create_category.html" class="btn btn-cancel"
+                >Hủy</a
+              >
             </div>
           </form>
         </div>
       </main>
     </section>
+
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="js/script.js"></script>
   </body>
