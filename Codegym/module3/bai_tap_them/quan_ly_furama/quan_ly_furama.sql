@@ -320,9 +320,12 @@ select
     hop_dong.ngay_lam_hop_dong,
     hop_dong.ngay_ket_thuc,
     hop_dong.tien_dat_coc,
-    ifnull(sum(hop_dong_chi_tiet.so_luong),0) as so_luong_dich_vu_di_kem 
+    ifnull(sum(hop_dong_chi_tiet.so_luong),0) as so_luong_dich_vu_di_kem,
+	group_concat(dich_vu_di_kem.ten_dich_vu_di_kem separator ', ') as cac_dich_vu_di_kem,
+    group_concat(concat(dich_vu_di_kem.ten_dich_vu_di_kem, ' x ', hop_dong_chi_tiet.so_luong) separator ', ' ) as so_luong_dich_vu_di_kem
 from hop_dong
 left join hop_dong_chi_tiet on hop_dong.ma_hop_dong = hop_dong_chi_tiet.ma_hop_dong
+left join dich_vu_di_kem on hop_dong_chi_tiet.ma_dich_vu_di_kem = dich_vu_di_kem.ma_dich_vu_di_kem
 group by hop_dong.ma_hop_dong;
 
 -- 11.	Hiển thị thông tin các dịch vụ đi kèm đã được sử dụng bởi những khách hàng có ten_loai_khach là “Diamond” và có dia_chi ở “Vinh” hoặc “Quảng Ngãi”.
@@ -409,7 +412,7 @@ from nhan_vien
 join trinh_do on nhan_vien.ma_trinh_do = trinh_do.ma_trinh_do
 join bo_phan on nhan_vien.ma_bo_phan = bo_phan.ma_bo_phan
 left join hop_dong on nhan_vien.ma_nhan_vien = hop_dong.ma_nhan_vien
-and year(hop_dong.ngay_lam_hop_dong) between 2020 and 2021
+where year(hop_dong.ngay_lam_hop_dong) between 2020 and 2021
 group by nhan_vien.ma_nhan_vien
 having count(hop_dong.ma_hop_dong) <= 3;
 

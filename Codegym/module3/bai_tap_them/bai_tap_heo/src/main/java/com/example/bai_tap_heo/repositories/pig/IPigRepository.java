@@ -1,6 +1,7 @@
 package com.example.bai_tap_heo.repositories.pig;
 
 
+import com.example.bai_tap_heo.models.Origin;
 import com.example.bai_tap_heo.models.Pig;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface IPigRepository {
     void save(Pig pig);
     void update(Pig pig);
     void delete(int id);
+    List<Origin> findAllOrigins();
+    List<Pig> searchPigs(Boolean sold, String pidNumber, Integer originId);
 }

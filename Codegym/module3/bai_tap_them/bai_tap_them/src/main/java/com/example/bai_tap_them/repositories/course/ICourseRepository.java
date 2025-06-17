@@ -1,4 +1,13 @@
-package com.example.bai_tap_them.repositories;
+package com.example.bai_tap_them.repositories.course;
 
-public class ICourseRepository {
+import com.example.bai_tap_them.models.Course;
+
+import java.util.List;
+
+public interface ICourseRepository {
+    List<Course> getAllCourses();
+    Course getCourseById(int id);
+    boolean addCourse(Course course);
+    boolean updateCourse(Course course);
+    boolean deleteCourse(int id);
 }
