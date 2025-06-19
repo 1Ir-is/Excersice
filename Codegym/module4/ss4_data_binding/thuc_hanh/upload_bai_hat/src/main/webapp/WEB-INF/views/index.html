@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Song List</title></head>
+<body>
+<h3>Song Management</h3>
+<p><a th:href="@{/song/create}">Add new song</a></p>
+
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Artist</th>
+        <th>Genre</th>
+        <th>File</th>
+    </tr>
+    <tr th:each="song : ${songs}">
+        <td th:text="${song.name}"></td>
+        <td th:text="${song.artist}"></td>
+        <td th:text="${song.genre}"></td>
+        <td>
+            <a th:href="@{'/song/' + ${song.filePath}}" th:text="${song.filePath}" target="_blank"></a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

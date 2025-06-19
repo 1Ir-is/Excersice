@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Upload</title></head>
+<body>
+<h3>Upload Song</h3>
+
+<p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+<form th:action="@{/song/save}" method="POST" enctype="multipart/form-data" th:object="${songForm}">
+  <label>Name:</label><input type="text" th:field="*{name}"><br>
+  <label>Artist:</label><input type="text" th:field="*{artist}"><br>
+  <label>Genre:</label><input type="text" th:field="*{genre}"><br>
+  <label>File:</label><input type="file" th:field="*{file}"><br>
+  <button type="submit">Upload</button>
+</form>
+</body>
+</html>
