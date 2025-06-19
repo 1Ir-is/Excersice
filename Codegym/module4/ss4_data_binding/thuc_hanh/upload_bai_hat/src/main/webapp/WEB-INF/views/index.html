@@ -1,25 +1,183 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head><meta charset="UTF-8"><title>Song List</title></head>
-<body>
-<h3>Song Management</h3>
-<p><a th:href="@{/song/create}">Add new song</a></p>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Song Player</title>
+    <style>
+        body {
+            background: #fce4ec;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+        }
 
-<table border="1">
-    <tr>
-        <th>Name</th>
-        <th>Artist</th>
-        <th>Genre</th>
-        <th>File</th>
-    </tr>
-    <tr th:each="song : ${songs}">
-        <td th:text="${song.name}"></td>
-        <td th:text="${song.artist}"></td>
-        <td th:text="${song.genre}"></td>
-        <td>
-            <a th:href="@{'/song/' + ${song.filePath}}" th:text="${song.filePath}" target="_blank"></a>
-        </td>
-    </tr>
-</table>
+        .song-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            width: 300px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .disc {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background-size: cover;
+            background-position: center;
+            animation: spin 6s linear infinite;
+        }
+
+        .disc.paused {
+            animation-play-state: paused;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0); }
+            to { transform: rotate(360deg); }
+        }
+
+        .song-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .song-artist {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        audio {
+            display: none;
+        }
+
+        .controls {
+            margin-top: 15px;
+        }
+
+        .play-btn {
+            background-color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            box-shadow: 0 4px 10px rgba(255, 105, 135, 0.5);
+        }
+
+        .progress {
+            height: 5px;
+            background-color: #80deea;
+            border-radius: 5px;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        .time {
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        a.upload-link {
+            margin-bottom: 20px;
+            display: inline-block;
+            text-decoration: none;
+            color: #ec407a;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<a th:href="@{/song/create}" class="upload-link">+ Upload New Song</a>
+
+<div th:each="song : ${songs}" class="song-card">
+    <div th:id="'disc-' + ${song.id}"
+         class="disc paused"
+         th:style="'background-image: url(/images/disc.png)'"></div>
+
+    <div class="song-title" th:text="${song.name}">Song Name</div>
+    <div class="song-artist" th:text="${song.artist}">Artist</div>
+
+    <div class="progress-container">
+        <div class="time">
+            <span th:id="'currentTime-' + ${song.id}">00:00</span>
+            <span th:id="'duration-' + ${song.id}">--:--</span>
+        </div>
+        <input type="range" th:id="'progress-' + ${song.id}" value="0" step="1" class="progress">
+    </div>
+
+    <div class="controls">
+        <button class="play-btn"
+                th:id="'btn-' + ${song.id}"
+                th:onclick="'togglePlay(' + ${song.id} + ')'">▶️</button>
+    </div>
+
+    <audio th:id="'audio-' + ${song.id}" th:src="@{'/song/' + ${song.filePath}}"></audio>
+</div>
+
+<script>
+    function togglePlay(id) {
+        const audio = document.getElementById('audio-' + id);
+        const disc = document.getElementById('disc-' + id);
+        const button = document.getElementById('btn-' + id);
+        const progress = document.getElementById('progress-' + id);
+        const currentTime = document.getElementById('currentTime-' + id);
+        const duration = document.getElementById('duration-' + id);
+
+        // Stop all other players
+        document.querySelectorAll('audio').forEach(a => {
+            if (a !== audio) {
+                a.pause();
+                a.currentTime = 0;
+                const otherId = a.id.split('-')[1];
+                document.getElementById('disc-' + otherId).classList.add('paused');
+                document.getElementById('btn-' + otherId).innerText = '▶️';
+            }
+        });
+
+        if (audio.paused) {
+            audio.play();
+            disc.classList.remove('paused');
+            button.innerText = '⏸️';
+        } else {
+            audio.pause();
+            disc.classList.add('paused');
+            button.innerText = '▶️';
+        }
+
+        // Update progress bar
+        audio.ontimeupdate = () => {
+            progress.value = audio.currentTime;
+            currentTime.innerText = formatTime(audio.currentTime);
+        };
+
+        audio.onloadedmetadata = () => {
+            progress.max = audio.duration;
+            duration.innerText = formatTime(audio.duration);
+        };
+
+        progress.oninput = () => {
+            audio.currentTime = progress.value;
+        };
+    }
+
+    function formatTime(sec) {
+        const m = Math.floor(sec / 60);
+        const s = Math.floor(sec % 60);
+        return `${m < 10 ? '0' + m : m}:${s < 10 ? '0' + s : s}`;
+    }
+</script>
+
 </body>
 </html>

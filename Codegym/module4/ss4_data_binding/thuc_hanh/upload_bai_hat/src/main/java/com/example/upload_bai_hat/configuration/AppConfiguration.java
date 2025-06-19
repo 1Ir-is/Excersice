@@ -37,7 +37,7 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/WEB-INF/views/");
+        templateResolver.setPrefix("/WEB-INF/views");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode(TemplateMode.HTML);
         templateResolver.setCharacterEncoding("UTF-8");
@@ -63,6 +63,7 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/song/**")
                 .addResourceLocations("file:" + upload);
+        registry.addResourceHandler("/images/**").addResourceLocations("/images/");
     }
 
     @Bean(name = "multipartResolver")
