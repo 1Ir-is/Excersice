@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Config Form</title>
+</head>
+<body>
+<h2>[Bài tập] Chương trình lưu giữ cấu hình hòm thư điện tử</h2>
+
+<form th:action="@{/update}" method="post" th:object="${emailConfig}">
+    <fieldset>
+        <legend>Settings</legend>
+
+        <p>
+            <label>Languages</label>
+            <select th:field="*{language}">
+                <option th:each="lang : ${languages}" th:value="${lang}" th:text="${lang}"></option>
+            </select>
+        </p>
+
+        <p>
+            <label>Page Size:</label>
+            Show <select th:field="*{pageSize}">
+            <option th:each="size : ${pageSizes}" th:value="${size}" th:text="${size}"></option>
+        </select> emails per page
+        </p>
+
+        <p>
+            <label>Spams filter:</label>
+            <input type="checkbox" th:field="*{spamsFilter}"/> Enable spams filter
+        </p>
+
+        <p>
+            <label>Signature:</label><br/>
+            <textarea th:field="*{signature}" rows="4" cols="40"></textarea>
+        </p>
+
+        <button type="submit">Update</button>
+    </fieldset>
+</form>
+</body>
+</html>

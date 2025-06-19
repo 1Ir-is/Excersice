@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+</head>
+<body>
+<h2>Email Configuration Updated</h2>
+<table border="1">
+    <tr>
+        <th>Language</th>
+        <td th:text="${emailConfig.language}"></td>
+    </tr>
+    <tr>
+        <th>Page Size</th>
+        <td th:text="${emailConfig.pageSize}"></td>
+    </tr>
+    <tr>
+        <th>Spams Filter</th>
+        <td th:text="${emailConfig.spamsFilter ? 'Enabled' : 'Disabled'}"></td>
+    </tr>
+    <tr>
+        <th>Signature</th>
+        <td th:text="${emailConfig.signature}"></td>
+    </tr>
+</table>
+
+<p><a th:href="@{/email}">Back to form</a></p>
+</body>
+</html>
