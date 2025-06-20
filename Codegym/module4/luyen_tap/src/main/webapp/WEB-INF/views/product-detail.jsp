@@ -7,10 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<head>
+    <title>Product Detail</title>
+</head>
+<body>
+<h1>Product Detail</h1>
+<p>Id: ${product.id}</p>
+<p>Name: ${product.name}</p>
+<p>Price: ${product.price}</p>
+<a href="/products">Back to list</a>
+</body>
 </html>

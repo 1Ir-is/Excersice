@@ -1,16 +1,19 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ADMIN
-  Date: 6/18/2025
-  Time: 2:21 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<head>
+    <title>Add Product</title>
+</head>
+<body>
+<h1>Add Product</h1>
+<form action="/products" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <br>
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price" required>
+    <br>
+    <button type="submit">Add Product</button>
+</form>
+<a href="/products">Back to List</a>
+</body>
 </html>

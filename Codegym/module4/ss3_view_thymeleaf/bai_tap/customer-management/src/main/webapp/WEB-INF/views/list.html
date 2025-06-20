@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+    <title>Product List</title>
+</head>
+<body>
+
+<div th:replace="/layout :: navbar"></div>
+
+<div class="container mt-4">
+    <h1 class="mb-4">Product List</h1>
+
+    <div class="d-flex justify-content-between mb-3">
+        <a class="btn btn-success" th:href="@{/products/create}">Add New Product</a>
+        <form class="d-flex" role="search" action="/products/search" method="get">
+            <input class="form-control me-2" type="text" name="name" placeholder="Search By Name" />
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+    </div>
+
+    <table class="table table-bordered align-middle">
+        <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Manufacturer</th>
+            <th style="width: 160px;">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.description}"></td>
+            <td th:text="${product.manufacturer}"></td>
+            <td>
+                <div class="btn-group" role="group">
+                    <a class="btn btn-sm btn-primary" th:href="@{/products/view/{id}(id=${product.id})}">View</a>
+                    <a class="btn btn-sm btn-warning" th:href="@{/products/edit/{id}(id=${product.id})}">Edit</a>
+                    <a class="btn btn-sm btn-danger" th:href="@{/products/delete/{id}(id=${product.id})}">Delete</a>
+                </div>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(products)}">
+            <td colspan="5" class="text-center text-muted">No product found.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer th:replace="/layout :: footer"></footer>
+
+</body>
+</html>

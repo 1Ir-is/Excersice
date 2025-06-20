@@ -30,10 +30,12 @@ public class ProductController {
     @Autowired
     private ServletContext servletContext;
 
+    @Autowired
+    private IProductService productService;
+
     @Value("${file-upload}")
     private String fileUpload;
 
-    private final IProductService productService = new ProductService();
 
     @GetMapping("")
     public String index(Model model) {
