@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+    <title>Product List</title>
+</head>
+<body>
+
+<div th:replace="/layout :: navbar"></div>
+
+<div class="container mt-4">
+    <h1 class="mb-4">Product List</h1>
+
+    <div class="d-flex justify-content-between mb-3">
+        <a class="btn btn-success" th:href="@{/products/create}">Add New Product</a>
+        <form class="d-flex" role="search" method="get" th:action="@{/products/search}">
+            <input class="form-control me-2" type="text" name="name"
+                   placeholder="Search By Name" th:value="${searchName}" />
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+
+    </div>
+
+    <table class="table table-bordered align-middle">
+        <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Manufacturer</th>
+            <th style="width: 160px;">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.description}"></td>
+            <td th:text="${product.manufacturer}"></td>
+            <td>
+                <div class="btn-group" role="group">
+                    <a class="btn btn-sm btn-primary" th:href="@{/products/view/{id}(id=${product.id})}">View</a>
+                    <a class="btn btn-sm btn-warning" th:href="@{/products/edit/{id}(id=${product.id})}">Edit</a>
+                    <button type="button"
+                            class="btn btn-sm btn-danger"
+                            th:attr="data-id=${product.id}, data-name=${product.name}"
+                            onclick="openDeleteModal(this)">
+                        Delete
+                    </button>
+                </div>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(products)}">
+            <td colspan="5" class="text-center text-muted">No product found.</td>
+        </tr>
+        </tbody>
+    </table>
+    <nav th:if="${totalPages > 1}">
+        <ul class="pagination justify-content-center">
+            <li th:classappend="${currentPage == 1} ? 'disabled'" class="page-item">
+                <a class="page-link" th:href="@{'/products'(page=${currentPage - 1}, size=${pageSize})}">Previous</a>
+            </li>
+            <li th:each="i : ${#numbers.sequence(1, totalPages)}"
+                th:classappend="${i == currentPage} ? 'active'" class="page-item">
+                <a class="page-link" th:href="@{'/products'(page=${i}, size=${pageSize})}" th:text="${i}">1</a>
+            </li>
+            <li th:classappend="${currentPage == totalPages} ? 'disabled'" class="page-item">
+                <a class="page-link" th:href="@{'/products'(page=${currentPage + 1}, size=${pageSize})}">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<footer th:replace="/layout :: footer"></footer>
+
+<div th:if="${success != null}" th:replace="/layout :: toast(${success})"></div>
+
+<div th:replace="/layout :: deleteModal('/products/delete')"></div>
+
+<script>
+    function openDeleteModal(button) {
+        const id = button.getAttribute('data-id');
+        const name = button.getAttribute('data-name');
+        document.getElementById('deleteProductId').value = id;
+        document.getElementById('productNameToDelete').innerText = name;
+        const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        modal.show();
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

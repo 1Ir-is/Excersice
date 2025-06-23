@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:fragment="head">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Spring Product</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" th:fragment="navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Product Manager</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/products}">Product List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/products/create}">Create</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<footer class="bg-light text-center py-3 mt-4" th:fragment="footer">
+  &copy; 2025 CodeGym. All rights reserved.
+</footer>
+
+<div th:fragment="toast(message)">
+  <div class="position-fixed top-0 end-0 p-3" style="z-index: 1080">
+    <div class="toast align-items-center text-bg-success border-0"
+         role="alert"
+         aria-live="assertive"
+         aria-atomic="true"
+         th:id="${message != null ? 'toastSuccess' : null}"
+         data-bs-delay="3000" data-bs-autohide="true">
+
+      <div class="d-flex">
+        <div class="toast-body" th:text="${message}">Success!</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+
+
+      <div class="progress" style="height: 3px;">
+        <div id="toast-progress" class="progress-bar bg-warning" role="progressbar"
+             style="width: 100%; transition: width 3s linear;"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+      const toastEl = document.getElementById("toastSuccess");
+      const progressBar = document.getElementById("toast-progress");
+
+      if (toastEl && progressBar) {
+        const toast = new bootstrap.Toast(toastEl);
+        toast.show();
+        setTimeout(() => {
+          progressBar.style.width = "0%";
+        }, 100);
+      }
+    });
+  </script>
+</div>
+
+<div th:fragment="deleteModal(deleteUrl)">
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form method="post" th:action="${deleteUrl}">
+        <input type="hidden" name="id" id="deleteProductId">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirm Deletion</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Do you want to delete this product named: <strong id="productNameToDelete"></strong>?
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
