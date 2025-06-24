@@ -1,4 +1,4 @@
-package com.example.blog.service;
+package com.example.blog.service.blog;
 
 import com.example.blog.model.Blog;
 import com.example.blog.repository.IBlogRepository;
@@ -12,7 +12,6 @@ public class BlogService implements IBlogService {
 
     @Autowired
     IBlogRepository blogRepository;
-
 
     @Override
     public List<Blog> findAll() {
@@ -32,5 +31,10 @@ public class BlogService implements IBlogService {
     @Override
     public void deleteById(Long id) {
         blogRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Blog> findByCategoryId(Long categoryId) {
+        return blogRepository.findByCategoryId(categoryId);
     }
 }

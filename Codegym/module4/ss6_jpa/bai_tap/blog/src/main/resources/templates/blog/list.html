@@ -6,35 +6,40 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
+<nav th:replace="layout :: navbar"></nav>
+
 <div class="container mt-5">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>All Blog Posts</h2>
-    <a class="btn btn-success" th:href="@{/blogs/add}">+ Add New Blog</a>
+    <div>
+      <form th:action="@{/blogs}" method="get" class="d-inline">
+        <select name="category" class="form-select d-inline w-auto" onchange="this.form.submit()">
+          <option value="" th:selected="${category == null}">All Categories</option>
+          <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}" th:selected="${category == cat.id}"></option>
+        </select>
+      </form>
+      <a class="btn btn-primary ms-2" th:href="@{/blogs/manage}">Manage Blog List</a>
+    </div>
   </div>
 
-  <div class="table-responsive">
-    <table class="table table-hover align-middle border">
-      <thead class="table-light">
-      <tr>
-        <th>Title</th>
-        <th>Summary</th>
-        <th class="text-end">Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="blog : ${blogs}">
-        <td th:text="${blog.title}"></td>
-        <td th:text="${blog.summary}"></td>
-        <td class="text-end">
-          <a class="btn btn-outline-primary btn-sm" th:href="@{'/blogs/view/' + ${blog.id}}">View</a>
-          <a class="btn btn-outline-warning btn-sm" th:href="@{'/blogs/edit/' + ${blog.id}}">Edit</a>
-          <a class="btn btn-outline-danger btn-sm" th:href="@{'/blogs/delete/' + ${blog.id}}"
-             onclick="return confirm('Are you sure to delete this blog?')">Delete</a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+  <div th:if="${blogs.size() > 0}" class="row">
+    <div class="col-md-4 mb-4" th:each="blog : ${blogs}">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${blog.title}"></h5>
+          <p class="card-text text-muted" th:text="${blog.summary}"></p>
+          <a th:href="@{'/blogs/view/' + ${blog.id}}" class="stretched-link"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div th:unless="${blogs.size() > 0}" class="alert alert-warning text-center">
+    No blogs found.
   </div>
 </div>
+
+<footer th:replace="layout :: footer"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.example.blog.service;
+package com.example.blog.service.blog;
 
 import com.example.blog.model.Blog;
 
@@ -9,4 +9,5 @@ public interface IBlogService {
     Blog findById(Long id);
     void save(Blog blog);
     void deleteById(Long id);
+    List<Blog> findByCategoryId(Long categoryId);
 }
