@@ -25,7 +25,7 @@ public class SongController {
     public String listSongs(Model model, @RequestParam(value = "message", required = false) String message) {
         List<Song> songs = songService.findAll();
         model.addAttribute("songs", songs);
-        model.addAttribute("message", message); // Thêm thông báo vào model
+        model.addAttribute("message", message);
         return "list";
     }
 
