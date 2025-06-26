@@ -1,4 +1,12 @@
 package com.example.music_app.repository;
 
-public class ISongRepository {
+import com.example.music_app.model.Song;
+
+import java.util.List;
+
+public interface ISongRepository {
+    List<Song> findAll();
+    Song findById(Long id);
+    void save(Song song);
+    void delete(Long id);
 }

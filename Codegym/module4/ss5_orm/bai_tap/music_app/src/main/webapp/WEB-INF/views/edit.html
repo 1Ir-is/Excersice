@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+  <title>Song List</title>
 </head>
 <body>
-$END$
+
+<div th:replace="/layout :: navbar"></div>
+<div class="container mt-4">
+  <h2>Edit Song</h2>
+  <form th:action="@{/songs/edit}" th:object="${song}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <div class="mb-3">
+      <label>Name</label>
+      <input type="text" class="form-control" th:field="*{name}" required>
+    </div>
+    <div class="mb-3">
+      <label>Artist</label>
+      <input type="text" class="form-control" th:field="*{artist}" required>
+    </div>
+    <div class="mb-3">
+      <label>Genre</label>
+      <input type="text" class="form-control" th:field="*{genre}" required>
+    </div>
+    <div class="mb-3">
+      <label>Current File</label>
+      <input type="text" class="form-control" th:value="${song.filePath}" readonly>
+    </div>
+    <button type="submit" class="btn btn-warning">Update</button>
+    <a href="/songs" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+<div th:replace="layout :: footer"></div>
 </body>
 </html>
