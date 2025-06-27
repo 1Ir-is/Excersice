@@ -5,12 +5,12 @@ import com.example.book_rental.models.Book;
 import com.example.book_rental.services.IBookService;
 import com.example.book_rental.validators.BookValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/admin/books")
@@ -21,9 +21,13 @@ public class BookCRUDController {
     private final BookValidator bookValidator = new BookValidator();
 
     @GetMapping()
-    public String showListBooks(Model model) {
-        List<Book> books = bookService.findAll();
-        model.addAttribute("books", books);
+    public String showListBooks(Model model,
+                                @RequestParam(defaultValue = "0") int page,
+                                @RequestParam(defaultValue = "5") int size) {
+        Page<Book> bookPage = bookService.findAll(PageRequest.of(page, size));
+        model.addAttribute("books", bookPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", bookPage.getTotalPages());
         return "admin/book-list";
     }
 
@@ -78,5 +82,18 @@ public class BookCRUDController {
     public String deleteBook(@PathVariable Long id) {
         bookService.deleteById(id);
         return "redirect:/admin/books";
+    }
+
+    @GetMapping("/search")
+    public String searchBooks(@RequestParam String keyword,
+                              @RequestParam(defaultValue = "0") int page,
+                              @RequestParam(defaultValue = "5") int size,
+                              Model model) {
+        Page<Book> bookPage = bookService.searchBooks(keyword, PageRequest.of(page, size));
+        model.addAttribute("books", bookPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", bookPage.getTotalPages());
+        model.addAttribute("keyword", keyword);
+        return "admin/book-list";
     }
 }

@@ -9,6 +9,11 @@
     <h1 class="mb-4">Book List</h1>
     <a class="btn btn-primary mb-3" href="/admin/books/create">Add New Book</a>
     <a class="btn btn-secondary mb-3" href="/">Back To Home</a>
+    <form class="d-flex mb-4" method="get" th:action="@{/admin/books/search}">
+        <input class="form-control me-2" name="keyword" placeholder="Search by name" th:value="${keyword}"
+               type="search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -30,6 +35,23 @@
         </tr>
         </tbody>
     </table>
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/admin/books/search(page=${currentPage - 1}, size=${size}, keyword=${keyword})}">Previous</a>
+            </li>
+            <li class="page-item" th:classappend="${i == currentPage} ? 'active'"
+                th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+                <a class="page-link" th:href="@{/admin/books/search(page=${i}, size=${size}, keyword=${keyword})}"
+                   th:text="${i + 1}"></a>
+            </li>
+            <li class="page-item" th:classappend="${currentPage + 1 >= totalPages} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/admin/books/search(page=${currentPage + 1}, size=${size}, keyword=${keyword})}">Next</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 </body>
-</html>
+</html>s

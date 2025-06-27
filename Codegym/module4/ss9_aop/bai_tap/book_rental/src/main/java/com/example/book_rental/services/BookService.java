@@ -6,6 +6,8 @@ import com.example.book_rental.models.BorrowCode;
 import com.example.book_rental.repositories.IBookRepository;
 import com.example.book_rental.repositories.IBorrowCodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +23,8 @@ public class BookService implements IBookService {
     private IBorrowCodeRepository borrowCodeRepository;
 
     @Override
-    public List<Book> findAll() {
-        return bookRepository.findAll();
+    public Page<Book> findAll(Pageable pageable) {
+        return bookRepository.findAll(pageable);
     }
 
     @Override
@@ -107,6 +109,11 @@ public class BookService implements IBookService {
         bookRepository.save(book);
 
         borrowCodeRepository.delete(code);
+    }
+
+    @Override
+    public Page<Book> searchBooks(String keyword, Pageable pageable) {
+        return bookRepository.findByNameContainingIgnoreCase(keyword, pageable);
     }
 
     @Override

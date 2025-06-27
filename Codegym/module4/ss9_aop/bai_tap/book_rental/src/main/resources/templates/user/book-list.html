@@ -8,6 +8,10 @@
 <body>
 <div class="container mt-5">
     <h1 class="mb-4">Book List</h1>
+    <form class="d-flex mb-4" method="get" th:action="@{/books/search}">
+        <input class="form-control me-2" name="keyword" placeholder="Search by name" th:value="${keyword}" type="search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
     <div class="row">
         <div class="col-md-4 mb-4" th:each="book : ${books}">
             <a class="text-decoration-none" th:href="@{/books/detail/{id}(id=${book.id})}">
@@ -27,6 +31,22 @@
     <div class="mt-5 text-center">
         <a class="btn btn-secondary" href="/books/history">View History</a>
     </div>
+
+    <!-- Pagination Controls -->
+    <nav class="mt-4">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{/books/search(page=${currentPage - 1}, size=${size}, keyword=${keyword})}">Previous</a>
+            </li>
+            <li class="page-item" th:classappend="${i == currentPage} ? 'active'"
+                th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+                <a class="page-link" th:href="@{/books/search(page=${i}, size=${size}, keyword=${keyword})}" th:text="${i + 1}"></a>
+            </li>
+            <li class="page-item" th:classappend="${currentPage + 1 >= totalPages} ? 'disabled'">
+                <a class="page-link" th:href="@{/books/search(page=${currentPage + 1}, size=${size}, keyword=${keyword})}">Next</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 </body>
 </html>
