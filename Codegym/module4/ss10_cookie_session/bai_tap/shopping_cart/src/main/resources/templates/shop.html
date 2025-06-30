@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách sản phẩm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cart-info {
+            text-align: right;
+            margin: 10px 20px;
+            font-size: 16px;
+        }
+
+        .cart-info a {
+            text-decoration: none;
+            color: #2d89ef;
+            font-weight: bold;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .product-card {
+            width: 200px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .new-badge {
+            position: absolute;
+            top: 10px;
+            right: -30px;
+            background: red;
+            color: white;
+            width: 100px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .price-old {
+            text-decoration: line-through;
+            color: #999;
+            margin-right: 5px;
+        }
+
+        .price-new {
+            color: red;
+            font-weight: bold;
+        }
+
+        a.button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #2d89ef;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        a.button:hover {
+            background-color: #1b5dab;
+        }
+    </style>
+</head>
+<body>
+
+<div class="cart-info">
+    🛒 <a th:href="@{/shopping-cart}">
+    Giỏ hàng (<span th:text="${cart.countItemQuantity()}">0</span> sản phẩm)
+</a>
+</div>
+
+<h2>DANH SÁCH SẢN PHẨM</h2>
+
+<div class="product-grid">
+    <a style="text-decoration: none; color: inherit;" th:each="product : ${products}"
+       th:href="@{'/product/' + ${product.id}}">
+        <div class="product-card">
+            <div class="new-badge" th:if="${product.price > 500000}">NEW</div>
+
+            <img alt="Product Image"
+                 onerror="this.src='/image/image.jpg'"
+                 th:src="@{'/images/' + ${#strings.replace(product.name.toLowerCase(), ' ', '-')} + '.jpg'}"/>
+
+            <div th:text="${product.name}">Tên sản phẩm</div>
+
+            <div>
+                <span th:if="${product.price > 450000}">
+                    <span class="price-old"
+                          th:text="${#numbers.formatDecimal(product.price + 50000, 0, 'COMMA', 3, 'POINT')} + ' đ'">
+                    </span>
+                    <span class="price-new"
+                          th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 3, 'POINT')} + ' đ'">
+                    </span>
+                </span>
+                <span class="price-new"
+                      th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 3, 'POINT')} + ' đ'"
+                      th:unless="${product.price > 450000}">
+                </span>
+            </div>
+
+            <a class="button" onclick="event.stopPropagation();" th:href="@{/add/__${product.id}__(action='list')}">
+                Thêm vào giỏ
+            </a>
+        </div>
+    </a>
+</div>
+
+</body>
+</html>

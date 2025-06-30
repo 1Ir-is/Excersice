@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .cart-container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Bước tiến trình */
+        .steps {
+            display: flex;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            padding: 10px 20px;
+            background: #e0e0e0;
+            color: #000;
+            position: relative;
+            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%);
+            margin-right: -20px;
+            z-index: 1;
+        }
+
+        .step:last-child {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            margin-right: 0;
+        }
+
+        .step.active {
+            background: #00a2e8;
+            color: #fff;
+            z-index: 2;
+        }
+
+        .cart-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: auto;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+
+        .cart-info {
+            flex: 1;
+        }
+
+        .cart-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .delete-btn {
+            background-color: #d9534f;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .price {
+            color: red;
+            font-weight: bold;
+        }
+
+        select {
+            padding: 3px;
+        }
+
+        .total {
+            text-align: right;
+            font-weight: bold;
+            color: red;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="cart-container">
+
+    <!-- Thanh tiến trình -->
+    <div class="steps">
+        <div class="step active">01. Giỏ hàng</div>
+        <div class="step">02. Đơn hàng</div>
+        <div class="step">03. Thanh toán</div>
+    </div>
+
+    <!-- Tiêu đề giỏ hàng -->
+    <div class="cart-title">
+        GIỎ HÀNG (<span th:text="${cart.countItemQuantity()}">0</span> sản phẩm)
+    </div>
+
+    <!-- Danh sách sản phẩm -->
+    <div class="cart-item" th:each="entry : ${cart.products}">
+        <form method="post" style="margin-right: 10px;" th:action="@{/remove/{id}(id=${entry.key.id})}">
+            <button class="delete-btn" type="submit">×</button>
+        </form>
+
+        <img alt="Product Image"
+             onerror="this.src='/image/image.jpg'"
+             th:src="@{'/images/' + ${#strings.replace(entry.key.name.toLowerCase(), ' ', '-')} + '.jpg'}"/>
+
+        <div class="cart-info">
+            <div><strong th:text="${entry.key.name}">Sản phẩm</strong></div>
+            <div>Mã SP: <span th:text="${entry.key.id}">0000</span></div>
+            <div>
+                Đơn giá: <span class="price"
+                               th:text="${#numbers.formatDecimal(entry.key.price, 0, 'COMMA', 3, 'POINT')} + ' đ'">0 đ</span>
+            </div>
+        </div>
+
+        <div class="cart-actions">
+            <form method="post" th:action="@{/updateQuantity}">
+                <input name="productId" th:value="${entry.key.id}" type="hidden"/>
+                <select name="quantity" onchange="this.form.submit()">
+                    <option th:each="i : ${#numbers.sequence(1,10)}"
+                            th:selected="${i == entry.value}"
+                            th:text="${i}"
+                            th:value="${i}">1
+                    </option>
+                </select>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tổng cộng -->
+    <div class="total">
+        Tổng cộng:
+        <span th:text="${#numbers.formatDecimal(cart.countTotalPayment(), 0, 'COMMA', 3, 'POINT')} + ' đ'">0 đ</span>
+    </div>
+
+    <!-- Nút quay lại trang shop -->
+    <div style="margin-top: 30px;">
+        <a href="/shop" style="
+            display: inline-block;
+            background-color: #00a2e8;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        ">
+            ← Quay lại Shop
+        </a>
+    </div>
+
+
+</div>
+
+</body>
+</html>

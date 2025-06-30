@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${product.name}">Chi tiết sản phẩm</title>
+    <style>
+        .product-detail-container {
+            display: flex;
+            gap: 20px;
+            max-width: 800px;
+            margin: 30px auto;
+            font-family: Arial, sans-serif;
+        }
+
+        .product-image-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            width: 300px;
+        }
+
+        .product-image-box img {
+            width: 100%;
+            height: auto;
+        }
+
+        .product-info-box {
+            flex: 1;
+        }
+
+        .product-name {
+            font-size: 24px;
+            font-weight: bold;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .benefits {
+            background: #fff8dc;
+            border: 1px solid #ffd700;
+            border-radius: 6px;
+            padding: 10px 15px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .benefits li {
+            list-style: none;
+            margin-bottom: 5px;
+        }
+
+        .benefits li::before {
+            content: attr(data-index);
+            background: orange;
+            color: white;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 2px 6px;
+            margin-right: 8px;
+            font-size: 12px;
+        }
+
+        .product-code {
+            margin: 15px 0;
+            font-size: 16px;
+        }
+
+        .product-code span {
+            color: green;
+            font-weight: bold;
+        }
+
+        .price-old {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .price-new {
+            font-size: 18px;
+            font-weight: bold;
+            color: red;
+        }
+
+        .buy-button {
+            margin-top: 15px;
+            display: inline-block;
+            background: orange;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .buy-button:hover {
+            background: #cc6600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="product-detail-container">
+    <!-- Cột ảnh và giá -->
+    <div class="product-image-box">
+        <img alt="Product Image"
+             onerror="this.src='/image/image.jpg'"
+             th:src="@{'/images/' + ${#strings.replace(product.name.toLowerCase(), ' ', '-')} + '.jpg'}"/>
+
+        <div class="product-code">
+            Mã SP: <span th:text="${product.id}">1234</span>
+        </div>
+
+        <div th:if="${product.price > 450000}">
+            <div class="price-old"
+                 th:text="${#numbers.formatDecimal(product.price + 50000, 0, 'COMMA', 3, 'POINT')} + ' đ'">400.000 đ
+            </div>
+            <div class="price-new" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 3, 'POINT')} + ' đ'">
+                350.000 đ
+            </div>
+        </div>
+        <div class="price-new" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 3, 'POINT')} + ' đ'"
+             th:unless="${product.price > 450000}">350.000 đ
+        </div>
+
+        <a class="buy-button" th:href="@{/add/{id}(id=${product.id}, action='cart')}">MUA NGAY</a>
+
+    </div>
+
+    <!-- Cột mô tả -->
+    <div class="product-info-box">
+        <div class="product-name" th:text="${product.name}">Sản phẩm 1</div>
+        <ul class="benefits">
+            <li data-index="1">Tặng banner, thiệp (trị giá 20.000đ) miễn phí</li>
+            <li data-index="2">Giảm ngay 20.000đ khi Bạn tạo đơn hàng online</li>
+            <li data-index="3">Giảm tiếp 3% cho đơn hàng Bạn tạo ONLINE lần thứ 2, 5% lần 6 và 10% lần 12 <em>(Chỉ áp
+                dụng tại Tp. HCM)</em></li>
+            <li data-index="4">Giao miễn phí trong nội thành 63/63 tỉnh</li>
+            <li data-index="5">Giao gấp trong vòng 2 giờ</li>
+            <li data-index="6">Cam kết 100% hoàn lại tiền nếu Bạn không hài lòng</li>
+            <li data-index="7">Cam kết hoa tươi trên 3 ngày</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
