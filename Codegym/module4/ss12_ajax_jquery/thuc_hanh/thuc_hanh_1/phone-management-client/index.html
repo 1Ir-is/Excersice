@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <title>Thuc Hanh</title>
+  </head>
+  <body>
+    <h1>Create new smartphone</h1>
+    <form id="add-smartphone">
+      <h1>Form create</h1>
+      <table>
+        <tr>
+          <td><label for="producer">Producer:</label></td>
+          <td><input type="text" id="producer" placeholder="producer" /></td>
+        </tr>
+        <tr>
+          <td><label for="model">Model:</label></td>
+          <td><input type="text" id="model" placeholder="model" /></td>
+        </tr>
+        <tr>
+          <td><label for="price">Price:</label></td>
+          <td><input type="text" id="price" placeholder="price" /></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <input type="submit" value="Add" onclick="addNewSmartPhone()" />
+          </td>
+        </tr>
+      </table>
+    </form>
+
+    <h1 id="title">List Smartphones</h1>
+    <div id="div-btn">
+      <button onclick="successHandler()">Display List Smartphones</button>
+      <button onclick="displayFormCreate()">Create New Smartphone</button>
+    </div>
+
+    <div id="smartphoneList"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
