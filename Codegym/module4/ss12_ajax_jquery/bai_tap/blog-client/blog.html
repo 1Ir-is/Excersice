@@ -102,7 +102,21 @@
         </div>
       </div>
 
-      <!-- Blog Table -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <input
+            type="text"
+            class="form-control"
+            id="searchInput"
+            placeholder="Search by title..."
+          />
+        </div>
+        <div class="col-md-6 text-end">
+          <button class="btn btn-info" id="searchBtn">Search</button>
+          <button class="btn btn-secondary" id="clearSearchBtn">Clear</button>
+        </div>
+      </div>
+
       <table class="table table-bordered align-middle">
         <thead class="table-primary">
           <tr>
@@ -117,12 +131,20 @@
         </thead>
         <tbody id="blogTableBody"></tbody>
       </table>
+      <div class="text-center my-3">
+        <button class="btn btn-primary" id="loadMoreBtn">Show More</button>
+        <button class="btn btn-danger" id="showLessBtn">Show Less</button>
+      </div>
     </div>
 
     <script>
       const baseApiUrl = "http://localhost:8080/api";
 
       let categories = [];
+      let allBlogs = [];
+      let currentPage = 0;
+      let pageSize = 5;
+      let currentKeyword = "";
 
       function loadCategoriesForDropdown(dropdownId, selectedId) {
         $.ajax({
@@ -149,43 +171,96 @@
         });
       }
 
-      function loadBlogs() {
+      function renderBlogs(blogs) {
+        let html = "";
+        for (let i = 0; i < blogs.length; i++) {
+          let b = blogs[i];
+          html += "<tr>";
+          html += "<td>" + (i + 1) + "</td>";
+          html += "<td>" + b.title + "</td>";
+          html += "<td>" + b.summary + "</td>";
+          html += "<td>" + b.content + "</td>";
+          html += "<td>" + (b.category ? b.category.name : "N/A") + "</td>";
+          html +=
+            "<td>" +
+            (b.createdTime
+              ? b.createdTime.replace("T", " ").split(".")[0]
+              : "") +
+            "</td>";
+          html += "<td>";
+          html +=
+            "<button class='btn btn-warning btn-sm me-2' onclick='showEditBlog(" +
+            b.id +
+            ")'>Edit</button>";
+          html +=
+            "<button class='btn btn-danger btn-sm' onclick='deleteBlog(" +
+            b.id +
+            ")'>Delete</button>";
+          html += "</td>";
+          html += "</tr>";
+        }
+        $("#blogTableBody").html(html);
+      }
+
+      function loadBlogs(reset = true) {
+        let totalToShow = (currentPage + 1) * pageSize;
+        let url = `${baseApiUrl}/v1/blogs?page=0&size=${totalToShow}&sort=id`;
+        if (currentKeyword) {
+          url = `${baseApiUrl}/v1/blogs/search?title=${encodeURIComponent(
+            currentKeyword
+          )}&page=0&size=${totalToShow}&sort=id`;
+        }
         $.ajax({
-          url: `${baseApiUrl}/v1/blogs?page=0&size=5&sort=id`,
+          url: url,
           method: "GET",
           success: function (data) {
-            var blogs = data.content || [];
-            var html = "";
-            for (var i = 0; i < blogs.length; i++) {
-              var b = blogs[i];
-              html += "<tr>";
-              html += "<td>" + (i + 1) + "</td>";
-              html += "<td>" + b.title + "</td>";
-              html += "<td>" + b.summary + "</td>";
-              html += "<td>" + b.content + "</td>";
-              html += "<td>" + (b.category ? b.category.name : "N/A") + "</td>";
-              html +=
-                "<td>" +
-                (b.createdTime
-                  ? b.createdTime.replace("T", " ").split(".")[0]
-                  : "") +
-                "</td>";
-              html += "<td>";
-              html +=
-                "<button class='btn btn-warning btn-sm me-2' onclick='showEditBlog(" +
-                b.id +
-                ")'>Edit</button>";
-              html +=
-                "<button class='btn btn-danger btn-sm' onclick='deleteBlog(" +
-                b.id +
-                ")'>Delete</button>";
-              html += "</td>";
-              html += "</tr>";
+            allBlogs = data.content || [];
+            renderBlogs(allBlogs);
+            if (currentPage > 0) {
+              $("#showLessBtn").show();
+            } else {
+              $("#showLessBtn").hide();
             }
-            $("#blogTableBody").html(html);
+            if (data.last || allBlogs.length === 0) {
+              $("#loadMoreBtn").hide();
+            } else {
+              $("#loadMoreBtn").show();
+            }
           },
         });
       }
+
+      $("#searchBtn").click(function () {
+        currentKeyword = $("#searchInput").val().trim();
+        currentPage = 0;
+        loadBlogs(true);
+      });
+
+      $("#clearSearchBtn").click(function () {
+        $("#searchInput").val("");
+        currentKeyword = "";
+        currentPage = 0;
+        loadBlogs(true);
+      });
+
+      $("#loadMoreBtn").click(function () {
+        currentPage++;
+        loadBlogs(false);
+      });
+
+      $("#showLessBtn").click(function () {
+        if (currentPage > 0) {
+          currentPage--;
+          loadBlogs(false);
+        }
+      });
+
+      $("#searchInput").on("keypress", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          $("#searchBtn").click();
+        }
+      });
 
       $("#createBlogForm").submit(function (e) {
         e.preventDefault();
@@ -223,6 +298,13 @@
             $("#editBlogContent").val(blog.content);
             loadCategoriesForDropdown("#editBlogCategory", blog.category.id);
             $("#editBlogCard").removeClass("d-none");
+
+            $("html, body").animate(
+              {
+                scrollTop: $("#editBlogCard").offset().top - 30,
+              },
+              500
+            );
           },
           error: function (xhr, status, error) {
             console.error("Error loading blog:", error);
@@ -277,9 +359,12 @@
           });
         }
       };
-
-      loadBlogs();
-      loadCategoriesForDropdown("#blogCategory");
+      $(function () {
+        currentPage = 0;
+        currentKeyword = "";
+        loadBlogs(true);
+        loadCategoriesForDropdown("#blogCategory");
+      });
     </script>
   </body>
 </html>

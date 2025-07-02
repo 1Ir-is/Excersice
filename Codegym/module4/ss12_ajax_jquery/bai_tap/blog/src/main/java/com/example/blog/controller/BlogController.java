@@ -81,4 +81,16 @@ public class BlogController {
         blogService.deleteById(id);
         return new ResponseEntity<>(blogOptional.get(), HttpStatus.OK);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<Page<Blog>> searchBlogByTitle(
+            @RequestParam String title,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "id") String sort
+    ) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+        Page<Blog> blogs = blogService.searchByTitle(title, pageable);
+        return new ResponseEntity<>(blogs, HttpStatus.OK);
+    }
 }
