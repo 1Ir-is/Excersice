@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh sửa thông tin nhân viên</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .form-container {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .avatar-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .avatar-section h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .avatar-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .avatar-tab {
+            flex: 1;
+            padding: 12px 20px;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .avatar-tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .avatar-tab:hover {
+            background: #5a6fd8;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .file-upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload-area:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .file-upload-area .upload-icon {
+            font-size: 48px;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
+        .file-upload-area .upload-text {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .file-upload-area .upload-hint {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .url-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .preview-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .preview-image {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            margin-left: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .success-message {
+            color: #27ae60;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .container {
+                margin: 10px;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Chỉnh sửa thông tin nhân viên</h1>
+            <p>Cập nhật thông tin chi tiết của nhân viên</p>
+        </div>
+
+        <div class="form-container">
+            <form id="employeeForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Họ và tên đệm</label>
+                        <input type="text" id="firstName" name="firstName" value="Nguyễn Văn" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Tên</label>
+                        <input type="text" id="lastName" name="lastName" value="An" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" value="nguyenvanan@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Số điện thoại</label>
+                        <input type="tel" id="phone" name="phone" value="0123456789" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="department">Phòng ban</label>
+                        <select id="department" name="department" required>
+                            <option value="">Chọn phòng ban</option>
+                            <option value="IT" selected>Công nghệ thông tin</option>
+                            <option value="HR">Nhân sự</option>
+                            <option value="FINANCE">Tài chính</option>
+                            <option value="MARKETING">Marketing</option>
+                            <option value="SALES">Bán hàng</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="position">Chức vụ</label>
+                        <input type="text" id="position" name="position" value="Lập trình viên" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Địa chỉ</label>
+                    <textarea id="address" name="address" rows="3" required>123 Đường ABC, Quận 1, TP. Hồ Chí Minh</textarea>
+                </div>
+
+                <div class="avatar-section">
+                    <h3>Ảnh đại diện</h3>
+                    <div class="avatar-tabs">
+                        <button type="button" class="avatar-tab active" data-tab="upload">Tải lên file</button>
+                        <button type="button" class="avatar-tab" data-tab="url">Nhập URL</button>
+                    </div>
+
+                    <div id="uploadTab" class="tab-content active">
+                        <div id="fileUploadArea" class="file-upload-area">
+                            <div class="upload-icon">📁</div>
+                            <div class="upload-text">Nhấp vào đây để tải lên hình ảnh</div>
+                            <div class="upload-hint">Hỗ trợ: JPG, PNG, GIF (tối đa 5MB)</div>
+                        </div>
+                        <input type="file" id="avatarFile" name="avatarFile" accept="image/*" class="hidden">
+                    </div>
+
+                    <div id="urlTab" class="tab-content">
+                        <input type="url" id="avatarUrl" name="avatarUrl" class="url-input" placeholder="Nhập URL hình ảnh">
+                    </div>
+
+                    <div class="preview-container">
+                        <img id="imagePreview" class="preview-image" alt="Preview">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                    <button type="button" class="btn btn-secondary" onclick="window.history.back()">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // DOM elements
+        const fileUploadArea = document.getElementById('fileUploadArea');
+        const avatarFile = document.getElementById('avatarFile');
+        const imagePreview = document.getElementById('imagePreview');
+        const avatarUrl = document.getElementById('avatarUrl');
+        const form = document.getElementById('employeeForm');
+        const avatarTabs = document.querySelectorAll('.avatar-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        // Initialize after DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing file upload...');
+            
+            // Add debugging to check if elements exist
+            if (!fileUploadArea) {
+                console.error('fileUploadArea element not found');
+                return;
+            }
+            
+            if (!avatarFile) {
+                console.error('avatarFile element not found');
+                return;
+            }
+            
+            if (!imagePreview) {
+                console.error('imagePreview element not found');
+                return;
+            }
+            
+            console.log('All required elements found, proceeding with initialization...');
+            
+            // Setup tab switching
+            avatarTabs.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const tabId = this.dataset.tab;
+                    switchTab(tabId);
+                });
+            });
+
+            // Setup file upload functionality
+            setupFileUpload();
+            
+            // Setup URL input
+            setupUrlInput();
+            
+            // Setup form submission
+            setupFormSubmission();
+        });
+
+        // Function to switch between tabs
+        function switchTab(tabId) {
+            // Remove active class from all tabs
+            avatarTabs.forEach(tab => tab.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Add active class to selected tab
+            document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+            document.getElementById(`${tabId}Tab`).classList.add('active');
+        }
+
+        // Setup file upload functionality
+        function setupFileUpload() {
+            // Ensure DOM elements are available
+            if (!fileUploadArea || !avatarFile) {
+                console.error('Required DOM elements not found');
+                return;
+            }
+
+            // FIXED: Single event listener with proper event handling
+            fileUploadArea.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent any default behavior
+                e.stopPropagation(); // Stop event bubbling
+                
+                console.log('Upload area clicked');
+                console.log('Avatar file element:', avatarFile);
+                
+                // Trigger file input click
+                avatarFile.click();
+            });
+
+            // Handle file selection
+            avatarFile.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    console.log('File selected:', file.name);
+                    
+                    // Validate file
+                    if (!validateFile(file)) {
+                        return;
+                    }
+                    
+                    // Preview image
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Drag and drop functionality
+            fileUploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.style.background = '#f0f8ff';
+                this.style.borderColor = '#667eea';
+            });
+
+            fileUploadArea.addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.style.background = 'white';
+                this.style.borderColor = '#ccc';
+            });
+
+            fileUploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.style.background = 'white';
+                this.style.borderColor = '#ccc';
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    const file = files[0];
+                    if (validateFile(file)) {
+                        // Create a new DataTransfer object to properly assign files
+                        const dt = new DataTransfer();
+                        dt.items.add(file);
+                        avatarFile.files = dt.files;
+                        avatarFile.dispatchEvent(new Event('change'));
+                    }
+                }
+            });
+        }
+
+        // Additional setup functions...
+        function setupUrlInput() {
+            avatarUrl.addEventListener('input', function(e) {
+                const url = e.target.value.trim();
+                if (url) {
+                    // Add basic URL validation
+                    try {
+                        new URL(url);
+                        imagePreview.src = url;
+                        imagePreview.style.display = 'block';
+                        
+                        // Handle image load errors
+                        imagePreview.onerror = function() {
+                            console.error('Failed to load image from URL:', url);
+                            imagePreview.style.display = 'none';
+                            // Show error message to user
+                            showErrorMessage('Không thể tải hình ảnh từ URL này');
+                        };
+                        
+                        imagePreview.onload = function() {
+                            console.log('Image loaded successfully from URL:', url);
+                            hideErrorMessage();
+                        };
+                    } catch (e) {
+                        console.error('Invalid URL:', url);
+                        imagePreview.style.display = 'none';
+                        showErrorMessage('URL không hợp lệ');
+                    }
+                } else {
+                    imagePreview.style.display = 'none';
+                    hideErrorMessage();
+                }
+            });
+        }
+
+        function setupFormSubmission() {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Basic validation
+                const requiredFields = form.querySelectorAll('[required]');
+                let isValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.style.borderColor = '#e74c3c';
+                    } else {
+                        field.style.borderColor = '#ddd';
+                    }
+                });
+                
+                if (isValid) {
+                    // Simulate form submission
+                    alert('Thông tin nhân viên đã được cập nhật thành công!');
+                    console.log('Form submitted successfully');
+                } else {
+                    alert('Vui lòng điền đầy đủ thông tin bắt buộc!');
+                }
+            });
+        }
+
+        function validateFile(file) {
+            // Check file type
+            if (!file.type.startsWith('image/')) {
+                alert('Vui lòng chọn file hình ảnh hợp lệ!');
+                return false;
+            }
+            
+            // Check file size (5MB max)
+            const maxSize = 5 * 1024 * 1024;
+            if (file.size > maxSize) {
+                alert('Kích thước file không được vượt quá 5MB!');
+                return false;
+            }
+            
+            return true;
+        }
+
+        function showErrorMessage(message) {
+            // Remove existing error messages
+            const existingError = document.querySelector('.error-message');
+            if (existingError) {
+                existingError.remove();
+            }
+            
+            // Create new error message
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            
+            // Insert after the URL input
+            avatarUrl.parentNode.insertBefore(errorDiv, avatarUrl.nextSibling);
+        }
+
+        function hideErrorMessage() {
+            const errorDiv = document.querySelector('.error-message');
+            if (errorDiv) {
+                errorDiv.remove();
+            }
+        }
+
+        // FIXED: Removed duplicate event listener to prevent conflicts
+    </script>
+</body>
+</html>
