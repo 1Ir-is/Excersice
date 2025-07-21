@@ -1,0 +1,11 @@
+{
+  "name": "bai_1",
+  "version": "1.0.0",
+  "description": "bai_1",
+  "main": "bai1.js",
+  "scripts": {
+    "test": "npm "
+  },
+  "author": "",
+  "license": "ISC"
+}
