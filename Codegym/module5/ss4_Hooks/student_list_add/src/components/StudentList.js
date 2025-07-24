@@ -23,6 +23,7 @@ function StudentList() {
   const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleAdd = () => {
     if (!code || !name || !age || !email) {
@@ -46,9 +47,21 @@ function StudentList() {
     setShowForm(false);
   };
 
+  const filteredStudents = students.filter(
+    (sinhVien) =>
+      sinhVien.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      sinhVien.code.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div>
       <h2>Danh sách sinh viên</h2>
+      <input
+        placeholder="Tìm kiếm theo tên hoặc mã sinh viên"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        style={{ marginBottom: "12px", display: "block" }}
+      />
       <table border="1" cellPadding="5">
         <thead>
           <tr>
@@ -59,7 +72,7 @@ function StudentList() {
           </tr>
         </thead>
         <tbody>
-          {students.map((sinhVien) => (
+          {filteredStudents.map((sinhVien) => (
             <tr key={sinhVien.id}>
               <td>{sinhVien.code}</td>
               <td>{sinhVien.name}</td>
