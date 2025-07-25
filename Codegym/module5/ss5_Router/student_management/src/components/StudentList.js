@@ -1,18 +1,22 @@
 import { getAll, deleteById } from "../services/studentService";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StudentSearch from "./StudentSearch";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import { filteredStudents } from "../utils/studentUtils";
 import { toast } from "react-toastify";
 
 function StudentList() {
-  const [students, setStudents] = useState(getAll());
+  const [students, setStudents] = useState([]);
   const [search, setSearch] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
   const [deleteName, setDeleteName] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setStudents(getAll());
+  }, []);
 
   const handleDelete = (id) => {
     deleteById(id);

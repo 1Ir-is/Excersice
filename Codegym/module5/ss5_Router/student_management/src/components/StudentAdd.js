@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { addNew, getAll } from "../services/studentService";
+import { addNew } from "../services/studentService";
 import { getAllClasses } from "../services/classService";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
