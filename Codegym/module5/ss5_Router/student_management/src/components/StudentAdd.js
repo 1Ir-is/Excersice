@@ -4,6 +4,7 @@ import { addNew } from "../services/studentService";
 import { getAllClasses } from "../services/classService";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 
 const coursesList = ["ReactJS", "NodeJS", "Java", "Python"];
 
@@ -22,7 +23,15 @@ const StudentSchema = Yup.object().shape({
 
 function StudentAdd() {
   const navigate = useNavigate();
-  const classes = getAllClasses();
+  const [classes, setClasses] = useState([]);
+
+  useEffect(() => {
+    async function fetchClasses() {
+      const data = await getAllClasses();
+      setClasses(data);
+    }
+    fetchClasses();
+  }, []);
 
   return (
     <div className="card">

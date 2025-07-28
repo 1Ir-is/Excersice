@@ -4,14 +4,25 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { getAllClasses } from "../services/classService";
+import { useEffect, useState } from "react";
 
 const coursesList = ["ReactJS", "NodeJS", "Java", "Python"];
 
 function StudentEdit() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const student = getById(Number(id));
-  const classes = getAllClasses();
+  const [student, setStudent] = useState(null);
+  const [classes, setClasses] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const stu = await getById(Number(id));
+      setStudent(stu);
+      const cls = await getAllClasses();
+      setClasses(cls);
+    }
+    fetchData();
+  }, [id]);
 
   if (!student) {
     return <div className="alert alert-danger">Khong tim thay sinh vien</div>;

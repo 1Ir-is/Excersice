@@ -1,10 +1,19 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { getById } from "../services/studentService";
+import { useEffect, useState } from "react";
 
 function StudentDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const student = getById(Number(id));
+  const [student, setStudent] = useState(null);
+
+  useEffect(() => {
+    async function fetchStudent() {
+      const data = await getById(Number(id));
+      setStudent(data);
+    }
+    fetchStudent();
+  }, [id]);
 
   if (!student) {
     return <div className="alert alert-danger">Khong tim thay sinh vien</div>;
