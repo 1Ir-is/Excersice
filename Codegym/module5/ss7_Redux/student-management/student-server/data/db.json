@@ -1,0 +1,111 @@
+{
+  "students": [
+    {
+      "name": "Huynh Minh Huy",
+      "age": 20,
+      "email": "huy@gmail.com",
+      "gender": "Nam",
+      "courses": [
+        "ReactJS",
+        "NodeJS"
+      ],
+      "class": "B2",
+      "id": 1
+    },
+    {
+      "name": "Nguyen Duc Vinh",
+      "age": 12,
+      "email": "huyhk1005@gmail.com",
+      "gender": "Nam",
+      "courses": [
+        "NodeJS",
+        "Java"
+      ],
+      "class": "A2",
+      "id": 2
+    },
+    {
+      "name": "Michels David",
+      "age": 12,
+      "email": "mhuynk1005@gmail.com",
+      "gender": "Nu",
+      "courses": [
+        "ReactJS",
+        "NodeJS"
+      ],
+      "class": "A1",
+      "id": 3
+    },
+    {
+      "name": "Nguyen Thanh Nhon",
+      "age": 30,
+      "email": "tuhuy513@gmail.com",
+      "gender": "Nam",
+      "courses": [
+        "NodeJS",
+        "ReactJS"
+      ],
+      "class": "A2",
+      "id": 4
+    },
+    {
+      "name": "To The Moon",
+      "age": 30,
+      "email": "binh@codegym.com",
+      "gender": "Nam",
+      "courses": [
+        "NodeJS",
+        "Java"
+      ],
+      "class": "B1",
+      "id": 5
+    },
+    {
+      "name": "Cellphones",
+      "age": 30,
+      "email": "huyhk1005@gmail.com",
+      "gender": "Nam",
+      "courses": [
+        "Python",
+        "Java"
+      ],
+      "class": "B1",
+      "id": 6
+    }
+  ],
+  "classes": [
+    {
+      "id": 1,
+      "name": "A1"
+    },
+    {
+      "id": 2,
+      "name": "A2"
+    },
+    {
+      "id": 3,
+      "name": "B1"
+    },
+    {
+      "id": 4,
+      "name": "B2"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "12345"
+    },
+    {
+      "username": "huy1233",
+      "password": "1234567",
+      "id": 2
+    },
+    {
+      "username": "huypro123",
+      "password": "huypro123",
+      "id": 3
+    }
+  ]
+}
