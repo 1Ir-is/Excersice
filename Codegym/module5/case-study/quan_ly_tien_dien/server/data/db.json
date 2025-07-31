@@ -1,0 +1,69 @@
+{
+  "invoices": [
+    {
+      "id": 1,
+      "maHoaDon": "MHD-0001",
+      "soLuongKW": 120,
+      "donGia": 2000,
+      "tongTien": 240000,
+      "thang": "07/2025",
+      "khachHang": {
+        "id": 1,
+        "ten": "Nguyễn Văn A",
+        "diaChi": "123 Đường ABC, Quận 1, TP.HCM"
+      }
+    },
+    {
+      "id": 2,
+      "maHoaDon": "MHD-0002",
+      "soLuongKW": 80,
+      "donGia": 2500,
+      "tongTien": 200000,
+      "thang": "07/2025",
+      "khachHang": {
+        "id": 2,
+        "ten": "Trần Thị B",
+        "diaChi": "456 Đường XYZ, Quận 3, TP.HCM"
+      }
+    },
+    {
+      "maHoaDon": "MHD-1004",
+      "soLuongKW": 12,
+      "donGia": 2000,
+      "thang": "12/2025",
+      "khachHang": {
+        "id": 1,
+        "ten": "Nguyễn Văn A",
+        "diaChi": "123 Đường ABC, Quận 1, TP.HCM"
+      },
+      "tongTien": 24000,
+      "id": 3
+    },
+    {
+      "maHoaDon": "MHD-1005",
+      "soLuongKW": 30,
+      "donGia": 4000,
+      "thang": "09/2000",
+      "khachHangId": "2",
+      "tongTien": 120000,
+      "khachHang": {
+        "id": 2,
+        "ten": "Trần Thị B",
+        "diaChi": "456 Đường XYZ, Quận 3, TP.HCM"
+      },
+      "id": 4
+    }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "ten": "Nguyễn Văn A",
+      "diaChi": "123 Đường ABC, Quận 1, TP.HCM"
+    },
+    {
+      "id": 2,
+      "ten": "Trần Thị B",
+      "diaChi": "456 Đường XYZ, Quận 3, TP.HCM"
+    }
+  ]
+}
