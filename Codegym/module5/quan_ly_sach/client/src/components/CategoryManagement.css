@@ -1,0 +1,164 @@
+.category-management {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.category-management h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.category-form {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.category-form h3 {
+  margin-top: 0;
+  color: #495057;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.form-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.form-actions button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+}
+
+.form-actions button[type="submit"]:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.form-actions button[type="button"] {
+  background-color: #6c757d;
+  color: white;
+}
+
+.form-actions button[type="button"]:hover:not(:disabled) {
+  background-color: #545b62;
+}
+
+.form-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.category-list {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.category-list h3 {
+  margin: 0;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  color: #495057;
+}
+
+.category-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.category-list th,
+.category-list td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.category-list th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+  color: #495057;
+}
+
+.category-list tr:hover {
+  background-color: #f8f9fa;
+}
+
+.category-list td button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.category-list td button:first-child {
+  background-color: #28a745;
+  color: white;
+}
+
+.category-list td button:first-child:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.category-list td button:last-child {
+  background-color: #dc3545;
+  color: white;
+}
+
+.category-list td button:last-child:hover:not(:disabled) {
+  background-color: #c82333;
+}
+
+.category-list td button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.category-list p {
+  padding: 20px;
+  text-align: center;
+  color: #6c757d;
+  margin: 0;
+}
