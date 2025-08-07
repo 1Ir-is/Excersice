@@ -146,7 +146,7 @@ public class GPTServiceImpl implements GPTService {
     @Override
     public CompletableFuture<GPTResponseDTO> callGPTAPI(GPTRequestDTO request) {
         try {
-            log.debug("🔄 Calling OpenAI API for with model: {}", request.getModel());
+            log.debug("Calling OpenAI API for with model: {}", request.getModel());
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -157,7 +157,7 @@ public class GPTServiceImpl implements GPTService {
 
             GPTResponseDTO responseBody = response.getBody();
             if (responseBody != null && responseBody.getUsage() != null) {
-                log.info("📊 Token usage for: {} total tokens", responseBody.getUsage().getTotal_tokens());
+                log.info("Token usage for: {} total tokens", responseBody.getUsage().getTotal_tokens());
             }
 
             return CompletableFuture.completedFuture(responseBody);

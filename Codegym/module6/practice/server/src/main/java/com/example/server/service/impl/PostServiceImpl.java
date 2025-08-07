@@ -219,7 +219,7 @@ public class PostServiceImpl implements PostService {
                                        int index, long generationTimeMs) {
         Post post = new Post();
         post.setTopicId(topic.getId());
-        post.setUserId(1L); // User 1Ir-is
+        post.setUserId(1L);
         post.setContentText(content);
         post.setAiGenerated(true);
         post.setStatus(PostStatus.DRAFT);

@@ -19,45 +19,41 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/api/topics")
 @Slf4j
 @CrossOrigin(origins = "*")
-@Tag(name = "Topic Management", description = "APIs for generating and managing marketing topics (Task 9)")
+@Tag(name = "Quản lý chủ đề", description = "API tạo và quản lý chủ đề marketing (Task 9)")
 public class TopicController {
 
     private final TopicService topicService;
 
     public TopicController(TopicService topicService) {
         this.topicService = topicService;
-        log.info("TopicController initialized successfully at {}", LocalDateTime.now());
+        log.info("TopicController khởi tạo thành công lúc {}", LocalDateTime.now());
     }
 
     @Operation(
-            summary = "Generate marketing topics using AI",
+            summary = "Tạo chủ đề marketing bằng AI",
             description = """
-                    Generate multiple marketing topics for a campaign using OpenAI GPT.
-                    This is the main endpoint for **Task 9**.
-
-                    **How it works:**
-                    1. Provide campaign ID and number of topics needed
-                    2. AI analyzes campaign context and generates relevant topics
-                    3. Topics are saved with PENDING status for user review
-                    4. User can then approve/reject topics before using them for content generation
-
-                    **Prerequisites:** Campaign must exist in the database
-                    **Generated topics status:** PENDING (requires approval before content generation)
+                    Tạo nhiều chủ đề marketing cho một chiến dịch bằng OpenAI GPT.               
+                    **Cách hoạt động:**
+                    1. Cung cấp ID chiến dịch và số lượng chủ đề cần tạo
+                    2. AI phân tích bối cảnh chiến dịch và tạo chủ đề phù hợp
+                    3. Chủ đề được lưu với trạng thái PENDING để người dùng duyệt
+                    4. Người dùng có thể duyệt/chặn chủ đề trước khi dùng để tạo nội dung
+                    
+                    **Yêu cầu:** Chiến dịch phải tồn tại trong cơ sở dữ liệu
+                    **Trạng thái chủ đề tạo ra:** PENDING (cần duyệt trước khi tạo nội dung)
                     """
     )
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Topics generated successfully",
+                    description = "Tạo chủ đề thành công",
                     content = @Content(
                             mediaType = "application/json",
                             schema = @Schema(implementation = TopicResponseDTO.class)
@@ -65,59 +61,59 @@ public class TopicController {
             ),
             @ApiResponse(
                     responseCode = "400",
-                    description = "Invalid request parameters (e.g., numberOfTopics out of range)",
+                    description = "Tham số yêu cầu không hợp lệ (ví dụ: số lượng chủ đề ngoài phạm vi)",
                     content = @Content(mediaType = "application/json")
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Campaign not found",
+                    description = "Không tìm thấy chiến dịch",
                     content = @Content(mediaType = "application/json")
             ),
             @ApiResponse(
                     responseCode = "500",
-                    description = "Internal server error or AI service unavailable",
+                    description = "Lỗi hệ thống hoặc dịch vụ AI không khả dụng",
                     content = @Content(mediaType = "application/json")
             )
     })
     @PostMapping("/generate")
     public CompletableFuture<ResponseEntity<List<TopicResponseDTO>>> generateTopics(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                    description = "Topic generation request parameters",
+                    description = "Tham số yêu cầu tạo chủ đề",
                     required = true,
                     content = @Content(
                             mediaType = "application/json",
                             schema = @Schema(implementation = TopicGenerationRequestDTO.class),
                             examples = {
                                     @ExampleObject(
-                                            name = "Technology Company",
-                                            description = "Generate topics for a tech company campaign",
+                                            name = "Công ty công nghệ",
+                                            description = "Tạo chủ đề cho chiến dịch công nghệ",
                                             value = """
                                                     {
                                                         "campaignId": 1,
                                                         "numberOfTopics": 5,
-                                                        "additionalInstructions": "Focus on technology and innovation themes for a software company. Include AI, cloud computing, and digital transformation topics."
+                                                        "additionalInstructions": "Tập trung vào chủ đề công nghệ và đổi mới cho công ty phần mềm. Bao gồm AI, điện toán đám mây, chuyển đổi số."
                                                     }
                                                     """
                                     ),
                                     @ExampleObject(
-                                            name = "E-commerce Business",
-                                            description = "Generate topics for an e-commerce campaign",
+                                            name = "Doanh nghiệp thương mại điện tử",
+                                            description = "Tạo chủ đề cho chiến dịch TMĐT",
                                             value = """
                                                     {
                                                         "campaignId": 1,
                                                         "numberOfTopics": 3,
-                                                        "additionalInstructions": "Focus on online shopping, customer experience, seasonal promotions, and mobile commerce trends."
+                                                        "additionalInstructions": "Tập trung vào mua sắm online, trải nghiệm khách hàng, khuyến mãi theo mùa và xu hướng thương mại di động."
                                                     }
                                                     """
                                     ),
                                     @ExampleObject(
-                                            name = "Healthcare Sector",
-                                            description = "Generate topics for healthcare industry",
+                                            name = "Ngành y tế",
+                                            description = "Tạo chủ đề cho ngành y tế",
                                             value = """
                                                     {
                                                         "campaignId": 1,
                                                         "numberOfTopics": 4,
-                                                        "additionalInstructions": "Focus on telemedicine, patient care innovation, health technology, and wellness trends."
+                                                        "additionalInstructions": "Tập trung vào y tế từ xa, đổi mới chăm sóc bệnh nhân, công nghệ sức khoẻ và xu hướng chăm sóc sức khoẻ."
                                                     }
                                                     """
                                     )
@@ -126,167 +122,136 @@ public class TopicController {
             )
             @Valid @RequestBody TopicGenerationRequestDTO request) {
 
-        log.info("=== TOPIC GENERATION REQUEST ===");
-        log.info("Campaign ID: {}, Number of topics: {}", request.getCampaignId(), request.getNumberOfTopics());
-        log.info("Additional instructions: {}", request.getAdditionalInstructions());
-        log.info("TopicService available: {}", topicService != null);
+        log.info("=== YÊU CẦU TẠO CHỦ ĐỀ ===");
+        log.info("ID chiến dịch: {}, Số lượng chủ đề: {}", request.getCampaignId(), request.getNumberOfTopics());
+        log.info("Hướng dẫn bổ sung: {}", request.getAdditionalInstructions());
+        log.info("TopicService khả dụng: {}", topicService != null);
 
         return topicService.generateTopicsForCampaign(request)
                 .thenApply(topics -> {
-                    log.info("✅ Successfully generated {} topics for campaign {}", topics.size(), request.getCampaignId());
+                    log.info("Tạo thành công {} chủ đề cho chiến dịch {}", topics.size(), request.getCampaignId());
                     return ResponseEntity.ok(topics);
                 })
                 .exceptionally(ex -> {
-                    log.error("❌ Error generating topics for campaign {}: {}", request.getCampaignId(), ex.getMessage(), ex);
+                    log.error("Lỗi khi tạo chủ đề cho chiến dịch {}: {}", request.getCampaignId(), ex.getMessage(), ex);
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
                 });
     }
 
     @Operation(
-            summary = "Get all topics for a campaign",
-            description = "Retrieve all topics associated with a specific campaign ID, including their approval status. Results are ordered by creation date (newest first)."
+            summary = "Lấy tất cả chủ đề của một chiến dịch",
+            description = "Lấy tất cả chủ đề liên quan đến một ID chiến dịch, bao gồm trạng thái duyệt. Kết quả sắp xếp theo ngày tạo (mới nhất trước)."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Topics retrieved successfully"),
-            @ApiResponse(responseCode = "404", description = "Campaign not found or no topics exist")
+            @ApiResponse(responseCode = "200", description = "Lấy chủ đề thành công"),
+            @ApiResponse(responseCode = "404", description = "Không tìm thấy chiến dịch hoặc không có chủ đề")
     })
     @GetMapping("/campaign/{campaignId}")
     public ResponseEntity<List<TopicResponseDTO>> getTopicsByCampaign(
-            @Parameter(description = "Campaign ID to get topics for", example = "1")
+            @Parameter(description = "ID chiến dịch để lấy chủ đề", example = "1")
             @PathVariable Long campaignId) {
 
-        log.info("Fetching topics for campaign: {}", campaignId);
+        log.info("Lấy chủ đề cho chiến dịch: {}", campaignId);
         List<TopicResponseDTO> topics = topicService.getTopicsByCampaignId(campaignId);
-        log.info("✅ Found {} topics for campaign {}", topics.size(), campaignId);
+        log.info("Tìm thấy {} chủ đề cho chiến dịch {}", topics.size(), campaignId);
         return ResponseEntity.ok(topics);
     }
 
     @Operation(
-            summary = "Get topic by ID",
-            description = "Retrieve a specific topic by its ID with full details including status and timestamps"
+            summary = "Lấy chủ đề theo ID",
+            description = "Lấy một chủ đề cụ thể theo ID với đầy đủ trạng thái và thời gian"
     )
     @GetMapping("/{topicId}")
     public ResponseEntity<TopicResponseDTO> getTopicById(
-            @Parameter(description = "Topic ID", example = "1")
+            @Parameter(description = "ID chủ đề", example = "1")
             @PathVariable Long topicId) {
 
-        log.info("Fetching topic: {}", topicId);
+        log.info("Lấy chủ đề: {}", topicId);
         TopicResponseDTO topic = topicService.getTopicById(topicId);
         return ResponseEntity.ok(topic);
     }
 
     @Operation(
-            summary = "Approve a topic",
+            summary = "Duyệt chủ đề",
             description = """
-                    Approve a pending topic so it can be used for content generation.
-
-                    **Status Change:** PENDING → APPROVED
-                    **Effect:** Topic becomes available for content generation
-                    **Note:** Only topics with PENDING status can be approved
+                    Duyệt một chủ đề đang chờ để có thể dùng tạo nội dung.
+                    
+                    **Chuyển trạng thái:** PENDING → APPROVED
+                    **Hiệu lực:** Chủ đề có thể dùng tạo nội dung
+                    **Lưu ý:** Chỉ chủ đề trạng thái PENDING mới được duyệt
                     """
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Topic approved successfully"),
-            @ApiResponse(responseCode = "404", description = "Topic not found"),
-            @ApiResponse(responseCode = "400", description = "Topic is not in pending status or already processed")
+            @ApiResponse(responseCode = "200", description = "Duyệt chủ đề thành công"),
+            @ApiResponse(responseCode = "404", description = "Không tìm thấy chủ đề"),
+            @ApiResponse(responseCode = "400", description = "Chủ đề không ở trạng thái chờ hoặc đã xử lý")
     })
     @PutMapping("/{topicId}/approve")
     public ResponseEntity<TopicResponseDTO> approveTopic(
-            @Parameter(description = "Topic ID to approve", example = "1")
+            @Parameter(description = "ID chủ đề cần duyệt", example = "1")
             @PathVariable Long topicId,
             HttpServletRequest request) {
 
         Long userId = getCurrentUserId(request);
-        log.info("User {} approving topic {}", userId, topicId);
+        log.info("Người dùng {} duyệt chủ đề {}", userId, topicId);
 
         TopicResponseDTO topic = topicService.approveTopicById(topicId, userId);
-        log.info("✅ Topic {} approved successfully by user {}", topicId, userId);
+        log.info("Chủ đề {} đã được duyệt thành công bởi người dùng {}", topicId, userId);
         return ResponseEntity.ok(topic);
     }
 
     @Operation(
-            summary = "Reject a topic",
+            summary = "Từ chối chủ đề",
             description = """
-                    Reject a pending topic. Rejected topics cannot be used for content generation.
-
-                    **Status Change:** PENDING → REJECTED
-                    **Effect:** Topic becomes unavailable for content generation
-                    **Note:** Only topics with PENDING status can be rejected
+                    Từ chối một chủ đề đang chờ. Chủ đề bị từ chối sẽ không được dùng tạo nội dung.
+                    
+                    **Chuyển trạng thái:** PENDING → REJECTED
+                    **Hiệu lực:** Chủ đề không thể dùng tạo nội dung
+                    **Lưu ý:** Chỉ chủ đề trạng thái PENDING mới được từ chối
                     """
     )
     @PutMapping("/{topicId}/reject")
     public ResponseEntity<TopicResponseDTO> rejectTopic(
-            @Parameter(description = "Topic ID to reject", example = "2")
+            @Parameter(description = "ID chủ đề cần từ chối", example = "2")
             @PathVariable Long topicId,
             HttpServletRequest request) {
 
         Long userId = getCurrentUserId(request);
-        log.info("User {} rejecting topic {}", userId, topicId);
+        log.info("Người dùng {} từ chối chủ đề {}", userId, topicId);
 
         TopicResponseDTO topic = topicService.rejectTopicById(topicId, userId);
-        log.info("✅ Topic {} rejected successfully by user {}", topicId, userId);
+        log.info("Chủ đề {} đã bị từ chối bởi người dùng {}", topicId, userId);
         return ResponseEntity.ok(topic);
     }
 
     @Operation(
-            summary = "Delete a topic",
+            summary = "Xoá chủ đề",
             description = """
-                    Permanently delete a topic and all its associated posts. This action cannot be undone.
-
-                    **Warning:** This will also delete all posts generated from this topic
-                    **Cascade Effect:** All related posts will be removed
-                    **Use Case:** Clean up unwanted topics
+                    Xoá vĩnh viễn một chủ đề và toàn bộ bài viết liên quan. Hành động này không thể hoàn tác.
+                    
+                    **Cảnh báo:** Thao tác này cũng xoá toàn bộ bài viết tạo từ chủ đề này
+                    **Hiệu ứng dây chuyền:** Tất cả bài viết liên quan sẽ bị xoá
+                    **Trường hợp sử dụng:** Dọn dẹp chủ đề không mong muốn
                     """
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Topic deleted successfully"),
-            @ApiResponse(responseCode = "404", description = "Topic not found")
+            @ApiResponse(responseCode = "204", description = "Xoá chủ đề thành công"),
+            @ApiResponse(responseCode = "404", description = "Không tìm thấy chủ đề")
     })
     @DeleteMapping("/{topicId}")
     public ResponseEntity<Void> deleteTopic(
-            @Parameter(description = "Topic ID to delete", example = "3")
+            @Parameter(description = "ID chủ đề cần xoá", example = "3")
             @PathVariable Long topicId) {
 
-        log.info("Deleting topic: {}", topicId);
+        log.info("Xoá chủ đề: {}", topicId);
         topicService.deleteTopicById(topicId);
-        log.info("✅ Topic {} deleted successfully", topicId);
+        log.info("Đã xoá thành công chủ đề {}", topicId);
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(
-            summary = "Test endpoint",
-            description = "Simple test endpoint to verify TopicController is working"
-    )
-    @GetMapping("/test")
-    public ResponseEntity<Map<String, Object>> testEndpoint() {
-        Map<String, Object> response = new HashMap<>();
-        response.put("status", "SUCCESS");
-        response.put("message", "TopicController is working!");
-        response.put("timestamp", LocalDateTime.now());
-        response.put("service", topicService != null ? "Available" : "NULL");
-        response.put("currentUser", getCurrentUserId(null));
-        return ResponseEntity.ok(response);
-    }
-
-    @Operation(
-            summary = "Health check endpoint",
-            description = "Health check endpoint with detailed service information"
-    )
-    @GetMapping("/health")
-    public ResponseEntity<Map<String, Object>> healthCheck() {
-        Map<String, Object> health = new HashMap<>();
-        health.put("status", "UP");
-        health.put("timestamp", LocalDateTime.now());
-        health.put("service", "TopicService");
-        health.put("controller", "TopicController");
-        health.put("version", "1.0.0");
-        health.put("currentUtcTime", "2025-08-06 05:52:13");
-        return ResponseEntity.ok(health);
-    }
-
     private Long getCurrentUserId(HttpServletRequest request) {
-        // In production, extract from JWT token or session
-        // For now, return mock user ID based on current user login
-        return 1L; // Can be mapped to actual user: 1Ir-is
+        // Lấy từ JWT token hoặc session
+        // Tạm thời trả về user ID
+        return 1L;
     }
 }

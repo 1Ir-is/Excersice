@@ -19,7 +19,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -28,62 +27,52 @@ import java.util.concurrent.CompletableFuture;
 @RequestMapping("/api/posts")
 @Slf4j
 @CrossOrigin(origins = "*")
-@Tag(name = "Enhanced Content Generation", description = "APIs for generating Vietnamese content (short & long-form) and scheduling posts - User 1Ir-is")
+@Tag(name = "Tạo nội dung nâng cao", description = "API tạo nội dung tiếng Việt (ngắn & dài) và lên lịch đăng bài")
 public class PostController {
 
     private final PostService postService;
 
     public PostController(PostService postService) {
         this.postService = postService;
-        log.info("🇻🇳 Enhanced PostController initialized successfully for user 1Ir-is at 2025-08-07 09:45:21");
     }
 
     @Operation(
-            summary = "Generate Vietnamese content using AI (Enhanced)",
+            summary = "Tạo nội dung tiếng Việt bằng AI (Nâng cao)",
             description = """
-                    Generate high-quality Vietnamese content from approved topics using OpenAI GPT.
-                    **Enhanced for User 1Ir-is at 2025-08-07 09:45:21**
+                    Tạo nội dung tiếng Việt chất lượng cao từ chủ đề đã duyệt bằng OpenAI GPT.
+                    ****
+                    **Loại nội dung hỗ trợ:**
+                    - Ngắn: social_post, story, email (150-400 từ)
+                    - Trung bình: article, blog_post (400-800 từ)
+                    - Dài: long_article, detailed_guide, white_paper, case_study (800-2000 từ)
                     
-                    **New Features:**
-                    - ✅ Vietnamese language optimization
-                    - ✅ Long-form content support (800-2000 words)
-                    - ✅ Content structure options
-                    - ✅ Target word count control
-                    - ✅ Advanced content metrics
-                    - ✅ Multiple content types
-                    
-                    **Content Types Supported:**
-                    - Short-form: social_post, story, email (150-400 words)
-                    - Medium-form: article, blog_post (400-800 words)
-                    - Long-form: long_article, detailed_guide, white_paper, case_study (800-2000 words)
-                    
-                    **Process:**
-                    1. Select an approved topic (status: APPROVED)
-                    2. Configure content parameters (tone, type, word count)
-                    3. AI generates structured Vietnamese content
-                    4. Content includes title, body, hashtags, and metrics
-                    5. Optional image prompt generation
-                    6. Review and edit before scheduling
+                    **Quy trình:**
+                    1. Chọn chủ đề đã duyệt (trạng thái: APPROVED)
+                    2. Cấu hình tham số nội dung (giọng điệu, loại, số từ)
+                    3. AI tạo nội dung tiếng Việt có cấu trúc
+                    4. Nội dung gồm tiêu đề, thân bài, hashtag, chỉ số
+                    5. Tuỳ chọn tạo prompt hình ảnh
+                    6. Xem lại và chỉnh sửa trước khi lên lịch
                     """
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Vietnamese content generated successfully"),
-            @ApiResponse(responseCode = "400", description = "Invalid parameters or topic not approved"),
-            @ApiResponse(responseCode = "404", description = "Topic not found"),
-            @ApiResponse(responseCode = "500", description = "AI service error")
+            @ApiResponse(responseCode = "200", description = "Tạo nội dung tiếng Việt thành công"),
+            @ApiResponse(responseCode = "400", description = "Tham số không hợp lệ hoặc chủ đề chưa duyệt"),
+            @ApiResponse(responseCode = "404", description = "Không tìm thấy chủ đề"),
+            @ApiResponse(responseCode = "500", description = "Lỗi dịch vụ AI")
     })
     @PostMapping("/generate")
     public CompletableFuture<ResponseEntity<List<PostResponseDTO>>> generateContent(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                    description = "Enhanced content generation request for user 1Ir-is",
+                    description = "Yêu cầu tạo nội dung",
                     required = true,
                     content = @Content(
                             mediaType = "application/json",
                             schema = @Schema(implementation = ContentGenerationRequestDTO.class),
                             examples = {
                                     @ExampleObject(
-                                            name = "Vietnamese Social Media Post",
-                                            description = "Generate engaging Vietnamese social media content",
+                                            name = "Bài đăng mạng xã hội tiếng Việt",
+                                            description = "Tạo nội dung mạng xã hội tiếng Việt hấp dẫn",
                                             value = """
                                                     {
                                                         "topicId": 35,
@@ -101,8 +90,8 @@ public class PostController {
                                                     """
                                     ),
                                     @ExampleObject(
-                                            name = "Vietnamese Long-form Article",
-                                            description = "Generate detailed Vietnamese business article",
+                                            name = "Bài viết dài tiếng Việt",
+                                            description = "Tạo bài viết kinh doanh tiếng Việt chi tiết",
                                             value = """
                                                     {
                                                         "topicId": 35,
@@ -124,8 +113,8 @@ public class PostController {
                                                     """
                                     ),
                                     @ExampleObject(
-                                            name = "Vietnamese Detailed Guide",
-                                            description = "Generate comprehensive Vietnamese how-to guide",
+                                            name = "Hướng dẫn chi tiết tiếng Việt",
+                                            description = "Tạo hướng dẫn từng bước tiếng Việt toàn diện",
                                             value = """
                                                     {
                                                         "topicId": 36,
@@ -144,8 +133,8 @@ public class PostController {
                                                     """
                                     ),
                                     @ExampleObject(
-                                            name = "Vietnamese Case Study",
-                                            description = "Generate business case study in Vietnamese",
+                                            name = "Case study tiếng Việt",
+                                            description = "Tạo case study kinh doanh bằng tiếng Việt",
                                             value = """
                                                     {
                                                         "topicId": 37,
@@ -169,66 +158,46 @@ public class PostController {
             )
             @Valid @RequestBody ContentGenerationRequestDTO request) {
 
-        log.info("=== ENHANCED CONTENT GENERATION REQUEST for USER 1Ir-is ===");
-        log.info("Timestamp: 2025-08-07 09:45:21 UTC");
-        log.info("Topic ID: {}, Posts: {}, Tone: {}, Type: {}",
-                request.getTopicId(), request.getNumberOfPosts(), request.getTone(), request.getContentType());
-        log.info("Target Word Count: {}, Platform: {}, Audience: {}",
-                request.getTargetWordCount(), request.getTargetPlatform(), request.getTargetAudience());
-        log.info("Include Image: {}, Sections: {}, Bullet Points: {}",
-                request.getIncludeImage(), request.getIncludeSections(), request.getIncludeBulletPoints());
-        log.info("Instructions: {}", request.getAdditionalInstructions());
-
         return postService.generateContentForTopic(request)
                 .thenApply(posts -> {
-                    log.info("✅ Successfully generated {} Vietnamese posts for topic {} for user 1Ir-is",
+                    log.info("Tạo thành công {} bài viết tiếng Việt cho chủ đề {}",
                             posts.size(), request.getTopicId());
                     return ResponseEntity.ok(posts);
                 })
                 .exceptionally(ex -> {
-                    log.error("❌ Error generating Vietnamese content for topic {} for user 1Ir-is: {}",
+                    log.error("Lỗi khi tạo nội dung tiếng Việt cho chủ đề {}: {}",
                             request.getTopicId(), ex.getMessage(), ex);
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
                 });
     }
 
     @Operation(
-            summary = "Schedule Vietnamese post for publishing",
+            summary = "Lên lịch đăng bài tiếng Việt",
             description = """
-                    Schedule a Vietnamese post to be published at a specific time on social media.
-                    **Enhanced for User 1Ir-is at 2025-08-07 09:45:21**
+                    Lên lịch đăng bài tiếng Việt vào thời gian cụ thể trên mạng xã hội.
                     
-                    **Scheduling Process:**
-                    1. Select a generated post (status: DRAFT)
-                    2. Choose target social media channel
-                    3. Set publication date/time (must be future)
-                    4. Optionally modify final Vietnamese content
-                    5. System auto-publishes at scheduled time
-                    
-                    **Supported Platforms:**
-                    - Facebook, Instagram, LinkedIn, Twitter, TikTok, YouTube
-                    
-                    **Time Format:** ISO 8601: YYYY-MM-DDTHH:MM:SS
-                    **Current UTC Time:** 2025-08-07 09:45:21
+                    **Nền tảng hỗ trợ:**
+                    - Facebook,...
+
                     """
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Post scheduled successfully"),
-            @ApiResponse(responseCode = "400", description = "Invalid parameters or past scheduled time"),
-            @ApiResponse(responseCode = "404", description = "Post or social channel not found")
+            @ApiResponse(responseCode = "200", description = "Lên lịch bài viết thành công"),
+            @ApiResponse(responseCode = "400", description = "Tham số không hợp lệ hoặc thời gian đã qua"),
+            @ApiResponse(responseCode = "404", description = "Không tìm thấy bài viết hoặc kênh mạng xã hội")
     })
     @PostMapping("/schedule")
     public ResponseEntity<PostResponseDTO> schedulePost(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                    description = "Post scheduling request for user 1Ir-is",
+                    description = "Yêu cầu lên lịch đăng bài cho người dùng",
                     required = true,
                     content = @Content(
                             mediaType = "application/json",
                             schema = @Schema(implementation = SchedulePostRequestDTO.class),
                             examples = {
                                     @ExampleObject(
-                                            name = "Schedule Vietnamese Facebook Post",
-                                            description = "Schedule Vietnamese content to Facebook",
+                                            name = "Lên lịch Facebook tiếng Việt",
+                                            description = "Lên lịch nội dung tiếng Việt lên Facebook",
                                             value = """
                                                     {
                                                         "postId": 48,
@@ -239,8 +208,8 @@ public class PostController {
                                                     """
                                     ),
                                     @ExampleObject(
-                                            name = "Schedule Vietnamese LinkedIn Article",
-                                            description = "Schedule professional Vietnamese content to LinkedIn",
+                                            name = "Lên lịch LinkedIn tiếng Việt",
+                                            description = "Lên lịch nội dung chuyên nghiệp tiếng Việt lên LinkedIn",
                                             value = """
                                                     {
                                                         "postId": 49,
@@ -255,32 +224,31 @@ public class PostController {
             )
             @Valid @RequestBody SchedulePostRequestDTO request) {
 
-        log.info("=== SCHEDULING VIETNAMESE POST for USER 1Ir-is ===");
-        log.info("Timestamp: 2025-08-07 09:45:21 UTC");
-        log.info("Post ID: {}, Channel: {}, Scheduled: {}",
+        log.info("=== ĐANG LÊN LỊCH BÀI VIẾT TIẾNG VIỆT ===");
+        log.info("Post ID: {}, Kênh: {}, Lịch đăng: {}",
                 request.getPostId(), request.getSocialChannelId(), request.getScheduledTime());
 
         PostResponseDTO post = postService.schedulePost(request);
-        log.info("✅ Vietnamese post {} scheduled successfully for {} by user 1Ir-is",
+        log.info("Bài viết tiếng Việt {} đã được lên lịch thành công cho {}",
                 post.getId(), request.getScheduledTime());
         return ResponseEntity.ok(post);
     }
 
     @Operation(
-            summary = "Update Vietnamese post content",
-            description = "Update Vietnamese post content. User can modify AI-generated content before scheduling. Maintains Vietnamese language quality."
+            summary = "Cập nhật nội dung bài viết tiếng Việt",
+            description = "Cập nhật nội dung bài viết tiếng Việt. Người dùng có thể chỉnh sửa nội dung AI trước khi lên lịch. Đảm bảo chất lượng tiếng Việt."
     )
     @PutMapping("/{postId}/content")
     public ResponseEntity<PostResponseDTO> updatePostContent(
-            @Parameter(description = "Post ID to update", example = "48")
+            @Parameter(description = "ID bài viết cần cập nhật", example = "48")
             @PathVariable Long postId,
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                    description = "New Vietnamese content for the post",
+                    description = "Nội dung tiếng Việt mới cho bài viết",
                     required = true,
                     content = @Content(
                             mediaType = "application/json",
                             examples = @ExampleObject(
-                                    name = "Updated Vietnamese Content",
+                                    name = "Nội dung tiếng Việt cập nhật",
                                     value = """
                                             {
                                                 "title": "🚀 AI Thay Đổi Cách Làm Việc - Cập Nhật Mới",
@@ -294,186 +262,143 @@ public class PostController {
             HttpServletRequest request) {
 
         Long userId = getCurrentUserId(request);
-        log.info("User 1Ir-is updating Vietnamese content for post {} at 2025-08-07 09:45:21", postId);
 
         String title = contentUpdate.get("title");
         String content = contentUpdate.get("content");
         String fullContent = (title != null ? title + "\n\n" : "") + (content != null ? content : "");
 
         PostResponseDTO post = postService.updatePostContent(postId, fullContent, userId);
-        log.info("✅ Vietnamese post {} content updated successfully by user 1Ir-is", postId);
+        log.info("Cập nhật nội dung bài viết tiếng Việt {} thành công", postId);
         return ResponseEntity.ok(post);
     }
 
-    // ========== ENHANCED QUERY ENDPOINTS ==========
-
     @Operation(
-            summary = "Get posts by content type",
-            description = "Retrieve posts by content type (social_post, long_article, blog_post, etc.)"
+            summary = "Lấy bài viết theo loại nội dung",
+            description = "Lấy bài viết theo loại nội dung (social_post, long_article, blog_post, v.v.)"
     )
     @GetMapping("/content-type/{contentType}")
     public ResponseEntity<List<PostResponseDTO>> getPostsByContentType(
-            @Parameter(description = "Content type", example = "long_article")
+            @Parameter(description = "Loại nội dung", example = "long_article")
             @PathVariable String contentType) {
 
-        log.info("Fetching posts by content type: {} for user 1Ir-is", contentType);
+        log.info("Lấy bài viết theo loại nội dung: {}", contentType);
         List<PostResponseDTO> posts = postService.getPostsByContentType(contentType);
-        log.info("✅ Found {} posts of type {} for user 1Ir-is", posts.size(), contentType);
+        log.info("Tìm thấy {} bài viết loại {}", posts.size(), contentType);
         return ResponseEntity.ok(posts);
     }
 
     @Operation(
-            summary = "Get posts by target platform",
-            description = "Retrieve posts by target platform (facebook, linkedin, instagram, etc.)"
+            summary = "Lấy bài viết theo nền tảng",
+            description = "Lấy bài viết theo nền tảng (facebook, linkedin, instagram, v.v.)"
     )
     @GetMapping("/platform/{platform}")
     public ResponseEntity<List<PostResponseDTO>> getPostsByPlatform(
-            @Parameter(description = "Target platform", example = "linkedin")
+            @Parameter(description = "Nền tảng", example = "linkedin")
             @PathVariable String platform) {
 
-        log.info("Fetching posts by platform: {} for user 1Ir-is", platform);
+        log.info("Lấy bài viết theo nền tảng: {}", platform);
         List<PostResponseDTO> posts = postService.getPostsByTargetPlatform(platform);
-        log.info("✅ Found {} posts for platform {} for user 1Ir-is", posts.size(), platform);
+        log.info("Tìm thấy {} bài viết cho nền tảng {}", posts.size(), platform);
         return ResponseEntity.ok(posts);
     }
 
     @Operation(
-            summary = "Get long-form posts",
-            description = "Retrieve all long-form posts (word count > 500)"
+            summary = "Lấy bài viết dài",
+            description = "Lấy tất cả bài viết dài (số từ > 500)"
     )
     @GetMapping("/long-form")
     public ResponseEntity<List<PostResponseDTO>> getLongFormPosts() {
-        log.info("Fetching long-form posts for user 1Ir-is");
+        log.info("Lấy bài viết dài");
         List<PostResponseDTO> posts = postService.getLongFormPosts();
-        log.info("✅ Found {} long-form posts for user 1Ir-is", posts.size());
+        log.info("Tìm thấy {} bài viết dài", posts.size());
         return ResponseEntity.ok(posts);
     }
 
     @Operation(
-            summary = "Get high-engagement posts",
-            description = "Retrieve posts with high engagement scores"
+            summary = "Lấy bài viết có tương tác cao",
+            description = "Lấy bài viết có điểm tương tác cao"
     )
     @GetMapping("/high-engagement")
     public ResponseEntity<List<PostResponseDTO>> getHighEngagementPosts(
-            @Parameter(description = "Minimum engagement score", example = "8.0")
+            @Parameter(description = "Điểm tương tác tối thiểu", example = "8.0")
             @RequestParam(defaultValue = "8.0") Double minScore) {
 
-        log.info("Fetching high-engagement posts (score >= {}) for user 1Ir-is", minScore);
+        log.info("Lấy bài viết tương tác cao (điểm >= {})", minScore);
         List<PostResponseDTO> posts = postService.getPostsByEngagementScore(minScore);
-        log.info("✅ Found {} high-engagement posts for user 1Ir-is", posts.size());
+        log.info("Tìm thấy {} bài viết tương tác cao", posts.size());
         return ResponseEntity.ok(posts);
     }
 
     @Operation(
-            summary = "Get recent posts by user",
-            description = "Retrieve recent posts for current user"
+            summary = "Lấy bài viết gần đây của người dùng",
+            description = "Lấy các bài viết gần đây cho người dùng hiện tại"
     )
     @GetMapping("/recent")
     public ResponseEntity<List<PostResponseDTO>> getRecentPosts(
-            @Parameter(description = "Number of posts to return", example = "10")
+            @Parameter(description = "Số lượng bài viết trả về", example = "10")
             @RequestParam(defaultValue = "10") int limit,
             HttpServletRequest request) {
 
         Long userId = getCurrentUserId(request);
-        log.info("Fetching {} recent posts for user 1Ir-is", limit);
+        log.info("Lấy {} bài viết gần đây cho người dùng 1Ir-is", limit);
         List<PostResponseDTO> posts = postService.getRecentPostsByUser(userId, limit);
-        log.info("✅ Found {} recent posts for user 1Ir-is", posts.size());
+        log.info("✅ Tìm thấy {} bài viết gần đây cho người dùng 1Ir-is", posts.size());
         return ResponseEntity.ok(posts);
     }
 
-    // ========== EXISTING ENDPOINTS (Updated) ==========
-
-    @Operation(summary = "Get posts by topic", description = "Retrieve all Vietnamese posts for a specific topic")
+    @Operation(summary = "Lấy bài viết theo chủ đề", description = "Lấy tất cả bài viết tiếng Việt cho một chủ đề cụ thể")
     @GetMapping("/topic/{topicId}")
     public ResponseEntity<List<PostResponseDTO>> getPostsByTopic(
-            @Parameter(description = "Topic ID", example = "35")
+            @Parameter(description = "ID chủ đề", example = "35")
             @PathVariable Long topicId) {
 
-        log.info("Fetching Vietnamese posts for topic: {} for user 1Ir-is", topicId);
+        log.info("Lấy bài viết tiếng Việt cho chủ đề: {}", topicId);
         List<PostResponseDTO> posts = postService.getPostsByTopicId(topicId);
-        log.info("✅ Found {} Vietnamese posts for topic {} for user 1Ir-is", posts.size(), topicId);
+        log.info("Tìm thấy {} bài viết tiếng Việt cho chủ đề {}", posts.size(), topicId);
         return ResponseEntity.ok(posts);
     }
 
-    @Operation(summary = "Get post by ID", description = "Retrieve specific Vietnamese post with complete details")
+    @Operation(summary = "Lấy bài viết theo ID", description = "Lấy chi tiết bài viết tiếng Việt")
     @GetMapping("/{postId}")
     public ResponseEntity<PostResponseDTO> getPostById(
-            @Parameter(description = "Post ID", example = "48")
+            @Parameter(description = "ID bài viết", example = "48")
             @PathVariable Long postId) {
 
-        log.info("Fetching Vietnamese post: {} for user 1Ir-is", postId);
+        log.info("Lấy bài viết tiếng Việt: {}", postId);
         PostResponseDTO post = postService.getPostById(postId);
         return ResponseEntity.ok(post);
     }
 
-    @Operation(summary = "Get scheduled posts", description = "Retrieve all scheduled Vietnamese posts")
+    @Operation(summary = "Lấy bài viết đã lên lịch", description = "Lấy tất cả bài viết tiếng Việt đã lên lịch")
     @GetMapping("/scheduled")
     public ResponseEntity<List<PostResponseDTO>> getScheduledPosts(HttpServletRequest request) {
         Long userId = getCurrentUserId(request);
-        log.info("Fetching scheduled Vietnamese posts for user 1Ir-is");
+        log.info("Lấy bài viết tiếng Việt đã lên lịch");
 
         List<PostResponseDTO> posts = postService.getScheduledPostsByUser(userId);
-        log.info("✅ Found {} scheduled Vietnamese posts for user 1Ir-is", posts.size());
+        log.info("Tìm thấy {} bài viết tiếng Việt đã lên lịch", posts.size());
         return ResponseEntity.ok(posts);
     }
 
-    @Operation(summary = "Delete a post", description = "Permanently delete a Vietnamese post")
+    @Operation(summary = "Xoá bài viết", description = "Xoá vĩnh viễn bài viết tiếng Việt")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Post deleted successfully"),
-            @ApiResponse(responseCode = "404", description = "Post not found")
+            @ApiResponse(responseCode = "204", description = "Xoá bài viết thành công"),
+            @ApiResponse(responseCode = "404", description = "Không tìm thấy bài viết")
     })
     @DeleteMapping("/{postId}")
     public ResponseEntity<Void> deletePost(
-            @Parameter(description = "Post ID to delete", example = "48")
+            @Parameter(description = "ID bài viết cần xoá", example = "48")
             @PathVariable Long postId) {
 
-        log.info("Deleting Vietnamese post: {} for user 1Ir-is", postId);
+        log.info("Xoá bài viết tiếng Việt: {}", postId);
         postService.deletePostById(postId);
-        log.info("✅ Vietnamese post {} deleted successfully by user 1Ir-is", postId);
+        log.info("Đã xoá thành công bài viết tiếng Việt {}", postId);
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(summary = "Enhanced test endpoint", description = "Test endpoint with enhanced features info")
-    @GetMapping("/test")
-    public ResponseEntity<Map<String, Object>> testEndpoint() {
-        Map<String, Object> response = new HashMap<>();
-        response.put("status", "SUCCESS");
-        response.put("message", "Enhanced PostController for Vietnamese content generation is working!");
-        response.put("user", "1Ir-is");
-        response.put("timestamp", "2025-08-07 09:45:21 UTC");
-        response.put("features", Map.of(
-                "vietnamese_content", true,
-                "long_form_support", true,
-                "content_metrics", true,
-                "enhanced_scheduling", true,
-                "multiple_platforms", true
-        ));
-        response.put("service", postService != null ? "Available" : "NULL");
-        return ResponseEntity.ok(response);
-    }
-
-    @Operation(summary = "Health check with metrics", description = "Enhanced health check with system metrics")
-    @GetMapping("/health")
-    public ResponseEntity<Map<String, Object>> healthCheck() {
-        Map<String, Object> health = new HashMap<>();
-        health.put("status", "UP");
-        health.put("user", "1Ir-is");
-        health.put("timestamp", "2025-08-07 09:45:21 UTC");
-        health.put("service", "Enhanced PostService");
-        health.put("controller", "Enhanced PostController");
-        health.put("version", "2.0.0");
-        health.put("features", Map.of(
-                "vietnamese_ai_content", "ACTIVE",
-                "long_form_generation", "ACTIVE",
-                "content_scheduling", "ACTIVE",
-                "metrics_tracking", "ACTIVE"
-        ));
-        return ResponseEntity.ok(health);
-    }
-
     private Long getCurrentUserId(HttpServletRequest request) {
-        // In production, extract from JWT token or session
-        // For now, return user 1Ir-is ID
+        // Lấy từ JWT token hoặc session
+        // Tạm thời trả về user ID
         return 1L;
     }
 }
