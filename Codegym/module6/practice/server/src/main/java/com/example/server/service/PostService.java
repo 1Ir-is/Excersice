@@ -23,4 +23,14 @@ public interface PostService {
     void deletePostById(Long postId);
 
     void publishScheduledPosts();
+
+    List<PostResponseDTO> getPostsByContentType(String contentType);
+
+    List<PostResponseDTO> getPostsByTargetPlatform(String targetPlatform);
+
+    List<PostResponseDTO> getLongFormPosts();
+
+    List<PostResponseDTO> getPostsByEngagementScore(Double minScore);
+
+    List<PostResponseDTO> getRecentPostsByUser(Long userId, int limit);
 }

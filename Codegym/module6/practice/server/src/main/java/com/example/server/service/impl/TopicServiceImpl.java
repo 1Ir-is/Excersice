@@ -47,8 +47,6 @@ public class TopicServiceImpl implements TopicService {
     @Async
     public CompletableFuture<List<TopicResponseDTO>> generateTopicsForCampaign(TopicGenerationRequestDTO request) {
         try {
-            log.info("🔍 Starting topic generation for user 1Ir-is at UTC 2025-08-06 06:05:24");
-
             Campaign campaign = campaignRepository.findById(request.getCampaignId())
                     .orElseThrow(() -> new EntityNotFoundException("Campaign not found"));
 
@@ -66,19 +64,17 @@ public class TopicServiceImpl implements TopicService {
                     .map(this::mapTopicToDTO)
                     .collect(Collectors.toList());
 
-            log.info("✅ Successfully completed topic generation for user 1Ir-is - {} topics created", responseDTOs.size());
+            log.info("Successfully completed topic generation - {} topics created", responseDTOs.size());
             return CompletableFuture.completedFuture(responseDTOs);
 
         } catch (Exception e) {
-            log.error("❌ Error in generateTopicsForCampaign for user 1Ir-is: {}", e.getMessage(), e);
+            log.error("Error in generateTopicsForCampaign: {}", e.getMessage(), e);
             throw new RuntimeException("Failed to generate topics", e);
         }
     }
 
     @Override
     public TopicResponseDTO approveTopicById(Long topicId, Long userId) {
-        log.info("User 1Ir-is approving topic {}", topicId);
-
         Topic topic = topicRepository.findById(topicId)
                 .orElseThrow(() -> new EntityNotFoundException("Topic not found"));
 
@@ -90,7 +86,7 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public TopicResponseDTO rejectTopicById(Long topicId, Long userId) {
-        log.info("User 1Ir-is rejecting topic {}", topicId);
+        log.info("rejecting topic {}", topicId);
 
         Topic topic = topicRepository.findById(topicId)
                 .orElseThrow(() -> new EntityNotFoundException("Topic not found"));
@@ -124,14 +120,9 @@ public class TopicServiceImpl implements TopicService {
             throw new EntityNotFoundException("Topic not found");
         }
         topicRepository.deleteById(topicId);
-        log.info("✅ Topic {} deleted by user 1Ir-is", topicId);
+        log.info("Topic {} deleted", topicId);
     }
 
-    // ========== PRIVATE HELPER METHODS ==========
-
-    /**
-     * Manual mapping to avoid ModelMapper conflicts for user 1Ir-is
-     */
     private TopicResponseDTO mapTopicToDTO(Topic topic) {
         TopicResponseDTO dto = new TopicResponseDTO();
         dto.setId(topic.getId());
@@ -146,7 +137,7 @@ public class TopicServiceImpl implements TopicService {
 
     private List<Topic> parseTopicsFromGPTResponse(String gptResponse, Long campaignId) {
         try {
-            log.info("🔍 Parsing GPT response for campaign {} for user 1Ir-is", campaignId);
+            log.info("Parsing GPT response for campaign {}", campaignId);
 
             JsonNode rootNode = objectMapper.readTree(gptResponse);
             JsonNode topicsNode = rootNode.get("topics");
@@ -165,11 +156,11 @@ public class TopicServiceImpl implements TopicService {
                 }
             }
 
-            log.info("✅ Parsed {} topics from GPT response for user 1Ir-is", topics.size());
+            log.info("Parsed {} topics from GPT response", topics.size());
             return topics;
 
         } catch (Exception e) {
-            log.error("❌ Error parsing topics from GPT response for user 1Ir-is: {}", e.getMessage(), e);
+            log.error("Error parsing topics from GPT response: {}", e.getMessage(), e);
             throw new RuntimeException("Failed to parse GPT response", e);
         }
     }
